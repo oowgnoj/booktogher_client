@@ -1,0 +1,40 @@
+import React, { ReactElement } from "react";
+import RecoReviewEntry from "./RecoReviewEntry";
+
+interface IAuthor {
+  id: string;
+  image: string;
+  name: string;
+  profile: string;
+}
+
+interface IReview {
+  id: string;
+  author: IAuthor;
+  contents: string;
+  likes: string[];
+  published: boolean;
+  thumbnail: string;
+  title: string;
+}
+
+interface IProps {
+  reviews: IReview[];
+}
+
+const RecoReviewList: React.SFC<IProps> = ({
+  reviews
+}: IProps): ReactElement => {
+  const reviewList: React.ReactElement[] = reviews.map((review, index) => (
+    <RecoReviewEntry review={review} key={index} />
+  ));
+  return (
+    <div className="main_review_list">
+      <div className="uk-child-width-1-2@s  uk-flex uk-flex-center" uk-grid>
+        {reviewList}
+      </div>
+    </div>
+  );
+};
+
+export default RecoReviewList;
