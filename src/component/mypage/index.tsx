@@ -5,7 +5,9 @@ import UserInfo from "../shared/userInfo";
 import NavBar from "./navBar";
 import Reviews from "./reviews";
 import Books from "./books";
+import ProgressBar from "./progressBar";
 
+// Books
 interface IAuthorInfo {
   id: string;
   image: string;
@@ -23,6 +25,7 @@ interface IUserReview {
   title: string;
 }
 
+// Users
 interface IBook {
   id: string;
   authors: string[];
@@ -74,6 +77,14 @@ export const Mypage: React.FC = (): ReactElement => {
         <UserInfo userInfo={myInfo}></UserInfo>
         <NavBar handleActive={handleActive} />
         <Books Info={myInfo}></Books>
+      </div>
+    );
+  } else if (active === "stats") {
+    return (
+      <div>
+        <UserInfo userInfo={myInfo}></UserInfo>
+        <NavBar handleActive={handleActive} />
+        <ProgressBar UserInfo={myInfo}></ProgressBar>
       </div>
     );
   }
