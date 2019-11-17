@@ -1,21 +1,21 @@
 import React, { ReactElement, useState } from "react";
-import { fakeReviews, fakeUser, fakeUser2 } from "../../fakeData/fake";
+import { fakeReviews, fakeUser } from "../../fakeData/fake";
 import "./../../../node_modules/uikit/dist/css/uikit.css";
 import UserInfo from "../shared/userInfo";
 import NavBar from "./navBar";
 import Reviews from "./reviews";
-// import Books from "./books";
+import Books from "./books";
 
-interface IauthorInfo {
-  id: number;
+interface IAuthorInfo {
+  id: string;
   image: string;
   name: string;
   profile: string;
 }
 
-interface IuserReview {
-  id: number;
-  author: IauthorInfo;
+interface IUserReview {
+  id: string;
+  author: IAuthorInfo;
   contents: string;
   likes: string[];
   published: boolean;
@@ -23,44 +23,66 @@ interface IuserReview {
   title: string;
 }
 
-interface Ibook {
-  id: number;
+interface IBook {
+  id: string;
   authors: string[];
   thumbnail: string;
   title: string;
 }
 
-interface IbookReading extends Ibook {
+interface IBookReading extends IBook {
   start: string;
   goal: string;
 }
-interface IbookFinished extends Ibook {
+interface IBookFinished extends IBook {
   start: string;
   end: string;
 }
 
-interface IuserInfo {
-  id: number;
+interface IUserInfo {
+  id: string;
   name: string;
   email: string;
   image: string;
   profile: string;
-  to_read: Ibook[];
-  reading: IbookReading[];
-  finished: IbookFinished[];
+  to_read: IBook[];
+  reading: IBookReading[];
+  finished: IBookFinished[];
   numBooksGoal: number;
   numReviewsGoal: number;
 }
 
-export const Mypage: React.FC = IuserInfo => {
-  const [myInfo, setInfo] = useState<IuserInfo>(fakeUser);
-  const [myReview, setReview] = useState<IuserReview[]>(fakeReviews);
+export const Mypage: React.FC = (): ReactElement => {
+  const [myInfo, setInfo] = useState<IUserInfo>(fakeUser);
+  const [myReview, setReview] = useState<IUserReview[]>(fakeReviews);
+  const [active, setActive] = useState<string>("나의 서평");
+
+  const handleActive = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) =>
+    setActive(e.currentTarget.id);
+
+  if (active === "reviews") {
+    return (
+      <div>
+        <UserInfo userInfo={myInfo}></UserInfo>
+        <NavBar handleActive={handleActive} />
+        <Reviews userReviews={fakeReviews}></Reviews>
+      </div>
+    );
+  } else if (active === "books") {
+    return (
+      <div>
+        <UserInfo userInfo={myInfo}></UserInfo>
+        <NavBar handleActive={handleActive} />
+        <Books Info={myInfo}></Books>
+      </div>
+    );
+  }
 
   return (
     <div>
-      <UserInfo {...fakeUser2}></UserInfo>
-      <NavBar></NavBar>
-      <Reviews {...fakeReviews}></Reviews>
+      <UserInfo userInfo={myInfo}></UserInfo>
+      <NavBar handleActive={handleActive} />
+      <Reviews userReviews={fakeReviews}></Reviews>
     </div>
   );
 };

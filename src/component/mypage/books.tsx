@@ -1,46 +1,57 @@
-import React, { ReactElement } from "react";
-
-//User
-interface IbeforeRead {
-  id: number;
+import React from "react";
+import Entry from "./bookSimpleEntry";
+interface IBoook {
+  id: string;
   authors: string[];
   thumbnail: string;
   title: string;
 }
-interface IstartRead {
-  id: number;
-  authors: string[];
-  thumbnail: string;
-  title: string;
+interface IBoookReading extends IBoook {
   start: string;
   goal: string;
 }
-interface IfinishRead {
-  id: number;
-  authors: string[];
-  thumbnail: string;
-  title: string;
+interface IBoookFinished extends IBoook {
   start: string;
   end: string;
 }
-interface IuserInfo {
-  id: number;
+interface IUserInfo {
+  id: string;
   name: string;
   email: string;
   image: string;
   profile: string;
-  to_read: IbeforeRead[];
-  reading: IstartRead[];
-  finished: IfinishRead[];
+  to_read: IBoook[];
+  reading: IBoookReading[];
+  finished: IBoookFinished[];
   numBooksGoal: number;
   numReviewsGoal: number;
 }
 
-type IuserInfoObj = { [key: string]: IuserInfo };
-
-function Books(props: { data: IuserInfoObj }): ReactElement {
-  console.log(props.data);
-  return <div>'hello'</div>;
+interface IProps {
+  Info: IUserInfo;
 }
+
+const Books: React.FC<IProps> = ({ Info }) => {
+  var toRead = Info.to_read;
+  var reading = Info.reading;
+  var finished = Info.finished;
+  console.log(Info);
+  return (
+    <div>
+      <h3>To READ</h3>
+      {toRead.map(el => (
+        <Entry Info={el} />
+      ))}{" "}
+      <h3>Reading</h3>
+      {reading.map(el => (
+        <Entry Info={el} />
+      ))}{" "}
+      <h3>finished</h3>
+      {finished.map(el => (
+        <Entry Info={el} />
+      ))}{" "}
+    </div>
+  );
+};
 
 export default Books;

@@ -1,4 +1,5 @@
-import React, { ReactElement } from "react";
+import React from "react";
+import "../../../node_modules/uikit/dist/css/uikit.css";
 
 interface IBook {
   id: string;
@@ -14,7 +15,6 @@ interface IBookFinished extends IBook {
   start: string;
   end: string;
 }
-
 interface IUserInfo {
   id: string;
   name: string;
@@ -29,23 +29,15 @@ interface IUserInfo {
 }
 
 interface Props {
-  userInfo: IUserInfo;
+  Info: IBook;
 }
 
-const Info: React.FC<Props> = ({ userInfo }): ReactElement => {
+const ReviewEntry: React.FC<Props> = ({ Info }) => {
   return (
-    <div className="uk-panel" style={{ width: 300 }}>
-      <img
-        className="uk-align-left uk-margin-remove-adjacent"
-        src="https://image.shutterstock.com/image-vector/people-icon-260nw-522300817.jpg"
-        width="100"
-        height="100"
-        alt="Example image"
-      />
-      <p>{userInfo.name}</p>
-      <p>{userInfo.profile}</p>
+    <div>
+      <img src={Info.thumbnail} style={{ width: 150, height: 200 }} />
     </div>
   );
 };
 
-export default Info;
+export default ReviewEntry;

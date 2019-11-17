@@ -1,16 +1,16 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import Entry from "./reviewEntry";
 
-interface IauthorInfo {
-  id: number;
+interface IAuthor {
+  id: string;
   image: string;
   name: string;
   profile: string;
 }
 
-interface IuserReview {
-  id: number;
-  author: IauthorInfo;
+interface IUserReview {
+  id: string;
+  author: IAuthor;
   contents: string;
   likes: string[];
   published: boolean;
@@ -18,9 +18,19 @@ interface IuserReview {
   title: string;
 }
 
-function Review(props: IuserReview[]): ReactElement {
-  console.log(props);
-  return <div>'hello'</div>;
+interface Props {
+  userReviews: IUserReview[];
 }
 
-export default Review;
+const Reviews: React.FC<Props> = ({ userReviews }) => {
+  console.log(userReviews);
+  return (
+    <div>
+      {userReviews.map(el => (
+        <Entry reviewEntry={el} />
+      ))}
+    </div>
+  );
+};
+
+export default Reviews;
