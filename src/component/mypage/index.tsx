@@ -58,12 +58,12 @@ interface IUserInfo {
 export const Mypage: React.FC = (): ReactElement => {
   const [myInfo, setInfo] = useState<IUserInfo>(fakeUser);
   const [myReview, setReview] = useState<IUserReview[]>(fakeReviews);
-  const [active, setActive] = useState<string>("나의 서평");
+  const [active, setActive] = useState<string>("review");
 
   const handleActive = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) =>
     setActive(e.currentTarget.id);
 
-  if (active === "reviews") {
+  if (active === "review") {
     return (
       <div>
         <UserInfo userInfo={myInfo}></UserInfo>

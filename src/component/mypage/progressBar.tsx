@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./../../../node_modules/uikit/dist/css/uikit.css";
 
 interface IBook {
@@ -36,13 +36,15 @@ interface IProps {
 const ProgressBar: React.FC<IProps> = ({ UserInfo }) => {
   console.log(UserInfo);
   const barStyle: object = { width: "30%", display: "inline-blodk" };
+  const [userGoal, setGoal] = useState<number>(0);
+  useEffect(() => setGoal(30));
   return (
     <div>
       <h3>독서 목표</h3>
       <progress
         id="js-progressbar"
         className="uk-progress"
-        value="10"
+        value={userGoal}
         max="100"
         style={barStyle}
       ></progress>
