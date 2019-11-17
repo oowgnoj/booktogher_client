@@ -6,6 +6,7 @@ interface IState {
   name: string;
   password1: string;
   password2: string;
+  status: string;
 }
 
 class SignUp extends React.Component<any, IState> {
@@ -16,7 +17,8 @@ class SignUp extends React.Component<any, IState> {
       email: "",
       name: "",
       password1: "",
-      password2: ""
+      password2: "",
+      status: "모든 항목을 입력해주세요."
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.nameChange = this.nameChange.bind(this);
@@ -28,20 +30,64 @@ class SignUp extends React.Component<any, IState> {
   public handleSubmit(event: React.MouseEvent<HTMLElement>): void {
     event.preventDefault();
     const { email, name, password1, password2 } = this.state;
-    if (password1 === password2) {
-      if (email && name && password1 && password2) {
-        // 서버에 요청
-        console.log(
-          `회원가입 성공! [email : ${email}] [name : ${name}] [password : ${password1}]`
-        );
-      } else {
-        console.log("모든 항목을 입력하세요");
-        this.setState({ alert: true });
+
+    let isEmail: boolean;
+
+    function checkEmail(address: string): boolean {
+      const regExp: RegExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+      return regExp.test(address); // 형식에 맞는 경우 true 리턴
+    }
+
+    isEmail = checkEmail(email);
+
+    if (!isEmail || password1 !== password2) {
+      if (!isEmail) {
+        this.setState({
+          alert: true,
+          status: "잘못된 형식의 이메일 주소입니다. 다시 입력해주세요."
+        });
+      } else if (password1 !== password2) {
+        this.setState({
+          alert: true,
+          status: "입력하신 패스워드가 일치하지 않습니다. 다시 확인해주세요."
+        });
       }
+    } else if (email && password1 && password2 && name) {
+      // 서버에 요청
+      console.log(
+        `회원가입 성공! [email : ${email}] [name : ${name}] [password : ${password1}]`
+      );
     } else {
-      console.log("비밀번호가 일치하지 않음!");
+      this.setState({
+        alert: true,
+        status: "모든 항목을 입력해주세요."
+      });
     }
   }
+
+  //   if (isEmail && password1 === password2) {
+  //     if (email && name && password1 && password2) {
+  //       // 서버에 요청
+  //       console.log(
+  //         `회원가입 성공! [email : ${email}] [name : ${name}] [password : ${password1}]`
+  //       );
+  //     } else {
+  //       console.log("모든 항목을 입력하세요");
+  //       this.setState({ alert: true, status: "모든 항목을 입력해주세요." });
+  //     }
+  //   } else if (password1 !== password2) {
+  //     console.log("비밀번호가 일치하지 않음!");
+  //     this.setState({
+  //       alert: true,
+  //       status: "입력하신 패스워드가 일치하지 않습니다. 다시 확인해주세요."
+  //     });
+  //   } else if (!isEmail) {
+  //     this.setState({
+  //       alert: true,
+  //       status: "잘못된 형식의 이메일 주소입니다. 다시 입력해주세요."
+  //     });
+  //   }
+  // }
 
   public emailChange(event: React.ChangeEvent<HTMLInputElement>): void {
     const updatingEmail: string = event.target.value;
@@ -67,7 +113,7 @@ class SignUp extends React.Component<any, IState> {
     const required: ReactElement = this.state.alert ? (
       <div className="uk-alert-primary" uk-alert>
         <a className="uk-alert-close" uk-close></a>
-        <p>모든 항목을 입력해주세요.</p>
+        <p>{this.state.status}</p>
       </div>
     ) : (
       <div></div>
@@ -105,7 +151,7 @@ class SignUp extends React.Component<any, IState> {
               <span className="uk-form-icon" uk-icon="icon: lock"></span>
               <input
                 className="uk-input"
-                type="text"
+                type="password"
                 placeholder="비밀번호를 입력해주세요"
                 onChange={this.passwordOneChange}
               />
@@ -117,7 +163,7 @@ class SignUp extends React.Component<any, IState> {
               <span className="uk-form-icon" uk-icon="icon: lock"></span>
               <input
                 className="uk-input"
-                type="text"
+                type="password"
                 placeholder="비밀번호를 확인해주세요"
                 onChange={this.passwordTwoChange}
               />
