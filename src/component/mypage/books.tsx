@@ -1,5 +1,7 @@
 import React from "react";
 import Entry from "./bookSimpleEntry";
+import Iframe from "./iframe";
+
 interface IBoook {
   id: string;
   authors: string[];

@@ -86,7 +86,8 @@ module.exports = {
       {
         id: "1",
         authors: ["톨스토이"],
-        thumbnail: "http://...",
+        thumbnail:
+          "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F230FDC34545EE81632",
         title: "안나 카레리나",
         start: "10/29/2019",
         goal: "12/13/2019"
@@ -96,7 +97,8 @@ module.exports = {
       {
         id: "1",
         authors: ["단테"],
-        thumbnail: "http://...",
+        thumbnail:
+          "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F230FDC34545EE81632",
         title: "신곡",
         start: "11/15/2019",
         end: "11/24/2019"
@@ -115,7 +117,8 @@ module.exports = {
       {
         id: "1",
         authors: ["도스토예프스키"],
-        thumbnail: "http://...",
+        thumbnail:
+          "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F230FDC34545EE81632",
         title: "죄와 벌"
       }
     ],
@@ -123,7 +126,9 @@ module.exports = {
       {
         id: "1",
         authors: ["톨스토이"],
-        thumbnail: "http://...",
+        thumbnail:
+          "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F230FDC34545EE81632",
+
         title: "안나 카레리나",
         start: "10/29/2019",
         goal: "12/13/2019"
@@ -133,7 +138,9 @@ module.exports = {
       {
         id: "1",
         authors: ["단테"],
-        thumbnail: "http://...",
+        thumbnail:
+          "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F230FDC34545EE81632",
+
         title: "신곡",
         start: "11/15/2019",
         end: "11/24/2019"
