@@ -17,7 +17,7 @@ function getCurationsAPI(): Promise<Response> {
 }
 
 export const updateReviewsRecommend = (): any => (
-  dispatch: any // Dispatch<IGetAllAssets | ISetAllAssets> 추후 바꿀 수 있음 !!
+  dispatch: any
 ): Promise<void> => {
   dispatch({ type: RECOMMEND_PENDING_REVIEW });
 

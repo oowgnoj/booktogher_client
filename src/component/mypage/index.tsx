@@ -1,4 +1,7 @@
 import React, { ReactElement, useState } from "react";
+import HTML5Backend from "react-dnd-html5-backend";
+import { DndProvider } from "react-dnd";
+
 import { fakeReviews, fakeUser } from "../../fakeData/fake";
 import "./../../../node_modules/uikit/dist/css/uikit.css";
 import UserInfo from "../shared/userInfo";
@@ -55,45 +58,34 @@ interface IUserInfo {
   numReviewsGoal: number;
 }
 
+type activeCompt = ReactElement;
 export const Mypage: React.FC = (): ReactElement => {
   const [myInfo, setInfo] = useState<IUserInfo>(fakeUser);
   const [myReview, setReview] = useState<IUserReview[]>(fakeReviews);
   const [active, setActive] = useState<string>("review");
 
+  let activeComp: ReactElement = <Reviews userReviews={fakeReviews}></Reviews>;
+
   const handleActive = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) =>
     setActive(e.currentTarget.id);
 
   if (active === "review") {
-    return (
-      <div>
-        <UserInfo userInfo={myInfo}></UserInfo>
-        <NavBar handleActive={handleActive} />
-        <Reviews userReviews={fakeReviews}></Reviews>
-      </div>
-    );
+    activeComp = <Reviews userReviews={fakeReviews}></Reviews>;
   } else if (active === "books") {
-    return (
-      <div>
-        <UserInfo userInfo={myInfo}></UserInfo>
-        <NavBar handleActive={handleActive} />
-        <Books Info={myInfo}></Books>
-      </div>
+    activeComp = (
+      <DndProvider backend={HTML5Backend}>
+        <Books Info={myInfo}></Books>{" "}
+      </DndProvider>
     );
   } else if (active === "stats") {
-    return (
-      <div>
-        <UserInfo userInfo={myInfo}></UserInfo>
-        <NavBar handleActive={handleActive} />
-        <ProgressBar UserInfo={myInfo}></ProgressBar>
-      </div>
-    );
+    return <ProgressBar UserInfo={myInfo}></ProgressBar>;
   }
 
   return (
     <div>
       <UserInfo userInfo={myInfo}></UserInfo>
       <NavBar handleActive={handleActive} />
-      <Reviews userReviews={fakeReviews}></Reviews>
+      {activeComp}{" "}
     </div>
   );
 };
