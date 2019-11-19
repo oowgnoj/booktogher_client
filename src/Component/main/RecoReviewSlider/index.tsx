@@ -38,13 +38,17 @@ const Slider: React.SFC<IProps> = ({ review }: IProps): ReactElement => {
           }}
         >
           <div className="uk-container">
-            <h3>{review.title}</h3>
+            <h3>{review ? review.title : "서평 제목"}</h3>
             <div className="uk-grid-match uk-child-width-1-3@m" uk-grid>
               <div>
-                <p>{review.author.name}</p>
+                <p>{review ? review.author.name : "작가 서명"}</p>
               </div>
               <div>
-                <p>{review.contents.replace(/<[^>]*>?/gm, "")}</p>
+                <p>
+                  {review
+                    ? review.contents.replace(/<[^>]*>?/gm, "")
+                    : "서평 본문"}
+                </p>
               </div>
               <div>
                 <p>혜경님 슬라이더 좀 만들어주세요.</p>
