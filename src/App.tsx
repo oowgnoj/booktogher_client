@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import Main from "./Component/main/index";
+import Main from "./component/main/index";
 
 const App: React.FC = (): ReactElement => {
   return (

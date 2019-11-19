@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import Main from "./Component/main/index";
+
+import Mypage from "./component/mypage/index";
 import "../node_modules/uikit/dist/css/uikit.css";
 import "../node_modules/uikit/dist/js/uikit.js";
 import "../node_modules/uikit/dist/js/uikit-icons.min.js";
@@ -12,8 +13,7 @@ import Store from "./Redux/configureStore";
 
 ReactDOM.render(
   <Provider store={Store}>
-    {console.log(Store)}
-    <App />
+    <Mypage />
   </Provider>,
   document.getElementById("root")
 );
