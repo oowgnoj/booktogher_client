@@ -1,4 +1,5 @@
 import React, { ReactElement, useState } from "react";
+
 import { fakeReviews, fakeUser } from "../../fakeData/fake";
 import "./../../../node_modules/uikit/dist/css/uikit.css";
 import UserInfo from "../shared/userInfo";
@@ -55,36 +56,27 @@ interface IUserInfo {
   numReviewsGoal: number;
 }
 
+type activeCompt = ReactElement;
 export const Mypage: React.FC = (): ReactElement => {
   const [myInfo, setInfo] = useState<IUserInfo>(fakeUser);
   const [myReview, setReview] = useState<IUserReview[]>(fakeReviews);
   const [active, setActive] = useState<string>("review");
 
+  let activeComp: ReactElement = <Reviews userReviews={fakeReviews}></Reviews>;
+
   const handleActive = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) =>
     setActive(e.currentTarget.id);
 
   if (active === "review") {
-    return (
-      <div>
-        <UserInfo userInfo={myInfo}></UserInfo>
-        <NavBar handleActive={handleActive} />
-        <Reviews userReviews={fakeReviews}></Reviews>
-      </div>
-    );
+    activeComp = <Reviews userReviews={fakeReviews}></Reviews>;
   } else if (active === "books") {
-    return (
-      <div>
-        <UserInfo userInfo={myInfo}></UserInfo>
-        <NavBar handleActive={handleActive} />
-        <Books Info={myInfo}></Books>
-      </div>
-    );
+    activeComp = <Books Info={myInfo}></Books>;
   } else if (active === "stats") {
     return (
       <div>
         <UserInfo userInfo={myInfo}></UserInfo>
         <NavBar handleActive={handleActive} />
-        <ProgressBar UserInfo={myInfo}></ProgressBar>
+        <ProgressBar UserInfo={myInfo}></ProgressBar>)
       </div>
     );
   }
@@ -93,7 +85,7 @@ export const Mypage: React.FC = (): ReactElement => {
     <div>
       <UserInfo userInfo={myInfo}></UserInfo>
       <NavBar handleActive={handleActive} />
-      <Reviews userReviews={fakeReviews}></Reviews>
+      {activeComp}{" "}
     </div>
   );
 };

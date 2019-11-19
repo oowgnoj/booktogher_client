@@ -1,5 +1,9 @@
 import React from "react";
+import { initialData } from "../../fakeData/fake";
 import Entry from "./bookSimpleEntry";
+import Column from "./Column";
+import BookDragList from "./BookList";
+
 interface IBoook {
   id: string;
   authors: string[];
@@ -35,10 +39,12 @@ const Books: React.FC<IProps> = ({ Info }) => {
   var toRead = Info.to_read;
   var reading = Info.reading;
   var finished = Info.finished;
-  console.log(Info);
+  const state = initialData;
+
   return (
     <div>
       <h3>To READ</h3>
+      <BookDragList />
       {toRead.map(el => (
         <Entry Info={el} />
       ))}{" "}

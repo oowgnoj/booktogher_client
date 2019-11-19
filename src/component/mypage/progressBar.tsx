@@ -37,6 +37,7 @@ const ProgressBar: React.FC<IProps> = ({ UserInfo }) => {
   console.log(UserInfo);
   const barStyle: object = { width: "30%", display: "inline-blodk" };
   const [userGoal, setGoal] = useState<number>(0);
+
   useEffect(() => setGoal(30));
   return (
     <div>

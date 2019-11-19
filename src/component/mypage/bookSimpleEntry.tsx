@@ -1,5 +1,6 @@
 import React from "react";
 import "../../../node_modules/uikit/dist/css/uikit.css";
+import ItemTypes from "./ItemTypes";
 
 interface IBook {
   id: string;
@@ -21,7 +22,7 @@ interface IUserInfo {
   email: string;
   image: string;
   profile: string;
-  to_read: IBook[];
+  BOOK: IBook[];
   reading: IBookReading[];
   finished: IBookFinished[];
   numBooksGoal: number;
