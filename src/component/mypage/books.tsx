@@ -1,6 +1,6 @@
 import React from "react";
 import Entry from "./bookSimpleEntry";
-import Iframe from "./iframe";
+import Dustbin from "./dustbin";
 
 interface IBoook {
   id: string;
