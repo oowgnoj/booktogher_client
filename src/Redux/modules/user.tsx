@@ -13,6 +13,7 @@ import { handleActions } from "redux-actions";
 //     8-3) 날짜 수정 "TYPE : user/EDITFINISHEDDATE"
 
 // LOGIN & LOGOUT  & UPDATE USERINFO requests
+
 const LOGIN_PENDING: string = "login/PENDING_LOGIN";
 const LOGIN_SUCCESS: string = "login/SUCCESS_LOGIN";
 const LOGIN_FAILURE: string = "login/FAILURE_LOGIN";
@@ -181,12 +182,12 @@ interface IToRead {
   book: IBoook;
 }
 
-interface IBoookReading {
+interface IBookReading {
   book: IBoook;
   start: string;
   goal: string;
 }
-interface IBoookFinished {
+interface IBookFinished {
   book: IBoook;
 
   start: string;
@@ -199,8 +200,8 @@ interface IUserInfo {
   image: string;
   profile: string;
   to_read: IToRead[];
-  reading: IBoookReading[];
-  finished: IBoookFinished[];
+  reading: IBookReading[];
+  finished: IBookFinished[];
   numBooksGoal: number;
   numReviewsGoal: number;
 }
@@ -217,8 +218,8 @@ interface IUserInfoOnly {
 
 interface IUserBookOnly {
   to_read: IToRead[];
-  reading: IBoookReading[];
-  finished: IBoookFinished[];
+  reading: IBookReading[];
+  finished: IBookFinished[];
 }
 
 interface IError {

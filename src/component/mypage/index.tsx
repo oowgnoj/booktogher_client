@@ -8,6 +8,14 @@ import Reviews from "./reviews";
 import Books from "./books";
 import ProgressBar from "./progressBar";
 
+// Users
+import {
+  IBookToRead,
+  IBookReading,
+  IBookFinished,
+  IUserInfo
+} from "./../shared/Types";
+
 // Books
 interface IAuthorInfo {
   id: string;
@@ -26,37 +34,12 @@ interface IUserReview {
   title: string;
 }
 
-// Users
-interface IBook {
-  id: string;
-  authors: string[];
-  thumbnail: string;
-  title: string;
-}
-
-interface IBookReading extends IBook {
-  start: string;
-  goal: string;
-}
-interface IBookFinished extends IBook {
-  start: string;
-  end: string;
-}
-
-interface IUserInfo {
-  id: string;
-  name: string;
-  email: string;
-  image: string;
-  profile: string;
-  to_read: IBook[];
-  reading: IBookReading[];
-  finished: IBookFinished[];
-  numBooksGoal: number;
-  numReviewsGoal: number;
-}
-
 type activeCompt = ReactElement;
+
+interface IProps {
+  Info: IUserInfo;
+}
+
 export const Mypage: React.FC = (): ReactElement => {
   const [myInfo, setInfo] = useState<IUserInfo>(fakeUser);
   const [myReview, setReview] = useState<IUserReview[]>(fakeReviews);
@@ -70,7 +53,7 @@ export const Mypage: React.FC = (): ReactElement => {
   if (active === "review") {
     activeComp = <Reviews userReviews={fakeReviews}></Reviews>;
   } else if (active === "books") {
-    activeComp = <Books Info={myInfo}></Books>;
+    activeComp = <Books User={myInfo}></Books>;
   } else if (active === "stats") {
     return (
       <div>

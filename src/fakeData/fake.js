@@ -68,38 +68,41 @@ module.exports = {
     }
   ],
   fakeUser: {
-    id: "1",
+    _id: "ObjectId",
     email: "aaa@gmail.com",
     image: "http://...",
     name: "정혜경",
     profile: "저는 말이죠...",
     to_read: [
       {
-        id: "1",
-        authors: ["도스토예프스키"],
-        thumbnail:
-          "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F230FDC34545EE81632",
-        title: "죄와 벌"
+        book: {
+          _id: "ObjectId",
+          authors: ["도스토예프스키"],
+          thumbnail: "http://...",
+          title: "죄와 벌"
+        }
       }
     ],
     reading: [
       {
-        id: "1",
-        authors: ["톨스토이"],
-        thumbnail:
-          "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F230FDC34545EE81632",
-        title: "안나 카레리나",
+        book: {
+          _id: "ObjectId",
+          authors: ["톨스토이"],
+          thumbnail: "http://...",
+          title: "안나 카레리나"
+        },
         start: "10/29/2019",
         goal: "12/13/2019"
       }
     ],
     finished: [
       {
-        id: "1",
-        authors: ["단테"],
-        thumbnail:
-          "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F230FDC34545EE81632",
-        title: "신곡",
+        book: {
+          _id: "ObjectId",
+          authors: ["단테"],
+          thumbnail: "http://...",
+          title: "신곡"
+        },
         start: "11/15/2019",
         end: "11/24/2019"
       }
@@ -149,19 +152,48 @@ module.exports = {
     numBooksGoal: 10,
     numReviewsGoal: 10
   },
-  initialData: {
-    tasks: {
-      "tasks-1": { id: "tasks - 1", content: "htello" },
-      "tasks-1": { id: "tasks - 1", content: "htello" },
-      "tasks-1": { id: "tasks - 1", content: "htello" }
-    },
-    columns: {
-      "column-1": {
-        id: "column-1",
-        title: "todo",
-        taskIds: ["tasks-1"]
+  userBookData: {
+    to_read: [
+      {
+        book: {
+          _id: "ObjectId",
+          authors: ["도스토예프스키"],
+          thumbnail: "http://...",
+          title: "죄와 벌"
+        }
+      },
+      {
+        book: {
+          _id: "ObjectId",
+          authors: ["도스토예프스키"],
+          thumbnail: "http://...",
+          title: "죄와 벌"
+        }
       }
-    },
-    columnOrder: ["column-1"]
+    ],
+    reading: [
+      {
+        book: {
+          _id: "ObjectId",
+          authors: ["톨스토이"],
+          thumbnail: "http://...",
+          title: "안나 카레리나"
+        },
+        start: "10/29/2019",
+        goal: "12/13/2019"
+      }
+    ],
+    finished: [
+      {
+        book: {
+          _id: "ObjectId",
+          authors: ["단테"],
+          thumbnail: "http://...",
+          title: "신곡"
+        },
+        start: "11/15/2019",
+        end: "11/24/2019"
+      }
+    ]
   }
 };

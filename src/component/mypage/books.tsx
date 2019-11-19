@@ -1,61 +1,30 @@
 import React from "react";
-import { initialData } from "../../fakeData/fake";
+import { fakeUser } from "../../fakeData/fake";
 import Entry from "./bookSimpleEntry";
 import Column from "./Column";
-import BookDragList from "./BookList";
+import BookList from "./BookList";
+import {
+  IBookToRead,
+  IBookReading,
+  IBookFinished,
+  IUserInfo
+} from "./../shared/Types";
 
-interface IBoook {
-  id: string;
-  authors: string[];
-  thumbnail: string;
-  title: string;
+interface IBooks {
+  toRead: IBookToRead[];
+  reading: IBookReading[];
+  finished: IBookFinished[];
 }
-interface IBoookReading extends IBoook {
-  start: string;
-  goal: string;
-}
-interface IBoookFinished extends IBoook {
-  start: string;
-  end: string;
-}
-interface IUserInfo {
-  id: string;
-  name: string;
-  email: string;
-  image: string;
-  profile: string;
-  to_read: IBoook[];
-  reading: IBoookReading[];
-  finished: IBoookFinished[];
-  numBooksGoal: number;
-  numReviewsGoal: number;
-}
-
 interface IProps {
-  Info: IUserInfo;
+  User: IUserInfo;
 }
 
-const Books: React.FC<IProps> = ({ Info }) => {
-  var toRead = Info.to_read;
-  var reading = Info.reading;
-  var finished = Info.finished;
-  const state = initialData;
+const Books: React.FC<IProps> = ({ User }) => {
+  const state = fakeUser;
 
   return (
     <div>
-      <h3>To READ</h3>
-      <BookDragList />
-      {toRead.map(el => (
-        <Entry Info={el} />
-      ))}{" "}
-      <h3>Reading</h3>
-      {reading.map(el => (
-        <Entry Info={el} />
-      ))}{" "}
-      <h3>finished</h3>
-      {finished.map(el => (
-        <Entry Info={el} />
-      ))}{" "}
+      <BookList User={User} />
     </div>
   );
 };

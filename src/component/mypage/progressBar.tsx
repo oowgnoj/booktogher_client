@@ -1,34 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./../../../node_modules/uikit/dist/css/uikit.css";
-
-interface IBook {
-  id: string;
-  authors: string[];
-  thumbnail: string;
-  title: string;
-}
-
-interface IBookReading extends IBook {
-  start: string;
-  goal: string;
-}
-interface IBookFinished extends IBook {
-  start: string;
-  end: string;
-}
-
-interface IUserInfo {
-  id: string;
-  name: string;
-  email: string;
-  image: string;
-  profile: string;
-  to_read: IBook[];
-  reading: IBookReading[];
-  finished: IBookFinished[];
-  numBooksGoal: number;
-  numReviewsGoal: number;
-}
+import { IUserInfo } from "./../shared/Types";
 
 interface IProps {
   UserInfo: IUserInfo;

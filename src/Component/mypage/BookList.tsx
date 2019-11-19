@@ -1,70 +1,59 @@
 import * as React from "react";
 import { DragDropContext } from "react-beautiful-dnd";
-import { reorderColors } from "./reorder";
-import { ColorMap } from "./types";
-import { BookEntry } from "./BookEntry";
+import { reorderbooks } from "./reorder";
+import BookEntry from "./BookEntry";
+import { userBookData } from "./../../fakeData/fake";
 
-interface IBook {
-  id: string;
-  authors: string[];
-  thumbnail: string;
-  title: string;
-}
-interface IBookReading extends IBook {
-  start: string;
-  goal: string;
-}
-interface IBookFinished extends IBook {
-  start: string;
-  end: string;
-}
-interface IUserInfo {
-  id: string;
-  name: string;
-  email: string;
-  image: string;
-  profile: string;
-  BOOK: IBook[];
+import {
+  IBookToRead,
+  IBookReading,
+  IBookFinished,
+  IUserInfo
+} from "./../shared/Types";
+
+interface IBooks {
+  toRead: IBookToRead[];
   reading: IBookReading[];
   finished: IBookFinished[];
-  numBooksGoal: number;
-  numReviewsGoal: number;
 }
 
-interface Props {
-  Info: IBook;
+interface IProps {
+  User: IUserInfo;
 }
 
-const App = () => {
-  const [colorMap, setColors] = React.useState<ColorMap>({
-    a: ["blue", "red", "yellow"],
-    b: ["pink"],
-    c: ["green", "tan"]
-  });
+const App: React.FC<IProps> = ({ User }) => {
+  const [bookList, setBookList] = React.useState<IBooks>(userBookData);
+  const bookListFromProps = {
+    to_read: User.to_read,
+    reading: User.reading,
+    finished: User.finished
+  };
 
   return (
-    <DragDropContext
-      onDragEnd={({ destination, source }) => {
-        // // dropped outside the list
-        if (!destination) {
-          return;
-        }
-
-        setColors(reorderColors(colorMap, source, destination));
-      }}
-    >
-      <div>
-        {Object.entries(colorMap).map(([k, v]) => (
-          <BookEntry
-            internalScroll
-            key={k}
-            listId={k}
-            listType="CARD"
-            colors={v}
-          />
-        ))}
-      </div>
-    </DragDropContext>
+    <div>
+      <DragDropContext
+        onDragEnd={({ destination, source }) => {
+          // // dropped outside the list
+          if (!destination) {
+            return;
+          }
+          setBookList(reorderbooks(bookList, source, destination));
+        }}
+      >
+        <div>
+          <BookEntry />
+          {/* {Object.entries(bookList).map(([k, v]) => (
+            <BookEntry
+              internalScroll
+              key={k}
+              listId={k}
+              listType="CARD"
+              books={bookList}
+            />
+          ))} */}
+        </div>
+      </DragDropContext>
+    </div>
   );
 };
 
