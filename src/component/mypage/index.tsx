@@ -72,7 +72,13 @@ export const Mypage: React.FC = (): ReactElement => {
   } else if (active === "books") {
     activeComp = <Books Info={myInfo}></Books>;
   } else if (active === "stats") {
-    return <ProgressBar UserInfo={myInfo}></ProgressBar>;
+    return (
+      <div>
+        <UserInfo userInfo={myInfo}></UserInfo>
+        <NavBar handleActive={handleActive} />
+        <ProgressBar UserInfo={myInfo}></ProgressBar>)
+      </div>
+    );
   }
 
   return (

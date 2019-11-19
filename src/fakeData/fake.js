@@ -148,5 +148,20 @@ module.exports = {
     ],
     numBooksGoal: 10,
     numReviewsGoal: 10
+  },
+  initialData: {
+    tasks: {
+      "tasks-1": { id: "tasks - 1", content: "htello" },
+      "tasks-1": { id: "tasks - 1", content: "htello" },
+      "tasks-1": { id: "tasks - 1", content: "htello" }
+    },
+    columns: {
+      "column-1": {
+        id: "column-1",
+        title: "todo",
+        taskIds: ["tasks-1"]
+      }
+    },
+    columnOrder: ["column-1"]
   }
 };
