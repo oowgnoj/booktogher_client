@@ -2,14 +2,14 @@ import React, { ReactElement } from "react";
 import RecoReviewEntry from "./RecoReviewEntry";
 
 interface IAuthor {
-  id: string;
+  _id: string;
   image: string;
   name: string;
   profile: string;
 }
 
 interface IReview {
-  id: string;
+  _id: string;
   author: IAuthor;
   contents: string;
   likes: string[];
@@ -25,9 +25,11 @@ interface IProps {
 const RecoReviewList: React.SFC<IProps> = ({
   reviews
 }: IProps): ReactElement => {
-  const reviewList: React.ReactElement[] = reviews.map((review, index) => (
-    <RecoReviewEntry review={review} key={index} />
-  ));
+  const reviewList: React.ReactElement[] = reviews.map(
+    (review: IReview, index: number) => (
+      <RecoReviewEntry review={review} key={index} />
+    )
+  );
   return (
     <div className="main_review_list">
       <div className="uk-child-width-1-2@s  uk-flex uk-flex-center" uk-grid>

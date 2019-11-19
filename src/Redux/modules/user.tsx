@@ -57,21 +57,34 @@ const EDITDATE_FINISHED_PENDING: string = "user/EDITDATE_FINISHED_PENDING";
 const EDITDATE_FINISHED_SUCCESS: string = "user/EDITDATE_FINISHED_SUCCESS";
 const EDITDATE_FINISHED_FAILURE: string = "user/EDITDATE_FINISHED_FAILURE";
 
-function loginAPI(): Promise<Response> {
-  return fetch("http://localhost:3000/login");
+function loginAPI(mail: string, pw: string): Promise<Response> {
+  return fetch("http://localhost:3000/login", {
+    body: JSON.stringify({
+      email: mail,
+      password: pw
+    }),
+    credentials: "include",
+    method: "POST"
+  });
 }
 
 function logoutAPI(): Promise<Response> {
-  return fetch("http://localhost:3000/logout");
+  return fetch("http://localhost:3000/logout", {
+    credentials: "include",
+    method: "POST"
+  });
 }
 
 function getInfoAPI(): Promise<Response> {
-  return fetch("http://localhost:3000/getinfo");
+  return fetch("http://localhost:3000/getinfo", {
+    credentials: "include"
+  });
 }
 
 function updateInfoAPI(userInfo: IUserInfoOnly): Promise<Response> {
   return fetch("http://localhost:3000/user", {
     body: JSON.stringify(userInfo),
+    credentials: "include",
     method: "PATCH"
   });
 }
@@ -82,10 +95,12 @@ function updateInfoAPI(userInfo: IUserInfoOnly): Promise<Response> {
 //   });
 // }
 
-export const requestLogin = (): any => (dispatch: any): Promise<void> => {
+export const requestLogin = (mail: string, pw: string): any => (
+  dispatch: any
+): Promise<void> => {
   dispatch({ type: LOGIN_PENDING });
 
-  return loginAPI()
+  return loginAPI(mail, pw)
     .then((response: Response) => response.json())
     .then((result: boolean) => {
       dispatch({
@@ -111,7 +126,7 @@ export const requestLogin = (): any => (dispatch: any): Promise<void> => {
 export const requestLogout = (): any => (dispatch: any): Promise<void> => {
   dispatch({ type: LOGOUT_PENDING });
 
-  return loginAPI()
+  return logoutAPI()
     .then((response: Response) => response.json())
     .then((result: boolean) => {
       dispatch({
@@ -169,6 +184,11 @@ export const updateUserInfo = (userInfo: IUserInfoOnly): any => (
 //       });
 //     });
 // };
+
+interface ILogIn {
+  email: string;
+  password: string;
+}
 
 interface IBoook {
   _id: string;
@@ -240,7 +260,7 @@ interface IState {
 
 const initialState: IState = {
   User: {
-    _id: "ObjectId",
+    _id: "",
     email: "aaa@gmail.com",
     image: "http://...",
     name: "정혜경",
@@ -282,7 +302,7 @@ const initialState: IState = {
     numBooksGoal: 10,
     numReviewsGoal: 10
   },
-  isLoggedIn: false,
+  isLoggedIn: true,
   pending: false,
   error: ""
 };

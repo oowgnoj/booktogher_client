@@ -1,4 +1,7 @@
 import React, { ReactElement } from "react";
+import { connect } from "react-redux";
+import "./index.css";
+
 import GuestGreeting from "./GuestGreeting";
 import UserGreeting from "./UserGreeting";
 
@@ -12,7 +15,7 @@ subscribe 한 state 의 유저정보를 보여줌
 */
 
 interface IBook {
-  id: number;
+  _id: number;
   authors: string[];
   thumbnail: string;
   title: string;
@@ -26,7 +29,7 @@ interface IBookFinished extends IBook {
   end: string;
 }
 interface IUserInfo {
-  id: number;
+  _id: number;
   name: string;
   email: string;
   image: string;
@@ -39,28 +42,28 @@ interface IUserInfo {
 }
 
 interface IState {
-  isLoggedIn: boolean;
+  isLogged: boolean;
 }
 
 class Sidebar extends React.Component {
-  public state: IState = {
-    isLoggedIn: true
-  };
+  // public state: IState = {
+  //   isLogged: true
+  // };
 
   public fUser: IUserInfo = {
+    _id: 1,
     email: "aaa@gmail.com",
     finished: [
       {
+        _id: 1,
         authors: ["단테"],
         end: "11/24/2019",
-        id: 1,
         start: "11/15/2019",
         thumbnail:
           "https://image.aladin.co.kr/product/11889/1/cover500/8937434717_2.jpg",
         title: "신곡"
       }
     ],
-    id: 1,
     image: "https://i-love-png.com/images/profile-417-1163876.png",
     name: "정혜경",
     numBooksGoal: 10,
@@ -68,9 +71,9 @@ class Sidebar extends React.Component {
     profile: "저는 말이죠...",
     reading: [
       {
+        _id: 1,
         authors: ["톨스토이"],
         goal: "12/13/2019",
-        id: 1,
         start: "10/29/2019",
         thumbnail:
           "https://image.aladin.co.kr/product/11889/1/cover500/8937434717_2.jpg",
@@ -79,8 +82,8 @@ class Sidebar extends React.Component {
     ],
     to_read: [
       {
+        _id: 1,
         authors: ["도스토예프스키"],
-        id: 1,
         thumbnail:
           "https://image.aladin.co.kr/product/11889/1/cover500/8937434717_2.jpg",
         title: "죄와 벌"
@@ -89,9 +92,9 @@ class Sidebar extends React.Component {
   };
 
   public render(): ReactElement {
-    const { isLoggedIn } = this.state;
-    const greeting: React.ReactElement = isLoggedIn ? (
-      <UserGreeting userinfo={this.fUser} />
+    const props: any = this.props;
+    const greeting: React.ReactElement = props.isLoggedIn ? (
+      <UserGreeting />
     ) : (
       <GuestGreeting />
     );
@@ -99,24 +102,16 @@ class Sidebar extends React.Component {
     return <div className="sidebar">{greeting}</div>;
   }
 }
-/*
 
-const RecoCollectionList: React.SFC<IProps> = ({
-  collections
-}: IProps): ReactElement => {
-  const collectionList: React.ReactElement[] = collections.map(
-    (collection, index) => (
-      <RecoCollectionEntry collection={collection} key={index} />
-    )
-  );
-  return (
-    <div className="main_collection_list">
-      <div className="uk-child-width-1-2@m  uk-flex uk-flex-center" uk-grid>
-        {collectionList}
-      </div>
-    </div>
-  );
-};
-*/
+function mapStateToProps(state: any): any {
+  console.log("로그인 여부 state!!", state);
+  return {
+    isLoggedIn: state.handleUserActions.isLoggedIn
+  };
+}
 
-export default Sidebar;
+function mapDispatchToProps(dispatch: any): any {
+  return {};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

@@ -1,14 +1,14 @@
 import React, { ReactElement } from "react";
 
 interface IAuthor {
-  id: string;
+  _id: string;
   image: string;
   name: string;
   profile: string;
 }
 
 interface IReview {
-  id: string;
+  _id: string;
   author: IAuthor;
   contents: string;
   likes: string[];

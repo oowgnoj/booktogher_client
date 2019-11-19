@@ -1,12 +1,16 @@
 import React, { ReactElement } from "react";
 
+// import "../../../node_modules/uikit/dist/js/uikit-icons.min.js";
+// import "../../../node_modules/uikit/dist/js/uikit.js";
+// import "../../../node_modules/uikit/dist/css/uikit.css";
+
 interface IState {
   alert: boolean;
-  email: string;
-  name: string;
+  mail: string; // req.body 의 key 값의 email 과 중복되는 문제 해결을 위해 mail 로 변경
   password1: string;
   password2: string;
   status: string;
+  username: string; // req.body 의 key 값의 name 과 중복되는 문제 해결을 위해 mail 로 변경
 }
 
 class SignUp extends React.Component<any, IState> {
@@ -14,11 +18,11 @@ class SignUp extends React.Component<any, IState> {
     super(props);
     this.state = {
       alert: false,
-      email: "",
-      name: "",
+      mail: "",
       password1: "",
       password2: "",
-      status: "모든 항목을 입력해주세요."
+      status: "모든 항목을 입력해주세요.",
+      username: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.nameChange = this.nameChange.bind(this);
@@ -29,7 +33,7 @@ class SignUp extends React.Component<any, IState> {
 
   public handleSubmit(event: React.MouseEvent<HTMLElement>): void {
     event.preventDefault();
-    const { email, name, password1, password2 } = this.state;
+    const { mail, username, password1, password2 } = this.state;
 
     let isEmail: boolean;
 
@@ -38,7 +42,7 @@ class SignUp extends React.Component<any, IState> {
       return regExp.test(address); // 형식에 맞는 경우 true 리턴
     }
 
-    isEmail = checkEmail(email);
+    isEmail = checkEmail(mail);
 
     if (!isEmail || password1 !== password2) {
       if (!isEmail) {
@@ -52,11 +56,23 @@ class SignUp extends React.Component<any, IState> {
           status: "입력하신 패스워드가 일치하지 않습니다. 다시 확인해주세요."
         });
       }
-    } else if (email && password1 && password2 && name) {
-      // 서버에 요청
-      console.log(
-        `회원가입 성공! [email : ${email}] [name : ${name}] [password : ${password1}]`
-      );
+    } else if (mail && password1 && password2 && username) {
+      fetch("http://localhost:3000/signup", {
+        body: JSON.stringify({
+          email: mail,
+          name: username,
+          password: password1
+        }),
+        credentials: "include",
+        method: "POST"
+      })
+        .then((response: Response) => {
+          console.log(
+            `회원가입 성공! [email : ${mail}] [name : ${username}] [password : ${password1}]`
+          );
+          this.props.history.push("/");
+        })
+        .catch((err: Error) => console.log(err));
     } else {
       this.setState({
         alert: true,
@@ -91,12 +107,12 @@ class SignUp extends React.Component<any, IState> {
 
   public emailChange(event: React.ChangeEvent<HTMLInputElement>): void {
     const updatingEmail: string = event.target.value;
-    this.setState({ email: updatingEmail });
+    this.setState({ mail: updatingEmail });
   }
 
   public nameChange(event: React.ChangeEvent<HTMLInputElement>): void {
     const updatingName: string = event.target.value;
-    this.setState({ name: updatingName });
+    this.setState({ username: updatingName });
   }
 
   public passwordOneChange(event: React.ChangeEvent<HTMLInputElement>): void {
@@ -169,7 +185,7 @@ class SignUp extends React.Component<any, IState> {
               />
             </div>
           </div>
-          <p uk-margin>
+          <p uk-margin="true">
             <button
               className="uk-button uk-button-small"
               style={{ color: "gray" }}
