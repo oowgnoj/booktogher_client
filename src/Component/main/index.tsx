@@ -74,16 +74,17 @@ class Main extends React.Component {
   }
 
   public render(): ReactElement {
+    const props: any = this.props;
+
     return (
       <div className="main">
-        {console.log(this.props)}
-        {/*        <Slider review={this.props.review[0]} />
-        <RecoReviewList reviews={review} />
+        <Slider review={props.review[0]} />
+        <RecoReviewList reviews={props.review} />
         <span className="main_recocollection_title">
           서로모임에 오신 분들께서 작성해주신 컬렉션입니다.
           {console.log(Store.getState())}
         </span>
-        <RecoCollectionList collections={curation} /> */}
+        <RecoCollectionList collections={props.curation} />
       </div>
     );
   }
