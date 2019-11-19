@@ -1,5 +1,18 @@
 import { handleActions } from "redux-actions";
 
+// 6) 마이페이지 > 유저정보 / 읽고싶은책 > user (info)
+//     6-1) 읽고싶은책 추가 "TYPE : user/ADDTOREAD"
+//     6-2) 읽고싶은책 빼기 "TYPE : user/DELETETOREAD"
+// 7) 마이페이지 > 유저정보 / 읽고있는책 > user (info)
+//     7-1) 읽고있는책 추가 "TYPE : user/ADDREADING"
+//     7-2) 읽고있는책 빼기 "TYPE : user/DELETEREADING"
+//     7-3) 날짜 수정 "TYPE : user/EDITREADINGDATE"
+// 8) 마이페이지 > 유저정보 / 다읽은책 > user (info)
+//     8-1) 다읽은책 추가 "TYPE : user/ADDFINISHED"
+//     8-2) 다읽은책 빼기 "TYPE : user/DELETEFINISHED"
+//     8-3) 날짜 수정 "TYPE : user/EDITFINISHEDDATE"
+
+// LOGIN & LOGOUT  & UPDATE USERINFO requests
 const LOGIN_PENDING: string = "login/PENDING_LOGIN";
 const LOGIN_SUCCESS: string = "login/SUCCESS_LOGIN";
 const LOGIN_FAILURE: string = "login/FAILURE_LOGIN";
@@ -8,13 +21,41 @@ const LOGOUT_PENDING: string = "logout/PENDING_LOGOUT";
 const LOGOUT_SUCCESS: string = "logout/SUCCESS_LOGOUT";
 const LOGOUT_FAILURE: string = "logout/FAILURE_LOGOUT";
 
-const GETINFO_PENDING: string = "getinfo/PENDING_GETINFO";
 const GETINFO_SUCCESS: string = "getinfo/SUCCESS_GETINFO";
-const GETINFO_FAILURE: string = "getinfo/FAILURE_GETINFO";
+// const GETINFO_PENDING: string = "getinfo/PENDING_GETINFO"; 우선 로그인과 한번에 처리
+// const GETINFO_FAILURE: string = "getinfo/FAILURE_GETINFO"; failure 에러도 로그인과 함께
 
 const UPDATEINFO_PENDING: string = "getinfo/PENDING_UPDATEINFO";
 const UPDATEINFO_SUCCESS: string = "getinfo/SUCCESS_UPDATEINFO";
 const UPDATEINFO_FAILURE: string = "getinfo/FAILURE_UPDATEINFO";
+
+// USER BOOK requests
+const ADD_TOREAD_PENDING: string = "user/ADD_TOREAD_PENDING";
+const ADD_TOREAD_SUCCESS: string = "user/ADD_TOREAD_SUCCESS";
+const ADD_TOREAD_FAILURE: string = "user/ADD_TOREAD_FAILURE";
+const DELETE_TOREAD_PENDING: string = "user/DELETE_TOREAD_PENDING";
+const DELETE_TOREAD_SUCCESS: string = "user/DELETE_TOREAD_SUCCESS";
+const DELETE_TOREAD_FAILURE: string = "user/DELETE_TOREAD_FAILURE";
+
+const ADD_READING_PENDING: string = "user/ADD_READING_PENDING";
+const ADD_READING_SUCCESS: string = "user/ADD_READING_SUCCESS";
+const ADD_READING_FAILURE: string = "user/ADD_READING_FAILURE";
+const DELETE_READING_PENDING: string = "user/DELETE_READING_PENDING";
+const DELETE_READING_SUCCESS: string = "user/DELETE_READING_SUCCESS";
+const DELETE_READING_FAILURE: string = "user/DELETE_READING_FAILURE";
+const EDITDATE_READING_PENDING: string = "user/EDITDATE_READING_PENDING";
+const EDITDATE_READING_SUCCESS: string = "user/EDITDATE_READING_SUCCESS";
+const EDITDATE_READING_FAILURE: string = "user/EDITDATE_READING_FAILURE";
+
+const ADD_FINISHED_PENDING: string = "user/ADD_FINISHED_PENDING";
+const ADD_FINISHED_SUCCESS: string = "user/ADD_FINISHED_SUCCESS";
+const ADD_FINISHED_FAILURE: string = "user/ADD_FINISHED_FAILURE";
+const DELETE_FINISHED_PENDING: string = "user/DELETE_FINISHED_PENDING";
+const DELETE_FINISHED_SUCCESS: string = "user/DELETE_FINISHED_SUCCESS";
+const DELETE_FINISHED_FAILURE: string = "user/DELETE_FINISHED_FAILURE";
+const EDITDATE_FINISHED_PENDING: string = "user/EDITDATE_FINISHED_PENDING";
+const EDITDATE_FINISHED_SUCCESS: string = "user/EDITDATE_FINISHED_SUCCESS";
+const EDITDATE_FINISHED_FAILURE: string = "user/EDITDATE_FINISHED_FAILURE";
 
 function loginAPI(): Promise<Response> {
   return fetch("http://localhost:3000/login");
@@ -28,12 +69,16 @@ function getInfoAPI(): Promise<Response> {
   return fetch("http://localhost:3000/getinfo");
 }
 
-function updateInfoAPI(userInfo: IUserInfo): Promise<Response> {
-  // const temp = JSON.parse(userInfo)
-//   var params :string= Object.keys(userInfo).reduce(key => key+'='+userInfo[key])
-//   return fetch("http://localhost:3000/updateInfo",{
-//     method: 'PATCH',
-//     body: params
+function updateInfoAPI(userInfo: IUserInfoOnly): Promise<Response> {
+  return fetch("http://localhost:3000/user", {
+    body: JSON.stringify(userInfo),
+    method: "PATCH"
+  });
+}
+// function updateUserBookAPI(userBook: IUserBookOnly): Promise<Response> {
+//   return fetch("http://localhost:3000/user", {
+//     body: JSON.stringify(userBook),
+//     method: "PATCH"
 //   });
 // }
 
@@ -44,9 +89,6 @@ export const requestLogin = (): any => (dispatch: any): Promise<void> => {
     .then((response: Response) => response.json())
     .then((result: boolean) => {
       dispatch({
-        payload: {
-          isLoggedIn: true
-        },
         type: LOGIN_SUCCESS
       });
     })
@@ -54,17 +96,13 @@ export const requestLogin = (): any => (dispatch: any): Promise<void> => {
     .then((response: Response) => response.json())
     .then((result: IUserInfo) => {
       dispatch({
-        payload: {
-          User: result
-        },
+        payload: result,
         type: GETINFO_SUCCESS
       });
     })
     .catch((err: Response) => {
       dispatch({
-        payload: {
-          isLoggedIn: false
-        },
+        payload: err,
         type: LOGIN_FAILURE
       });
     });
@@ -77,40 +115,57 @@ export const requestLogout = (): any => (dispatch: any): Promise<void> => {
     .then((response: Response) => response.json())
     .then((result: boolean) => {
       dispatch({
-        payload: {
-          isLoggedIn: false
-        },
         type: LOGOUT_SUCCESS
       });
     })
     .catch((err: Response) => {
       dispatch({
-        payload: {
-          isLoggedIn: true
-        },
+        payload: err,
         type: LOGOUT_FAILURE
       });
     });
 };
 
-// export const updateUserInfo = (): any => (dispatch: any): Promise<void> => {
-//   dispatch({ type: LOGOUT_PENDING });
-//   return updateInfoAPI()
+// * UPDATE user information  *
+export const updateUserInfo = (userInfo: IUserInfoOnly): any => (
+  dispatch: any
+): Promise<void> => {
+  dispatch({ type: UPDATEINFO_PENDING });
+
+  return updateInfoAPI(userInfo)
+    .then((response: Response) => response.json())
+    .then((result: IUserInfo) => {
+      dispatch({
+        payload: result,
+        type: UPDATEINFO_SUCCESS
+      });
+    })
+    .catch((err: Response) => {
+      dispatch({
+        payload: err,
+        type: UPDATEINFO_FAILURE
+      });
+    });
+};
+
+// * UPDATE user book information *
+// export const updateUserBook = (userBook: IUserBookOnly): any => (
+//   dispatch: any
+// ): Promise<void> => {
+//   dispatch({ type: UPDATEINFO_PENDING });
+
+//   return updateInfoAPI(userInfo)
 //     .then((response: Response) => response.json())
-//     .then((result: boolean) => {
+//     .then((result: IUserInfo) => {
 //       dispatch({
-//         payload: {
-//           isLoggedIn: false
-//         },
-//         type: LOGOUT_SUCCESS
+//         payload: result,
+//         type: UPDATEINFO_SUCCESS
 //       });
 //     })
 //     .catch((err: Response) => {
 //       dispatch({
-//         payload: {
-//           isLoggedIn: true
-//         },
-//         type: LOGOUT_FAILURE
+//         payload: err,
+//         type: UPDATEINFO_FAILURE
 //       });
 //     });
 // };
@@ -150,9 +205,37 @@ interface IUserInfo {
   numReviewsGoal: number;
 }
 
+interface IUserInfoOnly {
+  _id: string;
+  name: string;
+  email: string;
+  image: string;
+  profile: string;
+  numBooksGoal: number;
+  numReviewsGoal: number;
+}
+
+interface IUserBookOnly {
+  to_read: IToRead[];
+  reading: IBoookReading[];
+  finished: IBoookFinished[];
+}
+
+interface IError {
+  message: string;
+  status: number;
+  type: string;
+}
+
+interface IErrorResponse {
+  error: IError;
+}
+
 interface IState {
   User: IUserInfo;
   isLoggedIn: boolean;
+  pending: boolean;
+  error: string;
 }
 
 const initialState: IState = {
@@ -199,7 +282,9 @@ const initialState: IState = {
     numBooksGoal: 10,
     numReviewsGoal: 10
   },
-  isLoggedIn: false
+  isLoggedIn: false,
+  pending: false,
+  error: ""
 };
 
 export default handleActions(
@@ -207,43 +292,72 @@ export default handleActions(
     [LOGIN_PENDING]: (state: IState, action: any): IState => {
       return {
         ...state,
-        isLoggedIn: false
+        isLoggedIn: false,
+        pending: true
       };
     },
     [LOGIN_SUCCESS]: (state: IState, action: any): IState => {
       return {
         ...state,
-        isLoggedIn: true
+        isLoggedIn: true,
+        pending: false
       };
     },
     [LOGIN_FAILURE]: (state: IState, action: any): IState => {
       return {
         ...state,
-        isLoggedIn: false
+        isLoggedIn: false,
+        pending: false
       };
     },
     [LOGOUT_PENDING]: (state: IState, action: any): IState => {
       return {
         ...state,
-        isLoggedIn: true
+        isLoggedIn: true,
+        pending: true
       };
     },
     [LOGOUT_SUCCESS]: (state: IState, action: any): IState => {
       return {
         ...state,
-        isLoggedIn: false
+        error: "",
+        isLoggedIn: false,
+        pending: false
       };
     },
     [LOGOUT_FAILURE]: (state: IState, action: any): IState => {
       return {
         ...state,
-        isLoggedIn: true
+        error: action.payload.err.error.message,
+        isLoggedIn: true,
+        pending: false
       };
     },
     [GETINFO_SUCCESS]: (state: IState, action: any): IState => {
       return {
-        User: action.payload.User,
+        ...state,
+        User: action.payload,
         isLoggedIn: true
+      };
+    },
+    [UPDATEINFO_PENDING]: (state: IState, action: any): IState => {
+      return {
+        ...state,
+        pending: true
+      };
+    },
+    [UPDATEINFO_SUCCESS]: (state: IState, action: any): IState => {
+      return {
+        ...state,
+        User: action.payload,
+        pending: false
+      };
+    },
+    [UPDATEINFO_FAILURE]: (state: IState, action: any): IState => {
+      return {
+        ...state,
+        error: action.payload.err.error.message,
+        pending: false
       };
     }
   },
@@ -266,9 +380,9 @@ export default handleActions(
 2) 사이드바 > 로그아웃 > user (isloggedin, info) "TYPE : user/LOGOUT"
 3) 사이드바 > 로그인 > fetch > user (isloggedin, info) "TYPE : user/LOGIN"
 4) 사이드바 > 로그인 > fetch > user (isloggedin, info) "TYPE : user/GETINFO"
-
-
 5) 마이페이지 > 유저정보 > user (info) "TYPE : user/UPDATEINFO"
+
+
 6) 마이페이지 > 유저정보 / 읽고싶은책 > user (info)
     6-1) 읽고싶은책 추가 "TYPE : user/ADDTOREAD"
     6-2) 읽고싶은책 빼기 "TYPE : user/DELETETOREAD"

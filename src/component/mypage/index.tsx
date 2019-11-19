@@ -1,6 +1,4 @@
 import React, { ReactElement, useState } from "react";
-import HTML5Backend from "react-dnd-html5-backend";
-import { DndProvider } from "react-dnd";
 
 import { fakeReviews, fakeUser } from "../../fakeData/fake";
 import "./../../../node_modules/uikit/dist/css/uikit.css";
@@ -72,13 +70,15 @@ export const Mypage: React.FC = (): ReactElement => {
   if (active === "review") {
     activeComp = <Reviews userReviews={fakeReviews}></Reviews>;
   } else if (active === "books") {
-    activeComp = (
-      <DndProvider backend={HTML5Backend}>
-        <Books Info={myInfo}></Books>{" "}
-      </DndProvider>
-    );
+    activeComp = <Books Info={myInfo}></Books>;
   } else if (active === "stats") {
-    return <ProgressBar UserInfo={myInfo}></ProgressBar>;
+    return (
+      <div>
+        <UserInfo userInfo={myInfo}></UserInfo>
+        <NavBar handleActive={handleActive} />
+        <ProgressBar UserInfo={myInfo}></ProgressBar>)
+      </div>
+    );
   }
 
   return (
