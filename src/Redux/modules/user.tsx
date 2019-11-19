@@ -149,26 +149,26 @@ export const updateUserInfo = (userInfo: IUserInfoOnly): any => (
 };
 
 // * UPDATE user book information *
-export const updateUserBook = (userBook: IUserBookOnly): any => (
-  dispatch: any
-): Promise<void> => {
-  dispatch({ type: UPDATEINFO_PENDING });
+// export const updateUserBook = (userBook: IUserBookOnly): any => (
+//   dispatch: any
+// ): Promise<void> => {
+//   dispatch({ type: UPDATEINFO_PENDING });
 
-  return updateInfoAPI(userInfo)
-    .then((response: Response) => response.json())
-    .then((result: IUserInfo) => {
-      dispatch({
-        payload: result,
-        type: UPDATEINFO_SUCCESS
-      });
-    })
-    .catch((err: Response) => {
-      dispatch({
-        payload: err,
-        type: UPDATEINFO_FAILURE
-      });
-    });
-};
+//   return updateInfoAPI(userInfo)
+//     .then((response: Response) => response.json())
+//     .then((result: IUserInfo) => {
+//       dispatch({
+//         payload: result,
+//         type: UPDATEINFO_SUCCESS
+//       });
+//     })
+//     .catch((err: Response) => {
+//       dispatch({
+//         payload: err,
+//         type: UPDATEINFO_FAILURE
+//       });
+//     });
+// };
 
 interface IBoook {
   _id: string;

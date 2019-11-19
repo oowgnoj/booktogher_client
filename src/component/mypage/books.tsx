@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import Entry from "./bookSimpleEntry";
-import Dustbin from "./dustbin";
 
 interface IBoook {
   id: string;
@@ -37,7 +36,7 @@ const Books: React.FC<IProps> = ({ Info }) => {
   var toRead = Info.to_read;
   var reading = Info.reading;
   var finished = Info.finished;
-  console.log(Info);
+
   return (
     <div>
       <h3>To READ</h3>

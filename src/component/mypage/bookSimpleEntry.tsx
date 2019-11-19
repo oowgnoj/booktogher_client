@@ -1,6 +1,5 @@
 import React from "react";
 import "../../../node_modules/uikit/dist/css/uikit.css";
-import { useDrag, DragSourceMonitor } from "react-dnd";
 import ItemTypes from "./ItemTypes";
 
 interface IBook {
@@ -23,7 +22,7 @@ interface IUserInfo {
   email: string;
   image: string;
   profile: string;
-  to_read: IBook[];
+  BOOK: IBook[];
   reading: IBookReading[];
   finished: IBookFinished[];
   numBooksGoal: number;
@@ -35,22 +34,8 @@ interface Props {
 }
 
 const ReviewEntry: React.FC<Props> = ({ Info }) => {
-  const [{ isDragging }, drag] = useDrag({
-    item: { Info, type: ItemTypes.TO_READ },
-    end: (item: { name: string } | undefined, monitor: DragSourceMonitor) => {
-      const dropResult = monitor.getDropResult();
-      if (item && dropResult) {
-        alert(`You dropped ${item.name} into ${dropResult.name}!`);
-      }
-    },
-    collect: monitor => ({
-      isDragging: monitor.isDragging()
-    })
-  });
-  const opacity = isDragging ? 0.4 : 1;
-
   return (
-    <div ref={drag} style={{ opacity }}>
+    <div>
       <img src={Info.thumbnail} style={{ width: 150, height: 200 }} />
     </div>
   );

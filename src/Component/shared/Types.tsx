@@ -25,6 +25,7 @@ export interface IBoookFinished {
 }
 
 export interface IUserInfo {
+  // *** GET /user
   _id: string;
   email: string;
   name: string;
@@ -48,7 +49,13 @@ export interface IBook {
   title: string;
 }
 
+export interface IBooks {
+  // *** GET /books
+  books: IBook[];
+}
+
 export interface IBookSearch {
+  // *** GET /books/search
   results_count: number;
   pageable_count: number;
   current_page: number;
@@ -57,6 +64,7 @@ export interface IBookSearch {
 }
 
 export interface IBookDetail {
+  // *** GET /books/:id
   _id: string;
   authors: string[];
   contents: string;
@@ -82,6 +90,7 @@ export interface IAuthor {
 }
 
 export interface IReview {
+  // *** GET /reviews/:id
   _id: string;
   author: IAuthor;
   contents: string;
@@ -92,19 +101,37 @@ export interface IReview {
 }
 
 export interface IReviews {
+  // *** GET /reviews
   reviews: IReview[];
 }
 
+export interface IReviewLike {
+  user_id: string;
+  review_id: string;
+}
+
+export interface IReviewWithBooks {
+  id: string;
+  author: IAuthor;
+  title: string;
+  books: IBook[];
+  contents: string;
+  thumbnail: string;
+  likes: IReviewLike[];
+}
+
 export interface IReviewSearch {
+  // *** GET /reviews/search
   results_count: number;
   pageable_count: number;
   current_page: number;
-  reviews: I;R
+  reviews: IReviewWithBooks[];
 }
 
 // curation
 
 export interface ICuration {
+  // *** GET /curations/:id
   _id: string;
   author: IAuthor;
   contents: string;
@@ -113,7 +140,12 @@ export interface ICuration {
   title: string;
 }
 
-// curations 부분은 2차 배포 진행하며 더 수정될 수 있어 보여서 우선 생략함
+export interface ICurations {
+  // *** GET /curations
+  curations: ICuration[];
+}
+
+// curations POST 부분은 2차 배포 진행하며 더 수정될 수 있어 보여서 우선 생략함
 
 // ratings
 
@@ -129,136 +161,14 @@ export interface IRating {
 }
 
 export interface IRatings {
+  // *** GET /ratings
   ratings: IRating[];
 }
 
 export interface IRatingPost {
+  // *** POST /ratings
   _id: string;
   book: string;
   user: string;
   rating: number;
 }
-
-// export interface IReviews {
-//   review: IReview[]
-// }
-// export interface IBooks{
-//   bookList: IBook[];
-// }
-// export interface IReviewState {
-//   reviewList: IReview[];
-// }
-
-// export interface IBookState {
-//   bookList: IBook[];
-// }
-
-// export interface IBook {
-//   id: string;
-//   authors: [string];
-//   contents: string;
-//   rating: number;
-//   thumbnail: string;
-//   title: string;
-// }
-
-// interface IState {
-//   User: IUserInfo;
-//   isLoggedIn: boolean;
-// }
-// export interface IAuthor {
-//     id: string;
-//     image: string;
-//     name: string;
-//     profile: string;
-//   }
-
-//   export interface IReview {
-//     id: string;
-//     author: IAuthor;
-//     contents: string;
-//     likes: string[];
-//     published: boolean;
-//     thumbnail: string;
-//     title: string;
-//   }
-
-//   export interface IProps {
-//     review: IReview;
-//   }
-//   export interface IBookState {
-//     bookList : IBook[];
-//   }
-//   export interface IReviewState {
-//     reviewList: IReview[];
-//   }
-
-//   export interface IBook {
-//     id: string;
-//     authors: [ string ];
-//     contents: string;
-//     rating: number;
-//     thumbnail: string;
-//     title: string;
-//   }
-//   export interface IAuthor {
-//     id: string;
-//     image: string;
-//     name: string;
-//     profile: string;
-//   }
-
-//   export interface IReview {
-//     id: string;
-//     author: IAuthor;
-//     contents: string;
-//     likes: string[];
-//     published: boolean;
-//     thumbnail: string;
-//     title: string;
-//   }
-
-//   export interface IProps {
-//     review: IReview;
-//   }
-//   export interface IBookState {
-//     bookList : IBook[];
-//   }
-//   export interface IReviewState {
-//     reviewList: IReview[];
-//   }
-
-//   export interface IBook {
-//     id: string;
-//     authors: [ string ];
-//     contents: string;
-//     rating: number;
-//     thumbnail: string;
-//     title: string;
-//   }
-//   export interface IAuthor {
-//     id: string;
-//     image: string;
-//     name: string;
-//     profile: string;
-//   }
-
-//   export interface IReview {
-//     id: string;
-//     author: IAuthor;
-//     contents: string;
-//     likes: string[];
-//     published: boolean;
-//     thumbnail: string;
-//     title: string;
-//   }
-
-//   export interface IProps {
-//     review: IReview;
-//   }
-//   export interface IBookState {
-//     bookList : IBook[];
-//   }
-//   export interface IReviewState {
-//     reviewList: IReview[];
-//   }
