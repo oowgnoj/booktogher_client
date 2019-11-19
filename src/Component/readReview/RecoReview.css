@@ -1,0 +1,16 @@
+.recoReview-area {
+  display : flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+.recoReview-area h4 {
+  border-top : 1px solid rgb(201, 201, 201);
+  padding: 50px 0 30px 0;
+  width : 60%; 
+}
+
+.recoReview {
+  width : 60%; 
+  float: "left"
+}
