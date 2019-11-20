@@ -1,7 +1,5 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { fakeUser } from "../../fakeData/fake";
-import Entry from "./bookSimpleEntry";
-import Column from "./Column";
 import BookList from "./BookList";
 import {
   IBookToRead,
@@ -10,17 +8,12 @@ import {
   IUserInfo
 } from "./../shared/Types";
 
-interface IBooks {
-  toRead: IBookToRead[];
-  reading: IBookReading[];
-  finished: IBookFinished[];
-}
 interface IProps {
   User: IUserInfo;
 }
 
-const Books: React.FC<IProps> = ({ User }) => {
-  const state = fakeUser;
+const Books: React.FC<IProps> = ({ User }: IProps): ReactElement => {
+  const state: IUserInfo = fakeUser;
 
   return (
     <div>

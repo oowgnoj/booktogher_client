@@ -1,62 +1,49 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Droppable, Draggable, DroppableProvided } from "react-beautiful-dnd";
 
-import {
-  IBookToRead,
-  IBookReading,
-  IBookFinished,
-  IUserInfo
-} from "./../shared/Types";
+import { IBookToRead, IBookReading, IBookFinished } from "./../shared/Types";
 
-interface IBooks {
-  toRead: IBookToRead[];
-  reading: IBookReading[];
-  finished: IBookFinished[];
+interface IProps {
+  to_read?: IBookToRead;
+  reading?: IBookReading;
+  finish?: IBookFinished;
 }
 
-interface Props {
-  book: IBooks;
-  listId: string;
-  listType?: string;
-  internalScroll?: boolean;
-  isCombineEnabled?: boolean;
-}
+export const BookEntry: React.FC<IProps> = ({
+  to_read,
+  reading,
+  finish
+}: IProps): ReactElement => {
+  let temp: ReactElement = <div></div>;
 
-const BookEntry: React.FC = ({ book }) => {
-  return console.log(book);
+  if (to_read) {
+    temp = (
+      <div>
+        <h2>toRead</h2>
+        <p>{to_read.book.title} </p>
+      </div>
+    );
+  } else if (reading) {
+    temp = (
+      <div>
+        <h2>toRead</h2>
+        <p>{reading.book.title} </p>
+      </div>
+    );
+  } else if (finish) {
+    temp = (
+      <div>
+        <h2>toRead</h2>
+        <p>{finish.book.title} </p>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div>{temp}</div>
+    </div>
+  );
 };
-// <Droppable
-//   droppableId={listId}
-//   type={listType}
-//   direction="horizontal"
-//   isCombineEnabled={false}
-// >
-//   {dropProvided => (
-//     <div {...dropProvided.droppableProps}>
-//       <div>
-//         <div>
-//           <div style={{ display: "flex" }} ref={dropProvided.innerRef}>
-//             {book.map((color, index) => (
-//               <Draggable key={color} draggableId={color} index={index}>
-//                 {dragProvided => (
-//                   <div
-//                     {...dragProvided.dragHandleProps}
-//                     {...dragProvided.draggableProps}
-//                     ref={dragProvided.innerRef}
-//                   >
-//                     <div style={{ backgroundColor: color }}>{color}</div>
-//                   </div>
-//                 )}
-//               </Draggable>
-//             ))}
-//             {dropProvided.placeholder}
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   )}
-// </Droppable>
-//
 
 export default BookEntry;
-// export default "HELLO";

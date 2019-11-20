@@ -1,9 +1,9 @@
 module.exports = {
   fakeReviews: [
     {
-      id: "11",
+      _id: "11",
       author: {
-        id: "user-id2",
+        _id: "user-id2",
         image:
           "https://images.unsplash.com/photo-1564650211163-21049f1b683a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
         name: "정혜경",
@@ -18,7 +18,7 @@ module.exports = {
       title: "혜경님 추궁하는건 아니고요 지금 뭐하세요"
     },
     {
-      id: "12",
+      _id: "12",
       author: {
         id: "user-id3",
         image: "https://paisaboltahai.rbi.org.in/images/2000-note-front.png",
@@ -34,7 +34,7 @@ module.exports = {
       title: "승권님 노래 궁금해요"
     },
     {
-      id: "13",
+      _id: "13",
       author: {
         id: "user-id1",
         image:
@@ -51,9 +51,9 @@ module.exports = {
       title: "이렇게 이렇게 해서 이렇게 이렇게 전까지 잘라주세요 뭔지 아시죠"
     },
     {
-      id: "14",
+      _id: "14",
       author: {
-        id: "user-id4",
+        _id: "user-id4",
         image:
           "https://images.unsplash.com/photo-1522184216316-3c25379f9760?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
         name: "심경주",

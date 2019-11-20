@@ -1,26 +1,11 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import "../../../node_modules/uikit/dist/css/uikit.css";
-interface IAuthorInfo {
-  id: string;
-  image: string;
-  name: string;
-  profile: string;
-}
+import { IReview } from "./../shared/Types";
 
-interface IUserReview {
-  id: string;
-  author: IAuthorInfo;
-  contents: string;
-  likes: string[];
-  published: boolean;
-  thumbnail: string;
-  title: string;
-}
 interface IProps {
-  reviewEntry: IUserReview;
+  Review: IReview;
 }
-
-const ReviewEntry: React.FC<IProps> = ({ reviewEntry }) => {
+const ReviewEntry: React.FC<IProps> = ({ Review }: IProps): ReactElement => {
   return (
     <div
       className="uk-card uk-card-default uk-width-1-2@m"
@@ -31,16 +16,16 @@ const ReviewEntry: React.FC<IProps> = ({ reviewEntry }) => {
           <div className="uk-width-auto"></div>
           <div className="uk-width-expand">
             <h3 className="uk-card-title uk-margin-remove-bottom">
-              {reviewEntry.title}
+              {Review.title}
             </h3>
             <p className="uk-text-meta uk-margin-remove-top">
-              {reviewEntry.author.name}
+              {Review.author.name}
             </p>
           </div>
         </div>
       </div>
       <div className="uk-card-body">
-        <p>{reviewEntry.contents.slice(3, reviewEntry.contents.length - 4)}</p>
+        <p>{Review.contents.slice(3, Review.contents.length - 4)}</p>
       </div>
     </div>
   );
