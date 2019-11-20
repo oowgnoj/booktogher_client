@@ -57,15 +57,21 @@ class SignUp extends React.Component<any, IState> {
         });
       }
     } else if (mail && password1 && password2 && username) {
-      fetch("http://localhost:3000/signup", {
-        body: JSON.stringify({
-          email: mail,
-          name: username,
-          password: password1
-        }),
-        credentials: "include",
-        method: "POST"
-      })
+      fetch(
+        "http://booktogether.ap-northeast-2.elasticbeanstalk.com/auth/signup",
+        {
+          body: JSON.stringify({
+            email: mail,
+            name: username,
+            password: password1
+          }),
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          method: "POST"
+        }
+      )
         .then((response: Response) => {
           console.log(
             `회원가입 성공! [email : ${mail}] [name : ${username}] [password : ${password1}]`

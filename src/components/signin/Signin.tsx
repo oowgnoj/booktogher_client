@@ -46,7 +46,10 @@ class Signin extends React.Component<any, IState> {
           console.log("로그인 성공 / this.props : ", this.props);
           this.props.history.push("/");
         } else if (this.props.error) {
-          this.setState({ status: this.props.error });
+          this.setState({
+            alert: true,
+            status: this.props.error
+          });
         }
       });
     } else if (!isEmail) {
@@ -129,7 +132,7 @@ class Signin extends React.Component<any, IState> {
 function mapStateToProps(state: any): any {
   return {
     User: state.user.User,
-    isLoggedIn: state.user.curation
+    isLoggedIn: state.user.isLoggedIn
   };
 }
 

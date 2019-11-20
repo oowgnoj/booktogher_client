@@ -48,7 +48,9 @@ class UserGreeting extends React.Component {
   }
 
   public handleLogout(): void {
-    Store.dispatch(requestLogout());
+    Store.dispatch(requestLogout()).then((response: Response) =>
+      console.log("로그아웃 성공! response : ", response)
+    );
   }
 
   public render(): JSX.Element {
