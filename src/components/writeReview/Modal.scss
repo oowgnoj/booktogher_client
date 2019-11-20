@@ -4,7 +4,8 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(0,0,0,0.16);
+  background-color: rgba(0,0,0,0.6);
+  z-index: 1;
 }
 .Modal{
     position: fixed;
@@ -27,14 +28,32 @@
       font-weight: bold;
       color: #333;
     }
+    .search-box {
+      width: 400px;
+      border: none;
+      outline: none;
+      font-size: 20px;
+      color: #333;
+      padding: 10px 10px 0 10px;
+    }
     .content{
       border-top: 1px solid #bebebe;
       margin-top: 16px;
-      p{
-        padding: 8px;
-        font-size: 12pt;
-        color: #999;
-      }
+      padding: 20px;
+      font-size: 12pt;
+      color: #999;  
+    }
+    .content .book-select{
+      float: left;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .content .click-True {
+      border: 3px solid aqua;
+    }
+
+    .content .click-True {
+      border: 3px solid red;
     }
 
     .button-wrap{

@@ -5,28 +5,27 @@ import { TwitterPicker } from 'react-color';
 import "react-quill/dist/quill.snow.css";
 import "./writePost.css";
 
-
-//const WritePost = () => <ReactQuill />;
-
 interface IWrite {
-  books: [ string ]; // book id 목록
+  books: string[]; // book id 목록
   contents: string;
   published: boolean;
   thumbnail: string;
   title: string;
-  color: string;
 }
 
-class WritePost extends React.Component<{}, IWrite> {
-  constructor({}) {
-    super({})
+interface IProps {
+  bookId : string[]
+}
+
+class WritePost extends React.Component<IProps, IWrite> {
+  constructor(props: IProps) {
+    super(props)
     this.state = { 
-      books: [''], // book id 목록
+      books: this.props.bookId, // book id 목록
       contents: '',
       published: false,
-      thumbnail: '',
+      thumbnail: '#eeeeee',
       title: '',
-      color: '#eeeeee' 
     } 
     this.handleChangePost = this.handleChangePost.bind(this)
     this.handleChangeTitle = this.handleChangeTitle.bind(this)
@@ -46,14 +45,14 @@ class WritePost extends React.Component<{}, IWrite> {
   }
 
   public handleChangeComplete = (color : any) => {
-    this.setState({ color: color.hex });
+    this.setState({ thumbnail: color.hex });
   };
  
   public render() {
     const publishedFalse : string = '공개'
     const publishedTrue : string = '비공개'
     const style = {
-      backgroundColor : this.state.color
+      backgroundColor : this.state.thumbnail
     }
     
     return (
@@ -71,7 +70,7 @@ class WritePost extends React.Component<{}, IWrite> {
             <button>비공개</button>
             <button>등록</button>
             <TwitterPicker 
-              color={ this.state.color }
+              color={ this.state.thumbnail }
               onChangeComplete={ this.handleChangeComplete }/>   
           </div>
          </div>
