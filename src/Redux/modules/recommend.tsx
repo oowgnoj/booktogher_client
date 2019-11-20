@@ -9,15 +9,21 @@ const RECOMMEND_SUCCESS_CURATION: string = "recommend/SUCCESS_CURATION";
 const RECOMMEND_FAILURE_CURATION: string = "recommend/FAILURE_CURATION_";
 
 function getReviewsAPI(): Promise<Response> {
-  return fetch("http://localhost:3000/review", {
-    credentials: "include"
-  });
+  return fetch(
+    "http://booktogether.ap-northeast-2.elasticbeanstalk.com/reviews?list_type=recommended",
+    {
+      credentials: "include"
+    }
+  );
 }
 
 function getCurationsAPI(): Promise<Response> {
-  return fetch("http://localhost:3000/curation", {
-    credentials: "include"
-  });
+  return fetch(
+    "http://booktogether.ap-northeast-2.elasticbeanstalk.com/curations?list_type=recommended",
+    {
+      credentials: "include"
+    }
+  );
 }
 
 export const updateReviewsRecommend = (): any => (
