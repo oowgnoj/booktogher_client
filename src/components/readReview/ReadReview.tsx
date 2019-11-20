@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import { withRouter, RouteComponentProps } from 'react-router'
 import Review from "./Review";
 import BookInfo from "./BookInfo";
 import RecoReview from "./RecoReview";
@@ -6,10 +7,13 @@ import UserInfo from "./UserInfo";
 import { IProps } from './reviewInterface'
 import { fetchReview, fetchReviewBook  } from './fetchReview'
 
+interface IMatchParams {
+  id : string
+}
 
-class ReadReview extends React.Component<{}, IProps>{
-  constructor({}){
-    super({})
+class ReadReview extends React.Component<RouteComponentProps<IMatchParams>, IProps>{
+  constructor(props : any){
+    super(props)
     this.state ={
       review : {
         id: "11",
@@ -73,6 +77,7 @@ class ReadReview extends React.Component<{}, IProps>{
   }
   
   public render() : ReactElement{
+    console.log(this.props.match.params.id)
     return (
       <div>
         <Review review ={this.state.review} bookList={this.state.bookList}/>

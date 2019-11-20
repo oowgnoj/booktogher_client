@@ -1,9 +1,9 @@
 export interface IBookState {
-  bookList : IBook[];
+  books : IBook[];
 }
 
 export interface IBook {
-  id: string;
+  _id: string;
   authors: [ string ];
   contents: string;
   rating: number;
