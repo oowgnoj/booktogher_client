@@ -8,6 +8,7 @@ import {
   Action
 } from "redux";
 import ReduxThunk from "redux-thunk";
+
 import recommend from "./modules/recommend";
 import user from "./modules/user";
 
