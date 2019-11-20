@@ -23,7 +23,6 @@ interface IProps {
 const App: React.FC<IProps> = ({ User }: IProps): ReactElement => {
   const [bookList, setBookList] = React.useState<IBooks>(userBookData);
   // const UserLoginInfo: UserState = User;
-
   return (
     <div>
       {User.to_read.map((el: IBookToRead) => (
