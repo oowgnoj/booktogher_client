@@ -59,25 +59,37 @@ const EDITDATE_FINISHED_SUCCESS: string = "user/EDITDATE_FINISHED_SUCCESS";
 const EDITDATE_FINISHED_FAILURE: string = "user/EDITDATE_FINISHED_FAILURE";
 
 function loginAPI(mail: string, pw: string): Promise<Response> {
-  return fetch("http://localhost:3000/login", {
-    body: JSON.stringify({
-      email: mail,
-      password: pw
-    }),
-    credentials: "include",
-    method: "POST"
-  });
+  return fetch(
+    "http://booktogether.ap-northeast-2.elasticbeanstalk.com/auth/login",
+    {
+      body: JSON.stringify({
+        email: mail,
+        password: pw
+      }),
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST"
+    }
+  );
 }
 
 function logoutAPI(): Promise<Response> {
-  return fetch("http://localhost:3000/logout", {
-    credentials: "include",
-    method: "POST"
-  });
+  return fetch(
+    "http://booktogether.ap-northeast-2.elasticbeanstalk.com/books/auth/logout",
+    {
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST"
+    }
+  );
 }
 
 function getInfoAPI(): Promise<Response> {
-  return fetch("http://localhost:3000/getinfo", {
+  return fetch("http://booktogether.ap-northeast-2.elasticbeanstalk.com/user", {
     credentials: "include"
   });
 }
@@ -105,6 +117,7 @@ export const requestLogin = (mail: string, pw: string): any => (
   return loginAPI(mail, pw)
     .then((response: Response) => response.json())
     .then((result: boolean) => {
+      console.log("로그인 요청 보냈고 잘 왔어 : result ?", result);
       dispatch({
         type: LOGIN_SUCCESS
       });
@@ -112,6 +125,8 @@ export const requestLogin = (mail: string, pw: string): any => (
     .then(() => getInfoAPI())
     .then((response: Response) => response.json())
     .then((result: IUserInfo) => {
+      console.log("유저정보 요청 보냈고 잘 왔어 : result ?", result);
+      sessionStorage.setItem("userInfo", JSON.stringify(result));
       dispatch({
         payload: result,
         type: GETINFO_SUCCESS
@@ -264,48 +279,48 @@ interface IState {
 const initialState: IState = {
   User: {
     _id: "",
-    email: "aaa@gmail.com",
-    image: "http://...",
-    name: "정혜경",
-    profile: "저는 말이죠...",
+    email: "",
+    image: "",
+    name: "",
+    profile: "",
     to_read: [
       {
         book: {
-          _id: "ObjectId",
-          authors: ["도스토예프스키"],
-          thumbnail: "http://...",
-          title: "죄와 벌"
+          _id: "",
+          authors: [],
+          thumbnail: "",
+          title: ""
         }
       }
     ],
     reading: [
       {
         book: {
-          _id: "ObjectId",
-          authors: ["톨스토이"],
-          thumbnail: "http://...",
-          title: "안나 카레리나"
+          _id: "",
+          authors: [],
+          thumbnail: "",
+          title: ""
         },
-        start: "10/29/2019",
-        goal: "12/13/2019"
+        start: "",
+        goal: ""
       }
     ],
     finished: [
       {
         book: {
-          _id: "ObjectId",
-          authors: ["단테"],
-          thumbnail: "http://...",
-          title: "신곡"
+          _id: "",
+          authors: [],
+          thumbnail: "",
+          title: ""
         },
-        start: "11/15/2019",
-        end: "11/24/2019"
+        start: "",
+        end: ""
       }
     ],
     numBooksGoal: 10,
     numReviewsGoal: 10
   },
-  isLoggedIn: true,
+  isLoggedIn: false,
   pending: false,
   error: ""
 };
@@ -417,4 +432,58 @@ export default handleActions(
     8-1) 다읽은책 추가 "TYPE : user/ADDFINISHED"
     8-2) 다읽은책 빼기 "TYPE : user/DELETEFINISHED"
     8-3) 날짜 수정 "TYPE : user/EDITFINISHEDDATE"
+*/
+
+/*
+
+
+const initialState: IState = {
+  User: {
+    _id: "",
+    email: "aaa@gmail.com",
+    image: "http://...",
+    name: "정혜경",
+    profile: "저는 말이죠...",
+    to_read: [
+      {
+        book: {
+          _id: "ObjectId",
+          authors: ["도스토예프스키"],
+          thumbnail: "http://...",
+          title: "죄와 벌"
+        }
+      }
+    ],
+    reading: [
+      {
+        book: {
+          _id: "ObjectId",
+          authors: ["톨스토이"],
+          thumbnail: "http://...",
+          title: "안나 카레리나"
+        },
+        start: "10/29/2019",
+        goal: "12/13/2019"
+      }
+    ],
+    finished: [
+      {
+        book: {
+          _id: "ObjectId",
+          authors: ["단테"],
+          thumbnail: "http://...",
+          title: "신곡"
+        },
+        start: "11/15/2019",
+        end: "11/24/2019"
+      }
+    ],
+    numBooksGoal: 10,
+    numReviewsGoal: 10
+  },
+  isLoggedIn: true,
+  pending: false,
+  error: ""
+};
+
 */
