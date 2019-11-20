@@ -3,8 +3,16 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+import "../node_modules/uikit/dist/js/uikit.js";
+import "../node_modules/uikit/dist/css/uikit.css";
+import "../node_modules/uikit/dist/js/uikit-icons.min.js";
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+import { Provider } from "react-redux";
+import Store from "./Redux/configureStore";
+
+ReactDOM.render(
+  <Provider store={Store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
