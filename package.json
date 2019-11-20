@@ -15,6 +15,7 @@
     "@types/react-router-dom": "^5.1.2",
     "@types/redux": "^3.6.0",
     "@types/redux-actions": "^2.6.1",
+    "@types/shortid": "0.0.29",
     "@types/uikit": "^2.27.7",
     "body-parser": "^1.19.0",
     "grid-styled": "^5.0.2",
@@ -36,6 +37,7 @@
     "redux-actions": "^2.6.5",
     "redux-saga": "^1.1.3",
     "redux-thunk": "^2.3.0",
+    "shortid": "^2.2.15",
     "tslint": "^5.20.1",
     "typescript": "3.7.2",
     "uikit": "^3.2.3"

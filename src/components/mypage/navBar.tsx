@@ -1,9 +1,9 @@
 import React from "react";
 
-interface Props {
+interface IProps {
   handleActive: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
 }
-const NavBar: React.FC<Props> = ({ handleActive }) => {
+const NavBar: React.FC<IProps> = ({ handleActive }) => {
   return (
     <div>
       <nav className="uk-navbar-container uk-margin" uk-navbar="mode: click">

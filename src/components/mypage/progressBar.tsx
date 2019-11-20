@@ -1,34 +1,44 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactElement } from "react";
 import "./../../../node_modules/uikit/dist/css/uikit.css";
 import { IUserInfo } from "./../shared/Types";
 
 interface IProps {
   UserInfo: IUserInfo;
 }
-const ProgressBar: React.FC<IProps> = ({ UserInfo }) => {
+const ProgressBar: React.FC<IProps> = ({ UserInfo }): ReactElement => {
   console.log(UserInfo);
   const barStyle: object = { width: "30%", display: "inline-blodk" };
-  const [userGoal, setGoal] = useState<number>(0);
+  const [bookGoal, setBookGoal] = useState<number>(10);
+  const [essayGoal, setEssayGoal] = useState<number>(10);
 
-  useEffect(() => setGoal(30));
+  const handleBookGoal = (reading: number) => {
+    setBookGoal(reading);
+  };
+
+  const handleEssayGoal = (reading: number) => {
+    setBookGoal(reading);
+  };
+
   return (
     <div>
       <h3>독서 목표</h3>
       <progress
         id="js-progressbar"
         className="uk-progress"
-        value={userGoal}
+        value={bookGoal}
         max="100"
         style={barStyle}
       ></progress>
+      <button onClick={() => handleBookGoal}>changeGoal</button>
       <h3>서평 목표</h3>
       <progress
         id="js-progressbar"
         className="uk-progress"
-        value="37"
+        value={essayGoal}
         max="50"
         style={barStyle}
       ></progress>
+      <button onClick={() => handleEssayGoal}>changeGoal</button>
     </div>
   );
 };
