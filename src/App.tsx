@@ -6,6 +6,7 @@ import Signup from "./components/signup/Signup";
 import Signin from "./components/signin/Signin";
 import Mypage from "./components/mypage/index";
 import ReadReview from "./components/readReview/ReadReview";
+import PostReview from "./components/writeReview/ModalTest";
 // import WriteReview from "./component/writeReview";
 
 const App: React.FC = (): ReactElement => {
@@ -17,7 +18,8 @@ const App: React.FC = (): ReactElement => {
         <Route path="/signin" component={Signin} />
         <Route path="/mypage" component={Mypage} />
         {/* <Route path="/writereview" component={} /> */}
-        <Route path="/reviews:id" component={ReadReview} />
+        <Route path="/review/:id" component={ReadReview} />
+        <Route path="/postreview" component={PostReview} />
         <Route path="*" to="/" />
       </Switch>
     </BrowserRouter>

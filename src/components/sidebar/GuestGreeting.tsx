@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { slide as Menu, State } from "react-burger-menu";
+import { Link } from "react-router-dom";
 
 class GuestGreeting extends React.Component {
   public showSettings(event: { preventDefault(): void }): void {
@@ -13,18 +14,24 @@ class GuestGreeting extends React.Component {
         customCrossIcon={<span uk-icon="close"></span>}
         onStateChange={this.onStateChange}
       >
-        <a id="home" className="menu-item" href="/signin">
-          로그인
-        </a>
-        <a id="about" className="menu-item" href="/signup">
-          회원가입
-        </a>
-        <a id="contact" className="menu-item" href="/">
-          홈
-        </a>
-        <a onClick={this.showSettings} className="menu-item--small" href="">
+        <Link to="/signin">
+          <div id="home" className="menu-item">
+            로그인
+          </div>
+        </Link>
+        <Link to="/signup">
+          <div id="about" className="menu-item">
+            회원가입
+          </div>
+        </Link>
+        <Link to="/">
+          <div id="contact" className="menu-item">
+            홈
+          </div>
+        </Link>
+        <div onClick={this.showSettings} className="menu-item--small">
           Settings
-        </a>
+        </div>
       </Menu>
     );
   }

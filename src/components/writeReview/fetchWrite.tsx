@@ -1,17 +1,19 @@
-import { IBook } from './writeInterface';
+import { IBook } from "./writeInterface";
 
 interface ISearchBook {
-    results_count: number,
-    pageable_count: number,
-    current_page: number,
-    is_end: boolean,
-    books: [{
-      _id: string,
-      authors: [ string ],
-      contents: string,
-      thumbnail: string,
-      title: string
-    }]
+  results_count: number;
+  pageable_count: number;
+  current_page: number;
+  is_end: boolean;
+  books: [
+    {
+      _id: string;
+      authors: [string];
+      contents: string;
+      thumbnail: string;
+      title: string;
+    }
+  ];
 }
 
 interface IPostReview {
@@ -39,32 +41,29 @@ export interface IReview {
   title: string;
 }
 
-const url : string = "http://booktogether.ap-northeast-2.elasticbeanstalk.com"
+const url: string = "http://booktogether.ap-northeast-2.elasticbeanstalk.com";
 
-export const fetchBookSearch = (callback: any, title : string): any =>{
+export const fetchBookSearch = (callback: any, title: string): any => {
   fetch(`${url}/books/search?query=${title}`)
-  .then((res :Response) => res.json())
-  .then((res :ISearchBook) => {
-    console.log(res)
-    callback(res.books)
-  })
-}
+    .then((res: Response) => res.json())
+    .then((res: ISearchBook) => {
+      console.log(res);
+      callback(res.books);
+    });
+};
 
-export const fetchPostReview = (callback: any, post : IPostReview): any =>{
+export const fetchPostReview = (callback: any, post: IPostReview): any => {
   fetch(`${url}/reviews`, {
-    method: 'POST', 
+    method: "POST",
     headers: {
-        'Content-Type': 'application/json',
+      "Content-Type": "application/json"
     },
     body: JSON.stringify(post),
+    credentials: "include"
   })
-  .then((res :Response) => res.json())
-  .then((res :IReview) => {
-    console.log(res)
-    callback(res._id)
-  })
-}
-
-
-
-
+    .then((res: Response) => res.json())
+    .then((res: IReview) => {
+      console.log(res);
+      callback(res._id);
+    });
+};

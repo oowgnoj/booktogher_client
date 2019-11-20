@@ -1,22 +1,22 @@
 import React, { ReactElement } from "react";
-import { IReviewState, IReview } from './reviewInterface'
+import { IReviewState, IReview } from "./reviewInterface";
 import RecoReviewCard from "./RecoReviewCard";
 import "./RecoReview.css";
-import { fetchBookReviewList  } from './fetchReview'
+import { fetchBookReviewList } from "./fetchReview";
 
 interface IProps {
-  id : string
+  _id: string;
 }
 
-class RecoReview extends React.Component<IProps, IReviewState>{
-  constructor(props: any){
-    super(props)
+class RecoReview extends React.Component<IProps, IReviewState> {
+  constructor(props: any) {
+    super(props);
     this.state = {
-      reviewList :[
+      reviewList: [
         {
-          id: "11",
+          _id: "11",
           author: {
-            id: "user-id2",
+            _id: "user-id2",
             image:
               "https://images.unsplash.com/photo-1564650211163-21049f1b683a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
             name: "정혜경",
@@ -31,10 +31,11 @@ class RecoReview extends React.Component<IProps, IReviewState>{
           title: "혜경님 추궁하는건 아니고요 지금 뭐하세요"
         },
         {
-          id: "12",
+          _id: "12",
           author: {
-            id: "user-id3",
-            image: "https://paisaboltahai.rbi.org.in/images/2000-note-front.png",
+            _id: "user-id3",
+            image:
+              "https://paisaboltahai.rbi.org.in/images/2000-note-front.png",
             name: "정승권",
             profile: "저는 정승권이라고 합니다."
           },
@@ -47,9 +48,9 @@ class RecoReview extends React.Component<IProps, IReviewState>{
           title: "승권님 노래 궁금해요"
         },
         {
-          id: "13",
+          _id: "13",
           author: {
-            id: "user-id1",
+            _id: "user-id1",
             image:
               "http://www.wooripuppy.co.kr/data/file/puppy1/1218445154_8or5cmN7_BBFEC6E4C0CCBAD0BEE704.jpg",
             name: "박종우",
@@ -64,9 +65,9 @@ class RecoReview extends React.Component<IProps, IReviewState>{
           title: "이렇게 이렇게 해서 이렇게 "
         },
         {
-          id: "14",
+          _id: "14",
           author: {
-            id: "user-id4",
+            _id: "user-id4",
             image:
               "https://images.unsplash.com/photo-1522184216316-3c25379f9760?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
             name: "심경주",
@@ -80,28 +81,28 @@ class RecoReview extends React.Component<IProps, IReviewState>{
           title: "짧은 제목"
         }
       ]
-    }
+    };
   }
-  public componentDidMount() : void {
-    const setStateReviewList = (res: any) : void=> {
-      this.setState({reviewList : res})
-    }
-    fetchBookReviewList(setStateReviewList, '1');
+  /* public componentDidMount(): void {
+    const setStateReviewList = (res: any): void => {
+      this.setState({ reviewList: res });
+    };
+    fetchBookReviewList(setStateReviewList, "1");
   }
-
-  public render() : ReactElement{
-    const reviewCard: ReactElement[]= this.state.reviewList.map((info: IReview)=>{
-      return <RecoReviewCard review ={info}/>
-    })
+ */
+  public render(): ReactElement {
+    const reviewCard: ReactElement[] | string = this.state.reviewList
+      ? this.state.reviewList.map((info: IReview) => (
+          <RecoReviewCard review={info} />
+        ))
+      : "빈값";
     return (
-      <div className ="recoReview-area">
+      <div className="recoReview-area">
         <h4>이 책의 다른 서평들</h4>
-        <div className ="recoReview">
-          {reviewCard}
-        </div>
+        <div className="recoReview">{reviewCard}</div>
       </div>
-    )
+    );
   }
-};
+}
 
 export default RecoReview;
