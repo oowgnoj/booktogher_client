@@ -15,6 +15,7 @@ interface IWrite {
 
 interface IProps {
   bookId : string[]
+  bookTitle : string[]
 }
 
 class WritePost extends React.Component<IProps, IWrite> {
@@ -57,6 +58,7 @@ class WritePost extends React.Component<IProps, IWrite> {
     
     return (
       <div className ="write-area">
+        <div>{this.props.bookTitle}</div>
         <div className ="write-title-area" style ={style}>            
           <input 
             type ="text"
@@ -65,7 +67,7 @@ class WritePost extends React.Component<IProps, IWrite> {
             value={this.state.title}
             onChange ={this.handleChangeTitle}
           ></input>
-
+          
           <div className="submit">
             <button>비공개</button>
             <button>등록</button>
@@ -74,6 +76,7 @@ class WritePost extends React.Component<IProps, IWrite> {
               onChangeComplete={ this.handleChangeComplete }/>   
           </div>
          </div>
+         
         <div className ="write-post">
           <ReactQuill 
             value={this.state.contents}

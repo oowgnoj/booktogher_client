@@ -7,8 +7,8 @@ import './Modal.scss';
 interface IState {
   books: IBook[],
   title: string,
-  selectBooks: string[],
-  clickedBooks : string[],
+  selectBooksId: string[],
+  selectBooksTitle : string[],
   isOpen : boolean
 }
 
@@ -33,9 +33,9 @@ class BookSelect extends React.Component<{},IState>{
           title: '리액트 퀼 사용법'
         }
       ],
-      title : '',
-      selectBooks :[''],
-      clickedBooks : [''],
+      title : "",
+      selectBooksId :[""],
+      selectBooksTitle : [""],
       isOpen : true
     }
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
@@ -56,8 +56,10 @@ class BookSelect extends React.Component<{},IState>{
   }
 
   public clickSelectedBook(e:any) : void{
+    const idTitle = e.target.alt.split(" ")
     this.setState({
-      selectBooks: this.state.selectBooks.concat([e.target.alt]),
+      selectBooksId: this.state.selectBooksId.concat([idTitle[0]]),
+      selectBooksTitle: this.state.selectBooksTitle.concat([idTitle[1]])
     })
   }
 
@@ -68,23 +70,22 @@ class BookSelect extends React.Component<{},IState>{
   }
 
   public render() : ReactElement{
-    console.log(this.state.selectBooks)
     const searchBookList: ReactElement[]= this.state.books.map((info: IBook)=>{
       return(
         <div className ="book-select">
           <img 
             src = {info.thumbnail}
             width ="80px" 
-            alt ={info._id}
+            alt ={`${info._id} ${info.title}`}
             onClick = {(e)=> this.clickSelectedBook(e)}/>
           <div>{info.title}</div>
         </div>
       )
     })
 
-    const selectBookId :string[] = this.state.selectBooks.slice(1)
-    console.log('a',selectBookId)
-
+    const selectBookId :string[] = this.state.selectBooksId.slice(1)
+    const selectBookTitle :string[] = this.state.selectBooksTitle.slice(1)
+    console.log('a',selectBookId,selectBookTitle )
   
     return (
       <div> 
@@ -101,13 +102,16 @@ class BookSelect extends React.Component<{},IState>{
                 ></input>
                 <button onClick = {this.clickSearchButton}>검색</button>
               </p>
+              {this.state.selectBooksTitle.length === 1 ?
+                <h5>책을 선택해주세요.</h5> 
+                : <h5>{selectBookTitle}를 선택하셨습니다.</h5> }
               <div className="content">{searchBookList}</div>
               <div className="button-wrap">
                 <button onClick = {this.clickConfirm}> Confirm </button>
               </div>   
             </div>      
           </div> : null }
-        <WritePost bookId = {selectBookId}/>
+        <WritePost bookId = {selectBookId} bookTitle ={selectBookTitle}/>
       </div>
     ) 
   }
