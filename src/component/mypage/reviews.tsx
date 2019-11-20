@@ -1,33 +1,16 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import Entry from "./reviewEntry";
+import { IReview } from "./../shared/Types";
 
-interface IAuthor {
-  id: string;
-  image: string;
-  name: string;
-  profile: string;
+interface IProps {
+  userReviews: IReview[];
 }
 
-interface IUserReview {
-  id: string;
-  author: IAuthor;
-  contents: string;
-  likes: string[];
-  published: boolean;
-  thumbnail: string;
-  title: string;
-}
-
-interface Props {
-  userReviews: IUserReview[];
-}
-
-const Reviews: React.FC<Props> = ({ userReviews }) => {
-  console.log(userReviews);
+const Reviews: React.FC<IProps> = ({ userReviews }: IProps): ReactElement => {
   return (
     <div>
-      {userReviews.map(el => (
-        <Entry reviewEntry={el} />
+      {userReviews.map((el: IReview) => (
+        <Entry Review={el} />
       ))}
     </div>
   );

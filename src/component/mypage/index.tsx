@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useState, useEffect } from "react";
 
 import { fakeReviews, fakeUser } from "../../fakeData/fake";
 import "./../../../node_modules/uikit/dist/css/uikit.css";
@@ -7,70 +7,39 @@ import NavBar from "./navBar";
 import Reviews from "./reviews";
 import Books from "./books";
 import ProgressBar from "./progressBar";
-
-// Books
-interface IAuthorInfo {
-  id: string;
-  image: string;
-  name: string;
-  profile: string;
-}
-
-interface IUserReview {
-  id: string;
-  author: IAuthorInfo;
-  contents: string;
-  likes: string[];
-  published: boolean;
-  thumbnail: string;
-  title: string;
-}
+import { connect } from "react-redux";
 
 // Users
-interface IBook {
-  id: string;
-  authors: string[];
-  thumbnail: string;
-  title: string;
-}
-
-interface IBookReading extends IBook {
-  start: string;
-  goal: string;
-}
-interface IBookFinished extends IBook {
-  start: string;
-  end: string;
-}
-
-interface IUserInfo {
-  id: string;
-  name: string;
-  email: string;
-  image: string;
-  profile: string;
-  to_read: IBook[];
-  reading: IBookReading[];
-  finished: IBookFinished[];
-  numBooksGoal: number;
-  numReviewsGoal: number;
-}
+import { IUserInfo, IReview } from "./../shared/Types";
 
 type activeCompt = ReactElement;
-export const Mypage: React.FC = (): ReactElement => {
+
+interface IProps {
+  Info: IUserInfo;
+}
+
+export const Mypage: React.FC = (props: any): ReactElement => {
   const [myInfo, setInfo] = useState<IUserInfo>(fakeUser);
-  const [myReview, setReview] = useState<IUserReview[]>(fakeReviews);
+  const [myReview, setReview] = useState<IReview[]>(fakeReviews);
   const [active, setActive] = useState<string>("review");
 
-  let activeComp: ReactElement = <Reviews userReviews={fakeReviews}></Reviews>;
+  // get user information from REDUX STORE
+  useEffect(() => {
+    setInfo(props.user.User);
+  }, []);
 
-  const handleActive = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) =>
+  // get review infromation from DB * FETCH *
+
+  // Conditional Rendering nav Bar
+  const handleActive = (e: React.MouseEvent<HTMLLIElement, MouseEvent>): void =>
     setActive(e.currentTarget.id);
 
+  let activeComp: ReactElement = <Reviews userReviews={myReview}></Reviews>;
+
   if (active === "review") {
-    activeComp = <Reviews userReviews={fakeReviews}></Reviews>;
+    activeComp = <Reviews userReviews={myReview}></Reviews>;
   } else if (active === "books") {
-    activeComp = <Books Info={myInfo}></Books>;
+    activeComp = <Books User={myInfo}></Books>;
   } else if (active === "stats") {
     return (
       <div>
@@ -80,7 +49,6 @@ export const Mypage: React.FC = (): ReactElement => {
       </div>
     );
   }
-
   return (
     <div>
       <UserInfo userInfo={myInfo}></UserInfo>
@@ -90,4 +58,10 @@ export const Mypage: React.FC = (): ReactElement => {
   );
 };
 
-export default Mypage;
+function mapStateToProps(state: any): any {
+  return {
+    user: state.user
+  };
+}
+
+export default connect(mapStateToProps)(Mypage);

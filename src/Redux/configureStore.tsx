@@ -8,16 +8,13 @@ import {
   Action
 } from "redux";
 import ReduxThunk from "redux-thunk";
-import handleRecommendActions from "./modules/recommend";
-import handleUserActions from "./modules/user";
 
-const rootReducer: Reducer = combineReducers({
-  handleRecommendActions,
-  handleUserActions
-});
+import recommend from "./modules/recommend";
+import user from "./modules/user";
+
 // console.log(reducer);
 const store: Store<{}, Action<any>> = createStore(
-  rootReducer,
+  combineReducers({ recommend, user }),
   applyMiddleware(ReduxThunk)
 );
 

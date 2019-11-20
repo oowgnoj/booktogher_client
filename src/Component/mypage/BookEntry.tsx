@@ -1,46 +1,49 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Droppable, Draggable, DroppableProvided } from "react-beautiful-dnd";
 
-interface Props {
-  colors: string[];
-  listId: string;
-  listType?: string;
-  internalScroll?: boolean;
-  isCombineEnabled?: boolean;
+import { IBookToRead, IBookReading, IBookFinished } from "./../shared/Types";
+
+interface IProps {
+  to_read?: IBookToRead;
+  reading?: IBookReading;
+  finish?: IBookFinished;
 }
 
-export const BookEntry: React.FC<Props> = ({ listId, listType, colors }) => {
+export const BookEntry: React.FC<IProps> = ({
+  to_read,
+  reading,
+  finish
+}: IProps): ReactElement => {
+  let temp: ReactElement = <div></div>;
+
+  if (to_read) {
+    temp = (
+      <div>
+        <h2>toRead</h2>
+        <p>{to_read.book.title} </p>
+      </div>
+    );
+  } else if (reading) {
+    temp = (
+      <div>
+        <h2>toRead</h2>
+        <p>{reading.book.title} </p>
+      </div>
+    );
+  } else if (finish) {
+    temp = (
+      <div>
+        <h2>toRead</h2>
+        <p>{finish.book.title} </p>
+      </div>
+    );
+  }
+
   return (
-    <Droppable
-      droppableId={listId}
-      type={listType}
-      direction="horizontal"
-      isCombineEnabled={false}
-    >
-      {dropProvided => (
-        <div {...dropProvided.droppableProps}>
-          <div>
-            <div>
-              <div style={{ display: "flex" }} ref={dropProvided.innerRef}>
-                {colors.map((color, index) => (
-                  <Draggable key={color} draggableId={color} index={index}>
-                    {dragProvided => (
-                      <div
-                        {...dragProvided.dragHandleProps}
-                        {...dragProvided.draggableProps}
-                        ref={dragProvided.innerRef}
-                      >
-                        <div style={{ backgroundColor: color }}>{color}</div>
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {dropProvided.placeholder}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </Droppable>
+    <div>
+      <div>{temp}</div>
+    </div>
   );
 };
+
+export default BookEntry;

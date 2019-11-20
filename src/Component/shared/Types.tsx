@@ -1,25 +1,24 @@
 // user
 // 사이드바(유저정보), 마이페이지(유저정보, 읽고싶은책, 통계)
 
-export interface IUserBoook {
+interface IUserBook {
   _id: string;
   authors: string[];
   thumbnail: string;
   title: string;
 }
 
-export interface IToRead {
-  book: IUserBoook;
+export interface IBookToRead {
+  book: IUserBook;
 }
 
-export interface IBoookReading {
-  book: IUserBoook;
+export interface IBookReading {
+  book: IUserBook;
   start: string;
   goal: string;
 }
-
-export interface IBoookFinished {
-  book: IUserBoook;
+export interface IBookFinished {
+  book: IUserBook;
   start: string;
   end: string;
 }
@@ -31,9 +30,9 @@ export interface IUserInfo {
   name: string;
   image: string;
   profile: string;
-  to_read: IToRead[];
-  reading: IBoookReading[];
-  finished: IBoookFinished[];
+  to_read: IBookToRead[];
+  reading: IBookReading[];
+  finished: IBookFinished[];
   numBooksGoal: number;
   numReviewsGoal: number;
 }
