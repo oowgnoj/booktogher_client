@@ -8,7 +8,7 @@ import Reviews from "./reviews";
 import Books from "./books";
 import ProgressBar from "./progressBar";
 import { connect } from "react-redux";
-
+import { fetchReview } from "./Fetch";
 // Users
 import { IUserInfo, IReview } from "./../shared/Types";
 
@@ -25,9 +25,8 @@ export const Mypage: React.FC = (props: any): ReactElement => {
 
   // get user information from REDUX STORE
   useEffect(() => {
-    /* setInfo(props.user.User); */
-    const user: any = sessionStorage.getItem("userInfo");
-    setInfo(JSON.parse(user));
+    fetchReview();
+    setInfo(props.user.User);
   }, []);
 
   // get review infromation from DB * FETCH *

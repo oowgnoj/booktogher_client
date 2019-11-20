@@ -33,7 +33,6 @@ const BookList: React.FC<IProps> = ({
             }}
             ref={dropProvided.innerRef}
           >
-            {console.log(row.books)}
             {row.books.map((book: any, index: any) => (
               <Draggable
                 key={book.book.thumbnail}

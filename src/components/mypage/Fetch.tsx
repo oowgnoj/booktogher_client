@@ -1,9 +1,12 @@
 import { IReviews } from "./../shared/Types";
 
-export const fetchReview = (callback: any, id: string): any => {
-  fetch(`https://localhost:3000/reviews/reviews?list_type=recommended`)
+export const fetchReview = (callback?: any, id?: string): any => {
+  fetch(
+    `http://booktogether.ap-northeast-2.elasticbeanstalk.com/reviews?list_type=personal`
+  )
     .then((res: Response) => res.json())
     .then((res: IReviews) => {
+      console.log(res);
       callback(res);
     });
 };
