@@ -1,13 +1,23 @@
 import React, { ReactElement } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Main from "./component/main/index";
+import Signup from "./component/signup/Signup";
+import Signin from "./component/signin/Signin";
+import Mypage from "./component/mypage/index";
 
 const App: React.FC = (): ReactElement => {
   return (
-    <div className="App">
-      <Main />
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" exact component={Main} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/signin" component={Signin} />
+        <Route path="/mypage" component={Mypage} />
+        {/* <Route path="/writereview" component={} */}
+        <Route path="*" to="/" />
+      </Switch>
+    </BrowserRouter>
   );
 };
 
