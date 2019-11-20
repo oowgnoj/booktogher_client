@@ -67,7 +67,6 @@ class WritePost extends React.Component<IProps, IState> {
     const redirectReview = (id : string) : any =>{
       this.setState({reviewId : id})
       this.setState({redirect: true})
-      console.log(this.state)
     }
     fetchPostReview(redirectReview, this.state.body)  
   }
@@ -80,8 +79,6 @@ class WritePost extends React.Component<IProps, IState> {
     const style = {
       backgroundColor : this.state.body.thumbnail
     }
-    console.log('id' , this.props.bookId)
-    console.log('state' , this.state.body)
     return (
       <div className ="write-area">
         {this.state.redirect ? <Redirect to = {`/review/${this.state.reviewId}`}/> : null}

@@ -12,7 +12,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 500px;
+    width: 600px;
     border-radius: 10px;
     background-color: white;
     box-shadow: 0px 3px 6px rgba(0,0,0,0.16);
@@ -30,7 +30,7 @@
       border-bottom: 1px solid #bebebe;
     }
     .search-box {
-      width: 400px;
+      width: 500px;
       border: none;
       outline: none;
       font-size: 20px;
@@ -38,7 +38,7 @@
       padding: 10px 10px 0 10px;
     }
     .content{
-      
+      width: 560px;
       margin-top: 16px;
       padding: 20px;
       font-size: 12pt;
@@ -48,7 +48,11 @@
       float: left;
       padding: 10px;
       margin-bottom: 20px;
-      width: 120px;
+      width: 110px;
+      height: 180px;
+    }
+    .content .book-select img {
+      box-shadow: 2px 2px 4px 2px gray;
     }
     .button-wrap{
       margin: 0;
