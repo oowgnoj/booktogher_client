@@ -25,7 +25,7 @@ export const Mypage: React.FC = (props: any): ReactElement => {
 
   // get user information from REDUX STORE
   useEffect(() => {
-    fetchReview();
+    fetchReview(setReview);
     setInfo(props.user.User);
   }, []);
 

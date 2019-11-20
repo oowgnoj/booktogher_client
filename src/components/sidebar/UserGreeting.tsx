@@ -4,6 +4,7 @@ import { requestLogout } from "../../Redux/modules/user";
 import { slide as Menu, State } from "react-burger-menu";
 import Store from "../../Redux/configureStore";
 import { IUserInfo } from "../shared/Types";
+import { Link } from "react-router-dom";
 // import UserInfo from "./UserInfo";
 
 // interface IBook {
@@ -64,18 +65,25 @@ class UserGreeting extends React.Component {
         <img src={props.User.image} alt="" />
         <div className="sidebar_name">{props.User.name}</div>
         <div className="sidebar_profile">{props.User.profile}</div>
-        <a id="home" className="menu-item" href="/mypage">
-          내 서재 가기
-        </a>
-        <a id="about" className="menu-item" href="/">
-          서평쓰기
-        </a>
-        <a id="contact" className="menu-item" href="/">
-          홈
-        </a>
-        <a onClick={this.handleLogout} className="menu-item--small" href="">
+        <Link to="/mypage">
+          {" "}
+          <div id="home" className="menu-item">
+            내 서재 가기
+          </div>
+        </Link>
+        <Link to="/postreview">
+          <div id="about" className="menu-item">
+            서평쓰기
+          </div>
+        </Link>
+        <Link to="/">
+          <div id="contact" className="menu-item">
+            홈
+          </div>
+        </Link>
+        <div onClick={this.handleLogout} className="menu-item--small">
           로그아웃
-        </a>
+        </div>
       </Menu>
     );
   }

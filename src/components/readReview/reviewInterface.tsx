@@ -1,12 +1,12 @@
 export interface IAuthor {
-  id: string;
+  _id: string;
   image: string;
   name: string;
   profile: string;
 }
 
 export interface IReview {
-  id: string;
+  _id: string;
   author: IAuthor;
   contents: string;
   likes: string[];
@@ -31,7 +31,7 @@ export interface IReviewState {
 }
 
 export interface IBook {
-  id: string;
+  _id: string;
   authors: [string];
   contents: string;
   rating: number;

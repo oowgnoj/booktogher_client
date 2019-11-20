@@ -117,7 +117,6 @@ export const requestLogin = (mail: string, pw: string): any => (
   return loginAPI(mail, pw)
     .then((response: Response) => response.json())
     .then((result: boolean) => {
-      console.log("로그인 요청 보냈고 잘 왔어 : result ?", result);
       dispatch({
         type: LOGIN_SUCCESS
       });
@@ -125,8 +124,6 @@ export const requestLogin = (mail: string, pw: string): any => (
     .then(() => getInfoAPI())
     .then((response: Response) => response.json())
     .then((result: IUserInfo) => {
-      console.log("유저정보 요청 보냈고 잘 왔어 : result ?", result);
-      sessionStorage.setItem("userInfo", JSON.stringify(result));
       dispatch({
         payload: result,
         type: GETINFO_SUCCESS
