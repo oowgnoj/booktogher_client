@@ -6,7 +6,6 @@ interface IProps {
   UserInfo: IUserInfo;
 }
 const ProgressBar: React.FC<IProps> = ({ UserInfo }): ReactElement => {
-  console.log(UserInfo);
   const barStyle: object = { width: "30%", display: "inline-blodk" };
   const [bookGoal, setBookGoal] = useState<number>(10);
   const [essayGoal, setEssayGoal] = useState<number>(10);

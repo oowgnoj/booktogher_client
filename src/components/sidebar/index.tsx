@@ -104,7 +104,6 @@ class Sidebar extends React.Component {
 }
 
 function mapStateToProps(state: any): any {
-  console.log("로그인 여부 state!!", state);
   return {
     isLoggedIn: state.user.isLoggedIn
   };

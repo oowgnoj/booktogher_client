@@ -45,7 +45,6 @@ const Books: React.FC<IProps> = ({ User }: IProps): ReactElement => {
         if (!destination) {
           return;
         }
-        console.log(destination, source);
         setRows(reorderRows(rows, source, destination));
       }}
     >
