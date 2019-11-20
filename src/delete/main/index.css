@@ -1,8 +1,0 @@
-.main_review_list {
-  display: flex;
-  flex-direction: row;
-}
-
-.main_review_list_review {
-  flex: 1 1 auto;
-}
