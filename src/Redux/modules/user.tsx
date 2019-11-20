@@ -76,12 +76,13 @@ function updateInfoAPI(userInfo: IUserInfoOnly): Promise<Response> {
     method: "PATCH"
   });
 }
-// function updateUserBookAPI(userBook: IUserBookOnly): Promise<Response> {
-//   return fetch("http://localhost:3000/user", {
-//     body: JSON.stringify(userBook),
-//     method: "PATCH"
-//   });
-// }
+
+function updateUserBookAPI(userBook: IUserBookOnly): Promise<Response> {
+  return fetch("http://localhost:3000/user", {
+    body: JSON.stringify(userBook),
+    method: "PATCH"
+  });
+}
 
 export const requestLogin = (): any => (dispatch: any): Promise<void> => {
   dispatch({ type: LOGIN_PENDING });
@@ -128,6 +129,7 @@ export const requestLogout = (): any => (dispatch: any): Promise<void> => {
 };
 
 // * UPDATE user information  *
+
 export const updateUserInfo = (userInfo: IUserInfoOnly): any => (
   dispatch: any
 ): Promise<void> => {
