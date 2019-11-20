@@ -1,6 +1,6 @@
 import React, { ReactElement, useState, useEffect } from "react";
 
-import { fakeReviews, fakeUser } from "../../fakeData/fake";
+import { fakeReviews, fakeUser, UserDB } from "../../fakeData/fake";
 import "./../../../node_modules/uikit/dist/css/uikit.css";
 import UserInfo from "../shared/userInfo";
 import NavBar from "./navBar";
@@ -9,8 +9,8 @@ import Books from "./books";
 import ProgressBar from "./progressBar";
 import { connect } from "react-redux";
 import { fetchReview } from "./Fetch";
-// Users
 import { IUserInfo, IReview } from "./../shared/Types";
+// Users
 
 type activeCompt = ReactElement;
 
@@ -40,7 +40,7 @@ export const Mypage: React.FC = (props: any): ReactElement => {
   if (active === "review") {
     activeComp = <Reviews userReviews={myReview}></Reviews>;
   } else if (active === "books") {
-    activeComp = <Books User={myInfo}></Books>;
+    activeComp = <Books User={UserDB}></Books>;
   } else if (active === "stats") {
     return (
       <div>
