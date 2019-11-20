@@ -14,6 +14,31 @@ interface ISearchBook {
     }]
 }
 
+interface IPostReview {
+  books: string[]; // book id 목록
+  contents: string;
+  published: boolean;
+  thumbnail: string;
+  title: string;
+}
+
+export interface IAuthor {
+  _id: string;
+  image: string;
+  name: string;
+  profile: string;
+}
+
+export interface IReview {
+  _id: string;
+  author: IAuthor;
+  contents: string;
+  likes: string[];
+  published: boolean;
+  thumbnail: string;
+  title: string;
+}
+
 const url : string = "http://booktogether.ap-northeast-2.elasticbeanstalk.com"
 
 export const fetchBookSearch = (callback: any, title : string): any =>{
@@ -24,5 +49,22 @@ export const fetchBookSearch = (callback: any, title : string): any =>{
     callback(res.books)
   })
 }
+
+export const fetchPostReview = (callback: any, post : IPostReview): any =>{
+  fetch(`${url}/reviews`, {
+    method: 'POST', 
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(post),
+  })
+  .then((res :Response) => res.json())
+  .then((res :IReview) => {
+    console.log(res)
+    callback(res._id)
+  })
+}
+
+
 
 
