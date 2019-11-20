@@ -9,11 +9,15 @@ const RECOMMEND_SUCCESS_CURATION: string = "recommend/SUCCESS_CURATION";
 const RECOMMEND_FAILURE_CURATION: string = "recommend/FAILURE_CURATION_";
 
 function getReviewsAPI(): Promise<Response> {
-  return fetch("http://localhost:3000/review");
+  return fetch("http://localhost:3000/review", {
+    credentials: "include"
+  });
 }
 
 function getCurationsAPI(): Promise<Response> {
-  return fetch("http://localhost:3000/curation");
+  return fetch("http://localhost:3000/curation", {
+    credentials: "include"
+  });
 }
 
 export const updateReviewsRecommend = (): any => (

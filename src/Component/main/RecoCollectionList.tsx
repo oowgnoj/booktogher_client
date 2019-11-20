@@ -2,14 +2,14 @@ import React, { ReactElement } from "react";
 import RecoCollectionEntry from "./RecoCollectionEntry";
 
 interface IAuthor {
-  id: string;
+  _id: string;
   image: string;
   name: string;
   profile: string;
 }
 
 interface ICollection {
-  id: string;
+  _id: string;
   author: IAuthor;
   content: string;
   likes: string[];
@@ -25,7 +25,7 @@ const RecoCollectionList: React.SFC<IProps> = ({
   collections
 }: IProps): ReactElement => {
   const collectionList: React.ReactElement[] = collections.map(
-    (collection, index) => (
+    (collection: ICollection, index: number) => (
       <RecoCollectionEntry collection={collection} key={index} />
     )
   );

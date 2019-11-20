@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import Sidebar from "../sidebar/index";
 import Slider from "./RecoReviewSlider/index";
 import RecoReviewList from "./RecoReviewList";
 import RecoCollectionList from "./RecoCollectionList";
@@ -78,13 +79,14 @@ class Main extends React.Component {
 
     return (
       <div className="main">
+        <Sidebar />
         <Slider review={props.review[0]} />
-        <RecoReviewList reviews={props.review} />
+        <RecoReviewList reviews={props.review.slice(1, 5)} />
         <span className="main_recocollection_title">
           서로모임에 오신 분들께서 작성해주신 컬렉션입니다.
           {console.log(Store.getState())}
         </span>
-        <RecoCollectionList collections={props.curation} />
+        <RecoCollectionList collections={props.curation.slice(1, 5)} />
       </div>
     );
   }
@@ -130,8 +132,8 @@ interface ISAtate {
 function mapStateToProps(state: any): any {
   console.log("state!!", state);
   return {
-    curation: state.data.curation,
-    review: state.data.review
+    curation: state.recommend.data.curation.slice(0, 5),
+    review: state.recommend.data.review.slice(0, 5)
   };
 }
 
