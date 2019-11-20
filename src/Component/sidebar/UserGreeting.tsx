@@ -99,7 +99,7 @@ class UserGreeting extends React.Component {
 
 function mapStateToProps(state: any): any {
   return {
-    User: state.handleUserActions.User
+    User: state.user.User
   };
 }
 

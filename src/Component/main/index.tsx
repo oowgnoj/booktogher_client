@@ -132,8 +132,8 @@ interface ISAtate {
 function mapStateToProps(state: any): any {
   console.log("state!!", state);
   return {
-    curation: state.handleRecommendActions.data.curation.slice(0, 5),
-    review: state.handleRecommendActions.data.review.slice(0, 5)
+    curation: state.recommend.data.curation.slice(0, 5),
+    review: state.recommend.data.review.slice(0, 5)
   };
 }
 

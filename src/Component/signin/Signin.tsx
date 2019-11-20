@@ -128,8 +128,8 @@ class Signin extends React.Component<any, IState> {
 
 function mapStateToProps(state: any): any {
   return {
-    User: state.handleUserActions.User,
-    isLoggedIn: state.handleUserActions.curation
+    User: state.user.User,
+    isLoggedIn: state.user.curation
   };
 }
 
