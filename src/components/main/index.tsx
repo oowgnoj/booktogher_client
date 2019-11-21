@@ -79,7 +79,7 @@ class Main extends React.Component {
 
     return (
       <div className="main">
-        <Sidebar />
+        {/* <Sidebar /> */}
         <Slider review={props.review[0]} />
         <RecoReviewList reviews={props.review.slice(1, 5)} />
         <span className="main_recocollection_title">

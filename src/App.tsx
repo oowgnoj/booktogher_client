@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { requestUserInfo } from "./Redux/modules/user";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Sidebar from "./components/sidebar/index";
 import Main from "./components/main/index";
 import Signup from "./components/signup/Signup";
 import Signin from "./components/signin/Signin";
@@ -17,12 +18,12 @@ const App: React.FC = (props: any): ReactElement => {
 
   return (
     <BrowserRouter>
+      <Sidebar />
       <Switch>
         <Route path="/" exact component={Main} />
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
         <Route path="/mypage" component={Mypage} />
-        {/* <Route path="/writereview" component={} /> */}
         <Route path="/review/:id" component={ReadReview} />
         <Route path="/postreview" component={PostReview} />
         <Route path="*" to="/" />
