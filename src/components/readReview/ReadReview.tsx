@@ -83,8 +83,6 @@ class ReadReview extends React.Component<
   }
 
   public render(): ReactElement {
-    console.log(this.props.match.params.id);
-    console.log("booklist 입니다!", this.state.bookList);
     return (
       <div>
         <Review review={this.state.review} bookList={this.state.bookList} />

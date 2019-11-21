@@ -62,7 +62,6 @@ export const fetchPostReview = (callback: any, post: IPostReview): any => {
   })
     .then((res: Response) => res.json())
     .then((res: IReview) => {
-      console.log(res);
       callback(res._id);
     });
 };

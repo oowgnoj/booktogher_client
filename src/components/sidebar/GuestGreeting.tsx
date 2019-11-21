@@ -36,9 +36,7 @@ class GuestGreeting extends React.Component {
     );
   }
 
-  public onStateChange = (state: State): void => {
-    console.log(state.isOpen);
-  };
+  public onStateChange = (state: State): void => {};
 }
 
 // const GuestGreeting: React.SFC = (): React.ReactElement => {

@@ -19,14 +19,12 @@ interface IProps {
 }
 
 export const Mypage: React.FC = (props: any): ReactElement => {
-  const [myInfo, setInfo] = useState<IUserInfo>(fakeUser);
   const [myReview, setReview] = useState<IReview[]>(fakeReviews);
   const [active, setActive] = useState<string>("review");
 
   // get user information from REDUX STORE
   useEffect(() => {
     fetchReview(setReview);
-    setInfo(props.user.User);
   }, []);
 
   // get review infromation from DB * FETCH *
@@ -38,21 +36,22 @@ export const Mypage: React.FC = (props: any): ReactElement => {
   let activeComp: ReactElement = <Reviews userReviews={myReview}></Reviews>;
 
   if (active === "review") {
+    // console.log("마이페이지 인포", props.user.User);
     activeComp = <Reviews userReviews={myReview}></Reviews>;
   } else if (active === "books") {
     activeComp = <Books User={UserDB}></Books>;
   } else if (active === "stats") {
     return (
       <div>
-        <UserInfo userInfo={myInfo}></UserInfo>
+        <UserInfo userInfo={props.user.User}></UserInfo>
         <NavBar handleActive={handleActive} />
-        <ProgressBar UserInfo={myInfo}></ProgressBar>)
+        <ProgressBar UserInfo={props.user.User}></ProgressBar>)
       </div>
     );
   }
   return (
     <div>
-      <UserInfo userInfo={myInfo}></UserInfo>
+      <UserInfo userInfo={props.user.User}></UserInfo>
       <NavBar handleActive={handleActive} />
       {activeComp}{" "}
     </div>

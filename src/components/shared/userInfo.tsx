@@ -1,10 +1,12 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import { IUserInfo } from "./../shared/Types";
 interface Props {
   userInfo: IUserInfo;
 }
 
 const Info: React.FC<Props> = ({ userInfo }): ReactElement => {
+  const [userInfoState, setUserInfoState] = useState<IUserInfo>(userInfo);
+
   return (
     <div className="uk-panel" style={{ width: 300 }}>
       <img
@@ -14,8 +16,10 @@ const Info: React.FC<Props> = ({ userInfo }): ReactElement => {
         height="100"
         alt="Example image"
       />
-      <p>{userInfo.name}</p>
-      <p>{userInfo.profile}</p>
+      <p>name : {userInfo.name}</p>
+      <p>email : {userInfo.email}</p>
+      <p>profile : {userInfo.profile}</p>
+      <button>유저 정보 수정</button>
     </div>
   );
 };

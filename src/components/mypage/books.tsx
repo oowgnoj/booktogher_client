@@ -17,14 +17,17 @@ interface IProps {
 }
 
 const Books: React.FC<IProps> = ({ User }: IProps): ReactElement => {
-  const toRead: IBookToRead[] = User.to_read;
-  const reading: IBookReading[] = User.reading;
-  const finished: IBookFinished[] = User.finished;
+  const toRead: any = User.to_read;
+  const reading: any = User.reading;
+  const finished: any = User.finished;
   const [selectBox, setSelectBox] = useState<Boolean>(false);
+
+  let temp: ReactElement = <p></p>;
+  let updatedUser: IUserInfo;
+
   const handleSelctBox = (): void => {
     setSelectBox(!selectBox);
   };
-  let temp: ReactElement = <p></p>;
 
   const [rows, setRows] = React.useState([
     {
@@ -44,13 +47,30 @@ const Books: React.FC<IProps> = ({ User }: IProps): ReactElement => {
     }
   ]);
 
+  /*
+
+          book: 
+          {
+          _id: "ObjectId",
+          authors: ["도스토예프스키"],
+          thumbnail: "http://...",
+          title: "죄와 벌"
+        }
+
+*/
+
+  // 작성중 입니다 !
+
+  let toReadSimple = rows[1].books.map((el: any) => {
+    return { book: el.book._id, start: el.start };
+  });
+
   if (selectBox) {
     temp = <BookSelect />;
   }
 
   return (
     <div>
-      {console.log(rows)}
       <button
         style={{ width: "100px", height: "100px" }}
         onClick={handleSelctBox}
@@ -68,16 +88,20 @@ const Books: React.FC<IProps> = ({ User }: IProps): ReactElement => {
         }}
       >
         <div>
-          {rows.map(row => (
-            <BookList key={row.id} listId={row.id} listType="CARD" row={row} />
-          ))}
+          {rows.map(row => {
+            return (
+              <BookList
+                key={row.id}
+                listId={row.id}
+                listType="CARD"
+                row={row}
+              />
+            );
+          })}
         </div>
       </DragDropContext>
     </div>
   );
 };
 
-{
-  /* <BookList User={User} /> */
-}
 export default Books;

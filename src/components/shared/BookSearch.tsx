@@ -90,7 +90,6 @@ class BookSelect extends React.Component<{}, IState> {
 
     const selectBookId: string[] = this.state.selectBooksId.slice(1);
     const selectBookTitle: string[] = this.state.selectBooksTitle.slice(1);
-    console.log("a", selectBookId, selectBookTitle);
 
     return (
       <div>
