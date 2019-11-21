@@ -82,11 +82,10 @@ class UserGreeting extends React.Component {
             홈
           </div>
         </Link>
-        <Link to="/">
-          <div onClick={this.handleLogout} className="menu-item">
-            로그아웃
-          </div>
-        </Link>
+
+        <a onClick={this.handleLogout} className="menu-item" href="/">
+          로그아웃
+        </a>
       </Menu>
     );
   }

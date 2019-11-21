@@ -43,7 +43,7 @@ class Signin extends React.Component<any, IState> {
 
     if (isEmail && password) {
       Store.dispatch(requestLogin(email, password)).then(() => {
-        if (this.props.isLoggedIn && this.props.User._id) {
+        if (this.props.User._id) {
           console.log("로그인 성공 / this.props : ", this.props);
           this.props.history.push("/");
         } else if (this.props.error) {

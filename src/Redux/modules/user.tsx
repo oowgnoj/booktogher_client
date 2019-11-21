@@ -187,28 +187,27 @@ export default handleActions(
     [LOGIN_PENDING]: (state: IState, action: any): IState => {
       return {
         ...state,
-        isLoggedIn: false,
         pending: true
       };
     },
     [LOGIN_SUCCESS]: (state: IState, action: any): IState => {
       return {
         ...state,
-        isLoggedIn: true,
+
         pending: false
       };
     },
     [LOGIN_FAILURE]: (state: IState, action: any): IState => {
       return {
         ...state,
-        isLoggedIn: false,
+
         pending: false
       };
     },
     [LOGOUT_PENDING]: (state: IState, action: any): IState => {
       return {
         ...state,
-        isLoggedIn: true,
+
         pending: true
       };
     },
@@ -216,7 +215,7 @@ export default handleActions(
       return {
         ...state,
         error: "",
-        isLoggedIn: false,
+
         pending: false
       };
     },
@@ -224,29 +223,26 @@ export default handleActions(
       return {
         ...state,
         // error: action.payload.err.error.message,
-        isLoggedIn: true,
+
         pending: false
       };
     },
 
     [GETINFO_PENDING]: (state: IState, action: any): IState => {
       return {
-        ...state,
-        isLoggedIn: true
+        ...state
       };
     },
     [GETINFO_SUCCESS]: (state: IState, action: any): IState => {
       return {
         ...state,
-        User: action.payload,
-        isLoggedIn: true
+        User: action.payload
       };
     },
     [GETINFO_FAILURE]: (state: IState, action: any): IState => {
       return {
-        ...state,
+        ...state
         // error: action.payload.err.error.message,
-        isLoggedIn: false
       };
     },
     [UPDATEINFO_PENDING]: (state: IState, action: any): IState => {

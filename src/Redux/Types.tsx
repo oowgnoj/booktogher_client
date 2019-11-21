@@ -66,7 +66,6 @@ interface IErrorResponse {
 
 export default interface IState {
   User: IUserInfo;
-  isLoggedIn: boolean;
   pending: boolean;
   error: string;
 }
@@ -129,7 +128,6 @@ export const initialState: IState = {
     numBooksGoal: 10,
     numReviewsGoal: 10
   },
-  isLoggedIn: false,
   pending: false,
   error: ""
 };
