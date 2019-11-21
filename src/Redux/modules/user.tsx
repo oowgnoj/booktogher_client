@@ -77,11 +77,11 @@ function loginAPI(mail: string, pw: string): Promise<Response> {
 
 function logoutAPI(): Promise<Response> {
   return fetch(
-    "http://booktogether.ap-northeast-2.elasticbeanstalk.com/books/auth/logout",
+    "http://booktogether.ap-northeast-2.elasticbeanstalk.com/auth/logout",
     {
       credentials: "include",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/text"
       },
       method: "POST"
     }
@@ -142,12 +142,14 @@ export const requestLogout = (): any => (dispatch: any): Promise<void> => {
 
   return logoutAPI()
     .then((response: Response) => response.json())
-    .then((result: boolean) => {
+    .then((result: JSON) => {
+      console.log("서버로부터 로그아웃 성공");
       dispatch({
         type: LOGOUT_SUCCESS
       });
     })
     .catch((err: Response) => {
+      console.log("서버로부터 로그아웃 실패, err ? ", err);
       dispatch({
         payload: err,
         type: LOGOUT_FAILURE

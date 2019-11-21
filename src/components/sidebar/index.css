@@ -45,16 +45,20 @@
 
 a :link {
   text-decoration: none;
-  color: red;
+  color: #699ff4;
 }
 
 a :hover {
   text-decoration: none;
-  color: blue;
+  color: #699ff4;
 }
 
-/* Morph shape necessary with bubble or elastic */
-.bm-morph-shape {
+div :focus {
+  text-decoration: none;
+  outline: none;
+}
+
+Morph shape necessary with bubble or elastic .bm-morph-shape {
   fill: #373a47;
 }
 

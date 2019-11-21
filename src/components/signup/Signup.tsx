@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import "./Signup.css";
 
 // import "../../../node_modules/uikit/dist/js/uikit-icons.min.js";
 // import "../../../node_modules/uikit/dist/js/uikit.js";
@@ -133,12 +134,12 @@ class SignUp extends React.Component<any, IState> {
 
   public render(): ReactElement {
     const required: ReactElement = this.state.alert ? (
-      <div className="uk-alert-primary" uk-alert>
+      <span className="uk-alert-primary" uk-alert style={{ height: "50px" }}>
         <a className="uk-alert-close" uk-close></a>
-        <p>{this.state.status}</p>
-      </div>
+        <p style={{ color: "#blue" }}>{this.state.status}</p>
+      </span>
     ) : (
-      <div></div>
+      <div style={{ height: "44px" }}> </div>
     );
 
     return (
@@ -200,8 +201,8 @@ class SignUp extends React.Component<any, IState> {
               SIGN UP
             </button>
           </p>
+          <span className="signup_alert">{required}</span>
         </form>
-        {required}
       </div>
     );
   }

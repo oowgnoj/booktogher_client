@@ -1,0 +1,13 @@
+.signin {
+  display: table;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+form {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  background-color: rgb(247, 247, 243);
+}
