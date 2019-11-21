@@ -74,6 +74,7 @@ class WritePost extends React.Component<IProps, IState> {
   
 
   public render() {
+    console.log(this.state.body)
     const publishedFalse : string = '공개'
     const publishedTrue : string = '비공개'
     const style = {

@@ -13,11 +13,15 @@ const Review = ({ review, bookList }: IProps): ReactElement => {
       </div>
     );
   });
+  const style = {
+    backgroundColor : review.thumbnail
+  }
   return (
     <div className="review-area">
-      <div className="title-area">
+      <div className="title-area" style ={style}>
         <h1 className="title">{review.title}</h1>
         <div className="review-likes">
+          <button>좋아요</button>
           <button>수정</button>
         </div>
       </div>
