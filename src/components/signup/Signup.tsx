@@ -87,30 +87,6 @@ class SignUp extends React.Component<any, IState> {
     }
   }
 
-  //   if (isEmail && password1 === password2) {
-  //     if (email && name && password1 && password2) {
-  //       // 서버에 요청
-  //       console.log(
-  //         `회원가입 성공! [email : ${email}] [name : ${name}] [password : ${password1}]`
-  //       );
-  //     } else {
-  //       console.log("모든 항목을 입력하세요");
-  //       this.setState({ alert: true, status: "모든 항목을 입력해주세요." });
-  //     }
-  //   } else if (password1 !== password2) {
-  //     console.log("비밀번호가 일치하지 않음!");
-  //     this.setState({
-  //       alert: true,
-  //       status: "입력하신 패스워드가 일치하지 않습니다. 다시 확인해주세요."
-  //     });
-  //   } else if (!isEmail) {
-  //     this.setState({
-  //       alert: true,
-  //       status: "잘못된 형식의 이메일 주소입니다. 다시 입력해주세요."
-  //     });
-  //   }
-  // }
-
   public emailChange(event: React.ChangeEvent<HTMLInputElement>): void {
     const updatingEmail: string = event.target.value;
     this.setState({ mail: updatingEmail });

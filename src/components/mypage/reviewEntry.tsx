@@ -25,7 +25,11 @@ const ReviewEntry: React.FC<IProps> = ({ Review }: IProps): ReactElement => {
         </div>
       </div>
       <div className="uk-card-body">
-        <p>{Review.contents.slice(3, Review.contents.length - 4)}</p>
+        <p>
+          {Review.contents
+            .slice(3, Review.contents.length - 4)
+            .replace(/<[^>]*>?/gm, "")}
+        </p>
       </div>
     </div>
   );

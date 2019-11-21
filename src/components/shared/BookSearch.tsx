@@ -1,8 +1,7 @@
 import React, { ReactElement } from "react";
-import { IBookState, IBook } from "./writeInterface";
-import { fetchBookSearch } from "./fetchWrite";
-import WritePost from "./WritePost";
-import "./Modal.scss";
+import { IBooks, IBook } from "./Types";
+import { fetchBookSearch } from "./../shared/Fetch";
+import "./../writeReview/Modal.scss";
 
 interface IState {
   books: IBook[];
@@ -119,7 +118,6 @@ class BookSelect extends React.Component<{}, IState> {
             </div>
           </div>
         ) : null}
-        <WritePost bookId={selectBookId} bookTitle={selectBookTitle} />
       </div>
     );
   }

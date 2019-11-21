@@ -9,7 +9,6 @@ export const fetchReview = (callback?: any, id?: string): any => {
   )
     .then((res: Response) => res.json())
     .then((res: IReviews) => {
-      console.log(res);
       callback(res);
     });
 };

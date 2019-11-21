@@ -1,6 +1,10 @@
 import React, { ReactElement } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
-import { Row } from "./types";
+interface Row {
+  id: string;
+  label: string;
+  books: any;
+}
 
 interface IProps {
   row: Row;
