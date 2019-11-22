@@ -13,26 +13,25 @@
   line-height: 2;
 }
 .title-area {
-  width: 54%;
-  padding: 200px 500px 100px;
+  width: 100%;
+  padding: 200px 0px 40px 0px;
   background-color: #eeeeee;
   color:  #212121;
   font-family: 'Nanum Myeongjo', serif;
 }
 .title-area h1 {
   font-size: 36px;
-  font-weight: 800;
   color:  #3f3f3f;
-  font-family: 'Gothic A1', sans-serif;
+  font-family: 'Nanum Myeongjo', serif;
 }
 .review-likes {
-  margin-left: auto;
+  margin-left: 54%;
   text-align: right;
 }
 .post-area {
   width: 54%;
   text-align: left; 
-  padding: 50px;
+  padding: 60px;
   color: #0c0c0c;
   font-size: 16px;
   font-family: 'Gothic A1', sans-serif;
@@ -42,6 +41,7 @@
 .book-rating {
   margin-right: auto;
   text-align: left;
+  margin-bottom: 20px;
 }
 .post-area p {
   padding: 0;
