@@ -1,8 +1,7 @@
 import React, { ReactElement } from "react";
-import { IBookState, IBook } from "./writeInterface";
-import { fetchBookSearch } from "./fetchWrite";
-import WritePost from "./WritePost";
-import "./Modal.scss";
+import { IBooks, IBook } from "./Types";
+import { fetchBookSearch } from "./../shared/Fetch";
+import "./../writeReview/Modal.scss";
 
 interface IState {
   books: IBook[];
@@ -16,25 +15,24 @@ class BookSelect extends React.Component<{}, IState> {
   constructor({}) {
     super({});
     this.state = {
-
-      books :[{
-        _id: 'book-id1',
-        authors: [ '이모양' ],
-        contents: '타입스크립트와의 싸움을 펼치는 이야기이다',
-        rating: 3,
-        thumbnail: 'http://image.kyobobook.co.kr/images/book/large/598/l9788936433598.jpg',
-        title: '채식주의자'
-
+      books: [
+        {
+          _id: "book-id1",
+          authors: ["이모양"],
+          contents: "타입스크립트와의 싸움을 펼치는 이야기이다",
+          rating: 3,
+          thumbnail:
+            "http://sungsan.info/wp-content/uploads/2018/06/%EB%8F%99%EC%A0%84-%ED%95%98%EB%82%98-%EC%B1%85%ED%91%9C%EC%A7%80.jpg",
+          title: "타입스트립트"
         },
         {
           _id: "book-id2",
           authors: ["이기기"],
           contents: "리액크 퀼에 대하여 공부해봅시다",
           rating: 4,
-
-          thumbnail: 'http://image.kyobobook.co.kr/images/book/large/304/l9791196814304.jpg',
-          title: '너에게만 좋은 사람이 되고 싶어'
-
+          thumbnail:
+            "http://sungsan.info/wp-content/uploads/2018/06/%EB%8F%99%EC%A0%84-%ED%95%98%EB%82%98-%EC%B1%85%ED%91%9C%EC%A7%80.jpg",
+          title: "리액트 퀼 사용법"
         }
       ],
       title: "",
@@ -59,11 +57,8 @@ class BookSelect extends React.Component<{}, IState> {
     fetchBookSearch(setStateBook, this.state.title);
   }
 
-
-  public clickSelectedBook(e:any) : void{
-    const idTitle = e.target.alt.split(":")
-    console.log('idtitle', idTitle)
-
+  public clickSelectedBook(e: any): void {
+    const idTitle = e.target.alt.split(" ");
     this.setState({
       selectBooksId: this.state.selectBooksId.concat([idTitle[0]]),
       selectBooksTitle: this.state.selectBooksTitle.concat([idTitle[1]])
@@ -76,24 +71,25 @@ class BookSelect extends React.Component<{}, IState> {
     });
   }
 
+  public render(): ReactElement {
+    const searchBookList: ReactElement[] = this.state.books.map(
+      (info: IBook) => {
+        return (
+          <div className="book-select">
+            <img
+              src={info.thumbnail}
+              width="80px"
+              alt={`${info._id} ${info.title}`}
+              onClick={e => this.clickSelectedBook(e)}
+            />
+            <div>{info.title}</div>
+          </div>
+        );
+      }
+    );
 
-  public render() : ReactElement{
-    const searchBookList: ReactElement[]= this.state.books.map((info: IBook)=>{
-      return(
-        <div className ="book-select" key ={info._id}>
-          <img 
-            src = {info.thumbnail}
-            width ="100px" 
-            alt ={`${info._id}:${info.title}`}
-            onClick = {(e)=> this.clickSelectedBook(e)}/>
-          <div>{info.title}</div>
-        </div>
-      )
-    })
-
-    const selectBookId :string[] = this.state.selectBooksId.slice(1)
-    const selectBookTitle :string[] = this.state.selectBooksTitle.slice(1)
-  
+    const selectBookId: string[] = this.state.selectBooksId.slice(1);
+    const selectBookTitle: string[] = this.state.selectBooksTitle.slice(1);
 
     return (
       <div>
@@ -122,7 +118,6 @@ class BookSelect extends React.Component<{}, IState> {
             </div>
           </div>
         ) : null}
-        <WritePost bookId={selectBookId} bookTitle={selectBookTitle} />
       </div>
     );
   }

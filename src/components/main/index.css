@@ -1,3 +1,15 @@
+.main {
+  background-color: rgb(247, 247, 243);
+}
+
+.main_review_entry_content {
+  color: rgb(87, 85, 85);
+}
+
+.main_review_entry_author {
+  color: "gray";
+}
+
 .main_review_list {
   display: flex;
   flex-direction: row;

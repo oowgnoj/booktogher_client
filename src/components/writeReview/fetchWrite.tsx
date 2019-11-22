@@ -47,7 +47,6 @@ export const fetchBookSearch = (callback: any, title: string): any => {
   fetch(`${url}/books/search?query=${title}`)
     .then((res: Response) => res.json())
     .then((res: ISearchBook) => {
-      console.log(res);
       callback(res.books);
     });
 };
@@ -63,7 +62,6 @@ export const fetchPostReview = (callback: any, post: IPostReview): any => {
   })
     .then((res: Response) => res.json())
     .then((res: IReview) => {
-      console.log(res);
       callback(res._id);
     });
 };

@@ -39,10 +39,25 @@ export interface IUserInfo {
 
 // book
 // 서평쓰기 (책선택), 서평읽기 (책소개)
-
+interface ISearchBook {
+  results_count: number;
+  pageable_count: number;
+  current_page: number;
+  is_end: boolean;
+  books: [
+    {
+      _id: string;
+      authors: [string];
+      contents: string;
+      thumbnail: string;
+      title: string;
+    }
+  ];
+}
 export interface IBook {
   _id: string;
   authors: string[];
+  rating: number;
   contents: string;
   thumbnail: string;
   title: string;

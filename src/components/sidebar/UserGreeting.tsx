@@ -58,6 +58,7 @@ class UserGreeting extends React.Component {
     const props: any = this.props;
     return (
       <Menu
+        disableAutoFocus
         customBurgerIcon={<span uk-icon="menu"></span>}
         customCrossIcon={<span uk-icon="close"></span>}
         onStateChange={this.onStateChange}
@@ -81,9 +82,10 @@ class UserGreeting extends React.Component {
             홈
           </div>
         </Link>
-        <div onClick={this.handleLogout} className="menu-item--small">
+
+        <a onClick={this.handleLogout} className="menu-item" href="/">
           로그아웃
-        </div>
+        </a>
       </Menu>
     );
   }

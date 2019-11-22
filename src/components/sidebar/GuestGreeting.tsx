@@ -10,6 +10,7 @@ class GuestGreeting extends React.Component {
   public render(): JSX.Element {
     return (
       <Menu
+        disableAutoFocus
         customBurgerIcon={<span uk-icon="menu"></span>}
         customCrossIcon={<span uk-icon="close"></span>}
         onStateChange={this.onStateChange}
@@ -36,9 +37,7 @@ class GuestGreeting extends React.Component {
     );
   }
 
-  public onStateChange = (state: State): void => {
-    console.log(state.isOpen);
-  };
+  public onStateChange = (state: State): void => {};
 }
 
 // const GuestGreeting: React.SFC = (): React.ReactElement => {

@@ -2,6 +2,7 @@ import React, { ReactElement } from "react";
 import { connect } from "react-redux";
 import { requestLogin } from "../../Redux/modules/user";
 import Store from "../../Redux/configureStore";
+import "./Signin.css";
 
 // import "../../../node_modules/uikit/dist/js/uikit-icons.min.js";
 // import "../../../node_modules/uikit/dist/js/uikit.js";
@@ -42,7 +43,7 @@ class Signin extends React.Component<any, IState> {
 
     if (isEmail && password) {
       Store.dispatch(requestLogin(email, password)).then(() => {
-        if (this.props.isLoggedIn && this.props.User._id) {
+        if (this.props.User._id) {
           console.log("로그인 성공 / this.props : ", this.props);
           this.props.history.push("/");
         } else if (this.props.error) {
@@ -77,12 +78,12 @@ class Signin extends React.Component<any, IState> {
 
   public render(): ReactElement {
     const required: ReactElement = this.state.alert ? (
-      <div className="uk-alert-primary" uk-alert>
+      <span className="uk-alert-primary" uk-alert style={{ height: "50px" }}>
         <a className="uk-alert-close" uk-close></a>
-        <p>{this.state.status}</p>
-      </div>
+        <p style={{ color: "#blue" }}>{this.state.status}</p>
+      </span>
     ) : (
-      <div></div>
+      <div style={{ height: "44px" }}></div>
     );
 
     return (
@@ -122,8 +123,8 @@ class Signin extends React.Component<any, IState> {
               SIGN IN
             </button>
           </p>
+          <span>{required}</span>
         </form>
-        {required}
       </div>
     );
   }
