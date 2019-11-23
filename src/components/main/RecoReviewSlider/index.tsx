@@ -32,7 +32,7 @@ const Slider: React.SFC<IProps> = ({ review }: IProps): ReactElement => {
     <div className="main_slider">
       <div className="main_slider_image">
         <img
-          src="https://images.unsplash.com/photo-1562874724-b33411b38141?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+          src="https://images.unsplash.com/photo-1535954741680-a2e24eb05418?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
           alt=""
           width="680px"
         />
