@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import { Link } from "react-router-dom"
 import { IBooks, IBook } from "../shared/Types";
 import { fetchBookSearch } from "./../shared/Fetch";
 import "./SearchBook.css"
@@ -46,12 +47,14 @@ class SearchBooks extends React.Component<{}, IState> {
       (info: IBook) => {
         return (
           <div className="book-select">
+            <Link to = {`/book/${info._id}`}>
             <img
               src={info.thumbnail}
               width="80px"
               alt={`${info.title}`}
             />
             <div>{info.title}</div>
+            </Link>
           </div>
         );
       }

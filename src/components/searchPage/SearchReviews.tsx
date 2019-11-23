@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import { Link } from "react-router-dom"
 import { IBooks, IReviewWithBooks } from "../shared/Types";
 import { fetchReviewSearch } from "../shared/Fetch";
 import "./SearchBook.css"
@@ -60,10 +61,13 @@ class SearchReviews extends React.Component<{}, IState> {
     const searchBookList: ReactElement[] = this.state.reviews.map(
       (info: IReviewWithBooks) => {
         return (
-          <div className="book-select">
-            <div>{info.title}</div>
-            <div>{info.contents}</div>
-          </div>
+          <div key ={info._id} className="review-detail">
+            <Link to = {`/review/${info._id}`}>
+              <h5>{info.title}</h5>
+              <div>{info.author.name}</div>
+              <div>{info.contents.replace(/<[^>]*>?/gm, '')}</div>
+            </Link>     
+        </div>
         );
       }
     );
