@@ -57,7 +57,6 @@ interface ISearchBook {
 export interface IBook {
   _id: string;
   authors: string[];
-  rating: number;
   contents: string;
   thumbnail: string;
   title: string;
@@ -125,7 +124,7 @@ export interface IReviewLike {
 }
 
 export interface IReviewWithBooks {
-  id: string;
+  _id: string;
   author: IAuthor;
   title: string;
   books: IBook[];

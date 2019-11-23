@@ -13,7 +13,7 @@ export const fetchReview = (callback: any, id: string): any => {
 };
 
 export const fetchReviewBook = (callback: any, id: string): any => {
-  fetch(`${url}/books?review_id=${id}`, {
+  fetch(`${url}/books?review=${id}`, {
     credentials: "include"
   })
     .then((res: Response) => res.json())
@@ -24,7 +24,7 @@ export const fetchReviewBook = (callback: any, id: string): any => {
 };
 
 export const fetchBookReviewList = (callback: any, id: string): any => {
-  fetch(`${url}/reviews?book_id=${id}`, {
+  fetch(`${url}/reviews?book=${id}`, {
     credentials: "include"
   })
     .then((res: Response) => res.json())

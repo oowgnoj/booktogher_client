@@ -20,7 +20,6 @@ class BookSelect extends React.Component<{}, IState> {
           _id: "book-id1",
           authors: ["이모양"],
           contents: "타입스크립트와의 싸움을 펼치는 이야기이다",
-          rating: 3,
           thumbnail:
             "http://sungsan.info/wp-content/uploads/2018/06/%EB%8F%99%EC%A0%84-%ED%95%98%EB%82%98-%EC%B1%85%ED%91%9C%EC%A7%80.jpg",
           title: "타입스트립트"
@@ -29,7 +28,6 @@ class BookSelect extends React.Component<{}, IState> {
           _id: "book-id2",
           authors: ["이기기"],
           contents: "리액크 퀼에 대하여 공부해봅시다",
-          rating: 4,
           thumbnail:
             "http://sungsan.info/wp-content/uploads/2018/06/%EB%8F%99%EC%A0%84-%ED%95%98%EB%82%98-%EC%B1%85%ED%91%9C%EC%A7%80.jpg",
           title: "리액트 퀼 사용법"
@@ -58,7 +56,7 @@ class BookSelect extends React.Component<{}, IState> {
   }
 
   public clickSelectedBook(e: any): void {
-    const idTitle = e.target.alt.split(" ");
+    const idTitle = e.target.alt.split(":");
     this.setState({
       selectBooksId: this.state.selectBooksId.concat([idTitle[0]]),
       selectBooksTitle: this.state.selectBooksTitle.concat([idTitle[1]])
@@ -79,7 +77,7 @@ class BookSelect extends React.Component<{}, IState> {
             <img
               src={info.thumbnail}
               width="80px"
-              alt={`${info._id} ${info.title}`}
+              alt={`${info._id}:${info.title}`}
               onClick={e => this.clickSelectedBook(e)}
             />
             <div>{info.title}</div>
