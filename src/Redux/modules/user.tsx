@@ -103,13 +103,11 @@ export const requestLogout = (): any => (dispatch: any): Promise<void> => {
   return logoutAPI()
     .then((response: Response) => response.json())
     .then((result: JSON) => {
-      console.log("서버로부터 로그아웃 성공");
       dispatch({
         type: LOGOUT_SUCCESS
       });
     })
     .catch((err: Response) => {
-      console.log("서버로부터 로그아웃 실패, err ? ", err);
       dispatch({
         payload: err,
         type: LOGOUT_FAILURE

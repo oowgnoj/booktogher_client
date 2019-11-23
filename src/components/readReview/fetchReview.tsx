@@ -18,7 +18,6 @@ export const fetchReviewBook = (callback: any, id: string): any => {
   })
     .then((res: Response) => res.json())
     .then((res: IBook[]) => {
-      console.log('fetch',res)
       callback(res);
     });
 };

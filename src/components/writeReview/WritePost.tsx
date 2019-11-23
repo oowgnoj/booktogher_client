@@ -70,25 +70,20 @@ class WritePost extends React.Component<IProps, IState> {
     this.setState({ body: { ...this.state.body, thumbnail: color.hex } });
   };
 
-
-  public clickPostSubmit() :any {
-    const redirectReview = (id : string) : any =>{
-      this.setState({reviewId : id})
-      this.setState({redirect: true })
-    }
-    fetchPostReview(redirectReview, this.state.body)  
-
+  public clickPostSubmit(): any {
+    const redirectReview = (id: string): any => {
+      this.setState({ reviewId: id });
+      this.setState({ redirect: true });
+    };
+    fetchPostReview(redirectReview, this.state.body);
   }
 
   public render() {
-
-    console.log(this.state.body)
-    const publishedFalse : string = '공개'
-    const publishedTrue : string = '비공개'
+    const publishedFalse: string = "공개";
+    const publishedTrue: string = "비공개";
     const style = {
-      backgroundColor : this.state.body.thumbnail
-    }
-
+      backgroundColor: this.state.body.thumbnail
+    };
 
     return (
       <div className="write-area">
