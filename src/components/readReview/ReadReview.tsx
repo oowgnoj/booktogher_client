@@ -1,10 +1,10 @@
 import React, { ReactElement } from "react";
-import { withRouter, RouteComponentProps } from "react-router";
+import { RouteComponentProps } from "react-router";
 import Review from "./Review";
 import BookInfo from "./BookInfo";
 import RecoReview from "./RecoReview";
 import UserInfo from "./UserInfo";
-import { IProps } from "./reviewInterface";
+import { IProps, IBook } from "./reviewInterface";
 import { fetchReview, fetchReviewBook } from "./fetchReview";
 
 interface IMatchParams {
@@ -39,7 +39,7 @@ class ReadReview extends React.Component<
           authors: ["로라 오웬"],
           contents:
             "난 책읽기가 좋아 제2단계, 제36권 『마녀 워니 학교에 가다』. 그림책을 통해 유아들의 마음을 사로잡아온 마녀 위니가 동화를 통해 아이들에게 찾아왔다. 아이들의 심리를 코믹하고 엉뚱하며 따뜻한 상상력으로 풀어낸 총4편의 동화가 흥미진진하면서도 아슬아슬한 마법과 모헙의 세계로 아이들을 초대한다. 생동감과 박진감이 넘치는 유쾌하고 발랄한 그림이 곁들어져 흥겨움을 불러일으키고 있다. 아이들에게 공감을 자아내면서, 책 읽기의 즐거움을 느끼게 해준다.",
-          _id: "book-id1",
+          _id: "5dd455fab7c68bef431c1d51",
           rating: 3,
           thumbnail:
             "http://image.kyobobook.co.kr/images/book/large/259/l9788949161259.jpg",
@@ -60,12 +60,15 @@ class ReadReview extends React.Component<
   }
 
   public render(): ReactElement {
+    const bookId: any = this.state.bookList.map((info :IBook) =>{
+      return info._id
+    })
     return (
       <div>
         <Review review={this.state.review} bookList={this.state.bookList} />
         <BookInfo bookList={this.state.bookList} />
-        {/*  <RecoReview _id={this.state.review._id} />
-        <UserInfo review={this.state.review} /> */}
+        <RecoReview id={bookId} />
+       {/* <UserInfo review={this.state.review} /> */}
       </div>
     );
   }
