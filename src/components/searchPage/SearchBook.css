@@ -1,3 +1,14 @@
+.search-area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.search-select {
+  width: 54%;
+  padding: 0px 0px 10px 0px;
+}
+
 .search-book{
   font-family: 'Gothic A1', sans-serif;
   width: 100%;
@@ -9,27 +20,32 @@
   word-spacing: 1px;
   line-height: 2;
 }
+.uk-margin {
+  width: 100px;
+  margin-top: 60px;
+  margin-bottom: 0px;
+}
 .search-input{
-  width: 60%;
-  padding: 20px 0px 10px 0px;
+  width: 54%;
+  padding: 0px 0px 10px 0px;
   color:  #646464;
   font-family: 'Nanum Myeongjo', serif;
   border-bottom: 1px solid #646464;
 }
 
 .search-input input{
-  width: 100%;
+  width: 74%;
   height: 40px;
   font-size: 28px;
   border: none;
   transition: 0.5s;
   outline: none;
-  margin-top: 80px;
+  margin-top: 0px;
   padding-left: 30px; 
 }
 
 .search-result {
-  width: 60%;
+  width: 54%;
   padding: 60px;
 }
 
