@@ -1,18 +1,26 @@
 import React, { ReactElement } from "react";
 import { Link } from "react-router-dom"
-import { IBooks, IBook } from "../shared/Types";
-import { fetchBookSearch } from "./../shared/Fetch";
+import { connect } from 'react-redux';
+import { IBooks, IBook, IUserInfo,IBookReading } from "../shared/Types";
+import { fetchBookSearch} from "./../shared/Fetch";
 import "./SearchBook.css"
 
 interface IState {
   books: IBook[];
   title: string;
-  searchTitle : string;
+  searchTitle: string;
+  reading: IBookReading[];
+  to_read: IBookReading[];
 }
 
-class SearchBooks extends React.Component<{}, IState> {
-  constructor({}) {
-    super({});
+interface IProps {
+  reading: IBookReading[];
+  to_read: IBookReading[];
+}
+
+class SearchBooks extends React.Component<IProps, IState> {
+  constructor(props:any) {
+    super(props);
     this.state = {
       books: [
         {
@@ -24,8 +32,11 @@ class SearchBooks extends React.Component<{}, IState> {
           title: ""
         }
       ],
+      reading: this.props.reading,
+      searchTitle: "",
       title: '',
-      searchTitle : ""
+      to_read: this.props.to_read,
+      
     }
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.clickSearchButton = this.clickSearchButton.bind(this);
@@ -59,6 +70,21 @@ class SearchBooks extends React.Component<{}, IState> {
         );
       }
     );
+    const readingBook:ReactElement[] = this.state.reading.map(
+      (info: IBookReading) => {
+        return (
+          <div className="book-select">
+            <Link to = {`/book/${info.book._id}`}>
+            <img
+              src={info.book.thumbnail}
+              width="80px"
+              alt={`${info.book.title}`}
+            />
+            <div>{info.book.title}</div>
+            </Link>
+          </div>
+        )
+      })
     return (
       <div className = "search-book">
         <div className = "search-input">
@@ -73,7 +99,7 @@ class SearchBooks extends React.Component<{}, IState> {
         <button onClick={this.clickSearchButton}>검색</button>
         <div className="search-result">
           {this.state.searchTitle === "" ? 
-          null  :  
+          readingBook :  
           <h3 className = "search-result-title">{this.state.searchTitle}에 대한 책</h3>}
           {searchBookList}
         </div>
@@ -81,4 +107,12 @@ class SearchBooks extends React.Component<{}, IState> {
     )
   }
 }
-export default SearchBooks;
+
+const mapStateToProps = (state :any) :any => {
+  return {
+      reading: state.user.User.reading,
+      to_read: state.user.User.to_read
+  };
+}
+
+export default connect(mapStateToProps)(SearchBooks);
