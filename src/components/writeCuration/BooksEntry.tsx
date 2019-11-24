@@ -1,17 +1,16 @@
 import React, { ReactElement } from "react";
-import ReactHtmlParser from "react-html-parser";
 
 interface IBook {
   _id: string;
   thumbnail: string;
-  authors: string[];
+  authors: string;
   title: string;
-  contents: string;
 }
 
 interface IProps {
   book: IBook;
   deleteEvent: any;
+  isPlaceHolder: string;
 }
 
 class BooksEntry extends React.Component<IProps> {
@@ -28,16 +27,37 @@ class BooksEntry extends React.Component<IProps> {
   public render(): ReactElement {
     const { book } = this.props;
     return (
-      <div className="writecuration_books_bookentry">
+      <div
+        className={"writecuration_books_bookentry" + this.props.isPlaceHolder}
+      >
         <img
           src={book.thumbnail}
           alt={book.title}
           onClick={this.handleDelete}
+          style={{ width: "120px", height: "auto" }}
+          className="image"
         />
-        <div className="bookentry_title">{book.title}</div>
-        {book.authors.map(author =>
-          ReactHtmlParser(`<div className="bookentry_author">${author}</div>`)
-        )}
+        <div className="middle">
+          <span uk-icon="icon: close; ratio: 1.7" className="text"></span>
+        </div>
+        <div
+          className="bookentry_title"
+          style={{ width: "120px", textAlign: "center", marginTop: "10px" }}
+        >
+          <b>
+            {book.title.length < 10
+              ? book.title
+              : book.title.slice(0, 9) + ".."}
+          </b>
+        </div>
+        <div
+          className="bookentry_author"
+          style={{ width: "120px", textAlign: "center", marginBottom: "10px" }}
+        >
+          {book.authors.length < 10
+            ? book.authors
+            : book.authors.slice(0, 9) + ".."}
+        </div>
       </div>
     );
   }

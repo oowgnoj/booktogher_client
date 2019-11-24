@@ -10,6 +10,7 @@ import Signin from "./components/signin/Signin";
 import Mypage from "./components/mypage/index";
 import ReadReview from "./components/readReview/ReadReview";
 import PostReview from "./components/writeReview/ModalTest";
+import ReadCuration from "./components/readCuration/index";
 import PostCuration from "./components/writeCuration/index";
 
 const App: React.FC = (props: any): ReactElement => {
@@ -27,6 +28,7 @@ const App: React.FC = (props: any): ReactElement => {
         <Route path="/mypage" component={Mypage} />
         <Route path="/review/:id" component={ReadReview} />
         <Route path="/postreview" component={PostReview} />
+        <Route path="/curation/:id" component={ReadCuration} />
         <Route path="/postcuration" component={PostCuration} />
         <Route path="*" to="/" />
       </Switch>
