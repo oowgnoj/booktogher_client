@@ -14,7 +14,7 @@ export const fetchCuration = (callback: any, id: string): any => {
     {
       credentials: "include",
       headers: {
-        "Content-Type": "application/text"
+        "Content-Type": "application/json"
       },
       method: "GET"
     }
@@ -31,7 +31,7 @@ export const fetchBooks = (callback: any, id: string): any => {
     {
       credentials: "include",
       headers: {
-        "Content-Type": "application/text"
+        "Content-Type": "application/json"
       },
       method: "GET"
     }
@@ -48,7 +48,7 @@ export const fetchReviews = (callback: any, id: string): any => {
     {
       credentials: "include",
       headers: {
-        "Content-Type": "application/text"
+        "Content-Type": "application/json"
       },
       method: "GET"
     }
@@ -65,13 +65,19 @@ export const fetchDelete = (callback: any, id: string): any => {
     {
       credentials: "include",
       headers: {
-        "Content-Type": "application/text"
+        "Content-Type": "application/json"
       },
       method: "DELETE"
     }
   )
-    .then((response: Response) => callback())
-    .catch((err: Error) => callback());
+    .then((response: Response) => {
+      console.log("큐레이션 삭제 성공! , response", response);
+      callback();
+    })
+    .catch((err: Error) => {
+      console.log("큐레이션 삭제 실패! , err", err);
+      callback();
+    });
 };
 
 export const fetchPostCuration = (callback: any, body: ICurationsPost): any => {
@@ -81,7 +87,33 @@ export const fetchPostCuration = (callback: any, body: ICurationsPost): any => {
       body: JSON.stringify(body),
       credentials: "include",
       headers: {
-        "Content-Type": "application/text"
+        "Content-Type": "application/json"
+      },
+      method: "POST"
+    }
+  ).then((response: Response) => callback());
+};
+
+export const fetchDeleteLikes = (callback: any, id: string): any => {
+  return fetch(
+    `http://booktogether.ap-northeast-2.elasticbeanstalk.com/curations/${id}/likes`,
+    {
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "DELETE"
+    }
+  ).then((response: Response) => callback());
+};
+
+export const fetchPostLikes = (callback: any, id: string): any => {
+  return fetch(
+    `http://booktogether.ap-northeast-2.elasticbeanstalk.com/curations/${id}/likes`,
+    {
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
       },
       method: "POST"
     }

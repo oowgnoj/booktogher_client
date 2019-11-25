@@ -59,14 +59,18 @@ export const fetchReviews = (callback: any, id: string): any => {
     });
 };
 
-export const fetchEditCuration = (callback: any, body: ICurationsPost): any => {
+export const fetchEditCuration = (
+  callback: any,
+  id: string,
+  body: ICurationsPost
+): any => {
   return fetch(
-    "http://booktogether.ap-northeast-2.elasticbeanstalk.com/curations",
+    `http://booktogether.ap-northeast-2.elasticbeanstalk.com/curations/${id}`,
     {
       body: JSON.stringify(body),
       credentials: "include",
       headers: {
-        "Content-Type": "application/text"
+        "Content-Type": "application/json"
       },
       method: "PATCH"
     }

@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react";
 import { Redirect, Route } from "react-router-dom";
 import BooksList from "./BooksList";
+import ReviewsList from "./ReviewsList";
 import ReadCuration from "../readCuration/index";
 import "./index.css";
 import Books from "../mypage/books";
@@ -54,7 +55,22 @@ class WriteCuration extends React.Component<{}, IState> {
     this.state = {
       books: [{ _id: "", authors: "", thumbnail: "", title: "" }],
       contents: "",
-      reviews: [],
+      reviews: [
+        {
+          _id: "5dd5215165a18c467e20e20f",
+          author: {
+            _id: "5dd4dcee66195e1e807fabe5",
+            image: "",
+            name: "심경주",
+            profile: ""
+          },
+          contents: "<p>색 맘에 안드세요? 네? 괜찮나요? 고</p>",
+          likes: [],
+          published: true,
+          thumbnail: "#7bdcb5",
+          title: "배포 서평 떨린다!"
+        }
+      ],
       title: "",
       bookModal: false,
       reviewModal: false,
@@ -62,10 +78,12 @@ class WriteCuration extends React.Component<{}, IState> {
       curationId: ""
     };
     this.bookDelete = this.bookDelete.bind(this);
+    this.reviewDelete = this.reviewDelete.bind(this);
     this.handleTitle = this.handleTitle.bind(this);
     this.handleContent = this.handleContent.bind(this);
     this.handlePost = this.handlePost.bind(this);
     this.handleBookSelect = this.handleBookSelect.bind(this);
+    this.handleReviewSelect = this.handleReviewSelect.bind(this);
     this.addBooks = this.addBooks.bind(this);
   }
 
@@ -77,6 +95,16 @@ class WriteCuration extends React.Component<{}, IState> {
       }
     }
     this.setState({ books: currentBookList });
+  }
+
+  public reviewDelete(reviewId: string): void {
+    const currentReviewList: IReview[] = this.state.reviews.slice();
+    for (let i: number = 0; i < currentReviewList.length; i++) {
+      if (currentReviewList[i]._id === reviewId) {
+        currentReviewList.splice(i, 1);
+      }
+    }
+    this.setState({ reviews: currentReviewList });
   }
 
   public handleTitle(event: React.ChangeEvent<HTMLInputElement>): void {
@@ -92,6 +120,10 @@ class WriteCuration extends React.Component<{}, IState> {
 
   public handleBookSelect(): void {
     this.setState({ bookModal: true });
+  }
+
+  public handleReviewSelect(): void {
+    this.setState({ reviewModal: true });
   }
 
   public handlePost(): void {
@@ -175,6 +207,11 @@ class WriteCuration extends React.Component<{}, IState> {
           />
         </div>
         <div className="writecuration_review">
+          <ReviewsList
+            reviews={this.state.reviews}
+            deleteEvent={this.reviewDelete}
+            handleReviewSelect={this.handleReviewSelect}
+          />
           <span className="writecuration_review_btn"></span>
           <span className="writecuration_review_reviewlist">
             <div className="writecuration_review_reviewentry"></div>

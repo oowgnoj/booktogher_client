@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react";
 import { Redirect, Route, RouteComponentProps } from "react-router-dom";
 import BooksList from "./BooksList";
+import ReviewsList from "./ReviewsList";
 import ReadCuration from "../readCuration/index";
 import "./index.css";
 import Books from "../mypage/books";
@@ -49,7 +50,7 @@ interface IState {
   reviews: IReview[];
   bookModal: boolean;
   reviewModal: boolean;
-  isPosted: boolean;
+  isPatched: boolean;
   curationId: string;
 }
 
@@ -70,14 +71,16 @@ class WriteCuration extends React.Component<
       title: "",
       bookModal: false,
       reviewModal: false,
-      isPosted: false,
+      isPatched: false,
       curationId: ""
     };
     this.bookDelete = this.bookDelete.bind(this);
+    this.reviewDelete = this.reviewDelete.bind(this);
     this.handleTitle = this.handleTitle.bind(this);
     this.handleContent = this.handleContent.bind(this);
-    this.handlePost = this.handlePost.bind(this);
+    this.handlePatch = this.handlePatch.bind(this);
     this.handleBookSelect = this.handleBookSelect.bind(this);
+    this.handleReviewSelect = this.handleReviewSelect.bind(this);
     this.addBooks = this.addBooks.bind(this);
   }
 
@@ -107,6 +110,16 @@ class WriteCuration extends React.Component<
     this.setState({ books: currentBookList });
   }
 
+  public reviewDelete(reviewId: string): void {
+    const currentReviewList: IReview[] = this.state.reviews.slice();
+    for (let i: number = 0; i < currentReviewList.length; i++) {
+      if (currentReviewList[i]._id === reviewId) {
+        currentReviewList.splice(i, 1);
+      }
+    }
+    this.setState({ reviews: currentReviewList });
+  }
+
   public handleTitle(event: React.ChangeEvent<HTMLInputElement>): void {
     console.log("books 상태 궁금해!", this.state.books);
     const changingTitle: string = event.target.value;
@@ -122,7 +135,11 @@ class WriteCuration extends React.Component<
     this.setState({ bookModal: true });
   }
 
-  public handlePost(): void {
+  public handleReviewSelect(): void {
+    this.setState({ reviewModal: true });
+  }
+
+  public handlePatch(): void {
     const postBody: IBody = {
       title: this.state.title,
       contents: this.state.contents,
@@ -130,10 +147,10 @@ class WriteCuration extends React.Component<
       reviews: this.state.reviews.map((review: IReview) => review._id)
     };
     console.log("post 하는 body ?", postBody);
-    const getPostedId = (id: string): void =>
-      this.setState({ curationId: id, isPosted: true });
+    const getPatchedId = (id: string): void =>
+      this.setState({ curationId: id, isPatched: true });
 
-    fetchEditCuration(getPostedId, postBody);
+    fetchEditCuration(getPatchedId, this.props.match.params.id, postBody);
   }
 
   public addBooks = (selectedBooks: ISelectedBook): any => {
@@ -145,10 +162,11 @@ class WriteCuration extends React.Component<
   };
 
   public render(): ReactElement {
+    const { title, contents } = this.state;
     return (
       <div className="writecuration">
         {this.state.bookModal ? <Modal addBooks={this.addBooks} /> : null}
-        {this.state.isPosted ? (
+        {this.state.isPatched ? (
           <Redirect to={`/curation/${this.state.curationId}`} />
         ) : null}
         <div className="writecuration_header">
@@ -163,6 +181,7 @@ class WriteCuration extends React.Component<
                 border: "none",
                 fontSize: "50px"
               }}
+              value={title}
               onChange={this.handleTitle}
             />
           </span>
@@ -172,7 +191,7 @@ class WriteCuration extends React.Component<
           >
             <button
               className="uk-button uk-button-default"
-              onClick={this.handlePost}
+              onClick={this.handlePatch}
             >
               수정
             </button>
@@ -189,6 +208,7 @@ class WriteCuration extends React.Component<
               border: "none",
               fontSize: "20px"
             }}
+            value={contents}
             onChange={this.handleContent}
           />
         </div>
@@ -203,6 +223,11 @@ class WriteCuration extends React.Component<
           />
         </div>
         <div className="writecuration_review">
+          <ReviewsList
+            reviews={this.state.reviews}
+            deleteEvent={this.reviewDelete}
+            handleReviewSelect={this.handleReviewSelect}
+          />
           <span className="writecuration_review_btn"></span>
           <span className="writecuration_review_reviewlist">
             <div className="writecuration_review_reviewentry"></div>

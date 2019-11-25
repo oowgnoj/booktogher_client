@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Sidebar from "../sidebar/index";
 import Slider from "./RecoReviewSlider/index";
 import RecoReviewList from "./RecoReviewList";
-import RecoCollectionList from "./RecoCollectionList";
+import RecoCurationList from "./RecoCurationList";
 import { useDispatch } from "react-redux";
 import {
   updateReviewsRecommend,
@@ -110,9 +110,9 @@ class Main extends React.Component {
             </Link>
           </div>
           <div className="section curation" style={{ marginLeft: "50px" }}>
-            <Link to="/postreview">
+            <Link to="/postcuration">
               <h2 className="header" style={{ marginTop: "30px" }}>
-                컬렉션 등록하러 가기
+                큐레이션 등록하러 가기
                 <span
                   uk-icon="icon:pencil; ratio: 1.5"
                   style={{ marginLeft: "20px" }}
@@ -137,14 +137,20 @@ class Main extends React.Component {
         <div className="main_review_list_start">
           <RecoReviewList reviews={props.review.slice(1, 5)} />
           <RecoReviewList reviews={props.review.slice(1, 5)} />
-          <RecoReviewList reviews={props.review.slice(1, 5)} />
         </div>
         <div className="main_recocollection_div">
-          <span className="main_recocollection_title">
+          <div
+            className="main_recocollection_title"
+            style={{
+              marginBottom: "50px",
+              fontSize: "30px",
+              fontFamily: "Song Myung, serif"
+            }}
+          >
             서로모임에 오신 분들께서 작성해주신 컬렉션입니다.
-          </span>
+          </div>
         </div>
-        <RecoCollectionList collections={props.curation.slice(1, 5)} />
+        <RecoCurationList curations={props.curation.slice(1, 5)} />
       </div>
     );
   }

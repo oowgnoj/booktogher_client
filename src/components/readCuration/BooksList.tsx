@@ -24,9 +24,18 @@ class BooksList extends React.Component<IProps> {
         className="readCuration_bookslist"
         style={{ backgroundColor: "#ebebeb" }}
       >
-        {this.props.books.map((book: IBook, index: number) => {
-          return <BooksEntry book={book} key={index} />;
-        })}
+        <div
+          className="writecuration_books_booklist_wrapper"
+          style={{
+            display: "flex",
+            paddingLeft: "280px",
+            paddingTop: "30px"
+          }}
+        >
+          {this.props.books.map((book: IBook, index: number) => {
+            return <BooksEntry book={book} key={index} />;
+          })}
+        </div>
       </div>
     );
   }
