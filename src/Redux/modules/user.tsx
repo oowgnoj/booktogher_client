@@ -1,5 +1,10 @@
 import { handleActions } from "redux-actions";
-import IState, { IUserInfoOnly, IUserInfo, initialState } from "../Types";
+import IState, {
+  IUserInfoOnly,
+  IUserInfo,
+  initialState,
+  IUserEditInfo
+} from "../Types";
 
 const LOGIN_PENDING: string = "login/PENDING_LOGIN";
 const LOGIN_SUCCESS: string = "login/SUCCESS_LOGIN";
@@ -54,12 +59,29 @@ function getInfoAPI(): Promise<Response> {
   });
 }
 
-function updateInfoAPI(userInfo: IUserInfoOnly): Promise<Response> {
-  return fetch("http://localhost:3000/user", {
-    body: JSON.stringify(userInfo),
+function updateInfoAPI(data: IUserEditInfo): Promise<Response> {
+  console.log(data);
+  return fetch("http://booktogether.ap-northeast-2.elasticbeanstalk.com/user", {
     credentials: "include",
-    method: "PATCH"
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "PATCH",
+    body: JSON.stringify(data)
   });
+  // const file = new FormData();
+  // file.append("name", data.name);
+  // file.append("email", data.email);
+  // file.append("profile", data.profile);
+
+  // return fetch("http://booktogether.ap-northeast-2.elasticbeanstalk.com/user", {
+  //   body: file,
+  //   credentials: "include",
+  //   headers: {
+  //     "Content-Type": "multipart/form-data"
+  //   },
+  //   method: "PATCH"
+  // });
 }
 
 // function updateUserBookAPI(userBook: IUserBookOnly): Promise<Response> {
@@ -135,11 +157,11 @@ export const requestUserInfo = (): any => (dispatch: any): Promise<void> => {
     });
 };
 
-// * UPDATE user information  *
-
-export const updateUserInfo = (userInfo: IUserInfoOnly): any => (
+// * 마이페이지 UPDATE user information *
+export const updateUserInfo = (userInfo: IUserEditInfo): any => (
   dispatch: any
 ): Promise<void> => {
+  console.log("herer");
   dispatch({ type: UPDATEINFO_PENDING });
 
   return updateInfoAPI(userInfo)
@@ -151,6 +173,7 @@ export const updateUserInfo = (userInfo: IUserInfoOnly): any => (
       });
     })
     .catch((err: Response) => {
+      console.log(err);
       dispatch({
         payload: err,
         type: UPDATEINFO_FAILURE
@@ -259,7 +282,7 @@ export default handleActions(
     [UPDATEINFO_FAILURE]: (state: IState, action: any): IState => {
       return {
         ...state,
-        error: action.payload.err.error.message,
+        // error: action.payload.err.error.message,
         pending: false
       };
     }
