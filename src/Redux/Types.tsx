@@ -48,6 +48,12 @@ export interface IUserInfoOnly {
   numReviewsGoal: number;
 }
 
+export interface IUserEditInfo {
+  name: string;
+  email: string;
+  profile: string;
+}
+
 interface IUserBookOnly {
   to_read: IToRead[];
   reading: IBookReading[];
