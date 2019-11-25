@@ -1,5 +1,6 @@
-import { IBookSearch } from "./Types";
-import { IReviews } from "./Types";
+
+import { IBookSearch, IReviewSearch, IReviews } from "./Types";
+
 
 const url: string = "http://booktogether.ap-northeast-2.elasticbeanstalk.com";
 
@@ -10,6 +11,7 @@ export const fetchBookSearch = (callback: any, title: string): any => {
       callback(res.books);
     });
 };
+
 export const fetchReview = (callback?: any, id?: string): any => {
   fetch(
     `http://booktogether.ap-northeast-2.elasticbeanstalk.com/reviews?list_type=personal`,
@@ -22,3 +24,14 @@ export const fetchReview = (callback?: any, id?: string): any => {
       callback(res);
     });
 };
+
+
+export const fetchReviewSearch = (callback: any, title: string): any => {
+  fetch(`${url}/reviews/search?query=${title}`)
+    .then((res: Response) => res.json())
+    .then((res: IReviewSearch) => {
+      callback(res.reviews);
+    });
+};
+
+

@@ -5,11 +5,13 @@ import ReactQuill, { Quill } from "react-quill";
 import { TwitterPicker } from "react-color";
 import "react-quill/dist/quill.snow.css";
 import "./writePost.css";
-import { fetchPostReview } from "./fetchWrite";
+import { fetchPostReview, fetchBookRating } from "./fetchWrite";
 import ReadReview from "../readReview/ReadReview";
 
 interface IState {
   body: IWrite;
+  colorPicker : boolean;
+  rating: number;
   redirect: boolean;
   reviewId: string;
 }
@@ -37,6 +39,8 @@ class WritePost extends React.Component<IProps, IState> {
         thumbnail: "#eeeeee",
         title: ""
       },
+      colorPicker : false,
+      rating: 0,
       redirect: false,
       reviewId: ""
     };
@@ -44,6 +48,9 @@ class WritePost extends React.Component<IProps, IState> {
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.handleClickPublished = this.handleClickPublished.bind(this);
     this.clickPostSubmit = this.clickPostSubmit.bind(this);
+    this.clickPaintBucket = this.clickPaintBucket.bind(this);
+    this.handlePublished = this.handlePublished.bind(this);
+    this.handleChangeRating = this.handleChangeRating.bind(this)
   }
 
   public handleChangePost(value: string): void {
@@ -70,27 +77,55 @@ class WritePost extends React.Component<IProps, IState> {
     this.setState({ body: { ...this.state.body, thumbnail: color.hex } });
   };
 
-  public clickPostSubmit(): any {
-    const redirectReview = (id: string): any => {
-      this.setState({ reviewId: id });
-      this.setState({ redirect: true });
-    };
-    fetchPostReview(redirectReview, this.state.body);
+
+  public clickPaintBucket(): void {
+    this.setState({
+      colorPicker : !this.state.colorPicker
+    })
+
+  }
+ 
+  public handlePublished(): void {
+    this.setState({
+      body: {
+        ...this.state.body,
+        published: !this.state.body.published
+      }
+    })
   }
 
-  public render() {
-    const publishedFalse: string = "공개";
-    const publishedTrue: string = "비공개";
+  public handleChangeRating(e: any): void{
+    this.setState({
+      rating: e.target.value
+    })
+  }
+
+  public clickPostSubmit(): void {
+    const redirectReview = (id : string) : any =>{
+      this.setState({reviewId : id})
+      this.setState({redirect: true })
+    }
+    const postRating ={
+      book : this.state.body.books[0],
+      rating: this.state.rating
+    }
+    fetchPostReview(redirectReview, this.state.body)
+    fetchBookRating(postRating)
+  }
+
+  public render(): any {
+    console.log(this.state.rating)
+
     const style = {
-      backgroundColor: this.state.body.thumbnail
-    };
+      backgroundColor : this.state.body.thumbnail
+    }
 
     return (
       <div className="write-area">
         {this.state.redirect ? (
           <Redirect to={`/review/${this.state.reviewId}`} />
         ) : null}
-        <div>{this.props.bookTitle}</div>
+
         <div className="write-title-area" style={style}>
           <input
             type="text"
@@ -101,13 +136,26 @@ class WritePost extends React.Component<IProps, IState> {
           ></input>
 
           <div className="submit">
-            <button>비공개</button>
-            <button onClick={this.clickPostSubmit}>등록</button>
-            <TwitterPicker
-              color={this.state.body.thumbnail}
-              onChangeComplete={this.handleChangeComplete}
-            />
+            <span uk-icon="paint-bucket" className="uk-button uk-button-default paint-bucket" onClick = {this.clickPaintBucket}></span>
+              
+            {this.state.body.published ? 
+            <span uk-icon="unlock" className="uk-button uk-button-default unlock" onClick = {this.handlePublished}>공개</span>
+            : <span uk-icon="lock" className="uk-button uk-button-default lock" onClick = {this.handlePublished}>비공개</span>}
+            <button className ="uk-button uk-button-default"onClick={this.clickPostSubmit}>등록</button>
+
+            {this.state.colorPicker ? 
+              <TwitterPicker
+                color={this.state.body.thumbnail}
+                onChangeComplete={this.handleChangeComplete} 
+              /> : null }
+            
           </div>
+        </div>
+
+        <div className ="rating-box">
+          {this.props.bookTitle} : 
+          평점을 입력해주세요
+          <input type="number" onChange={this.handleChangeRating}></input> /10
         </div>
 
         <div className="write-post">
