@@ -1,0 +1,23 @@
+.readCuration {
+  padding-top: 150px;
+}
+
+.readCuration_header {
+  padding-left: 300px;
+  padding-right: 300px;
+}
+
+.readCuration_contents {
+  padding-left: 300px;
+  padding-right: 300px;
+}
+
+.readCuration_bookslist {
+  display: table;
+  width: 100%;
+}
+
+.readcuration_bookentry {
+  margin-right: 80px;
+  position: relative;
+}
