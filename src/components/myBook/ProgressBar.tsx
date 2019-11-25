@@ -5,7 +5,7 @@ interface IProps {
   UserInfo: IUserInfo;
 }
 const ProgressBar: React.FC<IProps> = ({ UserInfo }): ReactElement => {
-  const barStyle: object = { width: "30%", display: "inline-blodk" };
+  const barStyle: object = { width: "50%", display: "inline-block" };
   const [bookGoal, setBookGoal] = useState<number>(10);
   const [essayGoal, setEssayGoal] = useState<number>(10);
 
@@ -18,8 +18,9 @@ const ProgressBar: React.FC<IProps> = ({ UserInfo }): ReactElement => {
   };
 
   return (
-    <div>
-      <h3>독서 목표</h3>
+    <div style={{ textAlign: "center" }}>
+      <p style={{ width: "50%", display: "inline-block" }}>독서 목표</p>
+      <p style={{ width: "50%", display: "inline-block" }}>서평 목표</p>
       <progress
         id="js-progressbar"
         className="uk-progress"
@@ -27,8 +28,6 @@ const ProgressBar: React.FC<IProps> = ({ UserInfo }): ReactElement => {
         max="100"
         style={barStyle}
       ></progress>
-      <button onClick={() => handleBookGoal}>changeGoal</button>
-      <h3>서평 목표</h3>
       <progress
         id="js-progressbar"
         className="uk-progress"
@@ -36,7 +35,29 @@ const ProgressBar: React.FC<IProps> = ({ UserInfo }): ReactElement => {
         max="50"
         style={barStyle}
       ></progress>
-      <button onClick={() => handleEssayGoal}>changeGoal</button>
+      <div
+        className="Wrapper_button"
+        style={{ width: "50%", display: "inline-block" }}
+      >
+        <button
+          className="uk-button uk-button-text"
+          onClick={() => handleBookGoal}
+        >
+          change Goal
+        </button>
+      </div>
+
+      <div
+        className="Wrapper_button"
+        style={{ width: "50%", display: "inline-block" }}
+      >
+        <button
+          className="uk-button uk-button-text"
+          onClick={() => handleBookGoal}
+        >
+          change Goal
+        </button>
+      </div>
     </div>
   );
 };

@@ -77,6 +77,7 @@ class WritePost extends React.Component<IProps, IState> {
     this.setState({ body: { ...this.state.body, thumbnail: color.hex } });
   };
 
+
   public clickPaintBucket(): void {
     this.setState({
       colorPicker : !this.state.colorPicker
@@ -118,6 +119,7 @@ class WritePost extends React.Component<IProps, IState> {
     const style = {
       backgroundColor : this.state.body.thumbnail
     }
+
     return (
       <div className="write-area">
         {this.state.redirect ? (

@@ -16,6 +16,7 @@ interface IState {
   to_read: IBookReading[];
 }
 
+
 interface IProps {
   reading: IBookReading[];
   to_read: IBookReading[];
@@ -31,6 +32,7 @@ class BookSelect extends React.Component<IProps, IState> {
         contents: "",
         thumbnail: "",
         title: ""
+
         }
       ],
       isOpen: true,
@@ -58,8 +60,10 @@ class BookSelect extends React.Component<IProps, IState> {
   }
 
 
+
   public clickSelectedBook(e:any): void{
     const idTitle: any = e.target.alt.split(":")
+
     this.setState({
       selectBooksId: this.state.selectBooksId.concat([idTitle[0]]),
       selectBooksTitle: this.state.selectBooksTitle.concat([idTitle[1]])
@@ -71,6 +75,7 @@ class BookSelect extends React.Component<IProps, IState> {
       isOpen: !this.state.isOpen
     });
   }
+
 
   public render() : ReactElement{
     const searchBookList: ReactElement[]= this.state.books.map((info: IBook)=>{
@@ -88,6 +93,7 @@ class BookSelect extends React.Component<IProps, IState> {
 
     const selectBookId :string[] = this.state.selectBooksId.slice(1)
     const selectBookTitle :string[] = this.state.selectBooksTitle.slice(1)
+
 
     const readingBook:ReactElement[] = this.state.reading.map(
       (info: IBookReading) => {

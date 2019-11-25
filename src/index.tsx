@@ -10,9 +10,6 @@ import "../node_modules/uikit/dist/js/uikit-icons.min.js";
 import { Provider } from "react-redux";
 import Store from "./Redux/configureStore";
 
-Store.subscribe(() => {
-  console.log(Store.getState());
-});
 ReactDOM.render(
   <Provider store={Store}>
     <App />

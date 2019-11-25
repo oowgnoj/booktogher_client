@@ -1,0 +1,24 @@
+.content-holder {
+  height: 250px;
+  width: 120px;
+  padding: 10px;
+  margin-bottom: 30px;
+  display: inline-block;
+  vertical-align: top;
+}
+.book-image {
+  width: 120px;
+  height: 174px;
+  margin-bottom: 0px;
+  padding-bottom: 0;
+}
+.title-text {
+  font-size: 20px;
+  margin-bottom: 0;
+  height: 50px;
+  text-align: center;
+}
+.author-text {
+  font-size: 15px;
+  text-align: center;
+}
