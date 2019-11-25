@@ -12,10 +12,18 @@
   word-spacing: 1px;
   line-height: 2;
 }
-.title-area {
+
+.review-cover{
   width: 100%;
-  padding: 200px 0px 40px 0px;
+  height: 340px;
   background-color: #eeeeee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title-area {
+  width: 54%;
+  padding: 200px 0px 40px 0px;
   color:  #212121;
   font-family: 'Nanum Myeongjo', serif;
 }
@@ -47,3 +55,18 @@
   padding: 0;
   margin: 0;
 }
+
+.heart {
+  cursor: pointer;
+  color : red;
+}
+
+.heartLike {
+  cursor: pointer;
+  color : red
+}
+.heartLike path {
+  fill : red;
+}
+
+

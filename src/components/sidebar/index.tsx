@@ -62,7 +62,6 @@ class Sidebar extends React.Component {
   // };
 
   public render(): ReactElement {
-    console.log("사이드바 랜더링 때문에 this.props 찍어보는 중", this.props);
     const props: any = this.props;
     const greeting: React.ReactElement = props.User.User._id ? (
       <UserGreeting />
