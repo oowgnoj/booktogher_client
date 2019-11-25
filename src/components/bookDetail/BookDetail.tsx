@@ -1,8 +1,8 @@
 import React, { ReactElement } from "react";
 import { withRouter, RouteComponentProps } from "react-router";
-import { IBookDetail } from "../shared/Types";
-import { fetchBookDetail } from "./fetchBookdetail";
-import BookInfo from './BookInfo'
+import { IBookDetail, IRating } from "../shared/Types";
+import { fetchBookDetail, fetchBookRating } from "./fetchBookdetail";
+import BookInfo from "./BookInfo";
 import BookReview from "./BookReview";
 import "./BookDetail.css";
 
@@ -11,7 +11,8 @@ interface IMatchParams {
 }
 
 interface IState {
-  bookInfo : IBookDetail
+  bookInfo : IBookDetail;
+  ratings: IRating[];
 }
 
 class BookDetail extends React.Component<RouteComponentProps<IMatchParams>,IState> {
@@ -32,14 +33,26 @@ class BookDetail extends React.Component<RouteComponentProps<IMatchParams>,IStat
         title: "",
         translators: [ "" ],
         url: "",
-      }     
+      },
+      ratings: [ { 
+        book: "", // book id
+        avg_rating: 0,
+        user_rating: {
+          _id: "", // rating id
+          rating: 0
+        }
+      }]  
     }
   }
   public componentDidMount(): void {
     const setStateBook = (res: any): void => {
       this.setState({ bookInfo: res });
     };
+    const setStateRating = (res: any): void => {
+      this.setState({ ratings: res });
+    };
     fetchBookDetail(setStateBook, this.props.match.params.id);
+    fetchBookRating(setStateRating, this.props.match.params.id)
   }
 
   public render(): ReactElement {
