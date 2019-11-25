@@ -1,7 +1,29 @@
-.main_slider_image img {
-  display: inline;
+.main_slider {
+  margin-bottom: 0px;
+  height: 680px;
+  width: 100%;
+  background-color: rgb(247, 246, 246);
+}
+
+.main_slider_image {
+  float: left;
+  margin-right: 30px;
+}
+
+.main_slider h3 {
+  font-size: 60px;
+  font-family: "Song Myung", serif;
+  text-align: center;
+}
+
+.main_slider p {
+  text-align: center;
 }
 
 .main_slider_paper {
   display: inline;
+}
+
+.uk-card uk-card-body {
+  margin-left: 100px;
 }

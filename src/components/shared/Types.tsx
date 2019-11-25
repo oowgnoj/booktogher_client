@@ -71,7 +71,6 @@ interface ISearchBook {
 export interface IBook {
   _id: string;
   authors: string[];
-  rating: number;
   contents: string;
   thumbnail: string;
   title: string;
@@ -139,7 +138,7 @@ export interface IReviewLike {
 }
 
 export interface IReviewWithBooks {
-  id: string;
+  _id: string;
   author: IAuthor;
   title: string;
   books: IBook[];
@@ -173,6 +172,13 @@ export interface ICurations {
 }
 
 // curations POST 부분은 2차 배포 진행하며 더 수정될 수 있어 보여서 우선 생략함
+
+export interface ICurationsPost {
+  books: string[];
+  contents: string;
+  reviews: string[];
+  title: string;
+}
 
 // ratings
 

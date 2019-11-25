@@ -1,5 +1,37 @@
 .main {
-  background-color: rgb(247, 247, 243);
+  padding-top: 150px;
+  padding-left: 300px;
+  padding-right: 300px;
+}
+/* 
+.parallax {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+} */
+
+.section :hover {
+  text-decoration: none;
+}
+
+.section_wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.section {
+  display: inline-block;
+}
+
+.section h2 {
+  font-family: "Song Myung", serif;
+}
+
+.main_recocollection_div {
+  text-align: center;
+}
+
+.main_recocollection_title {
+  display: inline-block;
 }
 
 .main_review_entry_content {
@@ -10,6 +42,10 @@
   color: "gray";
 }
 
+.main_review_list_start {
+  margin-top: 40px;
+}
+
 .main_review_list {
   display: flex;
   flex-direction: row;
@@ -17,4 +53,12 @@
 
 .main_review_list_review {
   flex: 1 1 auto;
+}
+
+.parallax-container {
+  height: 180px;
+}
+
+#parallax_bottom {
+  height: 600px;
 }
