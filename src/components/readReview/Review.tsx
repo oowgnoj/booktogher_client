@@ -1,6 +1,13 @@
 import React, { ReactElement } from "react";
-import { IProps, IReview, IReviewProps, IBook } from "./reviewInterface";
+import { IReview, IReviewProps, IBook } from "./reviewInterface";
+import { connect } from "react-redux";
 import "./Review.css";
+
+export interface IProps {
+  review: IReview;
+  bookList: IBook[];
+  user : any;
+}
 
 interface IState{
   likes: boolean;
@@ -12,18 +19,23 @@ class Review extends React.Component< IProps, IState> {
     super(props)
     this.state ={
       edit : false,
-      likes :false  
+      likes: false  
     }
     this.onClickLike = this.onClickLike.bind(this)
   }
   public onClickLike(): void{
     this.setState({ likes : !this.state.likes})
   }
+
+  public componentDidMount(){
+    console.log(this.props.user)
+
+  }
   public render(): ReactElement {
     const { bookList, review } = this.props
     const bookTitle: JSX.Element[] = bookList.map((info: IBook) => {
       return (
-        <div>
+        <div key ={info._id}>
           <b>
             책 : {info.title} : 평점 {info.rating} 도{" "}
           </b>
@@ -61,4 +73,10 @@ class Review extends React.Component< IProps, IState> {
   }
 };
 
-export default Review;
+function mapStateToProps(state: any): any {
+  return {
+    user: state.user.User
+  };
+}
+
+export default connect(mapStateToProps,null)(Review);
