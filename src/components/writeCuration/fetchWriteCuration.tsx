@@ -2,7 +2,7 @@ import { IBook, ICuration, ICurationsPost } from "../shared/Types";
 
 export const fetchPostCuration = (callback: any, body: ICurationsPost): any => {
   return fetch(
-    "http://booktogether.ap-northeast-2.elasticbeanstalk.com//curations",
+    "http://booktogether.ap-northeast-2.elasticbeanstalk.com/curations",
     {
       body: JSON.stringify(body),
       credentials: "include",

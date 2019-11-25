@@ -150,7 +150,6 @@ export interface ICuration {
   author: IAuthor;
   contents: string;
   likes: string[];
-  published: boolean;
   title: string;
 }
 
