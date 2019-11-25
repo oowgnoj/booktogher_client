@@ -13,6 +13,42 @@ interface IBook {
   title: string;
 }
 
+interface IReview {
+  _id: string;
+  author: IAuthor;
+  contents: string;
+  likes: string[];
+  published: boolean;
+  thumbnail: string;
+  title: string;
+}
+
+interface IAuthor {
+  _id: string;
+  image: string;
+  name: string;
+  profile: string;
+}
+
+export const placeholdersReview: IReview[] = [
+  {
+    _id: "ObjectId",
+    author: {
+      _id: "12345",
+      image:
+        "https://icons-for-free.com/iconfiles/png/128/anonymous+app+contacts+open+line+profile+user+icon-1320183042822068474.png",
+      name: "정승권",
+      profile: "저는 이런..."
+    },
+    contents:
+      "인간은 변할 수 있고, 누구나 행복해 질 수 있다. 그렇다 서평 테스트 길게 들어가면 더 좋을 것 같다.",
+    likes: ["userid1", "userid2"],
+    published: true,
+    thumbnail: "blue",
+    title: "미움받을 용기에 대해"
+  }
+];
+
 export const placeholders: IBook[] = [
   {
     _id: "1",

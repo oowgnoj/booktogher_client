@@ -8,6 +8,7 @@ import Main from "./components/main/index";
 import Signup from "./components/signup/Signup";
 import Signin from "./components/signin/Signin";
 import Mypage from "./components/mypage";
+import BookDetail from "./components/bookDetail/BookDetail";
 import ReadReview from "./components/readReview/ReadReview";
 import PostReview from "./components/writeReview/ModalTest";
 import ReadCuration from "./components/readCuration/index";
@@ -17,7 +18,6 @@ import Myreview from "./components/myReview";
 import MyBook from "./components/myBook";
 import MyCuration from "./components/myCuration";
 import MyLikes from "./components/myLikes";
-
 
 const App: React.FC = (props: any): ReactElement => {
   useEffect(() => {
@@ -32,6 +32,7 @@ const App: React.FC = (props: any): ReactElement => {
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
         <Route path="/mypage" component={Mypage} />
+        <Route path="/book/:id" component={BookDetail} />
         <Route path="/review/:id" component={ReadReview} />
         <Route path="/postreview" component={PostReview} />
         <Route path="/curation/:id" component={ReadCuration} />

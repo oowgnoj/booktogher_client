@@ -3,15 +3,17 @@ import { connect } from "react-redux";
 import { requestUserInfo } from "../../Redux/modules/user";
 import { Redirect, Route, RouteComponentProps, Link } from "react-router-dom";
 import BooksList from "./BooksList";
+import ReviewsList from "./ReviewsList";
 import { IAuthor, ICuration, IReview } from "../shared/Types";
 import { string } from "prop-types";
 import {
   fetchCuration,
   fetchBooks,
   fetchReviews,
-  fetchDelete
+  fetchDelete,
+  fetchDeleteLikes,
+  fetchPostLikes
 } from "./fetchReadCuration";
-import { fetchBookReviewList } from "../readReview/fetchReview";
 import "./index.css";
 
 interface IBook {
@@ -82,6 +84,24 @@ class ReadCuration extends React.Component<IParams, IState> {
   }
 
   public handleLikes(): void {
+    const newCuration: ICuration = this.state.curation;
+    const newLikesList: string[] = this.state.curation.likes.slice();
+    if (this.state.curation.likes.includes(this.props.userId)) {
+      const deleteLikes = (): void => {
+        const userIndex: number = newLikesList.indexOf(this.props.userId);
+        newLikesList.splice(userIndex, 1);
+        newCuration.likes = newLikesList;
+        this.setState({ curation: newCuration });
+      };
+      fetchDeleteLikes(deleteLikes, this.props.match.params.id);
+    } else {
+      const postLikes = (): void => {
+        newLikesList.push(this.props.userId);
+        newCuration.likes = newLikesList;
+        this.setState({ curation: newCuration });
+      };
+      fetchPostLikes(postLikes, this.props.match.params.id);
+    }
     // 만약 state 의 likes 에 로그인한 유저의 likes 아이디가 포함되어 있다면
     // delete 요청을 보내고 하트 비우기, 내가 state likes 에서 아이디 지우기
     // 아이디가 없다면 Post 요청을 보내고 내가 스태이트 likes 에 아이디 채워넣고 하트 채우기
@@ -93,7 +113,11 @@ class ReadCuration extends React.Component<IParams, IState> {
     const { curation, books, reviews } = this.state;
     return (
       <div className="readCuration">
-        {console.log(this.props)};
+        {console.log("큐레이션 읽기 props.userId ? ", this.props.userId)}
+        {console.log(
+          "큐레이션 읽기 curation.likes 에 있는지 ? ",
+          curation.likes.includes(this.props.userId)
+        )}
         {this.state.isDeleted ? <Redirect to="/" /> : null}
         <div
           className="readCuration_header_likes"
@@ -106,20 +130,17 @@ class ReadCuration extends React.Component<IParams, IState> {
         >
           {curation.likes.includes(this.props.userId) ? (
             <span
-              uk-icon="icon: heart; ratio: 1.3"
+              uk-icon="icon: heart; ratio: 1.5"
               onClick={this.handleLikes}
-              style={{ fill: "red" }}
+              className="heart"
             ></span>
           ) : (
             <span
-              uk-icon="icon: heart; ratio: 1.3"
+              uk-icon="icon: heart; ratio: 1.5"
               onClick={this.handleLikes}
             ></span>
           )}
-          <span
-            uk-icon="icon: heart; ratio: 1.3"
-            onClick={this.handleLikes}
-          ></span>
+
           <span style={{ marginLeft: "13px", fontSize: "20px" }}>
             {curation.likes ? curation.likes.length : "좋아요 수"}
           </span>
@@ -183,14 +204,7 @@ class ReadCuration extends React.Component<IParams, IState> {
           {curation.contents ? curation.contents : "큐레이션 본문"}
         </div>
         <BooksList books={books} />
-        <div className="readCuration_reviewlist">
-          <div className="readCuration_reviewentry">
-            <div className="readCuration_reviewentry_userimage"></div>
-            <div className="readCuration_reviewentry_username"></div>
-            <div className="readCuration_reviewentry_title"></div>
-            <div className="readCuration_reviewentry_content"></div>
-          </div>
-        </div>
+        <ReviewsList reviews={reviews} />
       </div>
     );
   }

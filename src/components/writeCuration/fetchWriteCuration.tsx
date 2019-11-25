@@ -7,7 +7,7 @@ export const fetchPostCuration = (callback: any, body: ICurationsPost): any => {
       body: JSON.stringify(body),
       credentials: "include",
       headers: {
-        "Content-Type": "application/text"
+        "Content-Type": "application/json"
       },
       method: "POST"
     }

@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import RecoCollectionEntry from "./RecoCollectionEntry";
+import RecoCurationEntry from "./RecoCurationEntry";
 
 interface IAuthor {
   _id: string;
@@ -8,7 +8,7 @@ interface IAuthor {
   profile: string;
 }
 
-interface ICollection {
+interface ICuration {
   _id: string;
   author: IAuthor;
   content: string;
@@ -18,15 +18,15 @@ interface ICollection {
 }
 
 interface IProps {
-  collections: ICollection[];
+  curations: ICuration[];
 }
 
-const RecoCollectionList: React.SFC<IProps> = ({
-  collections
+const RecoCurationList: React.SFC<IProps> = ({
+  curations
 }: IProps): ReactElement => {
-  const collectionList: React.ReactElement[] = collections.map(
-    (collection: ICollection, index: number) => (
-      <RecoCollectionEntry collection={collection} key={index} />
+  const collectionList: React.ReactElement[] = curations.map(
+    (curation: ICuration, index: number) => (
+      <RecoCurationEntry curation={curation} key={index} />
     )
   );
   return (
@@ -38,4 +38,4 @@ const RecoCollectionList: React.SFC<IProps> = ({
   );
 };
 
-export default RecoCollectionList;
+export default RecoCurationList;

@@ -21,3 +21,13 @@
   margin-right: 80px;
   position: relative;
 }
+
+.heart {
+  color: #f34e4ee7;
+  fill: #f34e4ee7;
+}
+
+.heart path {
+  fill: #f34e4ee7;
+  color: #f34e4ee7;
+}
