@@ -14,8 +14,8 @@ export interface IBookToRead {
 
 export interface IBookReading {
   book: IUserBook;
-  start: string;
-  goal: string;
+  start?: string;
+  goal?: string;
 }
 export interface IBookFinished {
   book: IUserBook;
@@ -35,6 +35,20 @@ export interface IUserInfo {
   finished: IBookFinished[];
   numBooksGoal: number;
   numReviewsGoal: number;
+}
+
+interface ISimple_toRead {
+  book: string;
+}
+interface ISimple_reading {
+  book: string;
+  start: string;
+  goal: string;
+}
+interface ISimple_finished {
+  book: string;
+  start: string;
+  end: string;
 }
 
 // book
@@ -57,7 +71,6 @@ interface ISearchBook {
 export interface IBook {
   _id: string;
   authors: string[];
-  rating: number;
   contents: string;
   thumbnail: string;
   title: string;
@@ -125,7 +138,7 @@ export interface IReviewLike {
 }
 
 export interface IReviewWithBooks {
-  id: string;
+  _id: string;
   author: IAuthor;
   title: string;
   books: IBook[];

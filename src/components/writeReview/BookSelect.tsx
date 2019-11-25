@@ -1,6 +1,8 @@
 import React, { ReactElement } from "react";
 import { IBookState, IBook } from "./writeInterface";
+import { IBookReading } from "../shared/Types";
 import { fetchBookSearch } from "./fetchWrite";
+import { connect } from 'react-redux';
 import WritePost from "./WritePost";
 import "./Modal.scss";
 
@@ -10,37 +12,35 @@ interface IState {
   selectBooksId: string[];
   selectBooksTitle: string[];
   isOpen: boolean;
+  reading: IBookReading[];
+  to_read: IBookReading[];
 }
 
-class BookSelect extends React.Component<{}, IState> {
-  constructor({}) {
-    super({});
+
+interface IProps {
+  reading: IBookReading[];
+  to_read: IBookReading[];
+}
+
+class BookSelect extends React.Component<IProps, IState> {
+  constructor(props: any) {
+    super(props);
     this.state = {
-
       books :[{
-        _id: 'book-id1',
-        authors: [ '이모양' ],
-        contents: '타입스크립트와의 싸움을 펼치는 이야기이다',
-        rating: 3,
-        thumbnail: 'http://image.kyobobook.co.kr/images/book/large/598/l9788936433598.jpg',
-        title: '채식주의자'
-
-        },
-        {
-          _id: "book-id2",
-          authors: ["이기기"],
-          contents: "리액크 퀼에 대하여 공부해봅시다",
-          rating: 4,
-
-          thumbnail: 'http://image.kyobobook.co.kr/images/book/large/304/l9791196814304.jpg',
-          title: '너에게만 좋은 사람이 되고 싶어'
+        _id: "",
+        authors: [ "" ],
+        contents: "",
+        thumbnail: "",
+        title: ""
 
         }
       ],
-      title: "",
+      isOpen: true,
+      reading: this.props.reading,
       selectBooksId: [""],
       selectBooksTitle: [""],
-      isOpen: true
+      title: "",
+      to_read: this.props.to_read,
     };
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.clickSearchButton = this.clickSearchButton.bind(this);
@@ -60,9 +60,9 @@ class BookSelect extends React.Component<{}, IState> {
   }
 
 
-  public clickSelectedBook(e:any) : void{
-    const idTitle = e.target.alt.split(":")
-    console.log('idtitle', idTitle)
+
+  public clickSelectedBook(e:any): void{
+    const idTitle: any = e.target.alt.split(":")
 
     this.setState({
       selectBooksId: this.state.selectBooksId.concat([idTitle[0]]),
@@ -85,7 +85,7 @@ class BookSelect extends React.Component<{}, IState> {
             src = {info.thumbnail}
             width ="100px" 
             alt ={`${info._id}:${info.title}`}
-            onClick = {(e)=> this.clickSelectedBook(e)}/>
+            onClick = {(e): void=> this.clickSelectedBook(e)}/>
           <div>{info.title}</div>
         </div>
       )
@@ -93,8 +93,22 @@ class BookSelect extends React.Component<{}, IState> {
 
     const selectBookId :string[] = this.state.selectBooksId.slice(1)
     const selectBookTitle :string[] = this.state.selectBooksTitle.slice(1)
-  
 
+
+    const readingBook:ReactElement[] = this.state.reading.map(
+      (info: IBookReading) => {
+        return (
+          <div className="book-select" key ={info.book._id}>           
+            <img
+              src={info.book.thumbnail}
+              width="100px"
+              alt ={`${info.book._id}:${info.book.title}`}
+              onClick = {(e): void=> this.clickSelectedBook(e)}
+            />
+            <div>{info.book.title}</div>
+          </div>
+        )
+      })
     return (
       <div>
         {this.state.isOpen ? (
@@ -111,11 +125,15 @@ class BookSelect extends React.Component<{}, IState> {
                 <button onClick={this.clickSearchButton}>검색</button>
               </p>
               {this.state.selectBooksTitle.length === 1 ? (
-                <h5>책을 선택해주세요.</h5>
+                  <h5>책을 선택해주세요.</h5>        
               ) : (
                 <h5>{selectBookTitle}를 선택하셨습니다.</h5>
               )}
-              <div className="content">{searchBookList}</div>
+              <div className="content">
+                {this.state.books[0]._id ==="" ?
+                readingBook 
+                : searchBookList}
+              </div>
               <div className="button-wrap">
                 <button onClick={this.clickConfirm}> Confirm </button>
               </div>
@@ -128,4 +146,11 @@ class BookSelect extends React.Component<{}, IState> {
   }
 }
 
-export default BookSelect;
+const mapStateToProps = (state :any) :any => {
+  return {
+      reading: state.user.User.reading,
+      to_read: state.user.User.to_read
+  };
+}
+
+export default connect(mapStateToProps)(BookSelect);

@@ -9,17 +9,46 @@ const Info: React.FC<Props> = ({ userInfo }): ReactElement => {
 
   return (
     <div className="uk-panel" style={{ width: 300 }}>
-      <img
-        className="uk-align-left uk-margin-remove-adjacent"
-        src="https://image.shutterstock.com/image-vector/people-icon-260nw-522300817.jpg"
-        width="100"
-        height="100"
-        alt="Example image"
-      />
-      <p>name : {userInfo.name}</p>
-      <p>email : {userInfo.email}</p>
-      <p>profile : {userInfo.profile}</p>
-      <button>유저 정보 수정</button>
+      <article className="uk-comment uk-comment-primary">
+        <header
+          className="uk-comment-header uk-grid-medium uk-flex-middle"
+          uk-grid
+        >
+          <div className="uk-width-auto">
+            <img
+              className="uk-comment-avatar"
+              src="images/avatar.jpg"
+              width="80"
+              height="80"
+              alt=""
+            />
+          </div>
+          <div className="uk-width-expand">
+            <h4 className="uk-comment-title uk-margin-remove">
+              <a className="uk-link-reset" href="#">
+                Author
+              </a>
+            </h4>
+            <ul className="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+              <li>
+                <a href="#">12 days ago</a>
+              </li>
+              <li>
+                <a href="#">Reply</a>
+              </li>
+            </ul>
+          </div>
+        </header>
+        <div className="uk-comment-body">
+          <p>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+            Lorem ipsum dolor sit amet.
+          </p>
+        </div>
+      </article>
     </div>
   );
 };

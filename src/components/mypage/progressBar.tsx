@@ -1,5 +1,4 @@
 import React, { useState, useEffect, ReactElement } from "react";
-import "./../../../node_modules/uikit/dist/css/uikit.css";
 import { IUserInfo } from "./../shared/Types";
 
 interface IProps {

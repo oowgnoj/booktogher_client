@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import { Link } from "react-router-dom";
 import Sidebar from "../sidebar/index";
 import Slider from "./RecoReviewSlider/index";
 import RecoReviewList from "./RecoReviewList";
@@ -13,6 +14,8 @@ import Store from "../../Redux/configureStore";
 import "./index.css";
 import { connect } from "react-redux";
 import { any } from "prop-types";
+const { Parallax } = require("react-materialize");
+
 // const dispatch = useDispatch()
 
 /*
@@ -57,6 +60,7 @@ interface IState {
   curation: ICollection[];
   review: IReview[];
 }
+
 /* 
 interface IProps {
   review: IReview;
@@ -79,12 +83,67 @@ class Main extends React.Component {
 
     return (
       <div className="main">
-        {/* <Sidebar /> */}
         <Slider review={props.review[0]} />
-        <RecoReviewList reviews={props.review.slice(1, 5)} />
-        <span className="main_recocollection_title">
-          서로모임에 오신 분들께서 작성해주신 컬렉션입니다.
-        </span>
+        {/*  <Parallax
+          id="parallax_top"
+          image={
+            <img
+              src="https://images.unsplash.com/photo-1547331994-d26cb135af48?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+              alt=""
+              className="main_parallax_image"
+            />
+          }
+        /> */}
+        <div className="section_wrapper">
+          <div className="section review" style={{ marginLeft: "50px" }}>
+            <Link to="/postreview">
+              <h2 className="header" style={{ marginTop: "30px" }}>
+                서평 쓰러 가기
+                <span
+                  uk-icon="icon:pencil; ratio: 1.5"
+                  style={{ marginLeft: "20px" }}
+                ></span>
+              </h2>
+              <p className="grey-text text-darken-3 lighten-3">
+                서평을 작성해주세요.
+              </p>
+            </Link>
+          </div>
+          <div className="section curation" style={{ marginLeft: "50px" }}>
+            <Link to="/postreview">
+              <h2 className="header" style={{ marginTop: "30px" }}>
+                컬렉션 등록하러 가기
+                <span
+                  uk-icon="icon:pencil; ratio: 1.5"
+                  style={{ marginLeft: "20px" }}
+                ></span>
+              </h2>
+              <p className="grey-text text-darken-3 lighten-3">
+                당신의 북 플레이리스트를 공유하여 주세요.
+              </p>
+            </Link>
+          </div>
+        </div>
+        <Parallax
+          id="parallax_bottom"
+          image={
+            <img
+              src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+              alt=""
+              className="main_parallax_image"
+            />
+          }
+        />
+        <div className="main_review_list_start">
+          <RecoReviewList reviews={props.review.slice(1, 5)} />
+          <RecoReviewList reviews={props.review.slice(1, 5)} />
+          <RecoReviewList reviews={props.review.slice(1, 5)} />
+        </div>
+        <div className="main_recocollection_div">
+          <span className="main_recocollection_title">
+            서로모임에 오신 분들께서 작성해주신 컬렉션입니다.
+          </span>
+        </div>
         <RecoCollectionList collections={props.curation.slice(1, 5)} />
       </div>
     );
@@ -143,3 +202,12 @@ function mapDispatchToProps(dispatch: any): any {
 } //
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
+
+/*
+<Slider review={props.review[0]} />
+<RecoReviewList reviews={props.review.slice(1, 5)} />
+<span className="main_recocollection_title">
+서로모임에 오신 분들께서 작성해주신 컬렉션입니다.
+</span>
+<RecoCollectionList collections={props.curation.slice(1, 5)} />
+*/

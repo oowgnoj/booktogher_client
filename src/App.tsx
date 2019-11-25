@@ -7,12 +7,17 @@ import Sidebar from "./components/sidebar/index";
 import Main from "./components/main/index";
 import Signup from "./components/signup/Signup";
 import Signin from "./components/signin/Signin";
-import Mypage from "./components/mypage/index";
+import Mypage from "./components/mypage";
 import ReadReview from "./components/readReview/ReadReview";
 import PostReview from "./components/writeReview/ModalTest";
 import ReadCuration from "./components/readCuration/index";
 import PostCuration from "./components/writeCuration/index";
 import EditCuration from "./components/editCuration/index";
+import Myreview from "./components/myReview";
+import MyBook from "./components/myBook";
+import MyCuration from "./components/myCuration";
+import MyLikes from "./components/myLikes";
+
 
 const App: React.FC = (props: any): ReactElement => {
   useEffect(() => {
@@ -32,6 +37,10 @@ const App: React.FC = (props: any): ReactElement => {
         <Route path="/curation/:id" component={ReadCuration} />
         <Route path="/editcuration/:id" component={EditCuration} />
         <Route path="/postcuration" component={PostCuration} />
+        <Route path="/myreview" component={Myreview} />
+        <Route path="/mybook" component={MyBook} />
+        <Route path="/mycuration" component={MyCuration} />
+        <Route path="/mylikes" component={MyLikes} />
         <Route path="*" to="/" />
       </Switch>
     </BrowserRouter>

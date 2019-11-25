@@ -26,3 +26,35 @@
   width: 100%;
 }
 
+.submit {
+  width: 400px;
+  padding: 10px;
+}
+
+.submit button {
+  margin-left: 10px;
+}
+
+.unlock {
+  width: 120px;
+}
+
+.lock {
+  width: 120px;
+}
+
+.rating-box {
+  padding: 20px;
+  margin-right: auto;
+}
+
+.rating-box input {
+  width: 30px;
+  margin-left: 10px
+}
+
+.paint-bucket {
+  margin-right: 10px;
+}
+
+
