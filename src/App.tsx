@@ -12,6 +12,7 @@ import ReadReview from "./components/readReview/ReadReview";
 import PostReview from "./components/writeReview/ModalTest";
 import ReadCuration from "./components/readCuration/index";
 import PostCuration from "./components/writeCuration/index";
+import EditCuration from "./components/editCuration/index";
 
 const App: React.FC = (props: any): ReactElement => {
   useEffect(() => {
@@ -29,6 +30,7 @@ const App: React.FC = (props: any): ReactElement => {
         <Route path="/review/:id" component={ReadReview} />
         <Route path="/postreview" component={PostReview} />
         <Route path="/curation/:id" component={ReadCuration} />
+        <Route path="/editcuration/:id" component={EditCuration} />
         <Route path="/postcuration" component={PostCuration} />
         <Route path="*" to="/" />
       </Switch>
