@@ -45,8 +45,15 @@ const Books: React.FC = (): ReactElement => {
         return obj.book._id.toString() !== bookId.toString();
       });
     });
-    newUserBooks[1].push(tempObj);
-
+    let index: number;
+    if (target === "to_read") {
+      index = 0;
+    } else if (target === "reading") {
+      index = 1;
+    } else {
+      index = 2;
+    }
+    newUserBooks[index].push({ book: tempObj });
     setUserBooks([...newUserBooks]);
   };
 
@@ -80,6 +87,8 @@ const Books: React.FC = (): ReactElement => {
       </div>
     );
   } else if (bookStatus === "reading") {
+    console.log(userBooks);
+
     return (
       <div className="wrapper">
         <ProgressBar UserInfo={UserDB} />
@@ -90,6 +99,8 @@ const Books: React.FC = (): ReactElement => {
       </div>
     );
   } else {
+    console.log(userBooks);
+
     return (
       <div className="wrapper">
         <ProgressBar UserInfo={UserDB} />

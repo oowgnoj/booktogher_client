@@ -26,18 +26,17 @@ const BookEntry: React.FC<IProps> = ({
   finished,
   getCurrentBookID
 }: IProps): ReactElement => {
-  console.log(toRead, reading, finished);
-  const total = () => {
-    if (toRead) {
-      return toRead;
-    } else if (reading) {
-      return reading;
-    } else {
-      return finished;
-    }
-  };
+  // console.log(toRead, reading, finished);
+  // const total = () => {
+  //   if (toRead) {
+  //     return toRead;
+  //   } else if (reading) {
+  //     return reading;
+  //   } else {
+  //     return finished;
+  //   }
+  // };
 
-  const current = total();
   if (toRead) {
     return (
       <div className="content-holder">
