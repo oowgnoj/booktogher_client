@@ -29,10 +29,7 @@ const RecoReviewEntry = ({ review }: IProps): ReactElement => {
       <div className="main_review_list_review">
         <div className="uk-child-width-expand@s uk-text-center" uk-grid>
           <div>
-            <div
-              className="uk-card uk-card-hover uk-card-body"
-              style={{ height: "300px" }}
-            >
+            <div className="uk-card  uk-card-body" style={{ height: "300px" }}>
               <h3 className="uk-card-title">
                 <span style={{ color: "skyblue", fontSize: "80%" }}>서평</span>{" "}
                 {review.title}

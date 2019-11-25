@@ -58,18 +58,21 @@ div :focus {
   outline: none;
 }
 
-Morph shape necessary with bubble or elastic .bm-morph-shape {
+.bm-morph-shape {
   fill: #373a47;
 }
 
 .bm-item-list {
   color: #b8b1ad;
+  background-color: #fcf8f2;
   padding: 0.8em;
+  box-shadow: none;
 }
 
 /* Individual item */
 .bm-item {
   display: inline-block;
+  color: black;
 }
 
 /* Styling of overlay */
