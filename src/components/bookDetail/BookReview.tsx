@@ -39,7 +39,7 @@ class BookReview extends React.Component<IProps, IReviews> {
     const reviewList:ReactElement[] = this.state.reviews.map((info: IReview) => {
       return(
         <div key ={info._id} className="review-detail">
-          <h5>{info.title}</h5>
+          <a href={`/review/${info._id}`}><h5>{info.title}</h5></a>
           <div>{info.author.name}</div>
           <div>{info.contents.replace(/<[^>]*>?/gm, '')}</div>        
         </div>

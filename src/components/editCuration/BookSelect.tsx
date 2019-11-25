@@ -33,7 +33,6 @@ class BookSelect extends React.Component<IProps, IState> {
           _id: "book-id1",
           authors: ["이모양"],
           contents: "타입스크립트와의 싸움을 펼치는 이야기이다",
-          rating: 3,
           thumbnail:
             "http://image.kyobobook.co.kr/images/book/large/598/l9788936433598.jpg",
           title: "채식주의자"
@@ -42,8 +41,6 @@ class BookSelect extends React.Component<IProps, IState> {
           _id: "book-id2",
           authors: ["이기기"],
           contents: "리액크 퀼에 대하여 공부해봅시다",
-          rating: 4,
-
           thumbnail:
             "http://image.kyobobook.co.kr/images/book/large/304/l9791196814304.jpg",
           title: "너에게만 좋은 사람이 되고 싶어"

@@ -41,9 +41,7 @@ class RecoReview extends React.Component<IProps, IReviewState> {
   }
  
   public render(): ReactElement {
-    console.log(this.state.reviewList)
     const reviewCard = this.state.reviewList.map((info: IReview) => {
-      console.log(info)
       return (
         <RecoReviewCard review={info} />
       )

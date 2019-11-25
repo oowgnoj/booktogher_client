@@ -5,9 +5,11 @@ import "./BookInfo.css";
 const BookInfo = ({ bookList }: IBookState): ReactElement => {
   const book: JSX.Element[] = bookList.map((info: IBook) => {
     return (
-      <div>
+      <div key={info._id}>
         <div className="book-img">
-          <img src={info.thumbnail} width="120px" height="150px" />
+          <a href ={`/book/${info._id}`} >
+            <img src={info.thumbnail} width="120px" height="150px" />
+          </a>
         </div>
         <div className="book-info-area">
           <div className="book-title">
