@@ -13,18 +13,17 @@ export const fetchReview = (callback: any, id: string): any => {
 };
 
 export const fetchReviewBook = (callback: any, id: string): any => {
-  fetch(`${url}/books?review_id=${id}`, {
+  fetch(`${url}/books?review=${id}`, {
     credentials: "include"
   })
     .then((res: Response) => res.json())
     .then((res: IBook[]) => {
-      console.log('fetch',res)
       callback(res);
     });
 };
 
 export const fetchBookReviewList = (callback: any, id: string): any => {
-  fetch(`${url}/reviews?book_id=${id}`, {
+  fetch(`${url}/reviews?book=${id}`, {
     credentials: "include"
   })
     .then((res: Response) => res.json())
