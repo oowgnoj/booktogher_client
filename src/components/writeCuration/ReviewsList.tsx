@@ -63,15 +63,15 @@ class ReviewsList extends React.Component<IProps> {
             <p>서 평 추 가 하 기</p>
           </span>
         </span>
-        <span
+        <div
           className="writecuration_reviews_reviewlist"
           style={{
-            display: "flex",
-            paddingLeft: "100px"
+            display: "block",
+            paddingLeft: "70px"
           }}
         >
           {reviewList}
-        </span>
+        </div>
       </div>
     );
   }

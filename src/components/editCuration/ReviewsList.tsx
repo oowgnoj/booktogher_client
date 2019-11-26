@@ -66,8 +66,8 @@ class ReviewsList extends React.Component<IProps> {
         <span
           className="writecuration_reviews_reviewlist"
           style={{
-            display: "flex",
-            paddingLeft: "100px"
+            display: "block",
+            paddingLeft: "70px"
           }}
         >
           {reviewList}

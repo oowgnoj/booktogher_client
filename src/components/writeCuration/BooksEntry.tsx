@@ -20,7 +20,6 @@ class BooksEntry extends React.Component<IProps> {
   }
 
   public handleDelete() {
-    console.log("entry 에서 아이디 찍어보기 : ", this.props.book._id);
     this.props.deleteEvent(this.props.book._id);
   }
 

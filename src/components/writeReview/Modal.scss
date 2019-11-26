@@ -1,12 +1,13 @@
-.Modal-overlay{
+.Modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: 1;
 }
+
 .Modal{
     position: fixed;
     top: 50%;
@@ -54,22 +55,28 @@
       color: #999; 
       max-height: 500px;
       overflow-y: auto;
-      
     }
-    .content .book-select{
-      float: left;
-      padding: 10px;
-      margin-bottom: 20px;
-      width: 110px;
-      height: 180px;
+  }
+  .content .book-select div {
+    margin-top: 10px;
+    line-height: 1;
+    font-size: 14px;
+    text-align: center;
+  }
+  .button-wrap {
+    margin: 10px;
+    margin-top: 8px;
+    button {
+      width: 100%;
+      padding: 12px 0;
+      border-radius: 10px;
+      background-color: #ad7cef;
+      font-size: 13pt;
+      color: white;
+      border: 0;
       cursor: pointer;
-    }
-    .content .book-select img {
-      box-shadow: 1px 1px 3px 2px rgb(207, 207, 207);
-      -webkit-transition:width 0.3s;
-      transition:width 0.3s;
-      &:hover{
-        width: 104px;
+      &:hover {
+        background-color: #7f49c8;
       }
     }
     .content .book-select div {
@@ -99,3 +106,4 @@
       }
     }
   }
+}

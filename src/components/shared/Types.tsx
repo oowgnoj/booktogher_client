@@ -152,7 +152,7 @@ export interface IReviewSearch {
   results_count: number;
   pageable_count: number;
   current_page: number;
-  reviews: IReviewWithBooks[];
+  reviews: IReview[];
 }
 
 // curation
