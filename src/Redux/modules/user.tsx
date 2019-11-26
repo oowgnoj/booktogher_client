@@ -155,8 +155,6 @@ export const updateUserInfo = (userInfo: any): any => (
   return updateInfoAPI(userInfo)
     .then((response: Response) => response.json())
     .then((result: IUserInfo) => {
-      console.log("console from redux", result);
-
       dispatch({
         payload: result,
         type: UPDATEINFO_SUCCESS

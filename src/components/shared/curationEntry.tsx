@@ -17,7 +17,7 @@ const CurationEntry: React.FC<IProps> = ({
           className="uk-border-circle"
           width="50"
           height="50"
-          src="https://previews.123rf.com/images/rawpixel/rawpixel1704/rawpixel170456794/76519872-little-boy-bare-chest-smiling.jpg"
+          src={curation.author.image}
         />
         <span>{curation.title}</span> <span>{curation.contents}</span>
         <span className="author">{curation.author.name}</span>
