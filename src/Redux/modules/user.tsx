@@ -1,10 +1,5 @@
 import { handleActions } from "redux-actions";
-import IState, {
-  IUserInfoOnly,
-  IUserInfo,
-  initialState,
-  IUserEditInfo
-} from "../Types";
+import IState, { IUserInfo, initialState, IUserEditInfo } from "../Types";
 
 const LOGIN_PENDING: string = "login/PENDING_LOGIN";
 const LOGIN_SUCCESS: string = "login/SUCCESS_LOGIN";
@@ -59,8 +54,8 @@ function getInfoAPI(): Promise<Response> {
   });
 }
 
-function updateInfoAPI(data: IUserEditInfo): Promise<Response> {
-  console.log(data);
+// mypage update user information
+function updateInfoAPI(data: any): Promise<Response> {
   return fetch("http://booktogether.ap-northeast-2.elasticbeanstalk.com/user", {
     credentials: "include",
     headers: {
@@ -69,27 +64,19 @@ function updateInfoAPI(data: IUserEditInfo): Promise<Response> {
     method: "PATCH",
     body: JSON.stringify(data)
   });
-  // const file = new FormData();
-  // file.append("name", data.name);
-  // file.append("email", data.email);
-  // file.append("profile", data.profile);
-
-  // return fetch("http://booktogether.ap-northeast-2.elasticbeanstalk.com/user", {
-  //   body: file,
-  //   credentials: "include",
-  //   headers: {
-  //     "Content-Type": "multipart/form-data"
-  //   },
-  //   method: "PATCH"
-  // });
 }
 
-// function updateUserBookAPI(userBook: IUserBookOnly): Promise<Response> {
-//   return fetch("http://localhost:3000/user", {
-//     body: JSON.stringify(userBook),
-//     method: "PATCH"
-//   });
-// }
+// mypage update user image
+function updateUserImgAPI(data: File): Promise<Response> {
+  const img = new FormData();
+  img.append("image", data, data.name);
+
+  return fetch("http://booktogether.ap-northeast-2.elasticbeanstalk.com/user", {
+    body: img,
+    credentials: "include",
+    method: "PATCH"
+  });
+}
 
 export const requestLogin = (mail: string, pw: string): any => (
   dispatch: any
@@ -119,9 +106,11 @@ export const requestLogin = (mail: string, pw: string): any => (
     });
 };
 
+// update user book status
+
 export const requestLogout = (): any => (dispatch: any): Promise<void> => {
   dispatch({ type: LOGOUT_PENDING });
-
+  console.log("logout 확인");
   return logoutAPI()
     .then((response: Response) => response.json())
     .then((result: JSON) => {
@@ -158,10 +147,59 @@ export const requestUserInfo = (): any => (dispatch: any): Promise<void> => {
 };
 
 // * 마이페이지 UPDATE user information *
-export const updateUserInfo = (userInfo: IUserEditInfo): any => (
+export const updateUserInfo = (userInfo: any): any => (
   dispatch: any
 ): Promise<void> => {
-  console.log("herer");
+  console.log("dispatch 시작");
+  dispatch({ type: UPDATEINFO_PENDING });
+  return updateInfoAPI(userInfo)
+    .then((response: Response) => response.json())
+    .then((result: IUserInfo) => {
+      console.log("console from redux", result);
+
+      dispatch({
+        payload: result,
+        type: UPDATEINFO_SUCCESS
+      });
+    })
+    .catch((err: Response) => {
+      console.log(err);
+      dispatch({
+        payload: err,
+        type: UPDATEINFO_FAILURE
+      });
+    });
+};
+
+// * 마이페이지 UPDATE user image *
+
+export const updateUserImg = (data: File): any => (
+  dispatch: any
+): Promise<void> => {
+  console.log(data, "데이터");
+  dispatch({ type: UPDATEINFO_PENDING });
+
+  return updateUserImgAPI(data)
+    .then((response: Response) => response.json())
+    .then((result: IUserInfo) => {
+      dispatch({
+        payload: result,
+        type: UPDATEINFO_SUCCESS
+      });
+    })
+    .catch((err: Response) => {
+      console.log(err);
+      dispatch({
+        payload: err,
+        type: UPDATEINFO_FAILURE
+      });
+    });
+};
+
+// * 마이페이지 UPDATE user information *
+export const updateUserBookStatus = (userInfo: IUserEditInfo): any => (
+  dispatch: any
+): Promise<void> => {
   dispatch({ type: UPDATEINFO_PENDING });
 
   return updateInfoAPI(userInfo)
@@ -180,28 +218,6 @@ export const updateUserInfo = (userInfo: IUserEditInfo): any => (
       });
     });
 };
-
-// * UPDATE user book information *
-// export const updateUserBook = (userBook: IUserBookOnly): any => (
-//   dispatch: any
-// ): Promise<void> => {
-//   dispatch({ type: UPDATEINFO_PENDING });
-
-//   return updateInfoAPI(userInfo)
-//     .then((response: Response) => response.json())
-//     .then((result: IUserInfo) => {
-//       dispatch({
-//         payload: result,
-//         type: UPDATEINFO_SUCCESS
-//       });
-//     })
-//     .catch((err: Response) => {
-//       dispatch({
-//         payload: err,
-//         type: UPDATEINFO_FAILURE
-//       });
-//     });
-// };
 
 export default handleActions(
   {

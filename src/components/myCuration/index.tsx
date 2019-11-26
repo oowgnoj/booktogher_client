@@ -1,6 +1,8 @@
-import React, { ReactElement } from "react";
-import { ICuration } from "./../shared/Types";
+import React, { ReactElement, useEffect, useState, useRef } from "react";
+import { ICuration, IUserInfo } from "./../shared/Types";
+import { fetchCuration } from "./../shared/Fetch";
 import Entry from "./../shared/curationEntry";
+import { connect } from "react-redux";
 
 const fakeCurations: ICuration[] = [
   {
@@ -29,14 +31,37 @@ const fakeCurations: ICuration[] = [
   }
 ];
 
-const Curation: React.FC = (): ReactElement => {
+interface IProps {
+  user: IUserInfo;
+}
+const Curation: React.FC<IProps> = (props: any): ReactElement => {
+  const [myCuration, setMyCuration] = useState<ICuration[]>(fakeCurations);
+
+  const mounted = useRef(props);
+  useEffect(() => {
+    if (mounted.current.user._id !== props.user._id) {
+      fetchCuration(setMyCuration, props.user._id);
+      mounted.current.user._id = props.user._id;
+    }
+  });
+
   return (
     <div className="wrapper">
-      {fakeCurations.map((el: ICuration) => {
-        return <Entry curation={el} />;
-      })}
+      {myCuration.length ? (
+        myCuration.map((el: ICuration) => {
+          return <Entry curation={el} />;
+        })
+      ) : (
+        <div>없습니다</div>
+      )}
     </div>
   );
 };
 
-export default Curation;
+function mapStateToProps(state: any): any {
+  return {
+    user: state.user.User
+  };
+}
+
+export default connect(mapStateToProps)(Curation);

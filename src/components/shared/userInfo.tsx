@@ -9,7 +9,6 @@ interface IProps {
 
 const Info: React.FC = (props: any): ReactElement => {
   const [handleEditModal, setEditModal] = useState<boolean>(false);
-  console.log(props.user.User.name);
 
   const handleActive = (e: React.MouseEvent<HTMLLIElement, MouseEvent>): void =>
     setEditModal(!handleEditModal);
@@ -55,6 +54,7 @@ const Info: React.FC = (props: any): ReactElement => {
           </header>
           <div className="uk-comment-body">
             <p>{props.user.User.profile}</p>
+            <img src={props.user.User.image} style={{ width: "300px" }} />
           </div>
         </article>
       )}
@@ -62,7 +62,6 @@ const Info: React.FC = (props: any): ReactElement => {
   );
 };
 function mapStateToProps(state: any): any {
-  console.log("redux store", state);
   return {
     user: state.user
   };
