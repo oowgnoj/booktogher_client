@@ -11,7 +11,7 @@ import {
   fetchMyReview,
   fetchMyLikesReview,
   fetchReviewsSearch
-} from "./fetchWriteCuration";
+} from "../writeCuration/fetchWriteCuration";
 import MyReviewSelect from "./MyReviewSelect";
 import { flexbox } from "@material-ui/system";
 

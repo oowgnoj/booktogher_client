@@ -1,4 +1,4 @@
-.Modal-overlay {
+.Review-Modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -7,12 +7,12 @@
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 1;
 }
-.Modal {
+.Review-Modal {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px;
+  width: 1000px;
   max-height: 80vh;
   border-radius: 10px;
   background-color: white;
@@ -27,7 +27,7 @@
     margin-right: 20px;
   }
   p.title {
-    width: 540px;
+    width: 900px;
     margin-left: 16px;
     font-size: 16pt;
     font-weight: bold;
@@ -39,7 +39,7 @@
     padding: 10px;
   }
   .search-box {
-    width: 480px;
+    width: 700px;
     border: none;
     outline: none;
     font-size: 20px;
@@ -47,7 +47,7 @@
     padding: 10px 10px 0 10px;
   }
   .content {
-    width: 560px;
+    width: 900px;
     margin-top: 16px;
     padding: 10px;
     font-size: 12pt;
@@ -57,27 +57,25 @@
   }
   .content .book-select {
     float: left;
-    padding: 10px;
+    padding: px;
     margin-bottom: 20px;
-    width: 110px;
+    width: 800px;
     height: 180px;
     cursor: pointer;
   }
   .content .book-select img {
-    box-shadow: 1px 1px 3px 2px rgb(207, 207, 207);
-    -webkit-transition: width 0.3s;
-    transition: width 0.3s;
+    box-shadow: none;
     &:hover {
-      width: 104px;
+      width: 80px;
     }
   }
   .content .book-select div {
-    margin-top: 10px;
+    margin-top: 1px;
     line-height: 1;
     font-size: 14px;
-    text-align: center;
+    text-align: left;
   }
-  .button-wrap {
+  .Review-button-wrap {
     margin: 10px;
     margin-top: 8px;
     button {

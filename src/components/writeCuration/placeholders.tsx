@@ -41,7 +41,7 @@ export const placeholdersReview: IReview[] = [
       profile: "저는 이런..."
     },
     contents:
-      "인간은 변할 수 있고, 누구나 행복해 질 수 있다. 그렇다 서평 테스트 길게 들어가면 더 좋을 것 같다.",
+      "인간은 변할 수 있고, 누구나 행복해 질 수 있다. 그렇다 서평 테스트 길게 들어가면 더 좋을 것 같다. 벌써 2차 배포까지 와버렸다",
     likes: ["userid1", "userid2"],
     published: true,
     thumbnail: "blue",

@@ -7,7 +7,8 @@ import "./index.css";
 import Books from "../mypage/books";
 import { ICuration, ICurationsPost, IReview } from "../shared/Types";
 import { fetchPostCuration } from "./fetchWriteCuration";
-import Modal from "./BookSelect";
+import BookModal from "./BookSelect";
+import ReviewModal from "./ReviewSelect";
 
 interface IBook {
   _id: string;
@@ -30,14 +31,6 @@ interface ISelectedBook {
   thumbnail: string;
 }
 
-interface ISelectedReview {
-  reviewId: string;
-  reviewTitle: string;
-  reviewContents: string;
-  reviewAuthor: string;
-  reviewAuthorImage: string;
-}
-
 interface IState {
   title: string;
   contents: string;
@@ -57,18 +50,13 @@ class WriteCuration extends React.Component<{}, IState> {
       contents: "",
       reviews: [
         {
-          _id: "5dd5215165a18c467e20e20f",
-          author: {
-            _id: "5dd4dcee66195e1e807fabe5",
-            image: "",
-            name: "심경주",
-            profile: ""
-          },
-          contents: "<p>색 맘에 안드세요? 네? 괜찮나요? 고</p>",
+          _id: "",
+          author: { _id: "", image: "", name: "", profile: "" },
+          contents: "",
           likes: [],
           published: true,
-          thumbnail: "#7bdcb5",
-          title: "배포 서평 떨린다!"
+          thumbnail: "",
+          title: ""
         }
       ],
       title: "",
@@ -85,6 +73,7 @@ class WriteCuration extends React.Component<{}, IState> {
     this.handleBookSelect = this.handleBookSelect.bind(this);
     this.handleReviewSelect = this.handleReviewSelect.bind(this);
     this.addBooks = this.addBooks.bind(this);
+    this.addReviews = this.addReviews.bind(this);
   }
 
   public bookDelete(bookId: string): void {
@@ -148,10 +137,21 @@ class WriteCuration extends React.Component<{}, IState> {
     this.setState({ books: newBooks, bookModal: false });
   };
 
+  public addReviews = (selectedReviews: IReview): any => {
+    const newReviews: IReview[] =
+      this.state.reviews.length !== 0 && this.state.reviews[0]._id
+        ? this.state.reviews.concat(selectedReviews)
+        : this.state.reviews.slice(1).concat(selectedReviews);
+    this.setState({ reviews: newReviews, reviewModal: false });
+  };
+
   public render(): ReactElement {
     return (
       <div className="writecuration">
-        {this.state.bookModal ? <Modal addBooks={this.addBooks} /> : null}
+        {this.state.bookModal ? <BookModal addBooks={this.addBooks} /> : null}
+        {this.state.reviewModal ? (
+          <ReviewModal addReviews={this.addReviews} />
+        ) : null}
         {this.state.isPosted ? (
           <Redirect to={`/curation/${this.state.curationId}`} />
         ) : null}
@@ -191,7 +191,8 @@ class WriteCuration extends React.Component<{}, IState> {
               height: "300px",
               width: "100%",
               border: "none",
-              fontSize: "20px"
+              fontSize: "20px",
+              outline: "none"
             }}
             onChange={this.handleContent}
           />

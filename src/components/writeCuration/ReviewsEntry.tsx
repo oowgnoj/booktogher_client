@@ -48,7 +48,7 @@ class ReviewsEntry extends React.Component<IProps> {
             style={{ width: "120px", height: "auto" }}
             className="image"
           />
-          <div className="middle">
+          <div className="middle_review">
             <span uk-icon="icon: close; ratio: 1.7" className="text"></span>
           </div>
 
