@@ -56,8 +56,108 @@ class UserGreeting extends React.Component {
 
   public render(): JSX.Element {
     const props: any = this.props;
+
     return (
-      <Menu
+      <div>
+        <span
+          uk-icon="icon: menu; ratio: 1.5"
+          className="uk-button uk-margin-small-right"
+          uk-toggle="target: #offcanvas-slide"
+          style={{ marginTop: "25px", marginLeft: "10px" }}
+        ></span>
+
+        <div id="offcanvas-slide" uk-offcanvas="overlay: true">
+          <div className="uk-offcanvas-bar" style={{ backgroundColor: "peru" }}>
+            <span
+              className="uk-offcanvas-close"
+              uk-close
+              uk-icon="icon: close; ratio: 1.5"
+            ></span>
+
+            <img
+              src={
+                props.User.image
+                  ? props.User.image
+                  : "https://app.helperbit.com/media/avatar/png/single_user_female_256x256.png"
+              }
+              alt=""
+              width="100px"
+            />
+            <div
+              className="icons"
+              style={{
+                float: "right",
+                display: "flex",
+                justifyContent: "space-between",
+                width: "40%",
+                marginTop: "43px"
+              }}
+            >
+              <Link to="/mypage">
+                <span uk-icon="icon: user; ratio: 1.2"></span>
+              </Link>
+              <Link to="/mylikes">
+                <span uk-icon="icon: heart; ratio: 1.2"></span>
+              </Link>
+              <Link to="/">
+                {" "}
+                <span uk-icon="icon: home; ratio: 1.2"></span>
+              </Link>
+            </div>
+            <h3>{props.User.name}</h3>
+            <p>{props.User.profile}</p>
+            <ul className="uk-nav uk-nav-default">
+              <li className="uk-nav-divider"></li>
+
+              <Link to="/postreview">
+                <li className="uk-nav-header">서평 쓰기</li>
+              </Link>
+
+              <Link to="/postcuration">
+                <li className="uk-nav-header">큐레이션 쓰기</li>
+              </Link>
+
+              <li
+                className="uk-nav-divider"
+                style={{ color: "transparent", fontSize: "1px" }}
+              >
+                {"__"}
+              </li>
+
+              <li>
+                <Link to="/mybook">
+                  {" "}
+                  <div className="nav_myBook">나의 책</div>
+                </Link>
+              </li>
+              <li>
+                <Link to="/myreview">
+                  {" "}
+                  <div className="nav_myReview">나의 서평</div>
+                </Link>
+              </li>
+              <li>
+                <Link to="/mycuration">
+                  <div className="nav_myCuration">나의 큐레이션</div>
+                </Link>
+              </li>
+              <li
+                className="uk-nav-divider"
+                style={{ color: "transparent", fontSize: "1px" }}
+              >
+                {"__"}
+              </li>
+              <li>
+                <a onClick={this.handleLogout} href="/">
+                  로그아웃
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      /*   <Menu
         disableAutoFocus
         customBurgerIcon={<span uk-icon="menu"></span>}
         customCrossIcon={<span uk-icon="close"></span>}
@@ -86,7 +186,7 @@ class UserGreeting extends React.Component {
         <a onClick={this.handleLogout} className="menu-item" href="/">
           로그아웃
         </a>
-      </Menu>
+      </Menu> */
     );
   }
 
