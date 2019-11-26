@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Redirect, Route } from "react-router-dom";
-import { render } from "react-dom";
 import ReactQuill, { Quill } from "react-quill";
 import { TwitterPicker } from "react-color";
 import "react-quill/dist/quill.snow.css";
@@ -61,8 +60,8 @@ class WritePost extends React.Component<IProps, IState> {
     this.setState({
       body: {
         ...this.state.body,
-        title: e.target.value,
-        books: this.props.bookId
+        books: this.props.bookId,
+        title: e.target.value,       
       }
     });
   }
@@ -73,16 +72,14 @@ class WritePost extends React.Component<IProps, IState> {
     });
   }
 
-  public handleChangeComplete = (color: any) => {
+  public handleChangeComplete = (color: any): void => {
     this.setState({ body: { ...this.state.body, thumbnail: color.hex } });
   };
-
 
   public clickPaintBucket(): void {
     this.setState({
       colorPicker : !this.state.colorPicker
     })
-
   }
  
   public handlePublished(): void {
@@ -105,7 +102,7 @@ class WritePost extends React.Component<IProps, IState> {
       this.setState({reviewId : id})
       this.setState({redirect: true })
     }
-    const postRating ={
+    const postRating: any ={
       book : this.state.body.books[0],
       rating: this.state.rating
     }
@@ -113,10 +110,27 @@ class WritePost extends React.Component<IProps, IState> {
     fetchBookRating(postRating)
   }
 
-  public render(): any {
-    console.log(this.state.rating)
+  public isNumberKey(e:any): any { 
+    const value: any = e.target.value;
+    const charCode: any = (e.which) ? e.which : e.keyCode;
+    const pattern1: any = /^\d{1}$/; // 현재 value값이 1자리 숫자이면 0 만 입력가능
+    if (pattern1.test(value)) {
+      if (charCode !== 48) {
+        alert("10 이하의 숫자만 입력가능합니다");
+        return false;
+      }
+    }
+  }
+  public numberMaxLength(e:any): void {
+    if(e.target.value !== "10"){
+      if(e.target.value.length > 1){
+        e.target.value = e.target.value.slice(0, 1);
+      }
+    } 
+  }
 
-    const style = {
+  public render(): any {
+    const style: any = {
       backgroundColor : this.state.body.thumbnail
     }
 
@@ -136,26 +150,48 @@ class WritePost extends React.Component<IProps, IState> {
           ></input>
 
           <div className="submit">
-            <span uk-icon="paint-bucket" className="uk-button uk-button-default paint-bucket" onClick = {this.clickPaintBucket}></span>
+            <span 
+              uk-icon="paint-bucket" 
+              className="uk-button uk-button-default paint-bucket" 
+              onClick = {this.clickPaintBucket}
+            ></span>
               
             {this.state.body.published ? 
-            <span uk-icon="unlock" className="uk-button uk-button-default unlock" onClick = {this.handlePublished}>공개</span>
-            : <span uk-icon="lock" className="uk-button uk-button-default lock" onClick = {this.handlePublished}>비공개</span>}
-            <button className ="uk-button uk-button-default"onClick={this.clickPostSubmit}>등록</button>
+            <span 
+              uk-icon="unlock" 
+              className="uk-button uk-button-default unlock" 
+              onClick = {this.handlePublished}
+            >공개</span>
+            : 
+            <span 
+              uk-icon="lock" 
+              className="uk-button uk-button-default lock" 
+              onClick = {this.handlePublished}
+            >비공개</span>}
+
+            <button 
+              className ="uk-button uk-button-default"
+              onClick={this.clickPostSubmit}
+            >등록</button>
 
             {this.state.colorPicker ? 
               <TwitterPicker
                 color={this.state.body.thumbnail}
                 onChangeComplete={this.handleChangeComplete} 
-              /> : null }
-            
+              /> : null }            
           </div>
         </div>
 
         <div className ="rating-box">
           {this.props.bookTitle} : 
           평점을 입력해주세요
-          <input type="number" onChange={this.handleChangeRating}></input> /10
+          <input 
+            type="number" 
+            min="0"
+            max="10"
+            onChange={this.handleChangeRating}
+            onKeyPress={(e: any): void=>this.isNumberKey(e)}
+            onInput={(e: any): void=>this.numberMaxLength(e)}></input> /10
         </div>
 
         <div className="write-post">

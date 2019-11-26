@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react";
 import { IReview, IReviewProps, IBook } from "./reviewInterface";
-import { fetchReviewLikes, fetchDeleteLikes } from "./fetchReview"
+import { IRating } from "./../shared/Types"
+import { fetchReviewLikes, fetchDeleteLikes, fetchBookRatings } from "./fetchReview"
 import { connect } from "react-redux";
 import "./Review.css";
 
@@ -14,22 +15,22 @@ interface IState{
   likes: boolean;
   edit : boolean;
   likesNum : number;
+  bookRating: IRating[];
 }
 
 class Review extends React.Component< IProps, IState> {
   constructor(props :any){
     super(props)
     this.state ={
+      bookRating:[],
       edit : false,
       likes: false ,
-      likesNum: this.props.review.likes.length 
+      likesNum: this.props.review.likes.length,     
     }
     this.handleClickLikes = this.handleClickLikes.bind(this);
     this.handleDeleteLikes = this.handleDeleteLikes.bind(this)
   }
-  // public onClickLike(): void{
-    
-  // }
+
   public handleClickLikes(): void{
     const setStateLikesNum = (res: any): void => {
       return res
@@ -51,6 +52,16 @@ class Review extends React.Component< IProps, IState> {
       this.setState({ likesNum: this.state.likesNum -1 });
     }
   }
+
+  public componentDidMount(): void {
+    const setStateRating = (res: any): void => {
+      this.setState({ bookRating: res });
+    };
+    const bookId: any = this.props.bookList.map((info :IBook) =>{
+      return info._id
+    })
+    fetchBookRatings(setStateRating, bookId[0]); 
+  }
   
   public componentDidUpdate(prevProps: any): void {
     if (this.props.user._id !== prevProps.user._id) {
@@ -61,6 +72,15 @@ class Review extends React.Component< IProps, IState> {
     if(this.props.review.likes !== prevProps.review.likes){
       this.setState({likesNum: this.props.review.likes.length})
     }
+    if(this.props.bookList !== prevProps.bookList){
+      const setStateRating = (res: any): void => {
+        this.setState({ bookRating: res });
+      };
+      const bookId: any = this.props.bookList.map((info :IBook) =>{
+        return info._id
+      })
+      fetchBookRatings(setStateRating, bookId[0]);
+    }
   }
   
   public render(): ReactElement {
@@ -69,7 +89,8 @@ class Review extends React.Component< IProps, IState> {
       return (
         <div key ={info._id}>
           <b>
-            책 : {info.title} : 평점 {info.rating} 도{" "}
+            책 : {info.title} : 평점 
+            {this.state.bookRating.length ? this.state.bookRating[0].avg_rating : 0}
           </b>
         </div>
       );
@@ -77,7 +98,7 @@ class Review extends React.Component< IProps, IState> {
     const style: any = {
       backgroundColor : review.thumbnail
     }
-    console.log(review.likes, this.state.likesNum)
+
     
     return (
       <div className="review-area">

@@ -59,7 +59,7 @@ class BookDetail extends React.Component<RouteComponentProps<IMatchParams>,IStat
     return (
       <div className = "book-detail-area">
         <div className="book-cover"></div>
-        <BookInfo bookInfo = {this.state.bookInfo}/>
+        <BookInfo bookInfo = {this.state.bookInfo} rating={this.state.ratings}/>
         <BookReview id = {this.props.match.params.id} />
       </div>
     )
