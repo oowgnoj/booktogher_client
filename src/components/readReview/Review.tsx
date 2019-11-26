@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import { Link } from "react-router-dom"
 import { IReview, IReviewProps, IBook } from "./reviewInterface";
 import { IRating } from "./../shared/Types"
 import { fetchReviewLikes, fetchDeleteLikes, fetchBookRatings } from "./fetchReview"
@@ -130,7 +131,7 @@ class Review extends React.Component< IProps, IState> {
                 ></span>}
               <div>{this.state.likesNum}</div>
               {this.state.edit ? 
-              <button>수정</button> 
+              <button><Link to={`/editReview/${review._id}`}>수정</Link></button> 
               : null }             
             </div>
           </div>
