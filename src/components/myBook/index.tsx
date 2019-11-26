@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactElement } from "react";
+import React, { useState, useEffect, ReactElement, useRef } from "react";
 import { connect } from "react-redux";
 
 import {
@@ -46,17 +46,28 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void => {
     showSearchBook("open");
-    requestUserInfo();
   };
   if (searchBook === "open") {
     temp = <BookSelect addBooks={addBooks} />;
   }
+
+  const getImgBookId = (bookInfo: any): void => {
+    console.log(bookInfo);
+
+    const deletedBook = userBooks.map(array => {
+      return array.filter((obj: any) => {
+        return obj.book._id.toString() !== bookInfo._id;
+      });
+    });
+    props.updateUserInfo(modifyForm(deletedBook));
+  };
 
   // change user's book status
   const getCurrentBookID = (
     bookInfo: any,
     e: React.MouseEvent<HTMLLIElement, MouseEvent>
   ): void => {
+    console.log(e.currentTarget.id);
     changeBookStatus(bookInfo._id, e.currentTarget.id);
   };
 
@@ -70,24 +81,35 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
         return obj.book._id.toString() !== bookId.toString();
       });
     });
-    let index: number;
+    let index: number = 100;
 
     if (target === "to_read") {
       index = 0;
     } else if (target === "reading") {
       index = 1;
-    } else {
+    } else if (target === "finished") {
       index = 2;
     }
     newUserBooks[index].push({ book: tempObj });
     setUserBooks([...newUserBooks]);
-    props.updateUserInfo(modifyForm(userBooks));
+    props.updateUserInfo(modifyForm(newUserBooks));
   };
 
   // patch modified user book status
 
+  const mounted: React.MutableRefObject<boolean | undefined> = useRef<
+    boolean
+  >();
   useEffect(() => {
-    setUserBooks([props.user.to_read, props.user.reading, props.user.finished]);
+    if (!mounted.current) {
+      mounted.current = true;
+    } else {
+      setUserBooks([
+        props.user.to_read,
+        props.user.reading,
+        props.user.finished
+      ]);
+    }
   }, [props.user]);
 
   // useEffect(() => {
@@ -103,17 +125,29 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
   // rendering :  need refactoring
   if (bookStatus === "to_read") {
     return (
-      <div className="wrapper">
-        {console.log("여기", props)}
-        {temp}
-        <button id="toRead" onClick={handleSearchBox}>
-          책 추가
-        </button>
-        <ProgressBar UserInfo={props.user} />
-        <NavBar handleActive={handleActive} />
-        {userBooks[0].map((el: IBookToRead) => {
-          return <BookEntry toRead={el} getCurrentBookID={getCurrentBookID} />;
-        })}
+      <div>
+        <img
+          style={{ width: "100%", height: "400px" }}
+          src={
+            "https://images.unsplash.com/photo-1471107191679-f26174d2d41e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=966&q=80"
+          }
+        />
+        <div className="wrapper">
+          {temp}
+          <button id="toRead" onClick={handleSearchBox}>
+            책 추가
+          </button>
+          <NavBar handleActive={handleActive} />
+          {userBooks[0].map((el: IBookToRead) => {
+            return (
+              <BookEntry
+                toRead={el}
+                getCurrentBookID={getCurrentBookID}
+                getImgBookId={getImgBookId}
+              />
+            );
+          })}
+        </div>
       </div>
     );
   } else if (bookStatus === "reading") {
@@ -122,7 +156,13 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
         <ProgressBar UserInfo={props.user} />
         <NavBar handleActive={handleActive} />
         {userBooks[1].map((el: IBookReading) => {
-          return <BookEntry reading={el} getCurrentBookID={getCurrentBookID} />;
+          return (
+            <BookEntry
+              reading={el}
+              getCurrentBookID={getCurrentBookID}
+              getImgBookId={getImgBookId}
+            />
+          );
         })}
       </div>
     );
@@ -134,7 +174,11 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
         <NavBar handleActive={handleActive} />
         {userBooks[2].map((el: IBookFinished) => {
           return (
-            <BookEntry finished={el} getCurrentBookID={getCurrentBookID} />
+            <BookEntry
+              finished={el}
+              getCurrentBookID={getCurrentBookID}
+              getImgBookId={getImgBookId}
+            />
           );
         })}
       </div>

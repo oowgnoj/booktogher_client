@@ -4,34 +4,48 @@ import ReviewEntry from "./../shared/reviewEntry";
 import CurationEntry from "./../shared/curationEntry";
 import { fakeReviews, fakeCuration } from "./../../fakeData/fake";
 import { ICuration, IReview } from "./../shared/Types";
-import { fetchCurationLikes, fetchReviewLikes } from "./../shared/Fetch";
+import { fetchReviewLikes, fetchCurationLikes } from "./../shared/Fetch";
+import { connect } from "react-redux";
 
-const MyLikes: React.FC = (): ReactElement => {
+const MyLikes: React.FC = (props: any): ReactElement => {
   const [navBar, setNavBar] = useState<string>("review");
-  const [myCurations, setMyCuration] = useState<IReview[]>(fakeReviews);
-  const [myReviews, setMyReview] = useState<ICuration[]>(fakeCuration);
+  const [myCuration, setCuration] = useState<ICuration[]>(fakeCuration);
+  const [myReview, setReview] = useState<IReview[]>(fakeReviews);
+
+  useEffect(() => {
+    fetchReviewLikes(setReview);
+  }, []);
+
+  useEffect(() => {
+    fetchCurationLikes(setCuration);
+  }, []);
 
   const handleActive = (
     e: React.MouseEvent<HTMLLIElement, MouseEvent>
   ): void => {
     setNavBar(e.currentTarget.id);
   };
-  useEffect(() => {
-    fetchReviewLikes(setMyReview);
-    fetchCurationLikes(setMyCuration);
-  }, []);
+
   return (
     <div className="wrapper">
       <NavBar handleActive={handleActive} />
       {navBar === "review"
-        ? fakeReviews.map((el: IReview) => {
+        ? myReview.map((el: IReview) => {
+            console.log("review");
             return <ReviewEntry Review={el} />;
           })
-        : fakeCuration.map((el: ICuration) => {
+        : myCuration.map((el: ICuration) => {
+            console.log("curation");
             return <CurationEntry curation={el} />;
           })}
     </div>
   );
 };
 
-export default MyLikes;
+function mapStateToProps(state: any): any {
+  return {
+    user: state.user.User
+  };
+}
+
+export default connect(mapStateToProps)(MyLikes);

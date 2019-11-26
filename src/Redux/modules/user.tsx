@@ -56,6 +56,7 @@ function getInfoAPI(): Promise<Response> {
 
 // mypage update user information
 function updateInfoAPI(data: any): Promise<Response> {
+  console.log("redux ", data);
   return fetch("http://booktogether.ap-northeast-2.elasticbeanstalk.com/user", {
     credentials: "include",
     headers: {
@@ -155,6 +156,7 @@ export const updateUserInfo = (userInfo: any): any => (
   return updateInfoAPI(userInfo)
     .then((response: Response) => response.json())
     .then((result: IUserInfo) => {
+      console.log(result);
       dispatch({
         payload: result,
         type: UPDATEINFO_SUCCESS

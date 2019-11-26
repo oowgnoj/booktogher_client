@@ -24,7 +24,7 @@ const NavBar: React.FC<IProps> = ({ handleActive }) => {
             </li>
           </ul>
         </div>
-      </nav>{" "}
+      </nav>
     </div>
   );
 };

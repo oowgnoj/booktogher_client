@@ -14,7 +14,6 @@ interface IProps {
 
 const Reviews: React.FC = (props: any): ReactElement => {
   const [myReview, setReview] = useState<IReview[]>(fakeReviews);
-  const mounted = useRef(props);
   useEffect(() => {
     fetchReview(setReview, props.user._id);
   }, [props.user._id]);
