@@ -62,48 +62,10 @@ class GuestGreeting extends React.Component {
           </div>
         </div>
       </div>
-
-      /*
-      <Menu
-        disableAutoFocus
-        customBurgerIcon={<span uk-icon="menu"></span>}
-        customCrossIcon={<span uk-icon="close"></span>}
-        onStateChange={this.onStateChange}
-      >
-        <Link to="/signin">
-          <div id="home" className="menu-item">
-            로그인
-          </div>
-        </Link>
-        <Link to="/signup">
-          <div id="about" className="menu-item">
-            회원가입
-          </div>
-        </Link>
-        <Link to="/">
-          <div id="contact" className="menu-item">
-            홈
-          </div>
-        </Link>
-        <div onClick={this.showSettings} className="menu-item--small">
-          Settings
-        </div>
-      </Menu>
-      */
     );
   }
 
-  public onStateChange = (state: State): void => {};
+  /* public onStateChange = (state: State): void => {}; */
 }
-
-// const GuestGreeting: React.SFC = (): React.ReactElement => {
-//   return (
-//     <div className="sidebar_guest">
-//       <button>로그인</button>
-//       <button>회원가입</button>
-//       <button>홈</button>
-//     </div>
-//   );
-// };
 
 export default GuestGreeting;

@@ -113,6 +113,22 @@ class ReviewSelect extends React.Component<IProps, IState> {
     this.handleSearch = this.handleSearch.bind(this);
   }
 
+  public componentDidMount() {
+    const setStateMyLikesReview = (res: any): void => {
+      const newReviews = res.slice();
+      console.log("내가 좋아하는 서평 mylikes fetch 결과", newReviews);
+      this.setState({ myLikesReviews: newReviews });
+    };
+    fetchMyLikesReview(setStateMyLikesReview);
+
+    const setStateMyReview = (res: any): void => {
+      const newReviews = res.slice();
+      console.log("내가 쓴 서평 myreview fetch 결과", newReviews);
+      this.setState({ myReviews: newReviews });
+    };
+    fetchMyReview(setStateMyReview, this.props.user._id);
+  }
+
   public handleNavSelect(e: MouseEvent): void {
     const tab = e.currentTarget.id;
     console.log(tab);
@@ -138,27 +154,6 @@ class ReviewSelect extends React.Component<IProps, IState> {
       isOpen: !this.state.isOpen
     });
   }
-
-  public componentDidMount() {
-    const setStateMyLikesReview = (res: any): void => {
-      const newReviews = res.slice();
-      console.log("내가 좋아하는 서평 mylikes fetch 결과", newReviews);
-      this.setState({ myLikesReviews: newReviews });
-    };
-    fetchMyLikesReview(setStateMyLikesReview);
-
-    const setStateMyReview = (res: any): void => {
-      const newReviews = res.slice();
-      console.log("내가 쓴 서평 myreview fetch 결과", newReviews);
-      this.setState({ myReviews: newReviews });
-    };
-    fetchMyReview(setStateMyReview, this.props.user._id);
-  }
-
-  // public componentDidUpdate(prevProps: any): void {
-  //   if (this.props.user._id !== prevProps.user._id) {
-  //   }
-  // }
 
   public handleChange(event: any): void {
     this.setState({ search: event.target.value });
@@ -192,27 +187,6 @@ class ReviewSelect extends React.Component<IProps, IState> {
                     margin: "0px 50px"
                   }}
                 >
-                  {/* 
-                  <nav
-                    className="uk-navbar uk-margin"
-                    uk-navbar="mode: click"
-                    style={{ backgroundColor: "white" }}
-                  >
-                    <div className="uk-navbar-left">
-                      <ul className="uk-navbar-nav">
-                        <li id="myReview" onClick={this.handleNavSelect}>
-                          <a>내가 쓴 서평</a>
-                        </li>
-                        <li id="myLikesReview" onClick={this.handleNavSelect}>
-                          <a>좋아요 한 서평</a>
-                        </li>
-                        <li id="searchReview" onClick={this.handleNavSelect}>
-                          <a>모든 서평 검색</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </nav> */}
-
                   <ul
                     className="uk-breadcrumb"
                     style={{ marginTop: "20px", marginBottom: "25px" }}
@@ -235,18 +209,6 @@ class ReviewSelect extends React.Component<IProps, IState> {
                     </li>
                     <li></li>
                   </ul>
-
-                  {/*  <span id="myReview" onClick={this.handleNavSelect}>
-                    내가 쓴 서평
-                  </span>
-                  |
-                  <span id="myLikesReview" onClick={this.handleNavSelect}>
-                    좋아요 한 서평
-                  </span>
-                  |
-                  <span id="searchReview" onClick={this.handleNavSelect}>
-                    모든 서평 검색
-                  </span> */}
                 </div>
               </div>
               {this.state.navSelect === "myReview" ? (

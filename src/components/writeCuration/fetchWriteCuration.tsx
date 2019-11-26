@@ -61,7 +61,6 @@ export const fetchReviewsSearch = (callback: any, search: string): void => {
   })
     .then((res: Response) => res.json())
     .then((res: IReviews) => {
-      console.log("서버로부터 받아온 서평 검색 결과야!", res);
       callback(res);
     });
 };

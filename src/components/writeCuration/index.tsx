@@ -97,7 +97,6 @@ class WriteCuration extends React.Component<{}, IState> {
   }
 
   public handleTitle(event: React.ChangeEvent<HTMLInputElement>): void {
-    console.log("books 상태 궁금해!", this.state.books);
     const changingTitle: string = event.target.value;
     this.setState({ title: changingTitle });
   }
@@ -122,7 +121,7 @@ class WriteCuration extends React.Component<{}, IState> {
       books: this.state.books.map((book: IBook) => book._id),
       reviews: this.state.reviews.map((review: IReview) => review._id)
     };
-    console.log("post 하는 body ?", postBody);
+
     const getPostedId = (id: string): void =>
       this.setState({ curationId: id, isPosted: true });
 

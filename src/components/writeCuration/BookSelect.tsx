@@ -148,18 +148,6 @@ class BookSelect extends React.Component<IProps, IState> {
             </div>
           </div>
         ) : null}
-        {/*  <WritePost
-          books={this.state.selectedBooks}
-          reviews={[
-            {
-              reviewId: "",
-              reviewTitle: "",
-              reviewContents: "",
-              reviewAuthor: "",
-              reviewAuthorImage: ""
-            }
-          ]}
-        /> */}
       </div>
     );
   }
