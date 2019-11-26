@@ -9,10 +9,10 @@ interface IBookState{
 const BookInfo = ({ bookList }: IBookState): ReactElement => {
   const book: JSX.Element[] = bookList.map((info: IBook) => {
     return (
-      <div key={info._id}>
-        <div className="book-img">
+      <div>
+        <div className="book-img" key={info._id}>
           <Link to ={`/book/${info._id}`} >
-            <img src={info.thumbnail} width="120px" height="150px" />
+            <img src={info.thumbnail} width="120px" height="150px" alt={info.title}/>
           </Link>
         </div>
         <div className="book-info-area">

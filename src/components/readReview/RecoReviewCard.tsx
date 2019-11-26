@@ -7,7 +7,12 @@ const RecoReviewCard = ({ review } : any): ReactElement => {
     <div className="recoReview-card">
         <div className="recoReview-header">
             <div className="recoReview-img">
-                <img className="uk-border-circle" width="40" height="40" src={review.author.image}/>
+                <img 
+                  className="uk-border-circle" 
+                  width="40" 
+                  height="40" 
+                  src={review.author.image}
+                  alt={review.title}/>
             </div>
             <div className="recoReview-body">
                 <h5 className="recoReview-title">{review.title}</h5>  

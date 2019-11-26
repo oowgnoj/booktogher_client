@@ -67,10 +67,6 @@
   fill : red;
 }
 
-.review-likes {
-  width: 200px;
-  background-color: blueviolet;
-}
 
 .review-likes span {
   float: left;

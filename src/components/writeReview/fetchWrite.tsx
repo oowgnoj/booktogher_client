@@ -93,3 +93,18 @@ export const fetchBookRating = (post: IRating): any => {
       console.log(res)
     });
 };
+
+export const fetchEditReview = (callback: any, post: IPostReview): any => {
+  fetch(`${url}/reviews`, {
+    method: "PETCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(post),
+    credentials: "include"
+  })
+    .then((res: Response) => res.json())
+    .then((res: IReview) => {
+      callback(res._id);
+    });
+};

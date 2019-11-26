@@ -64,13 +64,25 @@ class Review extends React.Component< IProps, IState> {
   }
   
   public componentDidUpdate(prevProps: any): void {
+    console.log(1,this.props.review.author._id, 2,this.props.user._id, this.state.edit)
     if (this.props.user._id !== prevProps.user._id) {
+      if(this.props.user._id === this.props.review.author._id){
+        this.setState({edit:true})
+      }
       if(this.props.review.likes.includes(this.props.user._id)){
         this.setState({likes: true})
+      }  
+    }
+    if (this.props.review !== prevProps.review){
+      if(this.props.user._id === this.props.review.author._id){
+        this.setState({edit:true})
       }
     }
     if(this.props.review.likes !== prevProps.review.likes){
       this.setState({likesNum: this.props.review.likes.length})
+      if(this.props.review.likes.includes(this.props.user._id)){
+        this.setState({likes: true})
+      }
     }
     if(this.props.bookList !== prevProps.bookList){
       const setStateRating = (res: any): void => {

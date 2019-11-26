@@ -45,7 +45,9 @@ class RecoReview extends React.Component<IProps, IReviewState> {
   public render(): ReactElement {
     const reviewCard: any = this.state.reviewList.map((info: IReview) => {
       return (
-        <RecoReviewCard review={info} />
+        <div key ={info._id}>
+           <RecoReviewCard review={info}/>
+        </div>       
       )
     })
     return (
