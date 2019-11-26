@@ -13,6 +13,7 @@ import {
   fetchEditCuration
 } from "./fetchEditCuration";
 import Modal from "./BookSelect";
+import ReviewModal from "./ReviewSelect";
 
 interface IBook {
   _id: string;
@@ -67,7 +68,17 @@ class WriteCuration extends React.Component<
     this.state = {
       books: [{ _id: "", authors: "", thumbnail: "", title: "" }],
       contents: "",
-      reviews: [],
+      reviews: [
+        {
+          _id: "",
+          author: { _id: "", image: "", name: "", profile: "" },
+          contents: "",
+          likes: [],
+          published: true,
+          thumbnail: "",
+          title: ""
+        }
+      ],
       title: "",
       bookModal: false,
       reviewModal: false,
@@ -82,6 +93,7 @@ class WriteCuration extends React.Component<
     this.handleBookSelect = this.handleBookSelect.bind(this);
     this.handleReviewSelect = this.handleReviewSelect.bind(this);
     this.addBooks = this.addBooks.bind(this);
+    this.addReviews = this.addReviews.bind(this);
   }
 
   public componentDidMount(): void {
@@ -158,11 +170,22 @@ class WriteCuration extends React.Component<
     this.setState({ books: newBooks, bookModal: false });
   };
 
+  public addReviews = (selectedReviews: IReview): any => {
+    const newReviews: IReview[] =
+      this.state.reviews.length !== 0 && this.state.reviews[0]._id
+        ? this.state.reviews.concat(selectedReviews)
+        : this.state.reviews.slice(1).concat(selectedReviews);
+    this.setState({ reviews: newReviews, reviewModal: false });
+  };
+
   public render(): ReactElement {
     const { title, contents } = this.state;
     return (
       <div className="writecuration">
         {this.state.bookModal ? <Modal addBooks={this.addBooks} /> : null}
+        {this.state.reviewModal ? (
+          <ReviewModal addReviews={this.addReviews} />
+        ) : null}
         {this.state.isPatched ? (
           <Redirect to={`/curation/${this.state.curationId}`} />
         ) : null}
@@ -203,7 +226,8 @@ class WriteCuration extends React.Component<
               height: "300px",
               width: "100%",
               border: "none",
-              fontSize: "20px"
+              fontSize: "20px",
+              outline: "none"
             }}
             value={contents}
             onChange={this.handleContent}

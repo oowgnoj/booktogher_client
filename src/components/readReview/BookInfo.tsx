@@ -1,22 +1,26 @@
 import React, { ReactElement } from "react";
-import { IBookState, IBook } from "./reviewInterface";
+import { Link } from 'react-router-dom'
+import { IBook } from "./../shared/Types"
 import "./BookInfo.css";
 
+interface IBookState{
+  bookList :IBook[]
+}
 const BookInfo = ({ bookList }: IBookState): ReactElement => {
   const book: JSX.Element[] = bookList.map((info: IBook) => {
     return (
-      <div key={info._id}>
-        <div className="book-img">
-          <a href ={`/book/${info._id}`} >
-            <img src={info.thumbnail} width="120px" height="150px" />
-          </a>
+      <div>
+        <div className="book-img" key={info._id}>
+          <Link to ={`/book/${info._id}`} >
+            <img src={info.thumbnail} width="120px" height="150px" alt={info.title}/>
+          </Link>
         </div>
         <div className="book-info-area">
           <div className="book-title">
             <b>제목 : {info.title}</b>
           </div>
           <div className="book-authors">저자 : {info.authors}</div>
-          <div className="book-rating">평점 : {info.rating} 도</div>
+          <div className="book-rating">평점 : </div>
           <div className="book-contents">책 소개 : {info.contents}</div>
         </div>
       </div>

@@ -64,6 +64,7 @@ export const fetchEditCuration = (
   id: string,
   body: ICurationsPost
 ): any => {
+  console.log(body);
   return fetch(
     `http://booktogether.ap-northeast-2.elasticbeanstalk.com/curations/${id}`,
     {

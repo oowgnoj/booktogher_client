@@ -1,12 +1,28 @@
 import React, { ReactElement } from "react";
-import { IBookDetail } from "../shared/Types";
+import { IBookDetail, IRating } from "../shared/Types";
 import "./BookDetail.css";
 
 interface IProps {
-  bookInfo : IBookDetail
+  bookInfo : IBookDetail;
+  rating: IRating[];
 }
 
-const BookInfo = ({ bookInfo } :IProps): ReactElement => {
+const BookInfo = ({ bookInfo, rating } :IProps): ReactElement => {
+    const bookAvgRating = rating.map((info:IRating)=>{
+      return(
+        <div>
+          평점 : {info.avg_rating}
+        </div>
+      )
+    })
+    const bookUserRating = rating.map((info:IRating)=>{
+      return(
+        <div>
+          평점 : {info.user_rating.rating}
+        </div>
+      )
+    })
+
   return (
     <div className ="bookInfo-wrap">
         <div className="book-title">
@@ -14,7 +30,8 @@ const BookInfo = ({ bookInfo } :IProps): ReactElement => {
           <b>{bookInfo.title}</b>
         </div>
         <div className="">
-          <div>평점 영역</div>
+        <div>서로모임 평점{bookAvgRating}</div>
+        <div>나의 평점{bookUserRating}</div>
           <button className ="book-like">읽고싶은책추가</button>
           <div className="bookInfo-detail">
             <div>저자 : {bookInfo.authors}</div>

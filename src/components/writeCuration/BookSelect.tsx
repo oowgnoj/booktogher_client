@@ -1,7 +1,6 @@
 import React, { ReactElement } from "react";
 import { IBookState, IBook } from "../writeReview/writeInterface";
 import { fetchBookSearch } from "../writeReview/fetchWrite";
-import WritePost from "./index";
 import "../writeReview/Modal.scss";
 
 interface ISelected {

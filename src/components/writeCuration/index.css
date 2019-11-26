@@ -46,6 +46,17 @@
   align-items: center;
 }
 
+.middle_review {
+  transition: 0.3s ease;
+  opacity: 0;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  align-items: center;
+}
+
 .none .image:hover {
   opacity: 0.3;
 }
@@ -65,4 +76,8 @@
 
 .opacity {
   opacity: 0.2;
+}
+
+input:focus {
+  outline: none;
 }

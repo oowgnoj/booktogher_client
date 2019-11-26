@@ -58,13 +58,6 @@ class MyReviewSelect extends React.Component<IProps> {
                 </div>
               </article>
             </li>
-            <hr
-              style={{
-                color: "gray",
-
-                height: 1
-              }}
-            />
           </div>
         );
       }
@@ -78,3 +71,25 @@ class MyReviewSelect extends React.Component<IProps> {
 }
 
 export default MyReviewSelect;
+
+/*
+
+return (
+          <div>
+            <div key={info._id}>
+              <button value={index} onClick={e => this.props.clicked(e)}>
+                {info.title}
+              </button>
+              <div>{info.author.name}</div>
+              <div>{info.contents.replace(/<[^>]*>?/gm, "")}</div>
+            </div>
+          </div>
+        );
+      }
+    );
+    return (
+      <div>
+        <div className="content">{MyReviewList}</div>
+      </div>
+
+*/

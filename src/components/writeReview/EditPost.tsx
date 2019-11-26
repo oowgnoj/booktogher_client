@@ -4,7 +4,9 @@ import ReactQuill, { Quill } from "react-quill";
 import { TwitterPicker } from "react-color";
 import "react-quill/dist/quill.snow.css";
 import "./writePost.css";
-import { fetchPostReview, fetchBookRating } from "./fetchWrite";
+import { fetchPostReview, fetchBookRating, fetchEditReview } from "./fetchWrite";
+import { RouteComponentProps } from "react-router";
+import { fetchReview, fetchReviewBook, fetchBookReviewList } from "../readReview/fetchReview";
 import ReadReview from "../readReview/ReadReview";
 
 interface IState {
@@ -22,17 +24,16 @@ interface IWrite {
   title: string;
 }
 
-interface IProps {
-  bookId: string[];
-  bookTitle: string[];
+interface IMatchParams {
+  id: string;
 }
 
-class WritePost extends React.Component<IProps, IState> {
-  constructor(props: IProps) {
+class EditPost extends React.Component<RouteComponentProps<IMatchParams>, IState> {
+  constructor(props: any) {
     super(props);
     this.state = {
       body: {
-        books: this.props.bookId, // book id 목록
+        books: [], // book id 목록
         contents: "",
         published: true,
         thumbnail: "#eeeeee",
@@ -46,7 +47,7 @@ class WritePost extends React.Component<IProps, IState> {
     this.handleChangePost = this.handleChangePost.bind(this);
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.handleClickPublished = this.handleClickPublished.bind(this);
-    this.clickPostSubmit = this.clickPostSubmit.bind(this);
+    this.clickPostEdit = this.clickPostEdit.bind(this);
     this.clickPaintBucket = this.clickPaintBucket.bind(this);
     this.handlePublished = this.handlePublished.bind(this);
     this.handleChangeRating = this.handleChangeRating.bind(this)
@@ -60,7 +61,6 @@ class WritePost extends React.Component<IProps, IState> {
     this.setState({
       body: {
         ...this.state.body,
-        books: this.props.bookId,
         title: e.target.value,       
       }
     });
@@ -97,7 +97,7 @@ class WritePost extends React.Component<IProps, IState> {
     })
   }
 
-  public clickPostSubmit(): void {
+  public clickPostEdit(): void {
     const redirectReview = (id : string) : any =>{
       this.setState({reviewId : id})
       this.setState({redirect: true })
@@ -106,8 +106,9 @@ class WritePost extends React.Component<IProps, IState> {
       book : this.state.body.books[0],
       rating: this.state.rating
     }
-    fetchPostReview(redirectReview, this.state.body)
-    fetchBookRating(postRating)
+    console.log(this.state.body, postRating)
+    fetchEditReview(redirectReview, this.state.body)
+    //fetchBookRating(postRating)
   }
 
   public isNumberKey(e:any): any { 
@@ -128,6 +129,35 @@ class WritePost extends React.Component<IProps, IState> {
       }
     } 
   }
+
+  public componentDidMount(): void {
+    const setStateEditReview = (res: any): void => {
+      this.setState({
+        body: {
+          ...this.state.body,
+          contents: res.contents,
+          title: res.title,
+          published: res.published,
+          thumbnail: res.thumbnail,       
+        },
+        reviewId: res._id
+      });
+    };
+    fetchReview(setStateEditReview, this.props.match.params.id);
+
+    const setStateBook = (res: any): void => {
+      res.map((book: any)=>{
+        this.setState({ 
+          body: {
+            ...this.state.body,
+            books : [book._id]
+          }
+        })
+      })
+    }
+    fetchReviewBook(setStateBook, this.props.match.params.id);
+  }
+
 
   public render(): any {
     const style: any = {
@@ -171,8 +201,8 @@ class WritePost extends React.Component<IProps, IState> {
 
             <button 
               className ="uk-button uk-button-default"
-              onClick={this.clickPostSubmit}
-            >등록</button>
+              onClick={this.clickPostEdit}
+            >수정</button>
 
             {this.state.colorPicker ? 
               <TwitterPicker
@@ -183,8 +213,6 @@ class WritePost extends React.Component<IProps, IState> {
         </div>
 
         <div className ="rating-box">
-          {this.props.bookTitle} : 
-          평점을 입력해주세요
           <input 
             type="number" 
             min="0"
@@ -206,4 +234,4 @@ class WritePost extends React.Component<IProps, IState> {
   }
 }
 
-export default WritePost;
+export default EditPost;

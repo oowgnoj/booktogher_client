@@ -19,6 +19,9 @@ import MyBook from "./components/myBook";
 import MyCuration from "./components/myCuration";
 import MyLikes from "./components/myLikes";
 import Search from "./components/searchPage/SearchPage";
+import EditPost from "./components/writeReview/EditPost"
+
+
 
 const App: React.FC = (props: any): ReactElement => {
   useEffect(() => {
@@ -44,6 +47,7 @@ const App: React.FC = (props: any): ReactElement => {
         <Route path="/mycuration" component={MyCuration} />
         <Route path="/mylikes" component={MyLikes} />
         <Route path="/search" component={Search} />
+        <Route path="/editReview/:id" component={EditPost} />
         <Route path="*" to="/" />
       </Switch>
     </BrowserRouter>
