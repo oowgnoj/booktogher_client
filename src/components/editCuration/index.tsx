@@ -94,7 +94,6 @@ class WriteCuration extends React.Component<
     const getReviewInfo = (result: IReview[]): void => {
       this.setState({ reviews: result });
     };
-    console.log("this.props.match.params.id : ", this.props.match.params.id);
     fetchCuration(getCurationInfo, this.props.match.params.id);
     fetchBooks(getBookInfo, this.props.match.params.id);
     fetchReviews(getReviewInfo, this.props.match.params.id);
@@ -121,7 +120,6 @@ class WriteCuration extends React.Component<
   }
 
   public handleTitle(event: React.ChangeEvent<HTMLInputElement>): void {
-    console.log("books 상태 궁금해!", this.state.books);
     const changingTitle: string = event.target.value;
     this.setState({ title: changingTitle });
   }
@@ -146,7 +144,6 @@ class WriteCuration extends React.Component<
       books: this.state.books.map((book: IBook) => book._id),
       reviews: this.state.reviews.map((review: IReview) => review._id)
     };
-    console.log("post 하는 body ?", postBody);
     const getPatchedId = (id: string): void =>
       this.setState({ curationId: id, isPatched: true });
 

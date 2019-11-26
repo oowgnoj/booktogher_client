@@ -24,7 +24,6 @@ class ReviewsEntry extends React.Component<IProps> {
   }
 
   public handleDelete(): void {
-    console.log("entry 에서 아이디 찍어보기 : ", this.props.review._id);
     this.props.deleteEvent(this.props.review._id);
   }
 

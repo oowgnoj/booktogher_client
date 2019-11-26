@@ -22,7 +22,12 @@ export interface IBookFinished {
   start: string;
   end: string;
 }
-
+export interface ISelectedBook {
+  _id: string;
+  title: string;
+  authors: string;
+  thumbnail: string;
+}
 export interface IUserInfo {
   // *** GET /user
   _id: string;

@@ -1,21 +1,24 @@
 import React, { ReactElement, useState } from "react";
 import { IUserInfo } from "./../shared/Types";
 import { connect } from "react-redux";
-import { updateUserInfo } from "./../../Redux/modules/user";
+import { updateUserInfo, updateUserImg } from "./../../Redux/modules/user";
 import { IUserEditInfo } from "./../../Redux/Types";
 
 interface IProps {
   handleClose: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   user: IUserInfo;
   updateUserInfo: (user: IUserEditInfo) => void;
+  updateUserImg: (img: any) => void;
 }
 
 const EditUserInfo: React.FC<IProps> = ({
   handleClose,
   user,
-  updateUserInfo
+  updateUserInfo,
+  updateUserImg
 }: IProps): ReactElement => {
   const [userInfo, setUserInfo] = useState<IUserInfo>(user);
+  const [userImg, setUserImg] = useState<any>("");
 
   // handle change email and username (input box)
   const changeInputValue = (
@@ -40,18 +43,20 @@ const EditUserInfo: React.FC<IProps> = ({
   const handleImageChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
-    const updatedUser: IUserInfo = Object.assign({}, user);
-    updatedUser.image = event.target.value;
-    setUserInfo(updatedUser);
+    setUserImg(event!.target!.files![0]);
   };
 
   const handleSubmit = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void => {
-    const { name, email, image, profile } = userInfo;
-    const userInfoUpdated = { name, email, image, profile };
-
-    updateUserInfo(userInfoUpdated);
+    const { name, email, profile } = userInfo;
+    const userInfoUpdated = { name, email, profile };
+    if (!userImg) {
+      updateUserInfo(userInfo);
+    } else {
+      updateUserImg(userImg);
+      updateUserInfo(userInfo);
+    }
   };
 
   return (
@@ -132,6 +137,7 @@ const EditUserInfo: React.FC<IProps> = ({
 
 function mapDispatchToProps(dispatch: any): any {
   return {
+    updateUserImg: (img: File): void => dispatch(updateUserImg(img)),
     updateUserInfo: (userInfo: IUserEditInfo): void =>
       dispatch(updateUserInfo(userInfo))
   };

@@ -7,7 +7,6 @@ interface IProps {
   userInfo: IUserInfo[];
 }
 const MyInfo: React.FC<IProps> = (props: any): ReactElement => {
-  console.log(props.user);
   return (
     <div className="wrapper">
       <UserInfo userInfo={props.user} />

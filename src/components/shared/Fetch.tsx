@@ -1,6 +1,4 @@
-
-import { IBookSearch, IReviewSearch, IReviews } from "./Types";
-
+import { IBookSearch, IReviewSearch, IReviews, ICuration } from "./Types";
 
 const url: string = "http://booktogether.ap-northeast-2.elasticbeanstalk.com";
 
@@ -13,7 +11,29 @@ export const fetchBookSearch = (callback: any, title: string): any => {
 };
 
 export const fetchReview = (callback?: any, id?: string): any => {
-  fetch(`${url}/reviews?list_type=personal`, {
+  fetch(`${url}/reviews?author=${id}`, {
+    credentials: "include"
+  })
+    .then((res: Response) => res.json())
+    .then((res: IReviews[]) => {
+      console.log(res);
+      callback(res);
+    });
+};
+
+export const fetchCuration = (callback?: any, id?: string): any => {
+  console.log("id", id);
+  fetch(`${url}/curations?author=${id}`, {
+    credentials: "include"
+  })
+    .then((res: Response) => res.json())
+    .then((res: ICuration[]) => {
+      console.log("from fetch", res);
+      callback(res);
+    });
+};
+export const fetchReviewLikes = (callback?: any, id?: string): any => {
+  fetch(`${url}/reviews?list_type=mylikes`, {
     credentials: "include"
   })
     .then((res: Response) => res.json())
@@ -21,7 +41,15 @@ export const fetchReview = (callback?: any, id?: string): any => {
       callback(res);
     });
 };
-
+export const fetchCurationLikes = (callback?: any, id?: string): any => {
+  fetch(`${url}/curations?list_type=mylikes`, {
+    credentials: "include"
+  })
+    .then((res: Response) => res.json())
+    .then((res: ICuration) => {
+      callback(res);
+    });
+};
 
 export const fetchReviewSearch = (callback: any, title: string): any => {
   fetch(`${url}/reviews/search?query=${title}`)
@@ -30,5 +58,3 @@ export const fetchReviewSearch = (callback: any, title: string): any => {
       callback(res.reviews);
     });
 };
-
-

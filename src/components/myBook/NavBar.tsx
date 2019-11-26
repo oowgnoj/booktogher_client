@@ -13,7 +13,7 @@ const NavBar: React.FC<IProps> = ({ handleActive }) => {
       >
         <div className="uk-navbar-left">
           <ul className="uk-navbar-nav">
-            <li id="to_read" onClick={handleActive}>
+            <li id="to_read" onClick={handleActive} style={{ width: "100px" }}>
               <a>to read</a>
             </li>
             <li id="reading" onClick={handleActive}>
