@@ -158,38 +158,53 @@ class ReadCuration extends React.Component<IParams, IState> {
           >
             {curation.title ? curation.title : "큐레이션 제목"}
           </div>
-          <div className="readCuration_header_user" style={{ float: "right" }}>
-            <div className="readCuration_header_user_image">
-              <img
-                src={
-                  curation.author.image
-                    ? curation.author.image
-                    : "https://icons-for-free.com/iconfiles/png/128/anonymous+app+contacts+open+line+profile+user+icon-1320183042822068474.png"
-                }
-                alt={curation.author.name}
-              />
-            </div>
-            <p className="readCuration_header_user_name">
-              by {curation.author.name}
+          <div
+            className="readCuration_header_user"
+            style={{
+              float: "right",
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column"
+            }}
+          >
+            <img
+              src={
+                curation.author.image
+                  ? curation.author.image
+                  : "https://icons-for-free.com/iconfiles/png/128/anonymous+app+contacts+open+line+profile+user+icon-1320183042822068474.png"
+              }
+              alt={curation.author.name}
+              width="80px"
+            />
+
+            <p
+              className="readCuration_header_user_name"
+              style={{ fontStyle: "italic" }}
+            >
+              by <b>{curation.author.name}</b> 님
             </p>
-            <span className="readCuration_header_modify">
-              <Link to={`/editcuration/${this.props.match.params.id}`}>
-                <button
-                  className="uk-button uk-button-text"
-                  style={{ marginRight: "30px" }}
-                >
-                  수정
-                </button>
-              </Link>
-            </span>
-            <span className="readCuration_header_delete">
-              <button
-                className="uk-button uk-button-text"
-                onClick={this.handleDelete}
-              >
-                삭제
-              </button>
-            </span>
+            {curation.author._id === this.props.userId ? (
+              <div>
+                <span className="readCuration_header_modify">
+                  <Link to={`/editcuration/${this.props.match.params.id}`}>
+                    <button
+                      className="uk-button uk-button-text"
+                      style={{ marginRight: "30px" }}
+                    >
+                      수정
+                    </button>
+                  </Link>
+                </span>
+                <span className="readCuration_header_delete">
+                  <button
+                    className="uk-button uk-button-text"
+                    onClick={this.handleDelete}
+                  >
+                    삭제
+                  </button>
+                </span>
+              </div>
+            ) : null}
           </div>
         </div>
         <div
