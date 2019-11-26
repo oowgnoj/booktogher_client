@@ -58,3 +58,15 @@ export const fetchReviewSearch = (callback: any, title: string): any => {
       callback(res.reviews);
     });
 };
+
+export const fetchGetCurations = (callback: any, authorId: string): any => {
+  fetch(`${url}/curations?author=${authorId}`)
+    .then((res: Response) => res.json())
+    .then((res: IReviews) => callback(res));
+};
+
+export const fetchGetReviews = (callback: any, authorId: string): any => {
+  fetch(`${url}/reviews?author=${authorId}`)
+    .then((res: Response) => res.json())
+    .then((res: IReviews) => callback(res));
+};

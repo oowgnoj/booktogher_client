@@ -4,6 +4,7 @@ import { requestUserInfo } from "../../Redux/modules/user";
 import { Redirect, Route, RouteComponentProps, Link } from "react-router-dom";
 import BooksList from "./BooksList";
 import ReviewsList from "./ReviewsList";
+import UserHistoryModal from "../shared/UserHistoryModal";
 import { IAuthor, ICuration, IReview } from "../shared/Types";
 import { string } from "prop-types";
 import {
@@ -29,6 +30,7 @@ interface IState {
   books: IBook[];
   reviews: IReview[];
   isDeleted: boolean;
+  historyModal: boolean;
 }
 
 type IMatchParams = {
@@ -54,10 +56,13 @@ class ReadCuration extends React.Component<IParams, IState> {
         { _id: "", authors: [""], contents: "", thumbnail: "", title: "" }
       ],
       reviews: [],
-      isDeleted: false
+      isDeleted: false,
+      historyModal: false
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleLikes = this.handleLikes.bind(this);
+    this.handleHistoryClick = this.handleHistoryClick.bind(this);
+    this.detectHistoryModal = this.detectHistoryModal.bind(this);
   }
 
   public componentDidMount(): void {
@@ -74,6 +79,26 @@ class ReadCuration extends React.Component<IParams, IState> {
     fetchCuration(getCurationInfo, this.props.match.params.id);
     fetchBooks(getBookInfo, this.props.match.params.id);
     fetchReviews(getReviewInfo, this.props.match.params.id);
+  }
+
+  public componentDidUpdate(prevProps: any): void {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      // do something
+      const getCurationInfo = (result: ICuration): void => {
+        this.setState({ curation: result });
+      };
+      const getBookInfo = (result: IBook[]): void => {
+        this.setState({ books: result });
+      };
+      const getReviewInfo = (result: IReview[]): void => {
+        this.setState({ reviews: result });
+      };
+      console.log("this.props.match.params.id : ", this.props.match.params.id);
+      fetchCuration(getCurationInfo, this.props.match.params.id);
+      fetchBooks(getBookInfo, this.props.match.params.id);
+      fetchReviews(getReviewInfo, this.props.match.params.id);
+      this.setState({ historyModal: false });
+    }
   }
 
   public handleDelete(): void {
@@ -102,14 +127,17 @@ class ReadCuration extends React.Component<IParams, IState> {
       };
       fetchPostLikes(postLikes, this.props.match.params.id);
     }
-    // 만약 state 의 likes 에 로그인한 유저의 likes 아이디가 포함되어 있다면
-    // delete 요청을 보내고 하트 비우기, 내가 state likes 에서 아이디 지우기
-    // 아이디가 없다면 Post 요청을 보내고 내가 스태이트 likes 에 아이디 채워넣고 하트 채우기
-    // 하트 채우기 : 그냥 store 로 부터 유저 아이디 받아와서 그 유저정보가 배열에 있다면 채우고 아니면 비우기
+  }
+
+  public handleHistoryClick(): void {
+    this.setState({ historyModal: true });
+  }
+
+  public detectHistoryModal(): void {
+    this.setState({ historyModal: false });
   }
 
   public render(): ReactElement {
-    // 공용 스테이트랑 연결해서 유저 아이디 받아와서 좋아요 비교하기
     const { curation, books, reviews } = this.state;
     return (
       <div className="readCuration">
@@ -118,6 +146,12 @@ class ReadCuration extends React.Component<IParams, IState> {
           "큐레이션 읽기 curation.likes 에 있는지 ? ",
           curation.likes.includes(this.props.userId)
         )}
+        {this.state.historyModal ? (
+          <UserHistoryModal
+            author={this.state.curation.author}
+            handleClose={this.detectHistoryModal}
+          />
+        ) : null}
         {this.state.isDeleted ? <Redirect to="/" /> : null}
         <div
           className="readCuration_header_likes"
@@ -166,6 +200,7 @@ class ReadCuration extends React.Component<IParams, IState> {
               justifyContent: "center",
               flexDirection: "column"
             }}
+            onClick={this.handleHistoryClick}
           >
             <img
               src={

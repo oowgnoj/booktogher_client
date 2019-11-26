@@ -19,9 +19,7 @@ import MyBook from "./components/myBook";
 import MyCuration from "./components/myCuration";
 import MyLikes from "./components/myLikes";
 import Search from "./components/searchPage/SearchPage";
-import EditPost from "./components/writeReview/EditPost"
-
-
+import EditPost from "./components/writeReview/EditPost";
 
 const App: React.FC = (props: any): ReactElement => {
   useEffect(() => {
@@ -32,7 +30,7 @@ const App: React.FC = (props: any): ReactElement => {
     <BrowserRouter>
       <Sidebar />
       <Switch>
-        <Route path="/" exact component={Main} />
+        <Route exact path="/" component={Main} />
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
         <Route path="/mypage" component={Mypage} />
