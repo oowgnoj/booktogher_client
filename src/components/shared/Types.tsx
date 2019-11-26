@@ -133,8 +133,8 @@ export interface IReviews {
 }
 
 export interface IReviewLike {
-  user_id: string;
-  review_id: string;
+  user: string;
+  review: string;
 }
 
 export interface IReviewWithBooks {
@@ -144,7 +144,7 @@ export interface IReviewWithBooks {
   books: IBook[];
   contents: string;
   thumbnail: string;
-  likes: IReviewLike[];
+  likes: string[];
 }
 
 export interface IReviewSearch {

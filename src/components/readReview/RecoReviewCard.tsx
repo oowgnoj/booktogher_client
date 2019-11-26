@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import "./RecoReviewCard.css";
-import { IProps, IReview, IReviewState } from './reviewInterface'
+import { Link } from "react-router-dom"
 
 const RecoReviewCard = ({ review } : any): ReactElement => {  
   return (
@@ -14,9 +14,8 @@ const RecoReviewCard = ({ review } : any): ReactElement => {
             </div>
         </div>
         <div className="recoReview-footer">
-            <a href={`/review/${review._id}`} className="uk-button uk-button-text">Read more</a>
+        <Link to={`/review/${review._id}`}><div className="uk-button uk-button-text">Read more</div></Link>
         </div>
-
     </div>
   ) 
 };

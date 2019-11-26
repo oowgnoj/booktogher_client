@@ -47,10 +47,7 @@ class ReviewSelect extends React.Component<IProps, IState> {
           }],
           contents: "",
           thumbnail: "",
-          likes: [{
-            user_id: "",
-            review_id: ""
-          }]
+          likes: [""]
         }
       ],
       title: "",
@@ -73,10 +70,7 @@ class ReviewSelect extends React.Component<IProps, IState> {
           }],
           contents: "",
           thumbnail: "",
-          likes: [{
-            user_id: "",
-            review_id: ""
-          }]
+          likes: [""]
         }],
       selectedReviews: [{
         _id: "",
@@ -96,10 +90,7 @@ class ReviewSelect extends React.Component<IProps, IState> {
         }],
         contents: "",
         thumbnail: "",
-        likes: [{
-          user_id: "",
-          review_id: ""
-        }]
+        likes: [""]
       }],
       isOpen: true,
       navSelect: "myReview",
@@ -125,15 +116,24 @@ class ReviewSelect extends React.Component<IProps, IState> {
     });
   }
 
-  public componentDidMount(): void {
-    this.setState({userId: this.props.user._id})
-    const setStateMyReview = (res: any): void => {
-      this.setState({ myReviews : res });
-    };
+  // public componentDidMount(): void {
+  //   // this.setState({userId: this.props.user._id})
+  //   // const setStateMyReview = (res: any): void => {
+  //   //   this.setState({ myReviews : res });
+  //   // };
     
-  
-    fetchMyReview(setStateMyReview, "5dd526c965a18c467e20e210")
 
+  //   // fetchMyReview(setStateMyReview, "5dd526c965a18c467e20e210")
+
+  // }
+
+  public componentDidUpdate(prevProps: any): void {
+    if (this.props.user._id !== prevProps.user._id) {
+      const setStateMyReview = (res: any): void => {
+        this.setState({ myReviews : res });
+      }; 
+      fetchMyReview(setStateMyReview, this.props.user._id)
+    }
   }
 
   public render(): ReactElement {

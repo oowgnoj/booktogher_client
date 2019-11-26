@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import { Link } from 'react-router-dom'
 import { IBookState, IBook } from "./reviewInterface";
 import "./BookInfo.css";
 
@@ -7,9 +8,9 @@ const BookInfo = ({ bookList }: IBookState): ReactElement => {
     return (
       <div key={info._id}>
         <div className="book-img">
-          <a href ={`/book/${info._id}`} >
+          <Link to ={`/book/${info._id}`} >
             <img src={info.thumbnail} width="120px" height="150px" />
-          </a>
+          </Link>
         </div>
         <div className="book-info-area">
           <div className="book-title">
