@@ -1,4 +1,5 @@
 import { IReview, IBook } from "./reviewInterface";
+import { IReviewLike, IRating } from "./../shared/Types"
 
 const url: string = "http://booktogether.ap-northeast-2.elasticbeanstalk.com";
 
@@ -30,4 +31,39 @@ export const fetchBookReviewList = (callback: any, id: string): any => {
     .then((res: IReview[]) => {
       callback(res);
     });
+};
+
+export const fetchReviewLikes = (callback: any, id: string): any => {
+  fetch(`${url}/reviews/${id}/likes`, {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "POST"
+  })
+    .then((res: Response) => res.json())
+    .then((res: IReviewLike) => {
+      callback(res);
+    });
+};
+
+export const fetchDeleteLikes = (callback: any, id: string): any => {
+  fetch(`${url}/reviews/${id}/likes`, {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "DELETE"
+  })
+    .then((res: Response) =>  callback(res))
+};
+
+export const fetchBookRatings = (callback: any, id: string): any => {
+  fetch(`${url}/ratings?books[]=${id}`, {
+    credentials: "include"
+  })
+  .then((res: Response) => res.json())
+  .then((res: IRating) => {
+    callback(res);
+  });
 };

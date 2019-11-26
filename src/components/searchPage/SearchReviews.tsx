@@ -33,10 +33,7 @@ class SearchReviews extends React.Component<{}, IState> {
           }],
           contents: "",
           thumbnail: "",
-          likes: [{
-            user_id: "",
-            review_id: ""
-          }]
+          likes: [""]
         }
       ],
       title: '',

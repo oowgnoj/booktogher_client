@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react";
 import { IReviews, IReview } from "../shared/Types";
 import { fetchBookReview } from "./fetchBookdetail";
+import { Link } from 'react-router-dom'
 import "./BookDetail.css";
 
 interface IProps {
@@ -39,7 +40,7 @@ class BookReview extends React.Component<IProps, IReviews> {
     const reviewList:ReactElement[] = this.state.reviews.map((info: IReview) => {
       return(
         <div key ={info._id} className="review-detail">
-          <a href={`/review/${info._id}`}><h5>{info.title}</h5></a>
+          <Link to={`/review/${info._id}`}><h5>{info.title}</h5></Link>
           <div>{info.author.name}</div>
           <div>{info.contents.replace(/<[^>]*>?/gm, '')}</div>        
         </div>

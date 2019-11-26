@@ -56,23 +56,28 @@
   margin: 0;
 }
 
-.heart {
-  cursor: pointer;
-  color : red;
-}
 
 .heartLike {
   cursor: pointer;
-  color : red
+  color : red;
+  fill : red;
 }
 .heartLike path {
   color : red;
   fill : red;
 }
 
+
 .review-likes span {
-  margin-left: 5px;
+  float: left;
+  margin-top: 5px;
   font-family: 'Gothic A1', sans-serif;
+}
+
+.review-likes div {
+  float: left;
+  width: 16px;
+  padding: 0px;
 }
 
 
