@@ -115,10 +115,6 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
     }
   }, [props.user]);
 
-  // useEffect(() => {
-  //   props.updateUserInfo(modifyForm(userBooks));
-  // }, [userBooks]);
-
   // handle active tab
   const handleActive = (
     e: React.MouseEvent<HTMLLIElement, MouseEvent>
@@ -129,13 +125,12 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
   if (bookStatus === "to_read") {
     return (
       <div>
+        <button id="toRead" onClick={handleSearchBox}>
+          책 추가
+        </button>
         <div className="wrapper">
           <Cards />
           {temp}
-          {/* <ProgressBar UserInfo={props.user} /> */}
-          <button id="toRead" onClick={handleSearchBox}>
-            책 추가
-          </button>
           <NavBar handleActive={handleActive} />
           {userBooks[0].map((el: IBookToRead) => {
             return (
@@ -152,7 +147,8 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
   } else if (bookStatus === "reading") {
     return (
       <div className="wrapper">
-        {/* <ProgressBar UserInfo={props.user} /> */}
+        <Cards />
+
         <NavBar handleActive={handleActive} />
         {userBooks[1].map((el: IBookReading) => {
           return (
@@ -168,8 +164,8 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
   } else {
     return (
       <div className="wrapper">
-        {/* {temp} */}
-        <ProgressBar UserInfo={props.user} />
+        <Cards />
+
         <NavBar handleActive={handleActive} />
         {userBooks[2].map((el: IBookFinished) => {
           return (

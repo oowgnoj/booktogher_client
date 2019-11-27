@@ -90,7 +90,7 @@ class Signin extends React.Component<any, IState> {
     return (
       <div className="signin">
         <form>
-          <div className="uk-margin">
+          <div>
             <div className="uk-inline">
               <span className="uk-form-icon" uk-icon="icon: mail"></span>
               <input
@@ -103,7 +103,7 @@ class Signin extends React.Component<any, IState> {
             </div>
           </div>
 
-          <div className="uk-margin">
+          <div>
             <div className="uk-inline">
               <span className="uk-form-icon" uk-icon="icon: lock"></span>
               <input

@@ -6,6 +6,7 @@ import { fakeReviews, fakeCuration } from "./../../fakeData/fake";
 import { ICuration, IReview } from "./../shared/Types";
 import { fetchReviewLikes, fetchCurationLikes } from "./../shared/Fetch";
 import { connect } from "react-redux";
+import "./index.css";
 
 const MyLikes: React.FC = (props: any): ReactElement => {
   const [navBar, setNavBar] = useState<string>("review");

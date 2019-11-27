@@ -31,33 +31,11 @@ const Cards: React.FC = (): ReactElement => {
               display: "inline-block",
               textAlign: "center",
               width: "80px",
-              height: "100px"
+              height: "100px",
+              backgroundColor: "white"
             }}
           >
             <p>Finished Book</p>
-          </div>
-          <div
-            className="uk-card uk-card-primary uk-card-body"
-            style={{
-              display: "inline-block",
-              textAlign: "center",
-              width: "80px",
-              height: "100px"
-            }}
-          >
-            <p>Reading Book</p>
-          </div>
-          <div
-            className="uk-card uk-card-primary uk-card-body"
-            style={{
-              display: "inline-block",
-              textAlign: "center",
-              width: "80px",
-              height: "100px"
-            }}
-          >
-            {" "}
-            <p>TO read</p>
           </div>
         </div>
       </div>

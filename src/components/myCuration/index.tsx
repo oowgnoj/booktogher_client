@@ -4,6 +4,7 @@ import { fetchCuration } from "./../shared/Fetch";
 import Entry from "./../shared/curationEntry";
 import { connect } from "react-redux";
 
+import "./index.css";
 const fakeCurations: ICuration[] = [
   {
     _id: "ObjectId",
@@ -43,6 +44,7 @@ const Curation: React.FC<IProps> = (props: any): ReactElement => {
 
   return (
     <div className="wrapper">
+      <h2>your curations</h2>
       {myCuration.length ? (
         myCuration.map((el: ICuration) => {
           return <Entry curation={el} />;
