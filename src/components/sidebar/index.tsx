@@ -24,7 +24,7 @@ class Sidebar extends React.Component {
       <GuestGreeting />
     );
 
-    return <div className="sidebar">{greeting}</div>;
+    return <div className="sidebar nav-overlay">{greeting}</div>;
   }
 }
 

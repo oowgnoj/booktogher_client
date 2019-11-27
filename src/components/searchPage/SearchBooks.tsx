@@ -7,13 +7,14 @@ import "./SearchBook.css"
 
 interface IState {
   books: IBook[];
-  title: string;
   searchTitle: string;
   reading: IBookReading[];
   to_read: IBookReading[];
 }
 
 interface IProps {
+  books:IBook[];
+  searchTitle: string;
   reading: IBookReading[];
   to_read: IBookReading[];
 }
@@ -22,39 +23,21 @@ class SearchBooks extends React.Component<IProps, IState> {
   constructor(props:any) {
     super(props);
     this.state = {
-      books: [
-        {
-          _id: "",
-          authors: [""],
-          contents: "",
-          thumbnail:
-            "",
-          title: ""
-        }
-      ],
+      books: this.props.books,
       reading: this.props.reading,
-      searchTitle: "",
-      title: '',
+      searchTitle: this.props.searchTitle,
       to_read: this.props.to_read,
       
     }
-    this.handleChangeTitle = this.handleChangeTitle.bind(this);
-    this.clickSearchButton = this.clickSearchButton.bind(this);
   }
-
-  public handleChangeTitle(e: React.ChangeEvent<HTMLInputElement>): void {
-    this.setState({ title: e.target.value });
-  }
-
-  public clickSearchButton(): void {
-    const setStateBook = (res: any): void => {
-      this.setState({ books: res , searchTitle: this.state.title});
-    };
-    fetchBookSearch(setStateBook, this.state.title);
+  public componentDidUpdate(prevProps: any): void {
+    if (this.props.books !== prevProps.books) {
+      this.setState({ books: this.props.books }); 
+    }
   }
 
   public render(): ReactElement {
-    const searchBookList: ReactElement[] = this.state.books.map(
+    const searchBookList: ReactElement[] = this.props.books.map(
       (info: IBook) => {
         return (
           <div className="book-select">
@@ -86,21 +69,11 @@ class SearchBooks extends React.Component<IProps, IState> {
         )
       })
     return (
-      <div className = "search-book">
-        <div className = "search-input">
-          <input
-            type="text"
-            className="search-box"
-            placeholder="책 제목을 입력해 주세요"
-            value={this.state.title}
-            onChange={this.handleChangeTitle}
-          ></input>
-        </div>
-        <button onClick={this.clickSearchButton}>검색</button>
+      <div className = "search-book">       
         <div className="search-result">
-          {this.state.searchTitle === "" ? 
+          {/* {this.state.searchTitle === "" ? 
           readingBook :  
-          <h3 className = "search-result-title">{this.state.searchTitle}에 대한 책</h3>}
+          <h3 className = "search-result-title">{this.state.searchTitle}에 대한 책</h3>} */}
           {searchBookList}
         </div>
       </div>

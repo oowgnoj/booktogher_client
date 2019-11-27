@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { slide as Menu, State } from "react-burger-menu";
+
 import { Link } from "react-router-dom";
 
 class GuestGreeting extends React.Component {
@@ -21,7 +21,10 @@ class GuestGreeting extends React.Component {
           id="offcanvas-slide"
           uk-offcanvas="overlay: true, esc-close: true, bg-close:true"
         >
-          <div className="uk-offcanvas-bar" style={{ backgroundColor: "peru" }}>
+          <div
+            className="uk-offcanvas-bar"
+            style={{ backgroundColor: "#233253" }}
+          >
             <span
               className="uk-offcanvas-close"
               uk-close

@@ -14,7 +14,6 @@ import Store from "../../Redux/configureStore";
 import "./index.css";
 import { connect } from "react-redux";
 import { any } from "prop-types";
-const { Parallax } = require("react-materialize");
 
 // const dispatch = useDispatch()
 
@@ -124,16 +123,7 @@ class Main extends React.Component {
             </Link>
           </div>
         </div>
-        <Parallax
-          id="parallax_bottom"
-          image={
-            <img
-              src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-              alt=""
-              className="main_parallax_image"
-            />
-          }
-        />
+
         <div className="main_review_list_start">
           <RecoReviewList reviews={props.review.slice(1, 5)} />
           <RecoReviewList reviews={props.review.slice(1, 5)} />
