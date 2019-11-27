@@ -11,9 +11,12 @@ import {
 import ProgressBar from "./ProgressBar";
 import NavBar from "./NavBar";
 import BookEntry from "./BookEntry";
+import Cards from "./cards";
 import BookSelect from "./../writeCuration/BookSelect";
-import { updateUserInfo, requestUserInfo } from "../../Redux/modules/user";
+import { updateUserInfo } from "../../Redux/modules/user";
 import { modifyForm } from "./../shared/helper";
+
+import "./index.css";
 
 interface IProps {
   User: IUserInfo;
@@ -126,14 +129,10 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
   if (bookStatus === "to_read") {
     return (
       <div>
-        <img
-          style={{ width: "100%", height: "400px" }}
-          src={
-            "https://images.unsplash.com/photo-1471107191679-f26174d2d41e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=966&q=80"
-          }
-        />
         <div className="wrapper">
+          <Cards />
           {temp}
+          {/* <ProgressBar UserInfo={props.user} /> */}
           <button id="toRead" onClick={handleSearchBox}>
             책 추가
           </button>
@@ -153,7 +152,7 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
   } else if (bookStatus === "reading") {
     return (
       <div className="wrapper">
-        <ProgressBar UserInfo={props.user} />
+        {/* <ProgressBar UserInfo={props.user} /> */}
         <NavBar handleActive={handleActive} />
         {userBooks[1].map((el: IBookReading) => {
           return (

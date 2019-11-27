@@ -1,0 +1,10 @@
+/* .uk-card-title {
+  display: inline-block;
+  width: 150px;
+  height: 200px;
+} */
+.uk-card .uk-card-primary .uk-card-body {
+  display: inline-block;
+  width: 150px;
+  height: 200px;
+}

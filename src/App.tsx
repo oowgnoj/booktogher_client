@@ -19,9 +19,7 @@ import MyBook from "./components/myBook";
 import MyCuration from "./components/myCuration";
 import MyLikes from "./components/myLikes";
 import Search from "./components/searchPage/SearchPage";
-import EditPost from "./components/writeReview/EditPost"
-
-
+import EditPost from "./components/writeReview/EditPost";
 
 const App: React.FC = (props: any): ReactElement => {
   useEffect(() => {
