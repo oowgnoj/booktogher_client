@@ -1,12 +1,6 @@
 import React, { ReactElement } from "react";
 
 import "./cards.css";
-<<<<<<< HEAD
-
-=======
-import { filter } from "domutils";
-import { url } from "inspector";
->>>>>>> 20ac62183e96df3de22c135462373260a6c5a733
 const Cards: React.FC = (): ReactElement => {
   return (
     <div>
@@ -32,45 +26,15 @@ const Cards: React.FC = (): ReactElement => {
           <div
             className="uk-card uk-card-primary uk-card-body jongwoo"
             style={{
+              backgroundColor: "white",
               display: "inline-block",
-              textAlign: "center",
-              width: "80px",
-<<<<<<< HEAD
-              height: "100px"
-=======
               height: "100px",
-              backgroundColor: "white"
->>>>>>> 20ac62183e96df3de22c135462373260a6c5a733
+              textAlign: "center",
+              width: "80px"
             }}
           >
             <p>Finished Book</p>
           </div>
-<<<<<<< HEAD
-          <div
-            className="uk-card uk-card-primary uk-card-body"
-            style={{
-              display: "inline-block",
-              textAlign: "center",
-              width: "80px",
-              height: "100px"
-            }}
-          >
-            <p>Reading Book</p>
-          </div>
-          <div
-            className="uk-card uk-card-primary uk-card-body"
-            style={{
-              display: "inline-block",
-              textAlign: "center",
-              width: "80px",
-              height: "100px"
-            }}
-          >
-            {" "}
-            <p>TO read</p>
-          </div>
-=======
->>>>>>> 20ac62183e96df3de22c135462373260a6c5a733
         </div>
       </div>
     </div>
