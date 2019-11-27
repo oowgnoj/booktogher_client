@@ -1,3 +1,9 @@
+.search-i {
+  position: fixed;
+  right: 36px;
+  top: 0px;
+}
+
 .search-area {
   width: 100%;
   display: flex;
