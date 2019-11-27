@@ -107,7 +107,7 @@ class EditPost extends React.Component<RouteComponentProps<IMatchParams>, IState
       rating: this.state.rating
     }
     console.log(this.state.body, postRating)
-    fetchEditReview(redirectReview, this.state.body)
+    fetchEditReview(redirectReview, this.state.body, this.state.reviewId)
     //fetchBookRating(postRating)
   }
 

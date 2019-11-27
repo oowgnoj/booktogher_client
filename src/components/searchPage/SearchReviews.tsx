@@ -6,56 +6,31 @@ import "./SearchBook.css"
 
 interface IState {
   reviews: IReviewWithBooks[];
-  title: string;
   searchTitle : string;
 }
 
-class SearchReviews extends React.Component<{}, IState> {
-  constructor({}) {
-    super({});
+interface IProps {
+  reviews: IReviewWithBooks[];
+  searchTitle: string;
+}
+
+class SearchReviews extends React.Component<IProps, IState> {
+  constructor(props:IProps) {
+    super(props);
     this.state = {
-      reviews: [
-        {
-          _id: "",
-          author: {
-            _id: "",
-            image: "",
-            name: "",
-            profile: ""
-          },
-          title: "",
-          books: [{
-            _id: "",
-            authors: [""],
-            contents: "",
-            thumbnail: "",
-            title: "",
-          }],
-          contents: "",
-          thumbnail: "",
-          likes: [""]
-        }
-      ],
-      title: '',
-      searchTitle : ""
+      reviews: this.props.reviews,
+      searchTitle : this.props.searchTitle
     }
-    this.handleChangeTitle = this.handleChangeTitle.bind(this);
-    this.clickSearchButton = this.clickSearchButton.bind(this);
   }
 
-  public handleChangeTitle(e: React.ChangeEvent<HTMLInputElement>): void {
-    this.setState({ title: e.target.value });
-  }
-
-  public clickSearchButton(): void {
-    const setStateBook = (res: any): void => {
-      this.setState({ reviews: res , searchTitle: this.state.title});
-    };
-    fetchReviewSearch(setStateBook, this.state.title);
+  public componentDidUpdate(prevProps: any): void {
+    if (this.props.reviews !== prevProps.reviews) {
+      this.setState({ reviews: this.props.reviews }); 
+    }
   }
 
   public render(): ReactElement {
-    const searchBookList: ReactElement[] = this.state.reviews.map(
+    const searchReviewList: ReactElement[] = this.props.reviews.map(
       (info: IReviewWithBooks) => {
         return (
           <div key ={info._id} className="review-detail">
@@ -70,21 +45,11 @@ class SearchReviews extends React.Component<{}, IState> {
     );
     return (
       <div className = "search-book">
-        <div className = "search-input">
-          <input
-            type="text"
-            className="search-box"
-            placeholder="서평 제목을 입력해 주세요"
-            value={this.state.title}
-            onChange={this.handleChangeTitle}
-          ></input>
-        </div>
-        <button onClick={this.clickSearchButton}>검색</button>
         <div className="search-result">
-          {this.state.searchTitle === "" ? 
+          {/* {this.state.searchTitle === "" ? 
           null  :  
-          <h3 className = "search-result-title">{this.state.searchTitle}에 대한 서평</h3>}
-          {searchBookList}
+          <h3 className = "search-result-title">{this.state.searchTitle}에 대한 서평</h3>} */}
+          {searchReviewList}
         </div>
       </div>
     )

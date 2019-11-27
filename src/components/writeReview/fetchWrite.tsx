@@ -94,8 +94,8 @@ export const fetchBookRating = (post: IRating): any => {
     });
 };
 
-export const fetchEditReview = (callback: any, post: IPostReview): any => {
-  fetch(`${url}/reviews`, {
+export const fetchEditReview = (callback: any, post: IPostReview, id: string): any => {
+  fetch(`${url}/reviews/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json"
