@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { slide as Menu, State } from "react-burger-menu";
+
 import { Link } from "react-router-dom";
 
 class GuestGreeting extends React.Component {

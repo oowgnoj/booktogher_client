@@ -1,4 +1,4 @@
-import { IAuthor, ICuration, IReview } from "./Types";
+import { IAuthor, IReviewBook, ICuration, IReview } from "./Types";
 
 export const author: IAuthor = {
   _id: "",
@@ -27,4 +27,14 @@ export const reviews: IReview[] = [
     thumbnail: "",
     title: ""
   }
+];
+
+export const reviewsBooks: IReviewBook[][] = [
+  [
+    {
+      _id: "",
+      thumbnail: "",
+      title: ""
+    }
+  ]
 ];

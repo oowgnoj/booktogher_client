@@ -1,4 +1,12 @@
-import { IBookSearch, IReviewSearch, IReviews, ICuration } from "./Types";
+import {
+  IBook,
+  IBookSearch,
+  IReview,
+  IReviewSearch,
+  IReviews,
+  IReviewBook,
+  ICuration
+} from "./Types";
 
 const url: string = "http://booktogether.ap-northeast-2.elasticbeanstalk.com";
 
@@ -65,8 +73,22 @@ export const fetchGetCurations = (callback: any, authorId: string): any => {
     .then((res: IReviews) => callback(res));
 };
 
-export const fetchGetReviews = (callback: any, authorId: string): any => {
+export const fetchGetReviews = (
+  reviewCallback: any,
+  bookCallback: any,
+  authorId: string
+): any => {
   fetch(`${url}/reviews?author=${authorId}`)
     .then((res: Response) => res.json())
-    .then((res: IReviews) => callback(res));
+    .then((res: IReview[]) => {
+      reviewCallback(res);
+      const promises: any = res.map((review: IReview) => {
+        return fetch(`${url}/books?review=${review._id}`);
+      });
+      Promise.all(promises).then((res: any) => {
+        Promise.all(res.map((el: any) => el.json())).then(res => {
+          bookCallback(res);
+        });
+      });
+    });
 };

@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { connect } from "react-redux";
 import { requestLogout } from "../../Redux/modules/user";
-import { slide as Menu, State } from "react-burger-menu";
+
 import Store from "../../Redux/configureStore";
 import { IUserInfo } from "../shared/Types";
 import { Link } from "react-router-dom";
@@ -129,10 +129,6 @@ class UserGreeting extends React.Component {
       </div>
     );
   }
-
-  public onStateChange = (state: State): void => {
-    console.log(state.isOpen);
-  };
 }
 
 function mapStateToProps(state: any): any {

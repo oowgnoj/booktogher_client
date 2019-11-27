@@ -217,11 +217,24 @@ export interface IAuthorProps {
   handleClose: any;
 }
 
+export interface IReviewBook {
+  // states interface for userhistorymodal
+  _id: string;
+  title: string;
+  thumbnail: string;
+}
+
+export interface IReviewProps {
+  reviews: IReview[];
+  books: IReviewBook[][];
+}
+
 export interface IHistoryStates {
   // states interface for userhistorymodal
   author: IAuthor;
   curations: ICuration[];
   reviews: IReview[];
+  reviewsBooks: IReviewBook[][];
   tab: string;
   isOpen: boolean;
 }

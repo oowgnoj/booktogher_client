@@ -1,6 +1,12 @@
 import React, { Component, MouseEvent } from "react";
-import { ICuration, IReview, IAuthorProps, IHistoryStates } from "./Types";
-import { curations, reviews } from "./InitialStates";
+import {
+  IBook,
+  ICuration,
+  IReview,
+  IAuthorProps,
+  IHistoryStates
+} from "./Types";
+import { curations, reviews, reviewsBooks } from "./InitialStates";
 import { fetchGetCurations, fetchGetReviews } from "./Fetch";
 import UserHistoryReview from "./UserHistoryReview";
 import UserHistoryCuration from "./UserHistoryCuration";
@@ -17,6 +23,7 @@ export default class UserHistoryModal extends Component<
       author: this.props.author,
       curations,
       reviews,
+      reviewsBooks,
       tab: "reviews",
       isOpen: true
     };
@@ -31,8 +38,22 @@ export default class UserHistoryModal extends Component<
     const setReviews = (response: IReview[]): void => {
       this.setState({ reviews: response });
     };
+    const setReviewsBooks = (response: IBook[][]): void => {
+      const booksInfo = response.map((books: IBook[]) =>
+        books.map((book: IBook) => {
+          return {
+            _id: book._id,
+            thumbnail: book.thumbnail,
+            title: book.title
+          };
+        })
+      );
+      console.log("book 이중 매핑 잘 되었니...? 걱정이다 정말", booksInfo);
+      this.setState({ reviewsBooks: booksInfo });
+    };
+
     fetchGetCurations(setCurations, this.state.author._id);
-    fetchGetReviews(setReviews, this.state.author._id);
+    fetchGetReviews(setReviews, setReviewsBooks, this.state.author._id);
   }
 
   public handleTab(event: MouseEvent): void {
@@ -105,7 +126,10 @@ export default class UserHistoryModal extends Component<
                   </div>
                   <div className="history_list">
                     {this.state.tab === "reviews" ? (
-                      <UserHistoryReview reviews={this.state.reviews} />
+                      <UserHistoryReview
+                        reviews={this.state.reviews}
+                        books={this.state.reviewsBooks}
+                      />
                     ) : null}
                     {this.state.tab === "curations" ? (
                       <UserHistoryCuration curations={this.state.curations} />
