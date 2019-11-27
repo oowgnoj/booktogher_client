@@ -24,6 +24,7 @@ import SearchForm from "./components/searchPage/SearchForm"
 
 
 
+
 const App: React.FC = (props: any): ReactElement => {
   useEffect(() => {
     props.checkUserStatus();
@@ -34,7 +35,7 @@ const App: React.FC = (props: any): ReactElement => {
       <Sidebar />
       <SearchForm />
       <Switch>
-        <Route path="/" exact component={Main} />
+        <Route exact path="/" component={Main} />
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
         <Route path="/mypage" component={Mypage} />
