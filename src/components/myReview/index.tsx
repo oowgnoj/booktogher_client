@@ -20,10 +20,11 @@ const Reviews: React.FC = (props: any): ReactElement => {
 
   return (
     <div className="wrapper">
+      <h2>your reviews</h2>
       {myReview.length ? (
         myReview.map((el: IReview) => <Entry Review={el} />)
       ) : (
-        <div>없습니다</div>
+        <div></div>
       )}
     </div>
   );

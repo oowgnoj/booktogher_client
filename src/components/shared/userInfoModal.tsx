@@ -69,9 +69,6 @@ const EditUserInfo: React.FC<IProps> = ({
 
   return (
     <div>
-      {console.log(nameState)}
-      {console.log(emailState)}
-      {console.log(profileState)}
       <div className="uk-modal-header">
         <h2 className="uk-modal-title">user information</h2>
       </div>
@@ -85,7 +82,7 @@ const EditUserInfo: React.FC<IProps> = ({
               backgroundColor: "white"
             }}
           >
-            <div className="uk-margin">
+            <div>
               <input
                 className="uk-input"
                 type="text"
@@ -94,7 +91,7 @@ const EditUserInfo: React.FC<IProps> = ({
                 id="name"
               />
             </div>
-            <div className="uk-margin">
+            <div>
               <input
                 className="uk-input"
                 type="text"
@@ -104,7 +101,7 @@ const EditUserInfo: React.FC<IProps> = ({
               />
             </div>
 
-            <div className="uk-margin">
+            <div>
               <textarea
                 className="uk-textarea"
                 defaultValue={user.profile}
@@ -119,7 +116,6 @@ const EditUserInfo: React.FC<IProps> = ({
           </fieldset>
         </form>
       </div>
-
       <div className="uk-modal-footer uk-text-right">
         <button
           className="uk-button uk-button-default uk-modal-close"
