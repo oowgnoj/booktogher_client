@@ -57,6 +57,7 @@ const EditUserInfo: React.FC<IProps> = ({
       updateUserImg(userImg);
       updateUserInfo(userInfo);
     }
+    handleClose(e);
   };
 
   return (
@@ -104,13 +105,6 @@ const EditUserInfo: React.FC<IProps> = ({
                 type="file"
                 onChange={handleImageChange}
               />
-              <button
-                className="submitButton"
-                type="submit"
-                onClick={handleSubmit}
-              >
-                Upload Image
-              </button>
             </div>
           </fieldset>
         </form>

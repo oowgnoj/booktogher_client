@@ -37,13 +37,9 @@ interface IProps {
 const Curation: React.FC<IProps> = (props: any): ReactElement => {
   const [myCuration, setMyCuration] = useState<ICuration[]>(fakeCurations);
 
-  const mounted = useRef(props);
   useEffect(() => {
-    if (mounted.current.user._id !== props.user._id) {
-      fetchCuration(setMyCuration, props.user._id);
-      mounted.current.user._id = props.user._id;
-    }
-  });
+    fetchCuration(setMyCuration, props.user._id);
+  }, [props.user._id]);
 
   return (
     <div className="wrapper">
