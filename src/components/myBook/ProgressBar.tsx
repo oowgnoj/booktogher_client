@@ -40,30 +40,6 @@ const ProgressBar: React.FC<IProps> = ({ UserInfo }): ReactElement => {
         max="100"
         style={barStyle}
       ></progress>
-      <progress
-        id="js-progressbar"
-        className="uk-progress"
-        value={essayGoal}
-        max="50"
-        style={barStyle}
-      ></progress>
-      <div
-        className="Wrapper_button"
-        style={{ width: "50%", display: "inline-block" }}
-      >
-        <button className="uk-button uk-button-text" onClick={handleGoalModal}>
-          change Goal
-        </button>
-      </div>
-
-      <div
-        className="Wrapper_button"
-        style={{ width: "50%", display: "inline-block" }}
-      >
-        <button className="uk-button uk-button-text" onClick={handleGoalModal}>
-          change Goal
-        </button>
-      </div>
     </div>
   );
 };
