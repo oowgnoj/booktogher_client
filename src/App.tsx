@@ -20,6 +20,10 @@ import MyCuration from "./components/myCuration";
 import MyLikes from "./components/myLikes";
 import Search from "./components/searchPage/SearchPage";
 import EditPost from "./components/writeReview/EditPost";
+import SearchForm from "./components/searchPage/SearchForm"
+
+
+
 
 const App: React.FC = (props: any): ReactElement => {
   useEffect(() => {
@@ -29,6 +33,7 @@ const App: React.FC = (props: any): ReactElement => {
   return (
     <BrowserRouter>
       <Sidebar />
+      <SearchForm />
       <Switch>
         <Route exact path="/" component={Main} />
         <Route path="/signup" component={Signup} />
@@ -44,8 +49,9 @@ const App: React.FC = (props: any): ReactElement => {
         <Route path="/mybook" component={MyBook} />
         <Route path="/mycuration" component={MyCuration} />
         <Route path="/mylikes" component={MyLikes} />
-        <Route path="/search" component={Search} />
+        <Route path="/search/:keyWord" component={Search} />
         <Route path="/editReview/:id" component={EditPost} />
+        <Route path="/searchForm" component={SearchForm} />
         <Route path="*" to="/" />
       </Switch>
     </BrowserRouter>

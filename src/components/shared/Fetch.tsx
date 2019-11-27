@@ -41,16 +41,17 @@ export const fetchCuration = (callback?: any, id?: string): any => {
     });
 };
 export const fetchReviewLikes = (callback?: any, id?: string): any => {
-  fetch(`${url}/reviews?list_type=mylikes`, {
+  fetch(`${url}/reviews?list_type=my_likes`, {
     credentials: "include"
   })
     .then((res: Response) => res.json())
     .then((res: IReviews) => {
+      console.log(res);
       callback(res);
     });
 };
 export const fetchCurationLikes = (callback?: any, id?: string): any => {
-  fetch(`${url}/curations?list_type=mylikes`, {
+  fetch(`${url}/curations?list_type=my_likes`, {
     credentials: "include"
   })
     .then((res: Response) => res.json())

@@ -16,14 +16,14 @@ const Button: React.FC<IProps> = ({
 }: IProps): ReactElement => {
   let firstValue: string;
   let secondValue: string;
-  if (status === "toRead") {
+  if (status === "to_read") {
     firstValue = "reading";
     secondValue = "finished";
   } else if (status === "reading") {
-    firstValue = "to read";
+    firstValue = "to_read";
     secondValue = "finished";
   } else {
-    firstValue = "to read";
+    firstValue = "to_read";
     secondValue = "reading";
   }
 

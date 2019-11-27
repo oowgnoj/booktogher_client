@@ -142,7 +142,7 @@ class BookSelect extends React.Component<IProps, IState> {
     return (
       <div>
         {this.state.isOpen ? (
-          <div className="Modal-overlay">
+          <div className="Modal-overlay uk-animation-slide-top-small">
             <div className="Modal">
               <div className="button-wrap">
                 <button onClick={this.clickConfirm}> 완료 </button>

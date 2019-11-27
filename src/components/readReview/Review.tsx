@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import { Link } from "react-router-dom"
 import { IReview, IReviewProps, IBook } from "./reviewInterface";
 import { IRating } from "./../shared/Types"
 import { fetchReviewLikes, fetchDeleteLikes, fetchBookRatings } from "./fetchReview"
@@ -64,7 +65,6 @@ class Review extends React.Component< IProps, IState> {
   }
   
   public componentDidUpdate(prevProps: any): void {
-    console.log(1,this.props.review.author._id, 2,this.props.user._id, this.state.edit)
     if (this.props.user._id !== prevProps.user._id) {
       if(this.props.user._id === this.props.review.author._id){
         this.setState({edit:true})
@@ -130,7 +130,7 @@ class Review extends React.Component< IProps, IState> {
                 ></span>}
               <div>{this.state.likesNum}</div>
               {this.state.edit ? 
-              <button>수정</button> 
+              <button><Link to={`/editReview/${review._id}`}>수정</Link></button> 
               : null }             
             </div>
           </div>

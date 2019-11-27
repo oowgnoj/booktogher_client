@@ -22,3 +22,15 @@
   font-size: 15px;
   text-align: center;
 }
+
+.del {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+}
+
+.image-container {
+  position: relative;
+  text-align: center;
+  color: white;
+}

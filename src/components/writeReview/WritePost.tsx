@@ -1,15 +1,17 @@
 import * as React from "react";
-import { Redirect, Route } from "react-router-dom";
+import { Redirect, Route, Link } from "react-router-dom";
 import ReactQuill, { Quill } from "react-quill";
 import { TwitterPicker } from "react-color";
 import "react-quill/dist/quill.snow.css";
 import "./writePost.css";
 import { fetchPostReview, fetchBookRating } from "./fetchWrite";
 import ReadReview from "../readReview/ReadReview";
+import Modal from "../writeCuration/BookSelect";
 
 interface IState {
   body: IWrite;
-  colorPicker : boolean;
+  bookModal: boolean;
+  colorPicker: boolean;
   rating: number;
   redirect: boolean;
   reviewId: string;
@@ -27,6 +29,13 @@ interface IProps {
   bookTitle: string[];
 }
 
+interface ISelectedBook {
+  _id: string;
+  title: string;
+  authors: string;
+  thumbnail: string;
+}
+
 class WritePost extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
@@ -38,7 +47,8 @@ class WritePost extends React.Component<IProps, IState> {
         thumbnail: "#eeeeee",
         title: ""
       },
-      colorPicker : false,
+      bookModal: false,
+      colorPicker: false,
       rating: 0,
       redirect: false,
       reviewId: ""
@@ -49,7 +59,9 @@ class WritePost extends React.Component<IProps, IState> {
     this.clickPostSubmit = this.clickPostSubmit.bind(this);
     this.clickPaintBucket = this.clickPaintBucket.bind(this);
     this.handlePublished = this.handlePublished.bind(this);
-    this.handleChangeRating = this.handleChangeRating.bind(this)
+    this.handleChangeRating = this.handleChangeRating.bind(this);
+    this.handleBookSelect = this.handleBookSelect.bind(this);
+    this.addBooks = this.addBooks.bind(this);
   }
 
   public handleChangePost(value: string): void {
@@ -98,16 +110,20 @@ class WritePost extends React.Component<IProps, IState> {
   }
 
   public clickPostSubmit(): void {
-    const redirectReview = (id : string) : any =>{
-      this.setState({reviewId : id})
-      this.setState({redirect: true })
+    if(this.state.body.books.length !== 0){
+      const redirectReview = (id : string) : any =>{
+        this.setState({reviewId : id})
+        this.setState({redirect: true })
+      }
+      const postRating: any ={
+        book : this.state.body.books[0],
+        rating: this.state.rating
+      }
+      fetchPostReview(redirectReview, this.state.body)
+      fetchBookRating(postRating)
+    } else {
+      alert("책을 선택해주세요")
     }
-    const postRating: any ={
-      book : this.state.body.books[0],
-      rating: this.state.rating
-    }
-    fetchPostReview(redirectReview, this.state.body)
-    fetchBookRating(postRating)
   }
 
   public isNumberKey(e:any): any { 
@@ -129,6 +145,18 @@ class WritePost extends React.Component<IProps, IState> {
     } 
   }
 
+  public handleBookSelect(): void {
+    this.setState({ bookModal: true });
+  }
+
+  public addBooks = (selectedBooks: ISelectedBook): any => {
+    // const newBooks: ISelectedBook[] =
+    //   this.state.body.books.length !== 0 && this.state.body.books[0]
+    //     ? this.state.body.books.concat(selectedBooks)
+    //     : this.state.body.books.slice(1).concat(selectedBooks);
+    // this.setState({ books: newBooks, bookModal: false });
+  };
+
   public render(): any {
     const style: any = {
       backgroundColor : this.state.body.thumbnail
@@ -139,6 +167,7 @@ class WritePost extends React.Component<IProps, IState> {
         {this.state.redirect ? (
           <Redirect to={`/review/${this.state.reviewId}`} />
         ) : null}
+        {this.state.bookModal ? <Modal addBooks={this.addBooks} /> : null}
 
         <div className="write-title-area" style={style}>
           <input
@@ -150,6 +179,10 @@ class WritePost extends React.Component<IProps, IState> {
           ></input>
 
           <div className="submit">
+            <button 
+                className ="uk-button uk-button-default"
+                onClick ={this.handleBookSelect}
+              >책선택</button>
             <span 
               uk-icon="paint-bucket" 
               className="uk-button uk-button-default paint-bucket" 

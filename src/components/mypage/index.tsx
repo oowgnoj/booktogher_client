@@ -8,8 +8,16 @@ interface IProps {
 }
 const MyInfo: React.FC<IProps> = (props: any): ReactElement => {
   return (
-    <div className="wrapper">
-      <UserInfo userInfo={props.user} />
+    <div>
+      <img
+        style={{ width: "100%" }}
+        src={
+          "https://images.unsplash.com/photo-1471107191679-f26174d2d41e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=966&q=80"
+        }
+      />
+      <div className="wrapper">
+        <UserInfo userInfo={props.user} />
+      </div>
     </div>
   );
 };
