@@ -23,8 +23,6 @@ import EditPost from "./components/writeReview/EditPost";
 import SearchForm from "./components/searchPage/SearchForm"
 
 
-
-
 const App: React.FC = (props: any): ReactElement => {
   useEffect(() => {
     props.checkUserStatus();

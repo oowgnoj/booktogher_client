@@ -3,6 +3,7 @@ import { IUserInfo } from "./../shared/Types";
 import { connect } from "react-redux";
 import { updateUserInfo, updateUserImg } from "./../../Redux/modules/user";
 import { IUserEditInfo } from "./../../Redux/Types";
+import { UserInfo } from "os";
 
 interface IProps {
   handleClose: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -19,25 +20,26 @@ const EditUserInfo: React.FC<IProps> = ({
 }: IProps): ReactElement => {
   const [userInfo, setUserInfo] = useState<IUserInfo>(user);
   const [userImg, setUserImg] = useState<any>("");
+  const [nameState, setName] = useState<string>("");
+  const [emailState, setEmail] = useState<string>("");
+  const [profileState, setProfile] = useState<string>("");
 
   // handle change email and username (input box)
   const changeInputValue = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
-    const updatedUser: IUserInfo = Object.assign({}, user);
-    event.target.id === "name"
-      ? (updatedUser.name = event.target.value)
-      : (updatedUser.email = event.target.value);
-    setUserInfo(updatedUser);
+    if (event.target.id === "name") {
+      setName(event.target.value);
+    } else if (event.target.id === "email") {
+      setEmail(event.target.value);
+    }
   };
 
   // handle change profile (text area)
   const changeProfileValue = (
     event: React.ChangeEvent<HTMLTextAreaElement>
   ): void => {
-    const updatedUser: IUserInfo = Object.assign({}, user);
-    updatedUser.profile = event.target.value;
-    setUserInfo(updatedUser);
+    setProfile(event.target.value);
   };
 
   const handleImageChange = (
@@ -49,13 +51,18 @@ const EditUserInfo: React.FC<IProps> = ({
   const handleSubmit = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void => {
-    const { name, email, profile } = userInfo;
-    const userInfoUpdated = { name, email, profile };
+    let updated: any = {
+      name: nameState,
+      email: emailState,
+      profile: profileState
+    };
     if (!userImg) {
-      updateUserInfo(userInfo);
+      updateUserInfo(updated);
     } else {
+      console.log("image");
+
       updateUserImg(userImg);
-      updateUserInfo(userInfo);
+      updateUserInfo(updated);
     }
     handleClose(e);
   };
@@ -75,7 +82,7 @@ const EditUserInfo: React.FC<IProps> = ({
               backgroundColor: "white"
             }}
           >
-            <div className="uk-margin">
+            <div>
               <input
                 className="uk-input"
                 type="text"
@@ -84,7 +91,7 @@ const EditUserInfo: React.FC<IProps> = ({
                 id="name"
               />
             </div>
-            <div className="uk-margin">
+            <div>
               <input
                 className="uk-input"
                 type="text"
@@ -94,7 +101,7 @@ const EditUserInfo: React.FC<IProps> = ({
               />
             </div>
 
-            <div className="uk-margin">
+            <div>
               <textarea
                 className="uk-textarea"
                 defaultValue={user.profile}
@@ -109,7 +116,6 @@ const EditUserInfo: React.FC<IProps> = ({
           </fieldset>
         </form>
       </div>
-
       <div className="uk-modal-footer uk-text-right">
         <button
           className="uk-button uk-button-default uk-modal-close"

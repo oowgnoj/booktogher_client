@@ -151,7 +151,7 @@ export const requestUserInfo = (): any => (dispatch: any): Promise<void> => {
 export const updateUserInfo = (userInfo: any): any => (
   dispatch: any
 ): Promise<void> => {
-  console.log("dispatch 시작");
+  console.log("리덕스 유저인포", userInfo);
   dispatch({ type: UPDATEINFO_PENDING });
   return updateInfoAPI(userInfo)
     .then((response: Response) => response.json())
