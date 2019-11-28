@@ -1,9 +1,11 @@
 import React, { ReactElement, useEffect, useState, useRef } from "react";
 import { fakeReviews } from "./../../fakeData/fake";
 
+import { reviews } from "./../shared/InitialStates";
 import Entry from "./../shared/reviewEntry";
-import { IReview, IUserInfo } from "./../shared/Types";
-import { fetchReview } from "./../shared/Fetch";
+import { IReview, IUserInfo, IReviewBook } from "./../shared/Types";
+import { reviewsBooks } from "./../shared/InitialStates";
+import { fetchGetReviews } from "./../shared/Fetch";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./index.css";
@@ -14,15 +16,28 @@ interface IProps {
 }
 
 const Reviews: React.FC = (props: any): ReactElement => {
-  const [myReview, setReview] = useState<IReview[]>(fakeReviews);
+  const [userID, setUserID] = useState<string>("");
+  const [myReview, setReview] = useState<IReview[]>(reviews);
+  const [reviewBooks, setReviewBooks] = useState<IReviewBook[][]>(reviewsBooks);
+
   useEffect(() => {
-    fetchReview(setReview, props.user._id);
-  }, [props.user._id]);
+    setUserID(props.user._id);
+  });
+
+  const didMountRef = useRef(false);
+
+  useEffect(() => {
+    if (didMountRef.current) {
+      fetchGetReviews(setReview, setReviewBooks, userID);
+    } else {
+      didMountRef.current = true;
+    }
+  }, [userID]);
 
   return (
     <div className="wrapper">
-      <h2 style={{ fontWeight: "bold" }}>
-        your reviews
+      <h2 style={{ fontFamily: "Nanum Myeongjo, serif", fontWeight: "bold" }}>
+        나의 서평
         <button
           className="uk-button uk-button-default"
           style={{ float: "right" }}
@@ -34,7 +49,14 @@ const Reviews: React.FC = (props: any): ReactElement => {
       </h2>
       <hr style={{ marginTop: "5px" }} />
       {myReview.length ? (
-        myReview.map((el: IReview) => <Entry Review={el} />)
+        myReview.map((el: IReview, index: number) => (
+          <Entry
+            Review={el}
+            from={"my"}
+            key={index}
+            books={reviewBooks[index]}
+          />
+        ))
       ) : (
         <div></div>
       )}

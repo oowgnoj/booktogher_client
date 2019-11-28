@@ -80,7 +80,29 @@
       background-color: #7f49c8;
     }
   }
-
+}
+.content .book-select div {
+  margin-top: 10px;
+  line-height: 1;
+  font-size: 14px;
+  text-align: center;
+}
+.button-wrap {
+  margin-top: 8px;
+  float: right;
+  button {
+    width: 100px;
+    padding: 12px 0;
+    border-radius: 10px;
+    background-color: #ad7cef;
+    font-size: 13pt;
+    color: white;
+    border: 0;
+    cursor: pointer;
+    &:hover {
+      background-color: #7f49c8;
+    }
+  }
   .content .book-select div {
     margin-top: 10px;
     line-height: 1;
@@ -102,33 +124,9 @@
       &:hover {
         background-color: #7f49c8;
       }
-    }
-    .content .book-select div {
-      margin-top: 10px;
-      line-height: 1;
-      font-size: 14px;
-      text-align: center;
-    }
-    .button-wrap {
-      margin-top: 8px;
-      float: right;
-      button {
-        width: 100px;
-        padding: 12px 0;
-        border-radius: 10px;
-        background-color: #ad7cef;
-        font-size: 13pt;
-        color: white;
-        border: 0;
-        cursor: pointer;
-        &:hover {
-          background-color: #7f49c8;
-        }
-        &:active {
-          background-color: #7e49c8;
-        }
+      &:active {
+        background-color: #7e49c8;
       }
     }
   }
-}
 }

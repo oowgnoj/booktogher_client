@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import "./index.css";
+import { fontFamily } from "@material-ui/system";
 const fakeCurations: ICuration[] = [
   {
     _id: "ObjectId",
@@ -45,14 +46,14 @@ const Curation: React.FC<IProps> = (props: any): ReactElement => {
 
   return (
     <div className="wrapper">
-      <h2 style={{ fontWeight: "bold" }}>
-        your curations{" "}
+      <h2 style={{ fontFamily: "Nanum Myeongjo, serif", fontWeight: "bold" }}>
+        나의 큐레이션{" "}
         <button
           className="uk-button uk-button-default"
           style={{ float: "right" }}
         >
           <Link to={"/postcuration"} style={{ color: "black" }}>
-            서평 쓰러가기
+            큐레이션 쓰러가기
           </Link>
         </button>
       </h2>
@@ -60,7 +61,7 @@ const Curation: React.FC<IProps> = (props: any): ReactElement => {
       <hr style={{ marginTop: "5px" }} />
       {myCuration.length ? (
         myCuration.map((el: ICuration) => {
-          return <Entry curation={el} />;
+          return <Entry curation={el} from={"my"} />;
         })
       ) : (
         <div>없습니다</div>

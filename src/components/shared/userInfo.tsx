@@ -22,48 +22,17 @@ const Info: React.FC = (props: any): ReactElement => {
       {handleEditModal === true ? (
         <Modal handleClose={handleClose} user={props.user.User} />
       ) : (
-        // <article className="uk-comment uk-comment-primary">
-        //   <header
-        //     className="uk-comment-header uk-grid-medium uk-flex-middle"
-        //     uk-grid
-        //   >
-        //     <div className="uk-width-auto">
-        //       <img
-        //         className="uk-comment-avatar"
-        //         src="images/avatar.jpg"
-        //         width="80"
-        //         height="80"
-        //         alt=""
-        //       />
-        //     </div>
-        //     <div className="uk-width-expand">
-        //       <h4 className="uk-comment-title uk-margin-remove">
-        //         <a className="uk-link-reset" href="#">
-        //           {props.user.User.name}
-        //         </a>
-        //       </h4>
-        //       <ul className="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-        //         <li>
-        //           <a href="#">{props.user.User.email}</a>
-        //         </li>
-        //         <li id="fix" onClick={handleActive}>
-        //           <a>정보수정</a>
-        //         </li>
-        //       </ul>
-        //     </div>
-        //   </header>
-        //   <div className="uk-comment-body">
-        //     <p>{props.user.User.profile}</p>
-        //     <img src={props.user.User.image} style={{ width: "300px" }} />
-        //   </div>
-        // </article>
         <div
           className="uk-child-width-1-2@s"
           uk-grid
           style={{ paddingRight: "100px", paddingLeft: "100px" }}
         >
           <img
-            src={props.user.User.image}
+            src={
+              props.user.User.image
+                ? props.user.User.image
+                : "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjRpvrUmIzmAhXQfd4KHUDHCOcQjRx6BAgBEAQ&url=http%3A%2F%2Fgetdrawings.com%2Fdefault-user-icon&psig=AOvVaw2wj9hItFTx3GEcLK-_4BHh&ust=1575005978900259"
+            }
             style={{
               display: "inline-block",
               width: "40%",
@@ -72,8 +41,7 @@ const Info: React.FC = (props: any): ReactElement => {
               padding: "0",
               marginTop: "0",
               boxSizing: "border-box",
-
-              opacity: "70%"
+              opacity: "80%"
             }}
           />
           <div
@@ -85,12 +53,17 @@ const Info: React.FC = (props: any): ReactElement => {
               margin: "0",
               padding: "50px",
               marginTop: "0",
-              verticalAlign: "top"
+              verticalAlign: "top",
+              backgroundColor: "white"
             }}
           >
             {console.log(props.user.User)}{" "}
             <img
-              src={props.user.User.image}
+              src={
+                props.user.User.image
+                  ? props.user.User.image
+                  : "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjRpvrUmIzmAhXQfd4KHUDHCOcQjRx6BAgBEAQ&url=http%3A%2F%2Fgetdrawings.com%2Fdefault-user-icon&psig=AOvVaw2wj9hItFTx3GEcLK-_4BHh&ust=1575005978900259"
+              }
               style={{
                 borderRadius: "50%",
                 width: "75px",
@@ -126,7 +99,7 @@ const Info: React.FC = (props: any): ReactElement => {
             {props.user.User.profile === "" ? (
               <p>유저 프로필을 입력해주세요. </p>
             ) : (
-              <p>{props.user.User.profile} </p>
+              <p style={{ fontStyle: "italic" }}>{props.user.User.profile} </p>
             )}
           </div>
         </div>

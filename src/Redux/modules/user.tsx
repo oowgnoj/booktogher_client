@@ -56,7 +56,6 @@ function getInfoAPI(): Promise<Response> {
 
 // mypage update user information
 function updateInfoAPI(data: any): Promise<Response> {
-  console.log("redux ", data);
   return fetch("http://booktogether.ap-northeast-2.elasticbeanstalk.com/user", {
     credentials: "include",
     headers: {
@@ -70,6 +69,7 @@ function updateInfoAPI(data: any): Promise<Response> {
 // mypage update user image
 function updateUserImgAPI(data: File): Promise<Response> {
   const img = new FormData();
+  console.log(data);
   img.append("image", data, data.name);
 
   return fetch("http://booktogether.ap-northeast-2.elasticbeanstalk.com/user", {
@@ -111,7 +111,6 @@ export const requestLogin = (mail: string, pw: string): any => (
 
 export const requestLogout = (): any => (dispatch: any): Promise<void> => {
   dispatch({ type: LOGOUT_PENDING });
-  console.log("logout 확인");
   return logoutAPI()
     .then((response: Response) => response.json())
     .then((result: JSON) => {

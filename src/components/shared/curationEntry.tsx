@@ -5,10 +5,12 @@ import { Link } from "react-router-dom";
 
 interface IProps {
   curation: ICuration;
+  from: string;
 }
 
 const CurationEntry: React.FC<IProps> = ({
-  curation
+  curation,
+  from
 }: IProps): ReactElement => {
   console.log(curation);
 
@@ -20,7 +22,7 @@ const CurationEntry: React.FC<IProps> = ({
           {" "}
           {curation.title}{" "}
           <span style={{ color: "#696969", fontSize: "15px" }}>
-            {curation.author.name}
+            {from === "likes" ? curation.author.name : ""}
           </span>
         </dt>{" "}
         {/* <dd style={{ color: "grey" }}>{curation.author.name}</dd> */}
