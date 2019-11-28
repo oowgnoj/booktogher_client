@@ -3,6 +3,7 @@ import { ICuration, IUserInfo } from "./../shared/Types";
 import { fetchCuration } from "./../shared/Fetch";
 import Entry from "./../shared/curationEntry";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import "./index.css";
 const fakeCurations: ICuration[] = [
@@ -44,7 +45,19 @@ const Curation: React.FC<IProps> = (props: any): ReactElement => {
 
   return (
     <div className="wrapper">
-      <h2>your curations</h2>
+      <h2 style={{ fontWeight: "bold" }}>
+        your curations{" "}
+        <button
+          className="uk-button uk-button-default"
+          style={{ float: "right" }}
+        >
+          <Link to={"/postcuration"} style={{ color: "black" }}>
+            서평 쓰러가기
+          </Link>
+        </button>
+      </h2>
+
+      <hr style={{ marginTop: "5px" }} />
       {myCuration.length ? (
         myCuration.map((el: ICuration) => {
           return <Entry curation={el} />;

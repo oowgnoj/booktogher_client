@@ -29,6 +29,8 @@ const MyLikes: React.FC = (props: any): ReactElement => {
 
   return (
     <div className="wrapper">
+      <h2 style={{ fontWeight: "bold", margin: "0" }}>my likes</h2>
+      <hr />
       <NavBar handleActive={handleActive} />
       {navBar === "review"
         ? myReview.map((el: IReview) => {

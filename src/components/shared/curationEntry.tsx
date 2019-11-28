@@ -15,14 +15,7 @@ const CurationEntry: React.FC<IProps> = ({
   const path: string = `/curation/${curation._id}`;
   return (
     <Link to={path} style={{ textDecoration: "none" }}>
-      <dl
-        className="uk-description-list"
-        style={{
-          borderBottom: "solid",
-          borderColor: "#D3D3D3",
-          borderBottomWidth: "1px"
-        }}
-      >
+      <dl className="uk-description-list">
         <dt style={{ fontSize: "25px" }}>
           {" "}
           {curation.title}{" "}

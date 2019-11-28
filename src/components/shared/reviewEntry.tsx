@@ -2,6 +2,7 @@ import React, { ReactElement } from "react";
 import "../../../node_modules/uikit/dist/css/uikit.css";
 import { IReview } from "./Types";
 import { Link } from "react-router-dom";
+import "./curationEntry.css";
 
 interface IProps {
   Review: IReview;
@@ -10,14 +11,7 @@ const ReviewEntry: React.FC<IProps> = ({ Review }: IProps): ReactElement => {
   const path: string = `/review/${Review._id}`;
   return (
     <Link to={path} style={{ textDecoration: "none" }}>
-      <dl
-        className="uk-description-list"
-        style={{
-          borderBottom: "solid",
-          borderColor: "#D3D3D3",
-          borderBottomWidth: "1px"
-        }}
-      >
+      <dl className="uk-description-list">
         <dt style={{ fontSize: "25px" }}>
           {" "}
           {Review.title}{" "}

@@ -1,5 +1,8 @@
 .uk-description-list {
-  width: "60%";
+  border-bottom: solid;
+  border-color: #d3d3d3;
+  border-bottom-width: 1px;
+  padding-bottom: 10px;
 }
 .table {
   width: "60%";

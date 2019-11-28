@@ -8,15 +8,13 @@ import {
   IBookFinished
 } from "./../shared/Types";
 
-import ProgressBar from "./ProgressBar";
 import NavBar from "./NavBar";
 import BookEntry from "./BookEntry";
 import Cards from "./cards";
 import BookSelect from "./../writeCuration/BookSelect";
 import { updateUserInfo } from "../../Redux/modules/user";
 import { modifyForm } from "./../shared/helper";
-
-import "./index.css";
+import "./test.css";
 
 interface IProps {
   User: IUserInfo;
@@ -124,10 +122,7 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
   // rendering :  need refactoring
   if (bookStatus === "to_read") {
     return (
-      <div>
-        <button id="toRead" onClick={handleSearchBox}>
-          책 추가
-        </button>
+      <div className="random">
         <div className="wrapper">
           <Cards />
           {temp}
@@ -141,6 +136,20 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
               />
             );
           })}
+          <button
+            id="toRead"
+            style={{
+              width: "120px",
+              height: "174px",
+              marginTop: "10px",
+              backgroundColor: "white",
+              border: "dashed",
+              borderColor: "grey"
+            }}
+            onClick={handleSearchBox}
+          >
+            책 추가
+          </button>
         </div>
       </div>
     );

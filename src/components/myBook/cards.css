@@ -1,10 +1,15 @@
-/* .uk-card-title {
+.cardEntry {
+  background-color: white;
   display: inline-block;
-  width: 150px;
-  height: 200px;
-} */
-.uk-card .uk-card-primary .uk-card-body {
-  display: inline-block;
-  width: 150px;
-  height: 200px;
+  height: 70px;
+  text-align: center;
+  width: 140px;
+  padding: 0;
+  border-right: solid 1px;
+  border-color: #d3d3d3;
+}
+
+.card-Content {
+  color: black;
+  fontsize: 14px;
 }

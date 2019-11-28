@@ -5,7 +5,7 @@ interface IProps {
 }
 const NavBar: React.FC<IProps> = ({ handleActive }) => {
   return (
-    <div>
+    <div style={{ textAlign: "center" }}>
       <nav
         className="uk-navbar-container uk-margin"
         uk-navbar="mode: click"
