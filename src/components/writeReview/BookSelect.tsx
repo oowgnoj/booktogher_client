@@ -68,14 +68,16 @@ class BookSelect extends React.Component<IProps, IState> {
       selectBooksId: this.state.selectBooksId.concat([idTitle[0]]),
       selectBooksTitle: this.state.selectBooksTitle.concat([idTitle[1]])
     });
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+    alert(`${idTitle[1]}을 선택하셨습니다.`)
   }
 
-  public clickClose(): void {
-    
-      this.setState({
-        isOpen: !this.state.isOpen
-      });
-
+  public clickClose(): void { 
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
   }
 
   public clickConfirm(): void {
@@ -144,13 +146,14 @@ class BookSelect extends React.Component<IProps, IState> {
         {this.state.isOpen ? (
           <div className="Modal-overlay uk-animation-slide-top-small">
             <div className="Modal">
-              <div className="button-wrap">
+              {/* <div className="button-wrap">
                 <button onClick={this.clickConfirm}> 완료 </button>
-              </div>
-              <div className="button-wrap">
-                <button onClick={this.clickClose}> close </button>
-              </div>
+              </div> */}
               <p className="title">
+                <button 
+                    uk-icon="close"
+                    type="button" 
+                    onClick={this.clickClose}></button>
                 <input
                   type="text"
                   className="search-box"
@@ -159,16 +162,15 @@ class BookSelect extends React.Component<IProps, IState> {
                   onChange={this.handleChangeTitle}
                   onKeyPress ={this.handleKeyPress}
                 ></input>
-                {/* <button onClick={this.clickSearchButton}>검색</button> */}
               </p>
-              {this.state.selectBooksTitle.length === 1 ? (
+              {/* {this.state.selectBooksTitle.length === 1 ? (
                   <h5>책을 선택해주세요.</h5>        
               ) : (
                 <h5>[{selectBookRender}]를 선택하셨습니다.</h5>
-              )}
+              )} */}
               <div className="content">
                 {this.state.books[0]._id ==="" ?
-                readingBook 
+                "서평을 쓸 책을 검색해주세요." 
                 : searchBookList}
               </div>
               

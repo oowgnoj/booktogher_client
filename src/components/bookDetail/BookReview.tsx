@@ -41,7 +41,7 @@ class BookReview extends React.Component<IProps, IReviews> {
       if(info.published !== false){
         return(
           <div key ={info._id} className="review-detail">
-            <Link to={`/review/${info._id}`}><h5>{info.title}</h5></Link>
+            <Link to={`/review/${info._id}`}><h4>{info.title}</h4></Link>
             <div>{info.author.name}</div>
             <div>{info.contents.replace(/<[^>]*>?/gm, '')}</div>        
           </div>
@@ -51,7 +51,8 @@ class BookReview extends React.Component<IProps, IReviews> {
     return (
       <div className ="book-reveiw">
         <h4>이 책의 서평들</h4>
-        <div>{reviewList}</div>
+        <div>{this.state.reviews.length === 0 ?
+        "이 책의 서평이 없습니다." : reviewList}</div>
       </div>
     );
   }

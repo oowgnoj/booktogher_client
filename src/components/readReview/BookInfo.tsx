@@ -20,7 +20,6 @@ const BookInfo = ({ bookList }: IBookState): ReactElement => {
             <b>제목 : {info.title}</b>
           </div>
           <div className="book-authors">저자 : {info.authors}</div>
-          <div className="book-rating">평점 : </div>
           <div className="book-contents">책 소개 : {info.contents}</div>
         </div>
       </div>

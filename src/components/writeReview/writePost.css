@@ -19,30 +19,47 @@
   border: none;
   transition: 0.5s;
   outline: none;
-  margin-top: 80px;
+  margin-top: 40px;
   margin-bottom: 0;
   background-color:rgb(49, 49, 49,0);
-  padding-left: 30px;
-  padding-bottom: 10px;
-  
+  padding-left: 40px;
+  padding-bottom: 10px; 
+}
+
+.write-title::placeholder {
+  color: #c2c2c2;
+  font-style: italic;
 }
 
 .write-post {
   width: 70%;
+  min-height: 400px;
 }
 
 .submit {
-  width: 600px;
+  width: 800px;
   padding: 10px;
-  margin-left: auto;
+  margin-left: 79%;
 }
 
 .submit button {
-  margin-left: 3px;
+  color: #212121;
+  letter-spacing: 0px;
+  word-spacing: 0px;
+  line-height: 0;
+  width: 50px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  margin: 2px;
+  float: left;
 }
 
-.submit span {
-  margin-left: 3px;
+.color-picker-area{
+  height: 96px;
+}
+.twitter-picker-area{
+  padding-left: 340px;
 }
 
 .unlock {
@@ -54,8 +71,9 @@
 }
 
 .rating-box {
-  padding: 20px 15px 12px 15px;
-  margin-right: auto;
+  padding: 0 10px;
+  margin-left: 40%;
+  height: 20px;
 }
 
 .rating-box input {
