@@ -13,48 +13,43 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 800px;
-  height: 700px;
+  width: 720px;
+  height: 560px;
   background-color: white;
   overflow: hidden;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
   padding: 20px;
-  & > * {
-    &:first-child {
-      margin-top: 5px;
-    }
-    margin-left: 20px;
-    margin-right: 20px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
   p.title {
-    width: 700px;
-    margin-left: 16px;
+    width: 620px;
     font-size: 16pt;
     font-weight: bold;
     color: #333;
     padding: 10px;
-    margin: 0;
-  }
-  h5 {
-    padding: 0px;
-    margin: 0;
-  }
+    border-bottom: 2px solid rgb(95, 95, 95);
 
+  }
+  p.title button {
+    margin-left: 600px;
+  }
   .search-box {
-    width: 760px;
+    width: 620px;
     border: none;
     outline: none;
     font-size: 20px;
     color: #333;
-    padding: 10px 10px 0 10px;
+    padding: 10px 0px 0 0px;
   }
   .content {
-    width: 760px;
-    margin-top: 16px;
+    width: 620px;
+    margin-top: 20px;
     padding: 10px;
     font-size: 12pt;
     color: #999;
-    max-height: 500px;
+    max-height: 360px;
     overflow-y: auto;
   }
 }
@@ -64,71 +59,7 @@
   font-size: 14px;
   text-align: center;
 }
-.button-wrap {
-  margin: 10px;
-  margin-top: 8px;
-  button {
-    width: 100%;
-    padding: 12px 0;
-    border-radius: 10px;
-    background-color: #ad7cef;
-    font-size: 13pt;
-    color: white;
-    border: 0;
-    cursor: pointer;
-    &:hover {
-      background-color: #7f49c8;
-    }
-  }
-}
-  .content .book-select div {
-    margin-top: 10px;
-    line-height: 1;
-    font-size: 14px;
-    text-align: center;
-  }
-  .button-wrap {
-    margin-top: 8px;
-    float: right;
-    button {
-      width: 100px;
-      padding: 12px 0;
-      border-radius: 10px;
-      background-color: #ad7cef;
-      font-size: 13pt;
-      color: white;
-      border: 0;
-      cursor: pointer;
-      &:hover {
-        background-color: #7f49c8;
-      }
-    }
-    .content .book-select div {
-      margin-top: 10px;
-      line-height: 1;
-      font-size: 14px;
-      text-align: center;
-    }
-    .button-wrap {
-      margin-top: 8px;
-      float: right;
-      button {
-        width: 100px;
-        padding: 12px 0;
-        border-radius: 10px;
-        background-color: #ad7cef;
-        font-size: 13pt;
-        color: white;
-        border: 0;
-        cursor: pointer;
-        &:hover {
-          background-color: #7f49c8;
-        }
-        &:active {
-          background-color: #7e49c8;
-        }
-      }
-    }
-  }
+
+  
 
 

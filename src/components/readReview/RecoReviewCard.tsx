@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 const RecoReviewCard = ({ review } : any): ReactElement => {  
   return (
     <a href={`/review/${review._id}`} style={{ textDecoration: "none" }}>
-      <div className="main_review_list_review">
+      <div className="review_review_list_review">
         <div className="" uk-grid>
           <div>
             <div 

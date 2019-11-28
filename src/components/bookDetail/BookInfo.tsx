@@ -18,25 +18,20 @@ interface INewBook {
 }
 
 const BookInfo = ({ bookInfo, rating, user, updateUserInfo } :IProps): ReactElement => {
-    const bookAvgRating = rating.map((info:IRating)=>{
-      return(
-        <div>
-          평점 : {info.avg_rating}
-        </div>
+  console.log(bookInfo)
+    const bookAvgRating: ReactElement[]  = rating.map((info:IRating)=>{
+      return( 
+        <span> {info.avg_rating} </span>
       )
     })
-    const bookUserRating = rating.map((info:IRating)=>{
+    const bookUserRating: ReactElement[] = rating.map((info:IRating)=>{
       if(info.user_rating !== null){
         return(
-          <div>
-            평점 : {info.user_rating.rating}
-          </div>
+          <span> {info.user_rating.rating} </span>
         )
       } else {
         return(
-          <div>
-            평점 : 0
-          </div>
+          <span>0</span>
         )
       }
     })
@@ -56,23 +51,39 @@ const BookInfo = ({ bookInfo, rating, user, updateUserInfo } :IProps): ReactElem
       } 
     }
 
-  return (
+    const bookAuther: ReactElement[] = bookInfo.authors.map((author:string) =>{
+      return(
+        <span>{`${author} `}</span>
+      )
+    })
 
+    const bookTranslator: ReactElement[] = bookInfo.translators.map((translator:string) =>{
+      return(
+        <span>{`${translator} `}</span>
+      )
+    })
+
+  return (
     <div className ="bookInfo-wrap">
-      {console.log(user)}
-        <div className="book-title">
-          <img src={bookInfo.thumbnail} width="120px" height="150px" />
+        <div className="book-detail-book-title">
+          <img src={bookInfo.thumbnail} width="140px"  />
           <b>{bookInfo.title}</b>
+          <span 
+            uk-icon="heart"
+            uk-tooltip="읽고싶은책추가"
+            className ="book-like"
+            onClick={handleAddToRead}
+          ></span>
         </div>
         <div className="">
-        <div>서로모임 평점{bookAvgRating}</div>
-        <div>나의 평점{bookUserRating}</div>
-          <button 
-            className ="book-like"
-            onClick={handleAddToRead}>읽고싶은책추가</button>
+          <div className="rating-render-box">서로모임 평점{bookAvgRating}</div>
+          <div className="rating-render-box">나의 평점{bookUserRating}</div>
+          
           <div className="bookInfo-detail">
-            <div>저자 : {bookInfo.authors}</div>
-            <div>통역 : {bookInfo.translators}</div>
+            <div>저자 : {bookAuther}</div>
+            {bookInfo.translators.length !== 0 ? 
+              <div>통역 : {bookTranslator}</div>
+              : null}
             <div>출판사 : {bookInfo.publisher}</div>
             <div>판매가격 : {bookInfo.price}</div>
             <div className="book-desc">책 소개 : {bookInfo.contents}</div>
