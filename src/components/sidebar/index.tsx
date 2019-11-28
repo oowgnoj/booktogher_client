@@ -24,7 +24,11 @@ class Sidebar extends React.Component {
       <GuestGreeting />
     );
 
-    return <div className="sidebar nav-overlay">{greeting}</div>;
+    return (
+      <div className="sidebar nav-overlay" style={{ position: "absolute" }}>
+        {greeting}
+      </div>
+    );
   }
 }
 

@@ -25,7 +25,34 @@ const RecoCurationEntry = ({ curation }: IProps): ReactElement => {
   const path: string = `/curation/${curation._id}`;
   return (
     <Link to={path} style={{ textDecoration: "none" }}>
-      <div className="main_review_list_review">
+      <div className="main_review_list_review" style={{ marginLeft: "5%" }}>
+        <div className="uk-card uk-card-default">
+          <div className="uk-card-media-top crop">
+            <img src={curation.author.image} alt="" className="cropped" />
+          </div>
+          <div className="uk-card-body" style={{ height: "80px" }}>
+            <h3
+              className="uk-card-title"
+              style={{ fontSize: "1em", textAlign: "center" }}
+            >
+              {curation.title.length > 30
+                ? curation.title.slice(0, 30) + "..."
+                : curation.title}
+            </h3>
+            {/* <p>{curation.content}</p> */}
+            <p
+              style={{
+                textAlign: "right",
+                color: "lightgray",
+                fontSize: "0.8em"
+              }}
+            >
+              보러가기
+            </p>
+          </div>
+        </div>
+
+        {/* 
         <div className="uk-card uk-card-default">
           <div className="uk-card-media-top">
             <img
@@ -38,14 +65,12 @@ const RecoCurationEntry = ({ curation }: IProps): ReactElement => {
           </div>
           <div className="uk-card-body" style={{ height: "150px" }}>
             <h3 className="uk-card-title">
-              {curation.title.length > 30
-                ? curation.title.slice(0, 30) + "..."
-                : curation.title}
+              
             </h3>
             <p>{curation.content}</p>
             <p style={{ textAlign: "right", color: "lightgray" }}>보러가기</p>
           </div>
-        </div>
+        </div> */}
       </div>
     </Link>
   );
