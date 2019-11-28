@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { updateUserInfo, updateUserImg } from "./../../Redux/modules/user";
 import { IUserEditInfo } from "./../../Redux/Types";
 import { UserInfo } from "os";
+import { borderTop } from "@material-ui/system";
 
 interface IProps {
   handleClose: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -69,17 +70,14 @@ const EditUserInfo: React.FC<IProps> = ({
 
   return (
     <div>
-      <div className="uk-modal-header">
-        <h2 className="uk-modal-title">user information</h2>
-      </div>
-
       <div className="uk-modal-body" uk-overflow-auto>
         <form>
           <fieldset
             className="uk-fieldset"
             style={{
               width: "500px",
-              backgroundColor: "white"
+              backgroundColor: "white",
+              borderTop: "none"
             }}
           >
             <div>
@@ -120,6 +118,7 @@ const EditUserInfo: React.FC<IProps> = ({
         <button
           className="uk-button uk-button-default uk-modal-close"
           type="button"
+          onClick={handleClose}
         >
           Cancel
         </button>

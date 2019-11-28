@@ -84,33 +84,44 @@ const Info: React.FC = (props: any): ReactElement => {
               height: "350px",
               margin: "0",
               padding: "50px",
-              paddingTop: "20px",
               marginTop: "0",
               verticalAlign: "top"
             }}
           >
-            {console.log(props.user.User)}
-            <p>
-              {" "}
-              <img
-                src={props.user.User.image}
+            {console.log(props.user.User)}{" "}
+            <img
+              src={props.user.User.image}
+              style={{
+                borderRadius: "50%",
+                width: "75px",
+                height: "75px",
+                marginRight: "10px",
+                display: "inline-block"
+              }}
+            />
+            <p
+              style={{
+                display: "inline-block",
+                margin: 0,
+                verticalAlign: "top",
+                marginTop: "10px"
+              }}
+            >
+              <span>{props.user.User.name} </span> <br />
+              <button
+                className="uk-button uk-button-default"
+                onClick={handleActive}
                 style={{
-                  borderRadius: "50%",
-                  width: "100px",
-                  height: "100px",
-                  marginRight: "10px"
+                  float: "right",
+                  height: "auto",
+                  padding: 0,
+                  fontSize: "13px",
+                  color: "blue",
+                  borderColor: "blue"
                 }}
-              />
-              <span>{props.user.User.name} </span>
-              <span>
-                <button
-                  className="uk-button uk-button-default"
-                  onClick={handleActive}
-                  style={{ border: "none" }}
-                >
-                  change
-                </button>
-              </span>
+              >
+                change info
+              </button>
             </p>
             {props.user.User.profile === "" ? (
               <p>유저 프로필을 입력해주세요. </p>
