@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.7.0",
+    "@material-ui/lab": "^4.0.0-alpha.33",
     "@types/grid-styled": "^4.2.1",
     "@types/jest": "24.0.23",
     "@types/node": "12.12.7",

@@ -7,7 +7,7 @@ import { instanceOf } from "prop-types";
 import userInfo from "../shared/userInfo";
 
 interface IProps {
-  bookInfo : IBookDetail;
+  bookInfo: IBookDetail;
   rating: IRating[];
   user: IUserInfo;
   updateUserInfo: (data: any) => void;
@@ -16,6 +16,7 @@ interface IProps {
 interface INewBook {
   book: string;
 }
+
 
 const BookInfo = ({ bookInfo, rating, user, updateUserInfo } :IProps): ReactElement => {
   console.log(bookInfo)
@@ -50,6 +51,8 @@ const BookInfo = ({ bookInfo, rating, user, updateUserInfo } :IProps): ReactElem
         alert("읽고 싶은 책에 추가 되었습니다.")
       } 
     }
+  });
+  const toRead: any = user.to_read;
 
     const bookAuther: ReactElement[] = bookInfo.authors.map((author:string) =>{
       return(
@@ -89,6 +92,7 @@ const BookInfo = ({ bookInfo, rating, user, updateUserInfo } :IProps): ReactElem
             <div className="book-desc">책 소개 : {bookInfo.contents}</div>
           </div>         
         </div>
+      </div>
     </div>
   );
 };
