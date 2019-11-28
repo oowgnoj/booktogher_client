@@ -38,7 +38,7 @@ class SearchForm extends React.Component<{}, IState> {
   return ( 
     <div>
       {this.state.redirect ?
-      <Redirect to={`/search/${this.state.title}`}/>
+      <div className="uk-dark"><Redirect to={`/search/${this.state.title}`}/></div>
       :
       <div>
       <div className="nav-overlay uk-navbar-right search-i">

@@ -37,14 +37,16 @@ class BookReview extends React.Component<IProps, IReviews> {
   }
 
   public render(): ReactElement {
-    const reviewList:ReactElement[] = this.state.reviews.map((info: IReview) => {
-      return(
-        <div key ={info._id} className="review-detail">
-          <Link to={`/review/${info._id}`}><h5>{info.title}</h5></Link>
-          <div>{info.author.name}</div>
-          <div>{info.contents.replace(/<[^>]*>?/gm, '')}</div>        
-        </div>
-        )    
+    const reviewList: any = this.state.reviews.map((info: IReview) => {
+      if(info.published !== false){
+        return(
+          <div key ={info._id} className="review-detail">
+            <Link to={`/review/${info._id}`}><h5>{info.title}</h5></Link>
+            <div>{info.author.name}</div>
+            <div>{info.contents.replace(/<[^>]*>?/gm, '')}</div>        
+          </div>
+          ) 
+        }   
       })
     return (
       <div className ="book-reveiw">

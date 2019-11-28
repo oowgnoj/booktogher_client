@@ -67,3 +67,14 @@ export const fetchBookRatings = (callback: any, id: string): any => {
     callback(res);
   });
 };
+
+export const fetchDeleteReview = (callback: any, id: string): any => {
+  fetch(`${url}/reviews/${id}`, {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "DELETE"
+  })
+    .then((res: Response) => callback())
+};
