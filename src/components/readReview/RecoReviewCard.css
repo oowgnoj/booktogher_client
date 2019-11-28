@@ -11,3 +11,10 @@
 .recoReview-img {
   padding: 15px;
 }
+
+.main_review_list_review {
+  flex: 1 1 auto;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin-right: 10px;
+  width: 450px;
+}

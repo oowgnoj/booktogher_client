@@ -143,7 +143,8 @@ class Review extends React.Component< IProps, IState> {
             <div className="review-likes">
               {this.props.review.published === false ? 
               <span>비공개</span> : null}
-              {this.state.likes ?
+              
+              {this.state.likes ? 
               <span 
                 uk-icon="heart" 
                 className="heartLike" 
@@ -153,11 +154,15 @@ class Review extends React.Component< IProps, IState> {
                   uk-icon="heart" 
                   onClick ={this.handleClickLikes}
                 ></span>}
-              <div>{this.state.likesNum}</div>
+              <div className="likes-num">{this.state.likesNum}</div>
+
               {this.state.edit ? 
-              <div>
-                <button><Link to={`/editReview/${review._id}`}>수정</Link></button>
-                <button
+              <div className="button-area">
+                <button className="modify-button">
+                  <Link to={`/editReview/${review._id}`}>수정</Link>
+                </button>
+                <button 
+                  className="modify-button"
                   onClick = {this.handleDeleteReview}
                 >삭제</button>
               </div>

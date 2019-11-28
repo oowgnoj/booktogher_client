@@ -53,11 +53,13 @@ class RecoReview extends React.Component<IProps, IReviewState> {
         )
       }      
     })
+
     return (
       <div className="recoReview-area">
         <h4>이 책의 다른 서평들</h4>
-        <div className="recoReview">
-          { reviewCard }</div>
+        <div className="uk-flex uk-child-width-1-2@s recoReview-list" uk-grid>
+          {this.state.reviewList.length === 1 ? 
+          "이 책의 서평이 없습니다.": reviewCard} </div>
       </div>
     );
   }
