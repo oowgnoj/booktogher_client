@@ -1,8 +1,13 @@
 import React, { ReactElement } from "react";
-import { Link } from "react-router-dom"
+import { Redirect, Link } from "react-router-dom"
 import { IReview, IReviewProps, IBook } from "./reviewInterface";
 import { IRating } from "./../shared/Types"
-import { fetchReviewLikes, fetchDeleteLikes, fetchBookRatings } from "./fetchReview"
+import { 
+  fetchReviewLikes, 
+  fetchDeleteLikes, 
+  fetchBookRatings,
+  fetchDeleteReview 
+} from "./fetchReview"
 import { connect } from "react-redux";
 import "./Review.css";
 
@@ -17,6 +22,7 @@ interface IState{
   edit : boolean;
   likesNum : number;
   bookRating: IRating[];
+  redirect: boolean;
 }
 
 class Review extends React.Component< IProps, IState> {
@@ -26,17 +32,22 @@ class Review extends React.Component< IProps, IState> {
       bookRating:[],
       edit : false,
       likes: false ,
-      likesNum: this.props.review.likes.length,     
+      likesNum: this.props.review.likes.length,
+      redirect: false     
     }
     this.handleClickLikes = this.handleClickLikes.bind(this);
-    this.handleDeleteLikes = this.handleDeleteLikes.bind(this)
+    this.handleDeleteLikes = this.handleDeleteLikes.bind(this);
+    this.handleDeleteReview = this.handleDeleteReview.bind(this)
   }
 
   public handleClickLikes(): void{
     const setStateLikesNum = (res: any): void => {
       return res
     };
-    if(!this.state.likes){
+    if(this.props.user._id === undefined){
+      alert("로그인 후 좋아요 해주세요")
+    }
+    else if(!this.state.likes){
       fetchReviewLikes(setStateLikesNum, this.props.review._id)
       this.setState({ likes : !this.state.likes})
       this.setState({ likesNum: this.state.likesNum +1 });
@@ -52,6 +63,14 @@ class Review extends React.Component< IProps, IState> {
       this.setState({ likes : !this.state.likes})
       this.setState({ likesNum: this.state.likesNum -1 });
     }
+  }
+
+  public handleDeleteReview(): void{
+    const redirectHome = (): void =>{
+      this.setState({redirect: true })
+    }
+    fetchDeleteReview(redirectHome, this.props.review._id)
+    alert("서평이 삭제됩니다")
   }
 
   public componentDidMount(): void {
@@ -110,14 +129,18 @@ class Review extends React.Component< IProps, IState> {
     const style: any = {
       backgroundColor : review.thumbnail
     }
-
-    
-    return (
+  
+    return (      
       <div className="review-area">
+        {this.state.redirect ? (
+          <Redirect to="/" />
+        ) : null}
         <div className="review-cover" style ={style}>
           <div className="title-area" >
             <h1 className="title">{review.title}</h1>
             <div className="review-likes">
+              {this.props.review.published === false ? 
+              <span>비공개</span> : null}
               {this.state.likes ?
               <span 
                 uk-icon="heart" 
@@ -130,7 +153,12 @@ class Review extends React.Component< IProps, IState> {
                 ></span>}
               <div>{this.state.likesNum}</div>
               {this.state.edit ? 
-              <button><Link to={`/editReview/${review._id}`}>수정</Link></button> 
+              <div>
+                <button><Link to={`/editReview/${review._id}`}>수정</Link></button>
+                <button
+                  onClick = {this.handleDeleteReview}
+                >삭제</button>
+              </div>
               : null }             
             </div>
           </div>

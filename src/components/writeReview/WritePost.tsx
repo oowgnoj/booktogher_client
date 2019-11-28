@@ -2,7 +2,7 @@ import * as React from "react";
 import { Redirect, Route, Link } from "react-router-dom";
 import ReactQuill, { Quill } from "react-quill";
 import { TwitterPicker } from "react-color";
-import "react-quill/dist/quill.snow.css";
+import "../../../node_modules/react-quill/dist/quill.snow.css";
 import "./writePost.css";
 import { fetchPostReview, fetchBookRating } from "./fetchWrite";
 import ReadReview from "../readReview/ReadReview";
@@ -149,18 +149,32 @@ class WritePost extends React.Component<IProps, IState> {
     this.setState({ bookModal: true });
   }
 
-  public addBooks = (selectedBooks: ISelectedBook): any => {
-    // const newBooks: ISelectedBook[] =
-    //   this.state.body.books.length !== 0 && this.state.body.books[0]
-    //     ? this.state.body.books.concat(selectedBooks)
-    //     : this.state.body.books.slice(1).concat(selectedBooks);
-    // this.setState({ books: newBooks, bookModal: false });
+  public addBooks = (selectedBooks: ISelectedBook[]): any => {
+    const selectedBooksId: string[] = selectedBooks.map((book:any)=>{
+      return book._id
+    })
+    const newBooks: string[] =
+      this.state.body.books.length !== 0 && this.state.body.books[0]
+        ? this.state.body.books.concat(selectedBooksId)
+        : this.state.body.books.slice(1).concat(selectedBooksId);
+      this.setState({ 
+        body: {
+          ...this.state.body,
+          books: newBooks
+        }, 
+        bookModal: false 
+      });
   };
 
   public render(): any {
     const style: any = {
       backgroundColor : this.state.body.thumbnail
     }
+
+    // const ratingBooks = this.props.bookTitle.map((book) =>{
+    //   return 
+
+    //   })
 
     return (
       <div className="write-area">
@@ -170,15 +184,7 @@ class WritePost extends React.Component<IProps, IState> {
         {this.state.bookModal ? <Modal addBooks={this.addBooks} /> : null}
 
         <div className="write-title-area" style={style}>
-          <input
-            type="text"
-            className="write-title"
-            placeholder="제목을 입력하세요"
-            value={this.state.body.title}
-            onChange={this.handleChangeTitle}
-          ></input>
-
-          <div className="submit">
+        <div className="submit">
             <button 
                 className ="uk-button uk-button-default"
                 onClick ={this.handleBookSelect}
@@ -213,21 +219,29 @@ class WritePost extends React.Component<IProps, IState> {
                 onChangeComplete={this.handleChangeComplete} 
               /> : null }            
           </div>
-        </div>
 
-        <div className ="rating-box">
-          {this.props.bookTitle} : 
-          평점을 입력해주세요
-          <input 
-            type="number" 
-            min="0"
-            max="10"
-            onChange={this.handleChangeRating}
-            onKeyPress={(e: any): void=>this.isNumberKey(e)}
-            onInput={(e: any): void=>this.numberMaxLength(e)}></input> /10
+
+          <input
+            type="text"
+            className="write-title"
+            placeholder="제목을 입력하세요"
+            value={this.state.body.title}
+            onChange={this.handleChangeTitle}
+          ></input>
         </div>
 
         <div className="write-post">
+          <div className ="rating-box">
+            {this.props.bookTitle} 
+            평점을 입력해주세요
+            <input 
+              type="number" 
+              min="0"
+              max="10"
+              onChange={this.handleChangeRating}
+              onKeyPress={(e: any): void=>this.isNumberKey(e)}
+              onInput={(e: any): void=>this.numberMaxLength(e)}></input> /10
+          </div>
           <ReactQuill
             value={this.state.body.contents}
             onChange={this.handleChangePost}

@@ -6,6 +6,7 @@ import { fetchBookReviewList } from "./fetchReview";
 
 interface IProps {
   bookId: string[];
+  reviewId : string;
 }
 
 class RecoReview extends React.Component<IProps, IReviewState> {
@@ -27,7 +28,7 @@ class RecoReview extends React.Component<IProps, IReviewState> {
           thumbnail: "",
           title: ""
         }
-      ]
+      ],
     };
   }
 
@@ -44,11 +45,13 @@ class RecoReview extends React.Component<IProps, IReviewState> {
   
   public render(): ReactElement {
     const reviewCard: any = this.state.reviewList.map((info: IReview) => {
-      return (
-        <div key ={info._id}>
-           <RecoReviewCard review={info}/>
-        </div>       
-      )
+      if(this.props.reviewId !== info._id && info.published !== false){
+        return (
+          <div key ={info._id}>
+             <RecoReviewCard review={info}/>
+          </div>       
+        )
+      }      
     })
     return (
       <div className="recoReview-area">
