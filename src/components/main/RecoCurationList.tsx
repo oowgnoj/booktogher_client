@@ -31,7 +31,7 @@ const RecoCurationList: React.SFC<IProps> = ({
   );
   return (
     <div className="main_collection_list">
-      <div className="uk-child-width-1-2@m  uk-flex uk-flex-center" uk-grid>
+      <div className="uk-child-width-1-4@s uk-flex uk-flex-center" uk-grid>
         {collectionList}
       </div>
     </div>

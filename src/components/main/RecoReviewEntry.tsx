@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { Link } from "react-router-dom";
+import { textAlign } from "@material-ui/system";
 
 interface IAuthor {
   _id: string;
@@ -30,16 +31,45 @@ const RecoReviewEntry = ({ review }: IProps): ReactElement => {
         <div className="uk-child-width-expand@s uk-text-center" uk-grid>
           <div>
             <div className="uk-card  uk-card-body" style={{ height: "300px" }}>
-              <h3 className="uk-card-title">
-                <span style={{ color: "skyblue", fontSize: "80%" }}>서평</span>{" "}
+              <h3
+                className="uk-card-title"
+                style={{ fontSize: "1.1em", textAlign: "left" }}
+              >
+                <span
+                  style={{
+                    color: "#5b88b2",
+                    fontSize: "60%",
+                    marginRight: "5px"
+                  }}
+                >
+                  서평
+                </span>{" "}
                 {review.title}
               </h3>
-              <p style={{ color: "gray" }}>{review.author.name}</p>
-              <p style={{ color: "gray" }}>
+
+              <p
+                style={{
+                  color: "gray",
+                  fontSize: "0.9em",
+                  textAlign: "justify"
+                }}
+              >
                 {review.contents.length > 120
                   ? review.contents.replace(/<[^>]*>?/gm, "").slice(0, 100) +
                     "..."
                   : review.contents.replace(/<[^>]*>?/gm, "")}
+              </p>
+              <p
+                style={{
+                  color: "gray",
+                  textAlign: "right",
+                  marginTop: "-10px",
+                  marginBottom: "-10px",
+                  fontSize: "0.7em",
+                  fontStyle: "italic"
+                }}
+              >
+                by {review.author.name}
               </p>
             </div>
           </div>

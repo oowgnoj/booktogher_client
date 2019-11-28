@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { Link } from "react-router-dom";
+import { IAuthor, IReview, ICuration } from "../shared/Types";
 import Sidebar from "../sidebar/index";
 import Slider from "./RecoReviewSlider/index";
 import RecoReviewList from "./RecoReviewList";
@@ -29,44 +30,11 @@ collection 받은 다음 books?collection_id=각 recommended collection 으로
 fetch 받은 데이터를 store.dispatch 로 state 에 반영할 예정
 */
 
-interface IAuthor {
-  id: string;
-  image: string;
-  name: string;
-  profile: string;
-}
-
-interface IReview {
-  id: string;
-  author: IAuthor;
-  contents: string;
-  likes: string[];
-  published: boolean;
-  thumbnail: string;
-  title: string;
-}
-
-interface ICollection {
-  id: string;
-  author: IAuthor;
-  content: string;
-  likes: string[];
-  published: boolean;
-  title: string;
-}
-
 interface IState {
-  curation: ICollection[];
+  curation: ICuration[];
   review: IReview[];
 }
 
-/* 
-interface IProps {
-  review: IReview;
-} */
-
-// export const Main: React.FC<IState> = (): ReactElement => {
-// subscribe
 class Main extends React.Component {
   constructor(props: any) {
     super(props);
@@ -82,59 +50,66 @@ class Main extends React.Component {
 
     return (
       <div className="main">
-        <Slider review={props.review[0]} />
-        {/*  <Parallax
-          id="parallax_top"
-          image={
-            <img
-              src="https://images.unsplash.com/photo-1547331994-d26cb135af48?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-              alt=""
-              className="main_parallax_image"
-            />
-          }
-        /> */}
-        <div className="section_wrapper">
-          <div className="section review" style={{ marginLeft: "50px" }}>
-            <Link to="/postreview">
-              <h2 className="header" style={{ marginTop: "30px" }}>
-                서평 쓰러 가기
-                <span
-                  uk-icon="icon:pencil; ratio: 1.5"
-                  style={{ marginLeft: "20px" }}
-                ></span>
-              </h2>
-              <p className="grey-text text-darken-3 lighten-3">
-                서평을 작성해주세요.
-              </p>
-            </Link>
-          </div>
-          <div className="section curation" style={{ marginLeft: "50px" }}>
-            <Link to="/postcuration">
-              <h2 className="header" style={{ marginTop: "30px" }}>
+        <Slider review={props.review} />
+
+        <div className="section_wrappe" style={{ marginTop: "20px" }}>
+          <Link to="/postreview">
+            <div
+              style={{
+                width: "50%",
+                display: "inline-block",
+                textAlign: "center"
+              }}
+            >
+              {/* <div className="uk-dark uk-background-muted uk-padding"> */}
+              {/* <h3>서평</h3> */}
+              {/* <p>
+                  서평을 작성해주세요. 서로모임에 오신 분들께 서평을
+                  공유해주세요.
+                </p> */}
+              <button
+                className="uk-button uk-button-default uk-button-large "
+                style={{ width: "50%" }}
+              >
+                서평 쓰러가기
+              </button>
+            </div>
+            {/* </div> */}
+          </Link>
+          <Link to="/postcuration">
+            <div
+              style={{
+                width: "50%",
+                display: "inline-block",
+                textDecoration: "none",
+                textAlign: "center"
+              }}
+            >
+              {/* <div className="uk-dark uk-background-muted uk-padding"> */}
+              {/* <h3>큐레이션</h3> */}
+              {/*  <p>
+                  큐레이션을 등록해주세요. 책과 서평으로 구성된 당신의 북
+                  플레이리스트를 공유하여 주세요.
+                </p> */}
+              <button className="uk-button uk-button-default uk-button-large ">
                 큐레이션 등록하러 가기
-                <span
-                  uk-icon="icon:pencil; ratio: 1.5"
-                  style={{ marginLeft: "20px" }}
-                ></span>
-              </h2>
-              <p className="grey-text text-darken-3 lighten-3">
-                당신의 북 플레이리스트를 공유하여 주세요.
-              </p>
-            </Link>
-          </div>
+              </button>
+            </div>
+            {/* </div> */}
+          </Link>
         </div>
 
         <div className="main_review_list_start">
           <RecoReviewList reviews={props.review.slice(1, 5)} />
-          <RecoReviewList reviews={props.review.slice(1, 5)} />
         </div>
+
         <div className="main_recocollection_div">
           <div
             className="main_recocollection_title"
             style={{
-              marginBottom: "50px",
-              fontSize: "30px",
-              fontFamily: "Song Myung, serif"
+              marginTop: "80px",
+              marginBottom: "60px",
+              fontSize: "1.3em"
             }}
           >
             서로모임에 오신 분들께서 작성해주신 컬렉션입니다.
@@ -146,42 +121,42 @@ class Main extends React.Component {
   }
 }
 
-interface IAAuthor {
-  _id: string;
-  image: string;
-  name: string;
-  profile: string;
-}
+// interface IAAuthor {
+//   _id: string;
+//   image: string;
+//   name: string;
+//   profile: string;
+// }
 
-interface ICAuration {
-  _id: string;
-  author: IAAuthor;
-  contents: string;
-  likes: string[];
-  published: boolean;
-  title: string;
-}
+// interface ICAuration {
+//   _id: string;
+//   author: IAAuthor;
+//   contents: string;
+//   likes: string[];
+//   published: boolean;
+//   title: string;
+// }
 
-interface IRAeview {
-  id: string;
-  author: IAAuthor;
-  contents: string;
-  likes: string[];
-  published: boolean;
-  thumbnail: string;
-  title: string;
-}
+// interface IRAeview {
+//   id: string;
+//   author: IAAuthor;
+//   contents: string;
+//   likes: string[];
+//   published: boolean;
+//   thumbnail: string;
+//   title: string;
+// }
 
-interface IDAata {
-  curation: ICAuration[];
-  review: IRAeview[];
-}
+// interface IDAata {
+//   curation: ICAuration[];
+//   review: IRAeview[];
+// }
 
-interface ISAtate {
-  data: IDAata;
-  error: boolean;
-  pending: boolean;
-}
+// interface ISAtate {
+//   data: IDAata;
+//   error: boolean;
+//   pending: boolean;
+// }
 
 function mapStateToProps(state: any): any {
   return {
@@ -198,12 +173,3 @@ function mapDispatchToProps(dispatch: any): any {
 } //
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
-
-/*
-<Slider review={props.review[0]} />
-<RecoReviewList reviews={props.review.slice(1, 5)} />
-<span className="main_recocollection_title">
-서로모임에 오신 분들께서 작성해주신 컬렉션입니다.
-</span>
-<RecoCollectionList collections={props.curation.slice(1, 5)} />
-*/

@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css?family=Nanum+Myeongjo:400,700,800|Noto+Sans+KR:300,400&display=swap");
+
+.main_slider {
+  width: 100%;
+  background-color: #f8f8f8;
+  display: inline-block;
+}
+
+.slider_img {
+  width: 50%;
+  height: 100%;
+  float: left;
+  max-width: 50%;
+  max-height: 100%;
+}
+
+.slider_text {
+  font-family: "Gothic A1", sans-serif;
+  width: 50%;
+  display: inline-block;
+}
+
+.slider_text_author {
+  margin-top: 10%;
+  text-align: center;
+  font-size: 1em;
+  color: #666666;
+}
+
+.slider_text_title {
+  margin-top: 10%;
+  text-align: center;
+  font-size: 1.5em;
+  color: #212121;
+}
+
+.slider_text_contents {
+  margin-top: 10%;
+  text-align: center;
+  font-size: 1em;
+  color: #666666;
+}
