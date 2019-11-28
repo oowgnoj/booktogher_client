@@ -1,5 +1,4 @@
 import React, { ReactElement, useEffect, useState, useRef } from "react";
-import { fakeReviews } from "./../../fakeData/fake";
 
 import { reviews } from "./../shared/InitialStates";
 import Entry from "./../shared/reviewEntry";
@@ -63,6 +62,7 @@ const Reviews: React.FC = (props: any): ReactElement => {
     </div>
   );
 };
+
 function mapStateToProps(state: any): any {
   return {
     user: state.user.User

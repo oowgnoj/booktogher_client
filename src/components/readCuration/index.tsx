@@ -2,11 +2,12 @@ import React, { ReactElement } from "react";
 import { connect } from "react-redux";
 import { requestUserInfo } from "../../Redux/modules/user";
 import { Redirect, Route, RouteComponentProps, Link } from "react-router-dom";
+
 import BooksList from "./BooksList";
 import ReviewsList from "./ReviewsList";
 import UserHistoryModal from "../shared/UserHistoryModal";
-import { IAuthor, ICuration, IReview } from "../shared/Types";
-import { string } from "prop-types";
+import { ICuration, IReview } from "../shared/Types";
+import Clean from "../shared/CleanLoading";
 import {
   fetchCuration,
   fetchBooks,
@@ -139,127 +140,125 @@ class ReadCuration extends React.Component<IParams, IState> {
 
   public render(): ReactElement {
     const { curation, books, reviews } = this.state;
-    return (
-      <div className="readCuration">
-        {console.log("큐레이션 읽기 props.userId ? ", this.props.userId)}
-        {console.log(
-          "큐레이션 읽기 curation.likes 에 있는지 ? ",
-          curation.likes.includes(this.props.userId)
-        )}
-        {this.state.historyModal ? (
-          <UserHistoryModal
-            author={this.state.curation.author}
-            handleClose={this.detectHistoryModal}
-          />
-        ) : null}
-        {this.state.isDeleted ? <Redirect to="/" /> : null}
-        <div
-          className="readCuration_header_likes"
-          style={{
-            marginLeft: "130px",
-            marginTop: "54px",
-            float: "left",
-            clear: "right"
-          }}
-        >
-          {curation.likes.includes(this.props.userId) ? (
-            <span
-              uk-icon="icon: heart; ratio: 1.5"
-              onClick={this.handleLikes}
-              className="heart"
-            ></span>
-          ) : (
-            <span
-              uk-icon="icon: heart; ratio: 1.5"
-              onClick={this.handleLikes}
-            ></span>
-          )}
-
-          <span style={{ marginLeft: "13px", fontSize: "20px" }}>
-            {curation.likes ? curation.likes.length : "좋아요 수"}
-          </span>
-        </div>
-        <div className="readCuration_header">
-          <div
-            className="readCuration_header_title"
-            style={{
-              marginTop: "39px",
-              marginLeft: "1px",
-              height: "150px",
-              width: "100%",
-              fontSize: "50px"
-            }}
-          >
-            {curation.title ? curation.title : "큐레이션 제목"}
-          </div>
-          <div
-            className="readCuration_header_user"
-            style={{
-              float: "right",
-              display: "flex",
-              justifyContent: "center",
-              flexDirection: "column"
-            }}
-            onClick={this.handleHistoryClick}
-          >
-            <img
-              src={
-                curation.author.image
-                  ? curation.author.image
-                  : "https://icons-for-free.com/iconfiles/png/128/anonymous+app+contacts+open+line+profile+user+icon-1320183042822068474.png"
-              }
-              alt={curation.author.name}
-              width="80px"
+    if (!curation.author._id) {
+      return <Clean />;
+    } else {
+      return (
+        <div className="readCuration">
+          {this.state.historyModal ? (
+            <UserHistoryModal
+              author={this.state.curation.author}
+              handleClose={this.detectHistoryModal}
             />
+          ) : null}
+          {this.state.isDeleted ? <Redirect to="/" /> : null}
+          <div
+            className="readCuration_header_likes"
+            style={{
+              marginLeft: "130px",
+              marginTop: "54px",
+              float: "left",
+              clear: "right"
+            }}
+          >
+            {curation.likes.includes(this.props.userId) ? (
+              <span
+                uk-icon="icon: heart; ratio: 1.5"
+                onClick={this.handleLikes}
+                className="heart"
+              ></span>
+            ) : (
+              <span
+                uk-icon="icon: heart; ratio: 1.5"
+                onClick={this.handleLikes}
+              ></span>
+            )}
 
-            <p
-              className="readCuration_header_user_name"
-              style={{ fontStyle: "italic" }}
+            <span style={{ marginLeft: "13px", fontSize: "20px" }}>
+              {curation.likes ? curation.likes.length : "좋아요 수"}
+            </span>
+          </div>
+          <div className="readCuration_header">
+            <div
+              className="readCuration_header_title"
+              style={{
+                marginTop: "39px",
+                marginLeft: "1px",
+                height: "150px",
+                width: "100%",
+                fontSize: "50px"
+              }}
             >
-              by <b>{curation.author.name}</b> 님
-            </p>
-            {curation.author._id === this.props.userId ? (
-              <div>
-                <span className="readCuration_header_modify">
-                  <Link to={`/editcuration/${this.props.match.params.id}`}>
+              {curation.title ? curation.title : "제목을 입력해주세요"}
+            </div>
+            <div
+              className="readCuration_header_user"
+              style={{
+                float: "right",
+                display: "flex",
+                justifyContent: "center",
+                flexDirection: "column"
+              }}
+              onClick={this.handleHistoryClick}
+            >
+              <img
+                src={
+                  curation.author.image
+                    ? curation.author.image
+                    : "https://icons-for-free.com/iconfiles/png/128/anonymous+app+contacts+open+line+profile+user+icon-1320183042822068474.png"
+                }
+                alt={curation.author.name}
+                width="80px"
+              />
+
+              <p
+                className="readCuration_header_user_name"
+                style={{ fontStyle: "italic" }}
+              >
+                by <b>{curation.author.name}</b> 님
+              </p>
+              {curation.author._id === this.props.userId ? (
+                <div>
+                  <span className="readCuration_header_modify">
+                    <Link to={`/editcuration/${this.props.match.params.id}`}>
+                      <button
+                        className="uk-button uk-button-text"
+                        style={{ marginRight: "30px" }}
+                      >
+                        수정
+                      </button>
+                    </Link>
+                  </span>
+                  <span className="readCuration_header_delete">
                     <button
                       className="uk-button uk-button-text"
-                      style={{ marginRight: "30px" }}
+                      onClick={this.handleDelete}
                     >
-                      수정
+                      삭제
                     </button>
-                  </Link>
-                </span>
-                <span className="readCuration_header_delete">
-                  <button
-                    className="uk-button uk-button-text"
-                    onClick={this.handleDelete}
-                  >
-                    삭제
-                  </button>
-                </span>
-              </div>
-            ) : null}
+                  </span>
+                </div>
+              ) : null}
+            </div>
           </div>
+          <div
+            className="readCuration_contents"
+            style={{
+              marginLeft: "1px",
+              height: "300px",
+              width: "100%",
+              fontSize: "20px"
+            }}
+          >
+            {curation.contents ? curation.contents : "큐레이션 본문"}
+          </div>
+          <BooksList books={books} />
+          <ReviewsList reviews={reviews} />
         </div>
-        <div
-          className="readCuration_contents"
-          style={{
-            marginLeft: "1px",
-            height: "300px",
-            width: "100%",
-            fontSize: "20px"
-          }}
-        >
-          {curation.contents ? curation.contents : "큐레이션 본문"}
-        </div>
-        <BooksList books={books} />
-        <ReviewsList reviews={reviews} />
-      </div>
-    );
+      );
+    }
   }
 }
-
 function mapStateToProps(state: any): any {
   return {
     userId: state.user.User._id

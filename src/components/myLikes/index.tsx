@@ -5,14 +5,14 @@ import CurationEntry from "./../shared/curationEntry";
 import { fakeReviews, fakeCuration } from "./../../fakeData/fake";
 import { ICuration, IReview, IReviewBook } from "./../shared/Types";
 import { fetchGetReviewLikes, fetchCurationLikes } from "./../shared/Fetch";
-import { reviewsBooks } from "./../shared/InitialStates";
+import { reviewsBooks, reviews, curations } from "./../shared/InitialStates";
 import { connect } from "react-redux";
 import "./index.css";
 
 const MyLikes: React.FC = (props: any): ReactElement => {
   const [navBar, setNavBar] = useState<string>("review");
-  const [myCuration, setCuration] = useState<ICuration[]>(fakeCuration);
-  const [myReview, setReview] = useState<IReview[]>(fakeReviews);
+  const [myCuration, setCuration] = useState<ICuration[]>(curations);
+  const [myReview, setReview] = useState<IReview[]>(reviews);
   const [reviewBooks, setReviewBooks] = useState<IReviewBook[][]>(reviewsBooks);
   const [userID, setUserID] = useState<string>("");
 

@@ -3,7 +3,7 @@ import "../../../node_modules/uikit/dist/css/uikit.css";
 import { IReview, IReviewBook } from "./Types";
 import { Link } from "react-router-dom";
 import "./curationEntry.css";
-
+import { Skeleton } from "@material-ui/lab";
 interface IProps {
   Review: IReview;
   from: string;
@@ -21,16 +21,20 @@ const ReviewEntry: React.FC<IProps> = ({
         <dt style={{ fontSize: "25px" }}>
           {" "}
           <span style={{ color: "blue" }}>{books ? books[0].title : ""}</span>
-          {Review.title}{" "}
+          {Review.title ? (
+            Review.title
+          ) : (
+            <Skeleton variant="text" width={"50%"} height={40} />
+          )}{" "}
           <span style={{ color: "#696969	", fontSize: "15px" }}>
             {from === "likes" ? Review.author.name : ""}
           </span>
         </dt>
         <dd style={{ color: "#808080	", fontSize: "20px" }}>
           {" "}
-          {Review.contents.length > 120
+          {Review.contents.length
             ? Review.contents.replace(/<[^>]*>?/gm, "").slice(0, 100) + "..."
-            : Review.contents.replace(/<[^>]*>?/gm, "")}{" "}
+            : [<Skeleton variant="text" width={"90%"} height={25} />]}
         </dd>
       </dl>
     </Link>
