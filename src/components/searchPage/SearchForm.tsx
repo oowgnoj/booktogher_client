@@ -43,26 +43,19 @@ class SearchForm extends React.Component<{}, IState> {
         <div className="">
           <div className="search-i">
             <div>
-                <a className="uk-navbar-toggle" href="#" uk-icon="search"></a>
+                <a className="uk-navbar-toggle search-icon" href="#" uk-icon="search"></a>
                 <div 
-                  className="uk-navbar-dropdown" 
+                  className="uk-navbar-dropdown search-form" 
                   uk-drop="mode: click; cls-drop: uk-navbar-dropdown; boundary: !nav"
-                >
-                  <div className="uk-grid-small uk-flex-middle" uk-grid>
-                      <div className="uk-width-expand">
-                          <form className="uk-search uk-search-navbar uk-width-1-1">
-                              <input 
-                                className="uk-search-input" 
-                                type="search" 
-                                placeholder="Search..."
-                                onChange={this.handleChangeTitle}
-                                onKeyPress ={this.handleKeyPress} />
-                          </form>
-                      </div>
-                      <div className="uk-width-auto">
-                        <a className="uk-navbar-dropdown-close" href="#" uk-close></a>
-                      </div>
-                  </div>
+                >    
+                  <form className="uk-search uk-search-navbar uk-width-1-1">
+                      <input 
+                        className="uk-search-input search-form-input" 
+                        type="search" 
+                        placeholder="Search..."
+                        onChange={this.handleChangeTitle}
+                        onKeyPress ={this.handleKeyPress} />
+                  </form>
                 </div>
             </div>
           </div>
