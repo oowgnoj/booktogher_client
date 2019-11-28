@@ -6,6 +6,8 @@ import Store from "../../Redux/configureStore";
 import { IUserInfo } from "../shared/Types";
 import { Link } from "react-router-dom";
 
+import logo from "../../Asset/images/logo.png";
+
 class UserGreeting extends React.Component {
   constructor(props: any) {
     super(props);
@@ -33,7 +35,15 @@ class UserGreeting extends React.Component {
           uk-toggle="target: #offcanvas-slide"
           style={{ marginTop: "25px", marginLeft: "10px" }}
         ></span>
-
+        <img
+          src={logo}
+          alt="로고"
+          style={{
+            width: "100px",
+            marginTop: "35px",
+            marginLeft: "-20px"
+          }}
+        />
         <div id="offcanvas-slide" uk-offcanvas="overlay: true">
           <div
             className="uk-offcanvas-bar"

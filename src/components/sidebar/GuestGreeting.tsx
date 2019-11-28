@@ -2,6 +2,8 @@ import React, { ReactElement } from "react";
 
 import { Link } from "react-router-dom";
 
+import logo from "../../Asset/images/logo.png";
+
 class GuestGreeting extends React.Component {
   public showSettings(event: { preventDefault(): void }): void {
     event.preventDefault();
@@ -16,7 +18,15 @@ class GuestGreeting extends React.Component {
           uk-toggle="target: #offcanvas-slide"
           style={{ marginTop: "25px", marginLeft: "10px" }}
         ></span>
-
+        <img
+          src={logo}
+          alt="로고"
+          style={{
+            width: "100px",
+            marginTop: "35px",
+            marginLeft: "-20px"
+          }}
+        />
         <div
           id="offcanvas-slide"
           uk-offcanvas="overlay: true, esc-close: true, bg-close:true"
