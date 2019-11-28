@@ -84,34 +84,36 @@ class Review extends React.Component< IProps, IState> {
   }
   
   public componentDidUpdate(prevProps: any): void {
-    if (this.props.user._id !== prevProps.user._id) {
-      if(this.props.user._id === this.props.review.author._id){
-        this.setState({edit:true})
+    if(this.props.user._id){
+      if (this.props.user._id !== prevProps.user._id) {
+        if(this.props.user._id === this.props.review.author._id){
+          this.setState({edit:true})
+        }
+        if(this.props.review.likes.includes(this.props.user._id)){
+          this.setState({likes: true})
+        }  
       }
-      if(this.props.review.likes.includes(this.props.user._id)){
-        this.setState({likes: true})
-      }  
-    }
-    if (this.props.review !== prevProps.review){
-      if(this.props.user._id === this.props.review.author._id){
-        this.setState({edit:true})
+      if (this.props.review !== prevProps.review){
+        if(this.props.user._id === this.props.review.author._id){
+          this.setState({edit:true})
+        }     
+      }
+      if(this.props.review.likes !== prevProps.review.likes){
+        this.setState({likesNum: this.props.review.likes.length})
+        if(this.props.review.likes.includes(this.props.user._id)){
+          this.setState({likes: true})
+        }
       }
     }
-    if(this.props.review.likes !== prevProps.review.likes){
-      this.setState({likesNum: this.props.review.likes.length})
-      if(this.props.review.likes.includes(this.props.user._id)){
-        this.setState({likes: true})
-      }
-    }
-    if(this.props.bookList !== prevProps.bookList){
-      const setStateRating = (res: any): void => {
-        this.setState({ bookRating: res });
-      };
-      const bookId: any = this.props.bookList.map((info :IBook) =>{
-        return info._id
-      })
-      fetchBookRatings(setStateRating, bookId[0]);
-    }
+      if(this.props.bookList !== prevProps.bookList){
+        const setStateRating = (res: any): void => {
+          this.setState({ bookRating: res });
+        };
+        const bookId: any = this.props.bookList.map((info :IBook) =>{
+          return info._id
+        })
+        fetchBookRatings(setStateRating, bookId[0]);
+      } 
   }
   
   public render(): ReactElement {

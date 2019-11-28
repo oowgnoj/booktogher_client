@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { RouteComponentProps } from "react-router";
+import { Redirect } from "react-router-dom";
 import { IBook, IReviewWithBooks } from "../shared/Types";
 import { fetchBookSearch, fetchReviewSearch} from "./../shared/Fetch";
 import SearchBooks from "./SearchBooks"
@@ -12,6 +13,7 @@ interface IState {
   searchTitle: string;
   selectBook: string;
   title: string;
+  redirect: boolean;
 }
 
 interface IMatchParams {
@@ -56,7 +58,8 @@ class SearchPage extends React.Component<RouteComponentProps<IMatchParams>, ISta
       ],
       searchTitle: "",
       selectBook: "book",
-      title : this.props.match.params.keyWord
+      title : this.props.match.params.keyWord,
+      redirect: false
     }
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
@@ -70,14 +73,7 @@ class SearchPage extends React.Component<RouteComponentProps<IMatchParams>, ISta
   public handleKeyPress(e: any): any{
     if(e.key === 'Enter'){
       if(this.state.title !== ""){
-        const setStateBook = (res: any): void => {
-          this.setState({ books: res , searchTitle: this.state.title});
-        };
-        fetchBookSearch(setStateBook, this.state.title);
-        const setStateReview = (res: any): void => {
-          this.setState({ reviews: res });
-        };
-        fetchReviewSearch(setStateReview, this.state.title);
+        this.setState({redirect: true})
       }
       else {
         alert("검색어를 입력해주세요")
@@ -98,16 +94,35 @@ class SearchPage extends React.Component<RouteComponentProps<IMatchParams>, ISta
       this.setState({ reviews: res });
     };
     fetchReviewSearch(setStateReview, this.state.title);
+    this.setState({redirect: false})
+  }
+
+  public componentDidUpdate(prevProps: any): void {
+    if (prevProps.match.params.keyWord !== this.props.match.params.keyWord) {
+      this.setState({title: this.props.match.params.keyWord})
+      const setStateBook = (res: any): void => {
+        this.setState({ books: res });
+      };
+      fetchBookSearch(setStateBook, this.props.match.params.keyWord);
+      const setStateReview = (res: any): void => {
+        this.setState({ reviews: res });
+      };
+      fetchReviewSearch(setStateReview, this.state.title);
+      this.setState({redirect: false})
+    }
   }
  
   public render(): ReactElement {
-    console.log(this.props.match.params.keyWord)
+    console.log(this.state.redirect)
     return (
       <div>
+        {this.state.redirect ? 
+        <Redirect to={`/search/${this.state.title}`}/> 
+        :
         <div className = "search-area">
           <div className = "search-input">
             <input
-              type="text"
+              type="search"
               className="search-box"
               placeholder="검색어를 입력해 주세요"
               value={this.state.title}
@@ -142,9 +157,7 @@ class SearchPage extends React.Component<RouteComponentProps<IMatchParams>, ISta
               <li></li>
             </ul>
           </div>
-        </div>
-
-        {this.state.selectBook ==="book" ? 
+          {this.state.selectBook ==="book" ? 
         <SearchBooks 
           books={this.state.books}
           searchTitle={this.state.searchTitle} /> 
@@ -152,6 +165,7 @@ class SearchPage extends React.Component<RouteComponentProps<IMatchParams>, ISta
         <SearchReviews 
          reviews={this.state.reviews}
          searchTitle={this.state.searchTitle}/> } 
+        </div> }       
       </div>
     );
   }

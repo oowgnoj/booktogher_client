@@ -35,38 +35,40 @@ class SearchForm extends React.Component<{}, IState> {
   }
 
   public render(): ReactElement {
-  return ( 
-    <div>
-      {this.state.redirect ?
-      <div className="uk-dark"><Redirect to={`/search/${this.state.title}`}/></div>
-      :
+    return ( 
       <div>
-      <div className="nav-overlay uk-navbar-right search-i">
-          <a 
-            className="uk-navbar-toggle" 
-            uk-icon="search"  uk-toggle="target: .nav-overlay; animation: uk-animation-fade" 
-            href="#"></a>
-        </div>
-
-      <div className="nav-overlay uk-navbar-left uk-flex-1" hidden>
-        <div className="uk-navbar-item uk-width-expand">
-          <form className="uk-search uk-search-navbar uk-width-1-1">
-            <input 
-              className="uk-search-input" 
-              type="search" 
-              placeholder="Search..."
-              onChange={this.handleChangeTitle}
-              onKeyPress ={this.handleKeyPress}
-            ></input>
-          </form>
-        </div>
-        <a className="uk-navbar-toggle" uk-icon="close" uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
-      </div>
-      </div>
-       }
-      
-    </div>   
-  ) 
+        {this.state.redirect ?
+        <Redirect to={`/search/${this.state.title}`}/>
+        :
+        <div className="">
+          <div className="search-i">
+            <div>
+                <a className="uk-navbar-toggle" href="#" uk-icon="search"></a>
+                <div 
+                  className="uk-navbar-dropdown" 
+                  uk-drop="mode: click; cls-drop: uk-navbar-dropdown; boundary: !nav"
+                >
+                  <div className="uk-grid-small uk-flex-middle" uk-grid>
+                      <div className="uk-width-expand">
+                          <form className="uk-search uk-search-navbar uk-width-1-1">
+                              <input 
+                                className="uk-search-input" 
+                                type="search" 
+                                placeholder="Search..."
+                                onChange={this.handleChangeTitle}
+                                onKeyPress ={this.handleKeyPress} />
+                          </form>
+                      </div>
+                      <div className="uk-width-auto">
+                        <a className="uk-navbar-dropdown-close" href="#" uk-close></a>
+                      </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>}
+      </div>  
+    ) 
   }
 };
 

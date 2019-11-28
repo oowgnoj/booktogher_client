@@ -31,12 +31,14 @@ class SearchBooks extends React.Component<IProps, IState> {
     }
   }
   public componentDidUpdate(prevProps: any): void {
+    console.log(this.props.books)
     if (this.props.books !== prevProps.books) {
       this.setState({ books: this.props.books }); 
     }
   }
 
   public render(): ReactElement {
+    console.log(this.props.books)
     const searchBookList: ReactElement[] = this.props.books.map(
       (info: IBook) => {
         return (
@@ -53,28 +55,12 @@ class SearchBooks extends React.Component<IProps, IState> {
         );
       }
     );
-    const readingBook:ReactElement[] = this.state.reading.map(
-      (info: IBookReading) => {
-        return (
-          <div className="book-select">
-            <Link to = {`/book/${info.book._id}`}>
-            <img
-              src={info.book.thumbnail}
-              width="80px"
-              alt={`${info.book.title}`}
-            />
-            <div>{info.book.title}</div>
-            </Link>
-          </div>
-        )
-      })
+    
     return (
       <div className = "search-book">       
         <div className="search-result">
-          {/* {this.state.searchTitle === "" ? 
-          readingBook :  
-          <h3 className = "search-result-title">{this.state.searchTitle}에 대한 책</h3>} */}
-          {searchBookList}
+          {this.props.books.length === 0 ? 
+          <div>책 검색 결과가 없습니다.</div> : searchBookList}
         </div>
       </div>
     )

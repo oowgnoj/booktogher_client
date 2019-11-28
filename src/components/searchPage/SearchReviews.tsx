@@ -46,10 +46,9 @@ class SearchReviews extends React.Component<IProps, IState> {
     return (
       <div className = "search-book">
         <div className="search-result">
-          {/* {this.state.searchTitle === "" ? 
-          null  :  
-          <h3 className = "search-result-title">{this.state.searchTitle}에 대한 서평</h3>} */}
-          {searchReviewList}
+          {this.props.reviews.length === 0 ? 
+          <div>서평 검색 결과가 없습니다.</div> :
+          searchReviewList}
         </div>
       </div>
     )
