@@ -1,18 +1,8 @@
 import React, { ReactElement } from "react";
-import { IAuthor } from "../shared/Types";
-
-interface IReview {
-  _id: string;
-  author: IAuthor;
-  contents: string;
-  likes: string[];
-  published: boolean;
-  thumbnail: string;
-  title: string;
-}
+import { IAuthor, IReviewSearchWithBooks } from "../shared/Types";
 
 interface IProps {
-  review: IReview;
+  review: IReviewSearchWithBooks;
   deleteEvent: any;
   isPlaceHolder: string;
 }
@@ -46,7 +36,7 @@ class ReviewsEntry extends React.Component<IProps> {
             alt={review.title}
             onClick={this.handleDelete}
             style={{ width: "120px", height: "auto" }}
-            className="image"
+            className="reviewentry_cropped"
           />
           <div className="middle_review">
             <span uk-icon="icon: close; ratio: 1.7" className="text"></span>
@@ -65,10 +55,15 @@ class ReviewsEntry extends React.Component<IProps> {
         </span>
         <span style={{ display: "inline-block" }}>
           <div className="reviewentry_title" style={{ fontSize: "30px" }}>
-            <b>{review.title.replace(/<[^>]*>?/gm, "")}</b>
+            <p>
+              {review.books.length > 1
+                ? review.books[0].title + " 외"
+                : review.books[0].title}
+            </p>
+            <p>{review.title.replace(/<[^>]*>?/gm, "")}</p>
           </div>
           <div className="reviewentry_contents">
-            <b>{review.contents.replace(/<[^>]*>?/gm, "")}</b>
+            <p>{review.contents.replace(/<[^>]*>?/gm, "")}</p>
           </div>
         </span>
       </div>

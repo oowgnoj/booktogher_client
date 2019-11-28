@@ -5,7 +5,7 @@ import { Redirect, Route, RouteComponentProps, Link } from "react-router-dom";
 import BooksList from "./BooksList";
 import ReviewsList from "./ReviewsList";
 import UserHistoryModal from "../shared/UserHistoryModal";
-import { IAuthor, ICuration, IReview } from "../shared/Types";
+import { IAuthor, ICuration, IReview, IBookReview } from "../shared/Types";
 import { string } from "prop-types";
 import {
   fetchCuration,
@@ -16,6 +16,7 @@ import {
   fetchPostLikes
 } from "./fetchReadCuration";
 import "./index.css";
+import { author } from "../shared/InitialStates";
 
 interface IBook {
   _id: string;
@@ -31,6 +32,7 @@ interface IState {
   reviews: IReview[];
   isDeleted: boolean;
   historyModal: boolean;
+  reviewsBooks: IBookReview[][];
 }
 
 type IMatchParams = {
@@ -56,6 +58,7 @@ class ReadCuration extends React.Component<IParams, IState> {
         { _id: "", authors: [""], contents: "", thumbnail: "", title: "" }
       ],
       reviews: [],
+      reviewsBooks: [],
       isDeleted: false,
       historyModal: false
     };
@@ -72,8 +75,11 @@ class ReadCuration extends React.Component<IParams, IState> {
     const getBookInfo = (result: IBook[]): void => {
       this.setState({ books: result });
     };
-    const getReviewInfo = (result: IReview[]): void => {
-      this.setState({ reviews: result });
+    const getReviewInfo = (
+      reviews: IReview[],
+      books: IBookReview[][]
+    ): void => {
+      this.setState({ reviews, reviewsBooks: books });
     };
     console.log("this.props.match.params.id : ", this.props.match.params.id);
     fetchCuration(getCurationInfo, this.props.match.params.id);
@@ -138,14 +144,9 @@ class ReadCuration extends React.Component<IParams, IState> {
   }
 
   public render(): ReactElement {
-    const { curation, books, reviews } = this.state;
+    const { curation, books, reviews, reviewsBooks } = this.state;
     return (
       <div className="readCuration">
-        {console.log("큐레이션 읽기 props.userId ? ", this.props.userId)}
-        {console.log(
-          "큐레이션 읽기 curation.likes 에 있는지 ? ",
-          curation.likes.includes(this.props.userId)
-        )}
         {this.state.historyModal ? (
           <UserHistoryModal
             author={this.state.curation.author}
@@ -156,8 +157,8 @@ class ReadCuration extends React.Component<IParams, IState> {
         <div
           className="readCuration_header_likes"
           style={{
-            marginLeft: "130px",
-            marginTop: "54px",
+            marginLeft: "7%",
+            marginTop: "38px",
             float: "left",
             clear: "right"
           }}
@@ -179,15 +180,45 @@ class ReadCuration extends React.Component<IParams, IState> {
             {curation.likes ? curation.likes.length : "좋아요 수"}
           </span>
         </div>
+        {curation.author._id === this.props.userId ? (
+          <div
+            style={{
+              marginLeft: "80%",
+              display: "flex",
+              marginTop: "-10px"
+            }}
+          >
+            <div className="readCuration_header_modify">
+              <Link to={`/editcuration/${this.props.match.params.id}`}>
+                <button className="uk-button uk-button-default uk-button-small">
+                  수정
+                </button>
+              </Link>
+            </div>
+            <div
+              className="readCuration_header_delete"
+              style={{ paddingLeft: "10px" }}
+            >
+              <button
+                className="uk-button uk-button-default uk-button-small"
+                onClick={this.handleDelete}
+              >
+                삭제
+              </button>
+            </div>
+          </div>
+        ) : null}
         <div className="readCuration_header">
           <div
             className="readCuration_header_title"
             style={{
+              fontFamily: "Nanum Myeongjo, serif",
               marginTop: "39px",
               marginLeft: "1px",
-              height: "150px",
-              width: "100%",
-              fontSize: "50px"
+              height: "200px",
+              width: "70%",
+              fontSize: "2.4em",
+              display: "inline"
             }}
           >
             {curation.title ? curation.title : "큐레이션 제목"}
@@ -195,10 +226,11 @@ class ReadCuration extends React.Component<IParams, IState> {
           <div
             className="readCuration_header_user"
             style={{
+              marginTop: "1%",
               float: "right",
+              alignSelf: "right",
               display: "flex",
-              justifyContent: "center",
-              flexDirection: "column"
+              width: "20%"
             }}
             onClick={this.handleHistoryClick}
           >
@@ -210,51 +242,37 @@ class ReadCuration extends React.Component<IParams, IState> {
               }
               alt={curation.author.name}
               width="80px"
+              className="readCuration_cropped"
             />
 
             <p
               className="readCuration_header_user_name"
-              style={{ fontStyle: "italic" }}
+              style={{
+                fontStyle: "italic",
+                fontSize: "0.9em",
+                fontFamily: "Nanum Myeongjo, serif",
+                display: "inline-block"
+              }}
             >
               by <b>{curation.author.name}</b> 님
             </p>
-            {curation.author._id === this.props.userId ? (
-              <div>
-                <span className="readCuration_header_modify">
-                  <Link to={`/editcuration/${this.props.match.params.id}`}>
-                    <button
-                      className="uk-button uk-button-text"
-                      style={{ marginRight: "30px" }}
-                    >
-                      수정
-                    </button>
-                  </Link>
-                </span>
-                <span className="readCuration_header_delete">
-                  <button
-                    className="uk-button uk-button-text"
-                    onClick={this.handleDelete}
-                  >
-                    삭제
-                  </button>
-                </span>
-              </div>
-            ) : null}
           </div>
         </div>
         <div
           className="readCuration_contents"
           style={{
+            marginTop: "50px",
             marginLeft: "1px",
             height: "300px",
-            width: "100%",
-            fontSize: "20px"
+            width: "50%",
+            fontSize: "1.1em",
+            lineHeight: "1.8em"
           }}
         >
           {curation.contents ? curation.contents : "큐레이션 본문"}
         </div>
         <BooksList books={books} />
-        <ReviewsList reviews={reviews} />
+        <ReviewsList reviews={reviews} books={reviewsBooks} />
       </div>
     );
   }

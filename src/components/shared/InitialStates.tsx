@@ -1,4 +1,10 @@
-import { IAuthor, IReviewBook, ICuration, IReview } from "./Types";
+import {
+  IAuthor,
+  ICuration,
+  IReview,
+  IReviewBook,
+  IReviewSearchWithBooks
+} from "./Types";
 
 export const author: IAuthor = {
   _id: "",
@@ -37,4 +43,22 @@ export const reviewsBooks: IReviewBook[][] = [
       title: ""
     }
   ]
+];
+
+export const selectedReviews: IReviewSearchWithBooks[] = [
+  {
+    _id: "",
+    author: {
+      _id: "",
+      image: "",
+      name: "",
+      profile: ""
+    },
+    books: [{ _id: "", title: "" }],
+    contents: "",
+    likes: [""],
+    published: true,
+    thumbnail: "",
+    title: ""
+  }
 ];

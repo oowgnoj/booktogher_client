@@ -15,3 +15,14 @@ export const modifyForm = (entireBook: any) => {
   };
   return data;
 };
+
+export const validatePassword = (password: string): any => {
+  const passwordRegExp: RegExp = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
+  // 7 to 15 characters which contain at least one numeric digit and a special character
+  return password.match(passwordRegExp);
+};
+
+export const validateEmail = (address: string): boolean => {
+  const emailRegExp: RegExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+  return emailRegExp.test(address); // 형식에 맞는 경우 true 리턴
+};

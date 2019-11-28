@@ -1,4 +1,11 @@
-import { ICuration, ICurationsPost, IReview } from "../shared/Types";
+import {
+  ICuration,
+  ICurationsPost,
+  IReview,
+  IBookReview
+} from "../shared/Types";
+
+const url: string = "http://booktogether.ap-northeast-2.elasticbeanstalk.com";
 
 interface IBook {
   _id: string;
@@ -9,16 +16,13 @@ interface IBook {
 }
 
 export const fetchCuration = (callback: any, id: string): any => {
-  return fetch(
-    `http://booktogether.ap-northeast-2.elasticbeanstalk.com/curations/${id}`,
-    {
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      method: "GET"
-    }
-  )
+  return fetch(`${url}/curations/${id}`, {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "GET"
+  })
     .then((response: Response) => response.json())
     .then((result: ICuration) => {
       callback(result);
@@ -26,50 +30,57 @@ export const fetchCuration = (callback: any, id: string): any => {
 };
 
 export const fetchBooks = (callback: any, id: string): any => {
-  return fetch(
-    `http://booktogether.ap-northeast-2.elasticbeanstalk.com/books?curation=${id}`,
-    {
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      method: "GET"
-    }
-  )
+  return fetch(`${url}/books?curation=${id}`, {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "GET"
+  })
     .then((response: Response) => response.json())
     .then((result: IBook[]) => {
       callback(result);
     });
 };
 
+export const fetchGetBooksOfReviews = (
+  callback: any,
+  reviewIds: string[],
+  reviews: IReview[]
+): any => {
+  const promises: any = reviewIds.map((reviewId: string) => {
+    return fetch(`${url}/books?review=${reviewId}`, { credentials: "include" });
+  });
+  Promise.all(promises).then((res: any) => {
+    Promise.all(res.map((el: any) => el.json())).then((books: any) => {
+      callback(reviews, books);
+    });
+  });
+};
+
 export const fetchReviews = (callback: any, id: string): any => {
-  return fetch(
-    `http://booktogether.ap-northeast-2.elasticbeanstalk.com/reviews?curation=${id}`,
-    {
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      method: "GET"
-    }
-  )
+  return fetch(`${url}/reviews?curation=${id}`, {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "GET"
+  })
     .then((response: Response) => response.json())
-    .then((result: IReview[]) => {
-      callback(result);
+    .then((reviews: IReview[]) => {
+      const reviewIds: string[] = reviews.map((review: IReview) => review._id);
+      fetchGetBooksOfReviews(callback, reviewIds, reviews);
     });
 };
 
 export const fetchDelete = (callback: any, id: string): any => {
-  return fetch(
-    `http://booktogether.ap-northeast-2.elasticbeanstalk.com/reviews?curation=${id}`,
-    {
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      method: "DELETE"
-    }
-  )
+  return fetch(`${url}/curations/${id}`, {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "DELETE"
+  })
     .then((response: Response) => {
       console.log("큐레이션 삭제 성공! , response", response);
       callback();
@@ -81,43 +92,34 @@ export const fetchDelete = (callback: any, id: string): any => {
 };
 
 export const fetchPostCuration = (callback: any, body: ICurationsPost): any => {
-  return fetch(
-    "http://booktogether.ap-northeast-2.elasticbeanstalk.com/curations",
-    {
-      body: JSON.stringify(body),
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      method: "POST"
-    }
-  ).then((response: Response) => callback());
+  return fetch(`${url}/curations`, {
+    body: JSON.stringify(body),
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "POST"
+  }).then((response: Response) => callback());
 };
 
 export const fetchDeleteLikes = (callback: any, id: string): any => {
-  return fetch(
-    `http://booktogether.ap-northeast-2.elasticbeanstalk.com/curations/${id}/likes`,
-    {
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      method: "DELETE"
-    }
-  ).then((response: Response) => callback());
+  return fetch(`${url}/curations/${id}/likes`, {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "DELETE"
+  }).then((response: Response) => callback());
 };
 
 export const fetchPostLikes = (callback: any, id: string): any => {
-  return fetch(
-    `http://booktogether.ap-northeast-2.elasticbeanstalk.com/curations/${id}/likes`,
-    {
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      method: "POST"
-    }
-  )
+  return fetch(`${url}/curations/${id}/likes`, {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "POST"
+  })
     .then((response: Response) => response.json())
     .then((result: ICuration) => {
       callback(result._id);

@@ -5,7 +5,12 @@ import ReviewsList from "./ReviewsList";
 import ReadCuration from "../readCuration/index";
 import "./index.css";
 import Books from "../mypage/books";
-import { ICuration, ICurationsPost, IReview } from "../shared/Types";
+import {
+  ICuration,
+  ICurationsPost,
+  IReview,
+  IReviewSearchWithBooks
+} from "../shared/Types";
 import { fetchPostCuration } from "./fetchWriteCuration";
 import BookModal from "./BookSelect";
 import ReviewModal from "./ReviewSelect";
@@ -35,7 +40,7 @@ interface IState {
   title: string;
   contents: string;
   books: IBook[];
-  reviews: IReview[];
+  reviews: IReviewSearchWithBooks[];
   bookModal: boolean;
   reviewModal: boolean;
   isPosted: boolean;
@@ -56,7 +61,8 @@ class WriteCuration extends React.Component<{}, IState> {
           likes: [],
           published: true,
           thumbnail: "",
-          title: ""
+          title: "",
+          books: [{ _id: "", title: "" }]
         }
       ],
       title: "",
@@ -87,7 +93,7 @@ class WriteCuration extends React.Component<{}, IState> {
   }
 
   public reviewDelete(reviewId: string): void {
-    const currentReviewList: IReview[] = this.state.reviews.slice();
+    const currentReviewList: IReviewSearchWithBooks[] = this.state.reviews.slice();
     for (let i: number = 0; i < currentReviewList.length; i++) {
       if (currentReviewList[i]._id === reviewId) {
         currentReviewList.splice(i, 1);
@@ -136,8 +142,8 @@ class WriteCuration extends React.Component<{}, IState> {
     this.setState({ books: newBooks, bookModal: false });
   };
 
-  public addReviews = (selectedReviews: IReview): any => {
-    const newReviews: IReview[] =
+  public addReviews = (selectedReviews: IReviewSearchWithBooks[]): any => {
+    const newReviews: IReviewSearchWithBooks[] =
       this.state.reviews.length !== 0 && this.state.reviews[0]._id
         ? this.state.reviews.concat(selectedReviews)
         : this.state.reviews.slice(1).concat(selectedReviews);

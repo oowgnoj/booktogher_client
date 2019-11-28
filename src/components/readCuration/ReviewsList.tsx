@@ -1,21 +1,13 @@
 import React, { ReactElement } from "react";
 import ReactHtmlParser from "react-html-parser";
 import ReviewsEntry from "./ReviewsEntry";
-import { IAuthor } from "../shared/Types";
+import { IAuthor, IReview, IBookReview } from "../shared/Types";
 import "./index.css";
-
-interface IReview {
-  _id: string;
-  author: IAuthor;
-  contents: string;
-  likes: string[];
-  published: boolean;
-  thumbnail: string;
-  title: string;
-}
+import { timingSafeEqual } from "crypto";
 
 interface IProps {
   reviews: IReview[];
+  books: IBookReview[][];
 }
 
 class ReviewsList extends React.Component<IProps> {
@@ -29,19 +21,22 @@ class ReviewsList extends React.Component<IProps> {
         className="readcuration_reviews_reviewlist_wrapper"
         style={{
           display: "flex",
-          paddingLeft: "100px",
-          paddingTop: "30px"
+          paddingTop: "30px",
+          paddingLeft: "9%"
         }}
       >
         <span
           className="readcuration_reviews_reviewlist"
           style={{
-            display: "block",
-            paddingLeft: "70px"
+            display: "block"
           }}
         >
-          {this.props.reviews.map((el, index) => (
-            <ReviewsEntry review={el} key={index} />
+          {this.props.reviews.map((el: IReview, index: number) => (
+            <ReviewsEntry
+              review={el}
+              key={index}
+              book={this.props.books[index]}
+            />
           ))}
         </span>
       </div>

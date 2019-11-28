@@ -117,3 +117,15 @@
 .history_modal_history {
   grid-area: 2 / 3 / 6 / 6;
 }
+
+// .history_crop {
+//   text-align: center;
+// }
+
+.history_cropped {
+  margin-top: 10%;
+  object-fit: cover;
+  border-radius: 50%;
+  height: 100px;
+  width: 50px;
+}

@@ -3,16 +3,17 @@
 }
 
 .writecuration_header {
-  padding-left: 300px;
-  padding-right: 300px;
+  padding-left: 15%;
+  padding-right: 10%;
 }
 
 .writecuration_contents {
-  padding-left: 300px;
-  padding-right: 300px;
+  padding-left: 15%;
+  padding-right: 15%;
 }
 
 .writecuration_books {
+  margin-right: 15%;
   display: table;
   width: 100%;
 }
@@ -80,4 +81,11 @@
 
 input:focus {
   outline: none;
+}
+
+.reviewentry_cropped {
+  object-fit: cover;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
 }

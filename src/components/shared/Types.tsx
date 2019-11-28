@@ -158,6 +158,7 @@ export interface IReviewSearch {
   pageable_count: number;
   current_page: number;
   reviews: IReview[];
+  is_end: boolean;
 }
 
 // curation
@@ -175,8 +176,6 @@ export interface ICurations {
   // *** GET /curations
   curations: ICuration[];
 }
-
-// curations POST 부분은 2차 배포 진행하며 더 수정될 수 있어 보여서 우선 생략함
 
 export interface ICurationsPost {
   books: string[];
@@ -211,6 +210,8 @@ export interface IRatingPost {
   rating: number;
 }
 
+/* ------ user history modal ------ */
+
 export interface IAuthorProps {
   // props interface for userhistorymodal
   author: IAuthor;
@@ -225,6 +226,7 @@ export interface IReviewBook {
 }
 
 export interface IReviewProps {
+  // props interface for userhistorymodal
   reviews: IReview[];
   books: IReviewBook[][];
 }
@@ -237,4 +239,51 @@ export interface IHistoryStates {
   reviewsBooks: IReviewBook[][];
   tab: string;
   isOpen: boolean;
+}
+
+/* ------ review search modal ------ */
+
+export interface IReviewSearchBook {
+  // only for review search modal
+  _id: string;
+  title: string;
+}
+
+export interface IReviewSearchWithBooks {
+  // only for review search modal
+  _id: string;
+  books: IReviewSearchBook[];
+  likes: string[];
+  contents: string;
+  published: boolean;
+  thumbnail: string;
+  author: IAuthor;
+  title: string;
+}
+
+export interface IReviewSearchWithBooksRes {
+  // only for review search modal
+  current_page: number;
+  is_end: boolean;
+  pageable_count: number;
+  results_count: number;
+  reviews: IReviewSearchWithBooks[];
+}
+
+/* ------- read curation ------- */
+
+export interface IBookReview {
+  // *** GET /books?review={id}
+  _id: string;
+  authors: string[];
+  contents: string;
+  datetime: string;
+  isbn: string;
+  price: number;
+  publisher: string;
+  sale_price: number;
+  thumbnail: string;
+  title: string;
+  translators: string[];
+  url: string;
 }

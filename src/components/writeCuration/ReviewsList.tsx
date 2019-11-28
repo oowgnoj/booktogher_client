@@ -2,21 +2,11 @@ import React, { ReactElement } from "react";
 import ReactHtmlParser from "react-html-parser";
 import ReviewsEntry from "./ReviewsEntry";
 import { placeholdersReview } from "./placeholders";
-import { IAuthor } from "../shared/Types";
+import { IAuthor, IReviewSearchWithBooks } from "../shared/Types";
 import "./index.css";
 
-interface IReview {
-  _id: string;
-  author: IAuthor;
-  contents: string;
-  likes: string[];
-  published: boolean;
-  thumbnail: string;
-  title: string;
-}
-
 interface IProps {
-  reviews: IReview[];
+  reviews: IReviewSearchWithBooks[];
   deleteEvent: any;
   handleReviewSelect: any;
 }

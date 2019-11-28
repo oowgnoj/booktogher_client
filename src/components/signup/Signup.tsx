@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import { validatePassword, validateEmail } from "../shared/helper";
 import "./Signup.css";
 
 // import "../../../node_modules/uikit/dist/js/uikit-icons.min.js";
@@ -37,13 +38,7 @@ class SignUp extends React.Component<any, IState> {
     const { mail, username, password1, password2 } = this.state;
 
     let isEmail: boolean;
-
-    function checkEmail(address: string): boolean {
-      const regExp: RegExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-      return regExp.test(address); // 형식에 맞는 경우 true 리턴
-    }
-
-    isEmail = checkEmail(mail);
+    isEmail = validateEmail(mail);
 
     if (!isEmail || password1 !== password2) {
       if (!isEmail) {
@@ -57,7 +52,18 @@ class SignUp extends React.Component<any, IState> {
           status: "입력하신 패스워드가 일치하지 않습니다. 다시 확인해주세요."
         });
       }
-    } else if (mail && password1 && password2 && username) {
+    } else if (password1 === password2 && !validatePassword(password1)) {
+      this.setState({
+        alert: true,
+        status: `비밀번호는 최소 7자 ~ 최대 15자 이내로 설정해주세요. 영문, 숫자, 특수문자가 각 1자리 이상 포함되어야 합니다.`
+      });
+    } else if (
+      mail &&
+      password1 &&
+      password2 &&
+      username &&
+      validatePassword(password1)
+    ) {
       fetch(
         "http://booktogether.ap-northeast-2.elasticbeanstalk.com/auth/signup",
         {
@@ -74,10 +80,8 @@ class SignUp extends React.Component<any, IState> {
         }
       )
         .then((response: Response) => {
-          console.log(
-            `회원가입 성공! [email : ${mail}] [name : ${username}] [password : ${password1}]`
-          );
-          this.props.history.push("/");
+          alert("회원가입이 완료되었습니다. 로그인해주세요.");
+          this.props.history.push("/signin");
         })
         .catch((err: Error) => console.log(err));
     } else {
@@ -121,7 +125,7 @@ class SignUp extends React.Component<any, IState> {
     return (
       <div className="signup">
         <form>
-          <div className="uk-margin">
+          <div>
             <div className="uk-inline">
               <span className="uk-form-icon" uk-icon="icon: user"></span>
               <input
@@ -133,7 +137,7 @@ class SignUp extends React.Component<any, IState> {
             </div>
           </div>
 
-          <div className="uk-margin">
+          <div>
             <div className="uk-inline">
               <span className="uk-form-icon" uk-icon="icon: mail"></span>
               <input
@@ -145,7 +149,7 @@ class SignUp extends React.Component<any, IState> {
             </div>
           </div>
 
-          <div className="uk-margin">
+          <div>
             <div className="uk-inline">
               <span className="uk-form-icon" uk-icon="icon: lock"></span>
               <input
@@ -157,7 +161,7 @@ class SignUp extends React.Component<any, IState> {
             </div>
           </div>
 
-          <div className="uk-margin">
+          <div>
             <div className="uk-inline">
               <span className="uk-form-icon" uk-icon="icon: lock"></span>
               <input

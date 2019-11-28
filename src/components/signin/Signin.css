@@ -1,13 +1,16 @@
 .signin {
-  display: table;
-  position: absolute;
   height: 100%;
   width: 100%;
 }
 
-form {
-  display: table-cell;
-  vertical-align: middle;
+.signin form {
+  position: absolute;
+  top: 35%;
+  left: 40%;
   text-align: center;
-  background-color: rgb(247, 247, 243);
+}
+
+.signin form input {
+  padding: 10%;
+  margin: 5% 0;
 }
