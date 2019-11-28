@@ -5,16 +5,16 @@ interface IProps {
 }
 const NavBar: React.FC<IProps> = ({ handleActive }) => {
   return (
-    <div style={{ paddingTop: "0" }}>
+    <div>
       <nav
         className="uk-navbar-container uk-margin"
         uk-navbar="mode: click"
-        style={{ backgroundColor: "white", paddingTop: "0" }}
+        style={{ backgroundColor: "white", padding: "0", margin: "0" }}
       >
         <div className="uk-navbar-left">
           <ul className="uk-navbar-nav">
             <li id="review" onClick={handleActive} style={{ width: "auto" }}>
-              <a>review</a>
+              <a style={{ padding: "0", height: "20px" }}>review</a>
             </li>
             <li id="curation" onClick={handleActive}>
               <a>curation</a>

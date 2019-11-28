@@ -16,7 +16,8 @@ const Button: React.FC<IProps> = ({
 }: IProps): ReactElement => {
   let firstValue: string;
   let secondValue: string;
-  if (status === "to_read") {
+  console.log(status);
+  if (status === "toRead") {
     firstValue = "reading";
     secondValue = "finished";
   } else if (status === "reading") {
@@ -26,7 +27,7 @@ const Button: React.FC<IProps> = ({
     firstValue = "to_read";
     secondValue = "reading";
   }
-
+  console.log(firstValue, secondValue);
   return (
     <div className="uk-inline">
       <button
