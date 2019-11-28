@@ -31,3 +31,17 @@ export const fetchBookRating = (callback: any, id: string): any => {
       callback(res);
     });
 };
+
+export const fetchAddToRead = (id: string): any => {
+  fetch(`${url}/user`, {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "PATCH"
+  })
+    .then((res: Response) => res.json())
+    .then((res: any) => {
+      console.log(res);
+    });
+};

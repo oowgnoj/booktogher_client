@@ -63,13 +63,29 @@ class ReadReview extends React.Component<RouteComponentProps<IMatchParams>,IProp
     fetchReviewBook(setStateBook, this.props.match.params.id);
   }
 
+  public componentDidUpdate(prevProps: any): void {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      const setStateReview = (res: any): void => {
+        this.setState({ review: res });
+      };
+      fetchReview(setStateReview, this.props.match.params.id);
+  
+      const setStateBook = (res: any): void => {
+        this.setState({ bookList: res });
+        res.map((book: IBook)=>{
+          this.setState({ bookId : [book._id]})
+        })
+      };
+      fetchReviewBook(setStateBook, this.props.match.params.id);
+    }
+  }
 
   public render(): ReactElement {
     return (
       <div>
         <Review review={this.state.review} bookList={this.state.bookList} />
         <BookInfo bookList={this.state.bookList} />
-        <RecoReview bookId={this.state.bookId} />
+        <RecoReview bookId={this.state.bookId} reviewId={this.state.review._id}/>
        {/* <UserInfo review={this.state.review} /> */}
       </div>
     );

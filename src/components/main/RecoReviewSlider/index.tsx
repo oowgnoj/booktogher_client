@@ -1,10 +1,12 @@
 import React, { ReactElement } from "react";
 import "./index.css";
+import { Link } from "react-router-dom";
 // import Paper from "./Paper";
 // import Image from "./Image";
 
-// import main_image_one from "../../../Asset/images/main_1.png";
-// import main_image_two from "../../../Asset/images/main_2.png";
+import main_image_one from "../../../Asset/images/tem_1.png";
+import main_image_two from "../../../Asset/images/tem_2.png";
+import main_image_three from "../../../Asset/images/tem_3.png";
 
 interface IAuthor {
   id: string;
@@ -24,13 +26,120 @@ interface IReview {
 }
 
 interface IProps {
-  review: IReview;
+  review: IReview[];
 }
 
 const Slider: React.SFC<IProps> = ({ review }: IProps): ReactElement => {
   return (
     <div className="main_slider">
-      <div className="main_slider_image">
+      <div
+        className="slider_text uk-position-relative uk-visible-toggle"
+        tabIndex={-1}
+        uk-slideshow="autoplay: true; animation: slide"
+      >
+        <ul
+          className="uk-slideshow-items"
+          /* uk-height-viewport="offset-top: true; offset-bottom: false" */
+          uk-height-match
+          style={{ marginBottom: "-6.9%" }}
+        >
+          <li>
+            <img src={main_image_one} alt="" className="slider_img" />
+
+            <div className="slider_review">
+              <p className="slider_text_author">
+                서로모임의{" "}
+                <span style={{ color: "#5B88B2", fontWeight: "bold" }}>
+                  {review[0] ? review[0].author.name : "정혜경"}
+                </span>{" "}
+                님께서 작성해주신 서평입니다.
+              </p>
+
+              <h3 className="slider_text_title">
+                {review[0] ? review[0].title : "혜경님 서평 제목"}
+              </h3>
+
+              <p className="slider_text_contents">
+                {review[0]
+                  ? review[0].contents.replace(/<[^>]*>?/gm, "")
+                  : "서평 본문"}
+              </p>
+            </div>
+          </li>
+          <li>
+            <img src={main_image_two} alt="" className="slider_img" />
+            <div className="slider_review">
+              <p className="slider_text_author">
+                서로모임의{" "}
+                <span style={{ color: "#5B88B2", fontWeight: "bold" }}>
+                  {review[1] ? review[1].author.name : "정승권"}
+                </span>{" "}
+                님께서 작성해주신 서평입니다.
+              </p>
+              <h3 className="slider_text_title">
+                {review[1] ? review[1].title : "승권님 서평 제목"}
+              </h3>
+
+              <p className="slider_text_contents">
+                {review[1]
+                  ? review[1].contents.replace(/<[^>]*>?/gm, "")
+                  : "서평 본문"}
+              </p>
+            </div>
+          </li>
+          <li>
+            <img src={main_image_three} alt="" className="slider_img" />
+            <div className="slider_review">
+              <p className="slider_text_author">
+                서로모임의{" "}
+                <span style={{ color: "#5B88B2", fontWeight: "bold" }}>
+                  {review[2] ? review[2].author.name : "박종우"}
+                </span>{" "}
+                님께서 작성해주신 서평입니다.
+              </p>
+              <h3 className="slider_text_title">
+                {review[2] ? review[2].title : "종우님 서평 제목"}
+              </h3>
+
+              <p className="slider_text_contents">
+                {review[2]
+                  ? review[2].contents.replace(/<[^>]*>?/gm, "")
+                  : "서평 본문"}
+              </p>
+            </div>
+          </li>
+        </ul>
+
+        <a
+          className="uk-position-center-left uk-position-small uk-hidden-hover"
+          href="#"
+          uk-slidenav-previous
+          uk-slideshow-item="previous"
+        >
+          <span uk-icon="chevron-left" style={{ color: "gray" }}></span>
+        </a>
+        <a
+          className="uk-position-center-right uk-position-small uk-hidden-hover"
+          href="#"
+          uk-slidenav-next
+          uk-slideshow-item="next"
+        >
+          <span uk-icon="chevron-right" style={{ color: "gray" }}></span>
+        </a>
+      </div>
+      {/*  <div className="uk-card uk-card-body">
+        <p>
+          서로모임의 {review ? review.author.name : "작가 서명"} 님께서
+          작성해주신 서평입니다.
+        </p>
+        <h3 className="uk-card-title">{review ? review.title : "서평 제목"}</h3>
+
+        <p style={{ color: "gray", fontSize: "25px" }}>
+          {review ? review.contents.replace(/<[^>]*>?/gm, "") : "서평 본문"}
+        </p>
+      </div> */}
+
+      {/*   <div className="main_slider_image">
         <img
           src="https://images.unsplash.com/photo-1535954741680-a2e24eb05418?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
           alt=""
@@ -53,7 +162,7 @@ const Slider: React.SFC<IProps> = ({ review }: IProps): ReactElement => {
         <p style={{ color: "gray", fontSize: "25px" }}>
           {review ? review.contents.replace(/<[^>]*>?/gm, "") : "서평 본문"}
         </p>
-      </div>
+      </div> */}
     </div>
   );
 };

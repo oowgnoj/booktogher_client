@@ -1,7 +1,8 @@
 .main {
-  padding-top: 150px;
-  padding-left: 300px;
-  padding-right: 300px;
+  padding-top: 8%;
+  padding-left: 15%;
+  padding-right: 15%;
+  background: linear-gradient(180deg, #fafaf4 70%, #ffffff 30%);
 }
 /* 
 .parallax {
@@ -14,8 +15,7 @@
 }
 
 .section_wrapper {
-  display: flex;
-  justify-content: space-around;
+  width: 100%;
 }
 
 .section {
@@ -23,7 +23,8 @@
 }
 
 .section h2 {
-  font-family: "Song Myung", serif;
+  font-family: "Gothic A1", sans-serif;
+  font-size: 1.5em;
 }
 
 .main_recocollection_div {
@@ -31,6 +32,7 @@
 }
 
 .main_recocollection_title {
+  font-family: "Nanum Myeongjo", serif;
   display: inline-block;
 }
 
@@ -55,10 +57,22 @@
   flex: 1 1 auto;
 }
 
-.parallax-container {
-  height: 180px;
+/* .crop {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+} */
+
+.crop {
+  text-align: center;
 }
 
-#parallax_bottom {
-  height: 600px;
+.cropped {
+  margin-top: 10%;
+  object-fit: cover;
+  border-radius: 50%;
+  height: 70px;
+  width: 70px;
 }

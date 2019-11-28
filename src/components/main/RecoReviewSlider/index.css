@@ -1,29 +1,61 @@
+@import url("https://fonts.googleapis.com/css?family=Nanum+Myeongjo:400,700,800|Noto+Sans+KR:300,400&display=swap");
+
 .main_slider {
-  margin-bottom: 0px;
-  height: 680px;
   width: 100%;
-  background-color: rgb(247, 246, 246);
+  background-color: #ffffff;
+  display: inline-block;
+  box-shadow: 14px 13px 7px -7px rgba(214, 214, 214, 0.47);
+  margin-bottom: 30px;
 }
 
-.main_slider_image {
+.slider_img {
+  width: 50%;
   float: left;
-  margin-right: 30px;
+  height: auto;
+  max-width: 50%;
 }
 
-.main_slider h3 {
-  font-size: 60px;
-  font-family: "Song Myung", serif;
+.slider_text {
+  width: 100%;
+  height: auto;
+  display: inline-block;
+}
+
+.slider_review {
+  position: relative;
+  width: 80%;
+  left: 5%;
+  right: 0;
+  margin: 0 auto;
+}
+
+.slider_text_author {
+  font-family: "Gothic A1", sans-serif;
+  margin-top: 10%;
   text-align: center;
+  font-size: 1em;
+  color: #666666;
+  width: 80%;
+  margin-left: 20%;
 }
 
-.main_slider p {
+.slider_text_title {
+  font-family: "Nanum Myeongjo", serif;
+  font-weight: bold;
+  margin-top: 10%;
   text-align: center;
+  font-size: 1.5em;
+  color: #212121;
+  width: 80%;
+  margin-left: 20%;
 }
 
-.main_slider_paper {
-  display: inline;
-}
-
-.uk-card uk-card-body {
-  margin-left: 100px;
+.slider_text_contents {
+  font-family: "Nanum Myeongjo", serif;
+  margin-top: 10%;
+  text-align: left;
+  font-size: 1em;
+  color: #666666;
+  width: 80%;
+  margin-left: 20%;
 }
