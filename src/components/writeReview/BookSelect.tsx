@@ -32,7 +32,6 @@ class BookSelect extends React.Component<IProps, IState> {
         contents: "",
         thumbnail: "",
         title: ""
-
         }
       ],
       isOpen: true,

@@ -97,6 +97,7 @@ class EditPost extends React.Component<RouteComponentProps<IMatchParams>, IState
     })
   }
 
+
   public clickPostEdit(): void {
     const redirectReview = (id : string) : any =>{
       this.setState({reviewId : id})
@@ -171,48 +172,53 @@ class EditPost extends React.Component<RouteComponentProps<IMatchParams>, IState
         ) : null}
 
         <div className="write-title-area" style={style}>
+          
+
+          <div className="submit">
+            
+            <button     
+              className="paint-bucket" 
+              onClick = {this.clickPaintBucket}
+            >색선택</button>
+            
+              
+            {this.state.body.published ? 
+            <button  
+              className="unlock" 
+              onClick = {this.handlePublished}
+            >공개</button>
+            : 
+            <button 
+              className="lock" 
+              onClick = {this.handlePublished}
+            >비공개</button>}
+
+            <button 
+              className =""
+              onClick={this.clickPostEdit}
+            >등록</button>             
+          </div>
+
+          {this.state.colorPicker ? 
+            <div className="twitter-picker-area">
+              <TwitterPicker
+                color={this.state.body.thumbnail}
+                onChangeComplete={this.handleChangeComplete}
+                width="300px"
+                triangle="top-right"
+              /> </div>: 
+              <div className="color-picker-area"></div> 
+          } 
           <input
             type="text"
             className="write-title"
             placeholder="제목을 입력하세요"
             value={this.state.body.title}
             onChange={this.handleChangeTitle}
-          ></input>
-
-          <div className="submit">
-            <span 
-              uk-icon="paint-bucket" 
-              className="uk-button uk-button-default paint-bucket" 
-              onClick = {this.clickPaintBucket}
-            ></span>
-              
-            {this.state.body.published ? 
-            <span 
-              uk-icon="unlock" 
-              className="uk-button uk-button-default unlock" 
-              onClick = {this.handlePublished}
-            >공개</span>
-            : 
-            <span 
-              uk-icon="lock" 
-              className="uk-button uk-button-default lock" 
-              onClick = {this.handlePublished}
-            >비공개</span>}
-
-            <button 
-              className ="uk-button uk-button-default"
-              onClick={this.clickPostEdit}
-            >수정</button>
-
-            {this.state.colorPicker ? 
-              <TwitterPicker
-                color={this.state.body.thumbnail}
-                onChangeComplete={this.handleChangeComplete} 
-              /> : null }            
-          </div>
+          ></input>     
         </div>
 
-        <div className ="rating-box">
+        {/* <div className ="rating-box">
           <input 
             type="number" 
             min="0"
@@ -220,7 +226,7 @@ class EditPost extends React.Component<RouteComponentProps<IMatchParams>, IState
             onChange={this.handleChangeRating}
             onKeyPress={(e: any): void=>this.isNumberKey(e)}
             onInput={(e: any): void=>this.numberMaxLength(e)}></input> /10
-        </div>
+        </div> */}
 
         <div className="write-post">
           <ReactQuill

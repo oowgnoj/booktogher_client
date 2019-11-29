@@ -59,7 +59,7 @@ export const fetchDeleteLikes = (callback: any, id: string): any => {
 };
 
 export const fetchBookRatings = (callback: any, id: string): any => {
-  fetch(`${url}/ratings?books[]=${id}`, {
+  fetch(`${url}/ratings?${id}`, {
     credentials: "include"
   })
   .then((res: Response) => res.json())

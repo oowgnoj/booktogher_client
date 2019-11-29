@@ -81,6 +81,7 @@ class ReadReview extends React.Component<RouteComponentProps<IMatchParams>,IProp
   }
 
   public render(): ReactElement {
+    window.scroll(0, 0);
     return (
       <div>
         <Review review={this.state.review} bookList={this.state.bookList} />

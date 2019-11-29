@@ -48,6 +48,7 @@
     padding: 10px;
     font-size: 12pt;
     color: #999;
+    min-height: 360px;
     max-height: 360px;
     overflow-y: auto;
   }
@@ -57,4 +58,8 @@
   line-height: 1;
   font-size: 14px;
   text-align: center;
+}
+.button-wrap{
+  margin-top: 10px;
+  padding: 0px;
 }
