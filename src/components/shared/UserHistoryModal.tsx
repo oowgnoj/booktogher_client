@@ -3,6 +3,7 @@ import {
   IBook,
   ICuration,
   IReview,
+  IReviewBook,
   IAuthorProps,
   IHistoryStates
 } from "./Types";
@@ -24,7 +25,7 @@ export default class UserHistoryModal extends Component<
       curations,
       reviews,
       reviewsBooks,
-      tab: "reviews",
+      tab: "curations",
       isOpen: true
     };
     this.handleTab = this.handleTab.bind(this);
@@ -35,25 +36,15 @@ export default class UserHistoryModal extends Component<
     const setCurations = (response: ICuration[]): void => {
       this.setState({ curations: response });
     };
-    const setReviews = (response: IReview[]): void => {
-      this.setState({ reviews: response });
-    };
-    const setReviewsBooks = (response: IBook[][]): void => {
-      const booksInfo = response.map((books: IBook[]) =>
-        books.map((book: IBook) => {
-          return {
-            _id: book._id,
-            thumbnail: book.thumbnail,
-            title: book.title
-          };
-        })
-      );
-      console.log("book 이중 매핑 잘 되었니...? 걱정이다 정말", booksInfo);
-      this.setState({ reviewsBooks: booksInfo });
+    const setReviewsBooks = (
+      reviews: IReview[],
+      books: IReviewBook[][]
+    ): void => {
+      this.setState({ reviews, reviewsBooks: books });
     };
 
     fetchGetCurations(setCurations, this.state.author._id);
-    fetchGetReviews(setReviews, setReviewsBooks, this.state.author._id);
+    fetchGetReviews(setReviewsBooks, this.state.author._id);
   }
 
   public handleTab(event: MouseEvent): void {
@@ -92,7 +83,7 @@ export default class UserHistoryModal extends Component<
                         marginTop: "30px",
                         marginBottom: "30px"
                       }}
-                      className="profile-pic"
+                      className="history_cropped"
                     />
                   </div>
                   <div
@@ -112,13 +103,13 @@ export default class UserHistoryModal extends Component<
                   <div className="history_tab">
                     <ul className="tab uk-breadcrumb">
                       <li>
-                        <span id="reviews" onClick={this.handleTab}>
-                          서평 보기
+                        <span id="curations" onClick={this.handleTab}>
+                          큐레이션 보기
                         </span>
                       </li>
                       <li>
-                        <span id="curations" onClick={this.handleTab}>
-                          큐레이션 보기
+                        <span id="reviews" onClick={this.handleTab}>
+                          서평 보기
                         </span>
                       </li>
                       <li></li>

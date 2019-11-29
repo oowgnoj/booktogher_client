@@ -1,21 +1,29 @@
 import React, { ReactElement } from "react";
 import { Redirect, Route } from "react-router-dom";
+
 import BooksList from "./BooksList";
 import ReviewsList from "./ReviewsList";
 import ReadCuration from "../readCuration/index";
-import "./index.css";
 import Books from "../mypage/books";
-import { ICuration, ICurationsPost, IReview } from "../shared/Types";
-import { fetchPostCuration } from "./fetchWriteCuration";
 import BookModal from "./BookSelect";
 import ReviewModal from "./ReviewSelect";
 
-interface IBook {
-  _id: string;
-  thumbnail: string;
-  authors: string;
-  title: string;
-}
+import {
+  IBookSelectedCuration,
+  ICuration,
+  ICurationsPost,
+  IReview,
+  IReviewSearchWithBooks
+} from "../shared/Types";
+
+import {
+  selectedBooksForCuration,
+  selectedReviewsForCuration
+} from "../shared/InitialStates";
+
+import { fetchPostCuration } from "./fetchWriteCuration";
+
+import "./index.css";
 
 interface IBody {
   title: string;
@@ -24,18 +32,11 @@ interface IBody {
   reviews: string[];
 }
 
-interface ISelectedBook {
-  _id: string;
-  title: string;
-  authors: string;
-  thumbnail: string;
-}
-
 interface IState {
   title: string;
   contents: string;
-  books: IBook[];
-  reviews: IReview[];
+  books: IBookSelectedCuration[];
+  reviews: IReviewSearchWithBooks[];
   bookModal: boolean;
   reviewModal: boolean;
   isPosted: boolean;
@@ -46,19 +47,9 @@ class WriteCuration extends React.Component<{}, IState> {
   constructor({}) {
     super({});
     this.state = {
-      books: [{ _id: "", authors: "", thumbnail: "", title: "" }],
+      books: selectedBooksForCuration,
       contents: "",
-      reviews: [
-        {
-          _id: "",
-          author: { _id: "", image: "", name: "", profile: "" },
-          contents: "",
-          likes: [],
-          published: true,
-          thumbnail: "",
-          title: ""
-        }
-      ],
+      reviews: selectedReviewsForCuration,
       title: "",
       bookModal: false,
       reviewModal: false,
@@ -77,7 +68,7 @@ class WriteCuration extends React.Component<{}, IState> {
   }
 
   public bookDelete(bookId: string): void {
-    const currentBookList: IBook[] = this.state.books.slice();
+    const currentBookList: IBookSelectedCuration[] = this.state.books.slice();
     for (let i: number = 0; i < currentBookList.length; i++) {
       if (currentBookList[i]._id === bookId) {
         currentBookList.splice(i, 1);
@@ -87,7 +78,7 @@ class WriteCuration extends React.Component<{}, IState> {
   }
 
   public reviewDelete(reviewId: string): void {
-    const currentReviewList: IReview[] = this.state.reviews.slice();
+    const currentReviewList: IReviewSearchWithBooks[] = this.state.reviews.slice();
     for (let i: number = 0; i < currentReviewList.length; i++) {
       if (currentReviewList[i]._id === reviewId) {
         currentReviewList.splice(i, 1);
@@ -118,7 +109,7 @@ class WriteCuration extends React.Component<{}, IState> {
     const postBody: IBody = {
       title: this.state.title,
       contents: this.state.contents,
-      books: this.state.books.map((book: IBook) => book._id),
+      books: this.state.books.map((book: IBookSelectedCuration) => book._id),
       reviews: this.state.reviews.map((review: IReview) => review._id)
     };
 
@@ -128,16 +119,16 @@ class WriteCuration extends React.Component<{}, IState> {
     fetchPostCuration(getPostedId, postBody);
   }
 
-  public addBooks = (selectedBooks: ISelectedBook): any => {
-    const newBooks: ISelectedBook[] =
+  public addBooks = (selectedBooks: IBookSelectedCuration): any => {
+    const newBooks: IBookSelectedCuration[] =
       this.state.books.length !== 0 && this.state.books[0]._id
         ? this.state.books.concat(selectedBooks)
         : this.state.books.slice(1).concat(selectedBooks);
     this.setState({ books: newBooks, bookModal: false });
   };
 
-  public addReviews = (selectedReviews: IReview): any => {
-    const newReviews: IReview[] =
+  public addReviews = (selectedReviews: IReviewSearchWithBooks[]): any => {
+    const newReviews: IReviewSearchWithBooks[] =
       this.state.reviews.length !== 0 && this.state.reviews[0]._id
         ? this.state.reviews.concat(selectedReviews)
         : this.state.reviews.slice(1).concat(selectedReviews);
@@ -161,10 +152,13 @@ class WriteCuration extends React.Component<{}, IState> {
               name="title"
               placeholder="큐레이션의 제목을 입력해주세요"
               style={{
-                height: "150px",
-                width: "100%",
-                border: "none",
-                fontSize: "50px"
+                fontFamily: "Nanum Myeongjo, serif",
+                marginTop: "1%",
+                marginLeft: "-10%",
+                width: "80%",
+                fontSize: "2.4em",
+                display: "inline",
+                border: "none"
               }}
               onChange={this.handleTitle}
             />
@@ -186,11 +180,14 @@ class WriteCuration extends React.Component<{}, IState> {
             name="contents"
             placeholder="큐레이션의 내용을 입력해주세요"
             style={{
-              resize: "none",
+              marginTop: "50px",
+              marginLeft: "-10%",
               height: "300px",
-              width: "100%",
+              width: "50%",
+              fontSize: "1.1em",
+              lineHeight: "1.8em",
+              resize: "none",
               border: "none",
-              fontSize: "20px",
               outline: "none"
             }}
             onChange={this.handleContent}

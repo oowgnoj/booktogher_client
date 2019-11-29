@@ -1,13 +1,16 @@
 .signup {
-  display: table;
-  position: absolute;
   height: 100%;
   width: 100%;
 }
 
-form {
-  display: table-cell;
-  vertical-align: middle;
+.signup form {
+  position: absolute;
+  top: 30%;
+  left: 40%;
   text-align: center;
-  background-color: rgb(247, 247, 243);
+}
+
+.signup form input {
+  padding: 10%;
+  margin: 5% 0;
 }

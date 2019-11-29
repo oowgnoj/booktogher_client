@@ -1,9 +1,15 @@
 import React, { ReactElement } from "react";
-import { IBooks, IReview } from "../shared/Types";
+import {
+  IBooks,
+  IReview,
+  IReviewBook,
+  IReviewSearchBook
+} from "../shared/Types";
 import "./ReviewModal.scss";
 
 interface IProps {
   reviews: IReview[];
+  books: IReviewSearchBook[][];
   clicked: any;
 }
 
@@ -13,6 +19,7 @@ class MyReviewSelect extends React.Component<IProps> {
     this.state = {};
   }
   public render(): ReactElement {
+    console.log("myreviewselect this.props.books ? ", this.props.books);
     const MyReviewList: ReactElement[] = this.props.reviews.map(
       (info: IReview, index: number) => {
         return (
@@ -42,6 +49,13 @@ class MyReviewSelect extends React.Component<IProps> {
                   </div>
 
                   <div>
+                    <h4>
+                      {this.props.books[index].length > 0
+                        ? this.props.books[index].length > 1
+                          ? this.props.books[index][0].title + " 외"
+                          : this.props.books[index][0].title
+                        : null}
+                    </h4>
                     <h4
                       className="uk-comment-title uk-margin-remove"
                       style={{ paddingTop: "15px" }}

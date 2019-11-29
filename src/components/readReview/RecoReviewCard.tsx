@@ -1,9 +1,10 @@
 import React, { ReactElement } from "react";
 import "./RecoReviewCard.css";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
-const RecoReviewCard = ({ review } : any): ReactElement => {  
+const RecoReviewCard = ({ review }: any): ReactElement => {
   return (
+
     <a href={`/review/${review._id}`} style={{ textDecoration: "none" }}>
       <div className="review_review_list_review">
         <div className="" uk-grid>
@@ -75,6 +76,7 @@ const RecoReviewCard = ({ review } : any): ReactElement => {
     //     </div>
     // </div>
   ) 
+
 };
 
 export default RecoReviewCard;

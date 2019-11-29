@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { requestLogin } from "../../Redux/modules/user";
 import Store from "../../Redux/configureStore";
 import "./Signin.css";
@@ -124,6 +125,9 @@ class Signin extends React.Component<any, IState> {
               SIGN IN
             </button>
           </p>
+          <Link to="/password">
+            <p>계정을 잊어버리셨나요? </p>
+          </Link>
           <span>{required}</span>
         </form>
       </div>
