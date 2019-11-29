@@ -33,7 +33,8 @@ const BookInfo = ({
     } else {
       return <span>0</span>;
     }
-
+  });
+  const toRead: any = user.to_read;
 
   const handleAddToRead = (): void => {
     if (user._id === undefined) {
@@ -85,7 +86,7 @@ const BookInfo = ({
           <div className="book-desc">책 소개 : {bookInfo.contents}</div>
         </div>
       </div>
-
+    </div>
   );
 };
 

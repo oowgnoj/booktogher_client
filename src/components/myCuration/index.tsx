@@ -6,7 +6,6 @@ import Entry from "./../shared/curationEntry";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./index.css";
-import { Skeleton } from "@material-ui/lab";
 
 interface IProps {
   user: IUserInfo;
@@ -39,8 +38,7 @@ const Curation: React.FC<IProps> = (props: any): ReactElement => {
         })
       ) : (
         <div>
-          <Skeleton variant="text" width={"35%"} height={40} />
-          <Skeleton variant="text" width={"60%"} height={25} />
+          <div></div>
         </div>
       )}
     </div>

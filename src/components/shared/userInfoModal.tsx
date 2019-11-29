@@ -57,14 +57,8 @@ const EditUserInfo: React.FC<IProps> = ({
       profile: profileState
     };
     if (!userImg) {
-      console.log("no image update");
-      console.log(updated);
       updateUserInfo(updated);
     } else {
-      console.log("both update");
-      console.log(updated);
-      console.log(userImg);
-
       updateUserImg(userImg);
       updateUserInfo(updated);
     }

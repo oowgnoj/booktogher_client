@@ -1,5 +1,6 @@
 import React, { useState, useEffect, ReactElement, useRef } from "react";
 import { connect } from "react-redux";
+import "./myBook.css";
 
 import {
   IUserInfo,
@@ -10,7 +11,7 @@ import {
 
 import NavBar from "./NavBar";
 import BookEntry from "./BookEntry";
-import Cards from "./cards";
+import Modal from "./Modal";
 import BookSelect from "./../writeCuration/BookSelect";
 import { updateUserInfo } from "../../Redux/modules/user";
 import { modifyForm } from "./../shared/helper";
@@ -25,6 +26,7 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
   const toRead: any = props.user.to_read;
   const reading: any = props.user.reading;
   const finished: any = props.user.finished;
+  const userBookGoal: number = props.user.numBooksGoal;
 
   const [userBooks, setUserBooks] = React.useState([toRead, reading, finished]);
   const [bookStatus, setStatus] = useState<string>("to_read");
@@ -67,7 +69,6 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
     bookInfo: any,
     e: React.MouseEvent<HTMLLIElement, MouseEvent>
   ): void => {
-    console.log(e.currentTarget.id);
     changeBookStatus(bookInfo._id, e.currentTarget.id);
   };
 
@@ -119,64 +120,30 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
     setStatus(e.currentTarget.id);
   };
 
-  //   let dependsOnBookStatus;
-
-  //   if (bookStatus === "to_tead") {
-  //     dependsOnBookStatus = userBooks[0].map((el: IBookToRead) => {
-  //       return (
-  //         <BookEntry
-  //           toRead={el}
-  //           getCurrentBookID={getCurrentBookID}
-  //           getImgBookId={getImgBookId}
-  //         />
-  //       );
-  //     });
-  //   } else if (bookStatus === "reading") {
-  //     dependsOnBookStatus = userBooks[1].map((el: IBookReading) => {
-  //       return (
-  //         <BookEntry
-  //           reading={el}
-  //           getCurrentBookID={getCurrentBookID}
-  //           getImgBookId={getImgBookId}
-  //         />
-  //       );
-  //     });
-  //   } else {
-  //     dependsOnBookStatus = userBooks[2].map((el: IBookFinished) => {
-  //       return (
-  //         <BookEntry
-  //           finished={el}
-  //           getCurrentBookID={getCurrentBookID}
-  //           getImgBookId={getImgBookId}
-  //         />
-  //       );
-  //     });
-  //   }
-
-  //   return (
-  //     <div className="wrapper">
-  //       {console.log(bookStatus)}
-  //       <h2 style={{ fontFamily: "Nanum Myeongjo, serif", fontWeight: "bold" }}>
-  //         나의 서재{" "}
-  //       </h2>
-  //       <hr style={{ marginTop: "5px" }} />
-  //       {temp}
-  //       <NavBar handleActive={handleActive} />
-  //       {dependsOnBookStatus}
-  //     </div>
-  //   );
-  // };
-
   // rendering :  need refactoring
   if (bookStatus === "to_read") {
     return (
       <div className="wrapper">
         <h2 style={{ fontFamily: "Nanum Myeongjo, serif", fontWeight: "bold" }}>
-          나의 서재{" "}
+          나의 서재 <Modal />
+          <progress
+            id="js-progressbar"
+            className="uk-progress"
+            value={finished.length}
+            max={userBookGoal}
+            style={{
+              width: "50%",
+              display: "inline-block",
+              verticalAlign: "middle",
+              marginLeft: "auto",
+              marginRight: "0",
+              float: "right"
+            }}
+          ></progress>
         </h2>
+
         <hr style={{ marginTop: "5px" }} />
         {temp}
-
         <NavBar handleActive={handleActive} />
         {userBooks[0].map((el: IBookToRead) => {
           return (
