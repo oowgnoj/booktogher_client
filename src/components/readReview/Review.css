@@ -41,7 +41,7 @@
 .post-area {
   width: 54%;
   text-align: left; 
-  padding: 60px;
+  padding: 80px 60px;
   color: #0c0c0c;
   font-size: 16px;
   font-family: 'Gothic A1', sans-serif;
@@ -97,4 +97,9 @@
   margin: 2px;
   float: left;
 }
+
+.text-area {
+  margin-top: 60px;
+}
+
 

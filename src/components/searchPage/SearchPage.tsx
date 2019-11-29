@@ -6,6 +6,7 @@ import { fetchBookSearch, fetchReviewSearch } from "./../shared/Fetch";
 import SearchBooks from "./SearchBooks";
 import SearchReviews from "./SearchReviews";
 import "./SearchBook.css";
+import { minHeight } from "@material-ui/system";
 
 interface IState {
   books: IBook[];
@@ -122,8 +123,6 @@ class SearchPage extends React.Component<
   }
 
   public render(): ReactElement {
-
-    console.log(this.state.redirect)
     return (
       <div>
         {this.state.redirect ? 

@@ -31,15 +31,78 @@ class SearchReviews extends React.Component<IProps, IState> {
 
   public render(): ReactElement {
     const searchReviewList: ReactElement[] = this.props.reviews.map(
-      (info: IReviewWithBooks) => {
+      (review: IReviewWithBooks) => {
         return (
-          <div key ={info._id} className="review-detail">
-            <Link to = {`/review/${info._id}`}>
-              <h5>{info.title}</h5>
-              <div>{info.author.name}</div>
-              <div>{info.contents.replace(/<[^>]*>?/gm, '')}</div>
+          <div key ={review._id} className="review-detail">
+            <Link to = {`/review/${review._id}`}>
+            <div style={{display: "inline-block"}}>
+              <img
+                src={
+                  review.author.image
+                    ? review.author.image
+                    : "https://icons-for-free.com/iconfiles/png/128/anonymous+app+contacts+open+line+profile+user+icon-1320183042822068474.png"
+                }
+                alt={review.title}
+                className="writecuration_reviewentry_cropped"
+              />
+              <div className="middle_review">
+                <span uk-icon="icon: close; ratio: 1.7" className="text"></span>
+              </div>
+              <div
+                className="reviewentry_author"
+                style={{
+                  textAlign: "center",
+                  marginTop: "-30px",
+                  marginBottom: "10px",
+                  fontFamily: "Nanum Myeongjo, serif",
+                  fontSize: "0.8em",
+                  textDecoration: "none",
+                  color: "gray"
+                }}
+              >
+                {review.author.name}
+              </div>
+            </div>
+            <div
+              style={{
+                display: "inline-block",
+                textDecoration: "none",
+                color: "gray",
+                position: "absolute",
+                marginLeft: "2%",
+                marginTop: "10px",
+                width: "50%"
+              }}
+            >
+              <div className="">
+                <p
+                  style={{
+                    display: "inline",
+                    marginRight: "3%",
+                    color: "skyblue",
+                    fontSize: "1.2em"
+                  }}
+                >
+                  {review.books.length > 1
+                    ? review.books[0].title + " 외"
+                    : review.books[0].title}
+                </p>
+                <p style={{ display: "inline", fontSize: "1.2em", width: "80%" }}>
+                  {console.log(review.title)}
+                  {review.title}
+                </p>
+              </div>
+              <div className="reviewentry_contents" style={{ fontSize: "0.9em" }}>
+                <p>
+                  {review.contents.length > 120
+                    ? review.contents.replace(/<[^>]*>?/gm, "").slice(0, 120) +
+                      "..."
+                    : review.contents.replace(/<[^>]*>?/gm, "")}
+                </p>
+              </div>
+            </div>
             </Link>     
-        </div>
+          </div>
         );
       }
     );

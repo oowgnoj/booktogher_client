@@ -38,13 +38,16 @@ class SearchForm extends React.Component<{}, IState> {
     return ( 
       <div>
         {this.state.redirect ?
-        <Redirect to={`/search/${this.state.title}`}/>
+        <div>
+          {this.setState({redirect: false})}
+          <Redirect to={`/search/${this.state.title}`}/>
+        </div>     
         :
         <div className="search-i">
               <a className="uk-navbar-toggle search-icon" href="#" uk-icon="search"></a>
               <div 
                 className="uk-navbar-dropdown search-form" 
-                uk-drop="mode: click; cls-drop: uk-navbar-dropdown; boundary: !nav"
+                uk-drop="mode: click; "
               >    
                 <form className="uk-search uk-search-navbar uk-width-1-1">
                     <input 

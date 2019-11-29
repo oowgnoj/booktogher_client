@@ -63,6 +63,7 @@ class ReviewSelect extends React.Component<IProps, IState> {
     this.handleNavSelect = this.handleNavSelect.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.clickClose = this.clickClose.bind(this);
   }
 
   public componentDidMount(): void {
@@ -131,15 +132,24 @@ class ReviewSelect extends React.Component<IProps, IState> {
     fetchReviewsSearch(searchedReviews, search);
   }
 
+  public clickClose(): void { 
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+
   public render(): ReactElement {
     return (
       <div>
         {this.state.isOpen ? (
           <div className="Review-Modal-overlay">
             <div className="Review-Modal">
-              <div className="Review-button-wrap">
-                <button onClick={this.clickConfirm}> Confirm </button>
-              </div>
+            <button
+              className="close-button"
+              uk-icon="close"
+              type="button" 
+              onClick={this.clickClose}></button>
+              
               <div>
                 <div
                   style={{
@@ -214,7 +224,12 @@ class ReviewSelect extends React.Component<IProps, IState> {
                   ) : null}
                 </div>
               ) : null}
-            </div>
+              <div className="Review-button-wrap">
+                <button 
+                  className ="uk-button uk-button-default"
+                  onClick={this.clickConfirm}> Confirm </button>
+              </div>
+            </div>           
           </div>
         ) : null}
       </div>

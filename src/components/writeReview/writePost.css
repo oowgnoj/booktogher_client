@@ -24,6 +24,7 @@
   background-color:rgb(49, 49, 49,0);
   padding-left: 40px;
   padding-bottom: 10px; 
+  color: #3f3f3f;
 }
 
 .write-title::placeholder {

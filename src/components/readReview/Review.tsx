@@ -120,8 +120,9 @@ class Review extends React.Component< IProps, IState> {
   }
   
   public render(): ReactElement {
-    console.log(this.state.bookRating)
+
     const { bookList, review } = this.props
+    console.log(review.author.name)
     const bookTitle: JSX.Element[] = bookList.map((info: IBook, index: number) => {
       return (
         <div key ={info._id}>
@@ -175,6 +176,8 @@ class Review extends React.Component< IProps, IState> {
           </div>
         </div>
         <div className="post-area">
+          <div style ={{fontStyle:"italic"}}>by {review.author.name}</div>
+
           <div className="book-rating">{bookTitle}</div>
           <div
             dangerouslySetInnerHTML={{ __html: review.contents }}

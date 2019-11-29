@@ -62,6 +62,7 @@ class BookDetail extends React.Component<
   }
 
   public render(): ReactElement {
+    window.scroll(0, 0);
     return (
       <div className="book-detail-area">
         <div className="book-cover"></div>
