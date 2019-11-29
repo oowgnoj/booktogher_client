@@ -25,7 +25,10 @@ interface IProps {
 const RecoReviewList: React.SFC<IProps> = ({
   reviews
 }: IProps): ReactElement => {
-  const reviewList: React.ReactElement[] = reviews.map(
+  const publishedReviews: IReview[] = reviews.filter(
+    (review: IReview) => review.published
+  );
+  const reviewList: React.ReactElement[] = publishedReviews.map(
     (review: IReview, index: number) => (
       <RecoReviewEntry review={review} key={index} />
     )

@@ -19,7 +19,7 @@ class ReviewsEntry extends React.Component<IProps> {
         className="readcuration_reviews_reviewentry"
         style={{ marginLeft: "80px" }}
       >
-        <Link to={`/curation/${review._id}`}>
+        <Link to={`/review/${review._id}`}>
           <span style={{ display: "inline-block" }}>
             <img
               src={

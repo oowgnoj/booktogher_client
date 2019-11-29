@@ -41,6 +41,7 @@ class Main extends React.Component {
   }
 
   public componentDidMount(): void {
+    window.scroll(0, 0);
     Store.dispatch(updateReviewsRecommend());
     Store.dispatch(updateCurationsRecommend());
   }
@@ -100,7 +101,7 @@ class Main extends React.Component {
         </div>
 
         <div className="main_review_list_start">
-          <RecoReviewList reviews={props.review.slice(1, 5)} />
+          <RecoReviewList reviews={props.review.slice(3)} />
         </div>
 
         <div className="main_recocollection_div">
