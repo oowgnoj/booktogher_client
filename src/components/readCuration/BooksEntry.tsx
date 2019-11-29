@@ -35,7 +35,8 @@ class BooksEntry extends React.Component<IProps> {
               width: "120px",
               textAlign: "center",
               marginTop: "10px",
-              textDecoration: "none"
+              textDecoration: "none",
+              color: "gray"
             }}
           >
             <b>
@@ -50,7 +51,8 @@ class BooksEntry extends React.Component<IProps> {
               width: "120px",
               textAlign: "center",
               marginBottom: "10px",
-              textDecoration: "none"
+              textDecoration: "none",
+              color: "gray"
             }}
           >
             {book.authors.length < 10

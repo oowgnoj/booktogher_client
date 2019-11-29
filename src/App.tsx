@@ -37,64 +37,19 @@ const App: React.FC = (props: any): ReactElement => {
         <Route exact path="/" component={Main} />
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
-        <PrivateRoute
-          path="/mypage"
-          component={Mypage}
-          restricted={true}
-          exact
-        />
+        <PrivateRoute path="/mypage" component={Mypage} exact />
         <Route path="/book/:id" component={BookDetail} />
         <Route path="/review/:id" component={ReadReview} />
-        <PrivateRoute
-          path="/postreview"
-          component={PostReview}
-          restricted={true}
-          exact
-        />
+        <PrivateRoute path="/postreview" component={PostReview} exact />
         <Route path="/curation/:id" component={ReadCuration} />
-        <PrivateRoute
-          path="/editcuration/:id"
-          component={EditCuration}
-          restricted={true}
-          exact
-        />
-        <PrivateRoute
-          path="/postcuration"
-          component={PostCuration}
-          restricted={true}
-          exact
-        />
-        <PrivateRoute
-          path="/myreview"
-          component={Myreview}
-          restricted={true}
-          exact
-        />
-        <PrivateRoute
-          path="/mybook"
-          component={MyBook}
-          restricted={true}
-          exact
-        />
-        <PrivateRoute
-          path="/mycuration"
-          component={MyCuration}
-          restricted={true}
-          exact
-        />
-        <PrivateRoute
-          path="/mylikes"
-          component={MyLikes}
-          restricted={true}
-          exact
-        />
+        <PrivateRoute path="/editcuration/:id" component={EditCuration} exact />
+        <PrivateRoute path="/postcuration" component={PostCuration} exact />
+        <PrivateRoute path="/myreview" component={Myreview} exact />
+        <PrivateRoute path="/mybook" component={MyBook} exact />
+        <PrivateRoute path="/mycuration" component={MyCuration} exact />
+        <PrivateRoute path="/mylikes" component={MyLikes} exact />
         <Route path="/search/:keyWord" component={Search} />
-        <PrivateRoute
-          path="/editReview/:id"
-          component={EditPost}
-          restricted={true}
-          exact
-        />
+        <PrivateRoute path="/editReview/:id" component={EditPost} exact />
         <Route path="/searchForm" component={SearchForm} />
         <Route path="*" to="/" />
       </Switch>

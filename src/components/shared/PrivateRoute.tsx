@@ -19,6 +19,9 @@ const PrivateRoute: React.FC<any> = ({
     <Route
       {...rest}
       render={props => {
+        console.log("private props ?", props);
+        console.log("user:", user);
+        setTimeout(() => console.log(user), 1000);
         if (isLogin()) {
           return <Component {...props} />;
         } else {

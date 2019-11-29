@@ -19,11 +19,10 @@ const EditUserInfo: React.FC<IProps> = ({
   updateUserInfo,
   updateUserImg
 }: IProps): ReactElement => {
-  const [userInfo, setUserInfo] = useState<IUserInfo>(user);
   const [userImg, setUserImg] = useState<any>("");
-  const [nameState, setName] = useState<string>("");
-  const [emailState, setEmail] = useState<string>("");
-  const [profileState, setProfile] = useState<string>("");
+  const [nameState, setName] = useState<string>(user.name);
+  const [emailState, setEmail] = useState<string>(user.email);
+  const [profileState, setProfile] = useState<string>(user.profile);
 
   // handle change email and username (input box)
   const changeInputValue = (
@@ -58,9 +57,14 @@ const EditUserInfo: React.FC<IProps> = ({
       profile: profileState
     };
     if (!userImg) {
+      console.log("no image update");
+      console.log(updated);
       updateUserInfo(updated);
     } else {
-      console.log("image");
+      console.log("both update");
+      console.log(updated);
+      console.log(userImg);
+
       updateUserImg(userImg);
       updateUserInfo(updated);
     }

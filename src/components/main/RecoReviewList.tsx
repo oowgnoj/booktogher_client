@@ -33,10 +33,13 @@ const RecoReviewList: React.SFC<IProps> = ({
       <RecoReviewEntry review={review} key={index} />
     )
   );
+
+  console.log("publishedReviews ? ", publishedReviews);
+
   return (
     <div className="main_review_list">
       <div className="uk-child-width-1-2@s  uk-flex uk-flex-center" uk-grid>
-        {reviewList}
+        {reviewList.slice(0, 4)}
       </div>
     </div>
   );

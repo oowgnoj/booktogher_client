@@ -20,7 +20,13 @@ class ReviewsEntry extends React.Component<IProps> {
         style={{ marginLeft: "80px" }}
       >
         <Link to={`/review/${review._id}`}>
-          <span style={{ display: "inline-block" }}>
+          <span
+            style={{
+              display: "inline-block",
+              marginRight: "30px",
+              marginTop: "30px"
+            }}
+          >
             <img
               src={
                 review.author.image
@@ -35,7 +41,8 @@ class ReviewsEntry extends React.Component<IProps> {
               className="reviewentry_author"
               style={{
                 textAlign: "center",
-                paddingTop: "20%",
+                /* marginTop: "-30px", */
+
                 marginBottom: "10px",
                 fontFamily: "Nanum Myeongjo, serif",
                 fontSize: "0.8em",
@@ -50,15 +57,42 @@ class ReviewsEntry extends React.Component<IProps> {
             style={{
               display: "inline-block",
               textDecoration: "none",
-              color: "gray"
+              color: "gray",
+              position: "absolute",
+              marginLeft: "2%",
+              marginTop: "20px",
+              width: "60%"
             }}
           >
-            <div className="reviewentry_title" style={{ fontSize: "30px" }}>
-              <p>{book.length > 1 ? book[0].title + " 외" : book[0].title}</p>
-              <p>{review.title.replace(/<[^>]*>?/gm, "")}</p>
+            <div
+              className="reviewentry_title"
+              style={{
+                fontSize: "30px",
+                width: "100%"
+              }}
+            >
+              <p
+                style={{
+                  display: "inline",
+                  marginRight: "3%",
+                  color: "skyblue",
+                  fontSize: "20px"
+                }}
+              >
+                {book.length > 1 ? book[0].title + " 외" : book[0].title}
+              </p>
+              <p style={{ display: "inline", fontSize: "20px" }}>
+                {review.title}
+              </p>
             </div>
-            <div className="reviewentry_contents">
-              <p>{review.contents.replace(/<[^>]*>?/gm, "")}</p>
+            <div className="reviewentry_contents" style={{ fontSize: "0.9em" }}>
+              <p>
+                {review.contents.length > 120
+                  ? review.contents.replace(/<[^>]*>?/gm, "").slice(0, 120) +
+                    "..."
+                  : review.contents.replace(/<[^>]*>?/gm, "")}
+              </p>
+              <hr />
             </div>
           </span>
         </Link>

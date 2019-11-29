@@ -61,11 +61,18 @@ const Slider: React.SFC<IProps> = ({ review }: IProps): ReactElement => {
 
               <p className="slider_text_contents">
                 {review[0]
-                  ? review[0].contents.replace(/<[^>]*>?/gm, "")
+                  ? review[0].contents.replace(/<[^>]*>?/gm, "").length > 150
+                    ? review[0].contents
+                        .replace(/<[^>]*>?/gm, "")
+                        .slice(0, 150) + "..."
+                    : review[0].contents.replace(/<[^>]*>?/gm, "")
                   : "서평 본문"}
               </p>
               <Link to={review[0] ? `review/${review[0]._id}` : "/"}>
-                <button className="uk-button uk-button-default">
+                <button
+                  className="uk-button uk-button-default uk-button-small"
+                  style={{ float: "right" }}
+                >
                   보러가기
                 </button>
               </Link>
@@ -87,11 +94,18 @@ const Slider: React.SFC<IProps> = ({ review }: IProps): ReactElement => {
 
               <p className="slider_text_contents">
                 {review[1]
-                  ? review[1].contents.replace(/<[^>]*>?/gm, "")
+                  ? review[1].contents.replace(/<[^>]*>?/gm, "").length > 150
+                    ? review[1].contents
+                        .replace(/<[^>]*>?/gm, "")
+                        .slice(0, 150) + "..."
+                    : review[1].contents.replace(/<[^>]*>?/gm, "")
                   : "서평 본문"}
               </p>
               <Link to={review[1] ? `review/${review[1]._id}` : "/"}>
-                <button className="uk-button uk-button-default">
+                <button
+                  className="uk-button uk-button-default uk-button-small"
+                  style={{ float: "right" }}
+                >
                   보러가기
                 </button>
               </Link>
@@ -113,11 +127,18 @@ const Slider: React.SFC<IProps> = ({ review }: IProps): ReactElement => {
 
               <p className="slider_text_contents">
                 {review[2]
-                  ? review[2].contents.replace(/<[^>]*>?/gm, "")
+                  ? review[2].contents.replace(/<[^>]*>?/gm, "").length > 150
+                    ? review[2].contents
+                        .replace(/<[^>]*>?/gm, "")
+                        .slice(0, 150) + "..."
+                    : review[2].contents.replace(/<[^>]*>?/gm, "")
                   : "서평 본문"}
               </p>
               <Link to={review[2] ? `review/${review[2]._id}` : "/"}>
-                <button className="uk-button uk-button-default">
+                <button
+                  className="uk-button uk-button-default uk-button-small"
+                  style={{ float: "right" }}
+                >
                   보러가기
                 </button>
               </Link>

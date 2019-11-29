@@ -67,6 +67,10 @@ class WriteCuration extends React.Component<{}, IState> {
     this.addReviews = this.addReviews.bind(this);
   }
 
+  public componentDidMount(): void {
+    window.scroll(0, 0);
+  }
+
   public bookDelete(bookId: string): void {
     const currentBookList: IBookSelectedCuration[] = this.state.books.slice();
     for (let i: number = 0; i < currentBookList.length; i++) {

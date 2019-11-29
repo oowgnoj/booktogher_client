@@ -28,7 +28,8 @@ class ReviewsList extends React.Component<IProps> {
         <span
           className="readcuration_reviews_reviewlist"
           style={{
-            display: "block"
+            display: "block",
+            paddingLeft: "40px"
           }}
         >
           {this.props.reviews.map((el: IReview, index: number) => (
