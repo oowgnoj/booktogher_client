@@ -214,9 +214,9 @@ class ReadCuration extends React.Component<IParams, IState> {
             style={{
               fontFamily: "Nanum Myeongjo, serif",
               marginTop: "39px",
-              marginLeft: "1px",
+              marginLeft: "1%",
               height: "200px",
-              width: "70%",
+              width: "80%",
               fontSize: "2.4em",
               display: "inline"
             }}

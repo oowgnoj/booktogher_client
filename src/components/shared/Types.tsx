@@ -287,3 +287,12 @@ export interface IBookReview {
   translators: string[];
   url: string;
 }
+
+/* ------- write curation ------- */
+
+export interface IBookSelectedCuration {
+  _id: string;
+  authors: string;
+  thumbnail: string;
+  title: string;
+}

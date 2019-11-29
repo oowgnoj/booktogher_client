@@ -3,7 +3,7 @@
 }
 
 .writecuration_header {
-  padding-left: 15%;
+  padding-left: 10%;
   padding-right: 10%;
 }
 
@@ -83,7 +83,8 @@ input:focus {
   outline: none;
 }
 
-.reviewentry_cropped {
+.writecuration_reviewentry_cropped {
+  margin-top: 20px;
   object-fit: cover;
   border-radius: 50%;
   height: 50px;

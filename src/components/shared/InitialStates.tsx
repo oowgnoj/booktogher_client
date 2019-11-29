@@ -1,5 +1,6 @@
 import {
   IAuthor,
+  IBookSelectedCuration,
   ICuration,
   IReview,
   IReviewBook,
@@ -45,7 +46,16 @@ export const reviewsBooks: IReviewBook[][] = [
   ]
 ];
 
-export const selectedReviews: IReviewSearchWithBooks[] = [
+export const selectedBooksForCuration: IBookSelectedCuration[] = [
+  {
+    _id: "",
+    authors: "",
+    thumbnail: "",
+    title: ""
+  }
+];
+
+export const selectedReviewsForCuration: IReviewSearchWithBooks[] = [
   {
     _id: "",
     author: {

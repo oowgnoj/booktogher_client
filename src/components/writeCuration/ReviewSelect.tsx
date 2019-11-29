@@ -10,7 +10,7 @@ import {
 import {
   reviews,
   reviewsBooks,
-  selectedReviews
+  selectedReviewsForCuration
 } from "../shared/InitialStates";
 import { connect } from "react-redux";
 import {
@@ -46,13 +46,13 @@ class ReviewSelect extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = {
-      reviews: selectedReviews,
+      reviews: selectedReviewsForCuration,
       title: "",
       myReviews: reviews,
       myReviewsBooks: reviewsBooks,
       myLikesReviews: reviews,
       myLikesReviewsBooks: reviewsBooks,
-      selectedReviews,
+      selectedReviews: selectedReviewsForCuration,
       search: "",
       isOpen: true,
       navSelect: "myReview",
