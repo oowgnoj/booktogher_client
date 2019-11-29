@@ -14,7 +14,6 @@ import Cards from "./cards";
 import BookSelect from "./../writeCuration/BookSelect";
 import { updateUserInfo } from "../../Redux/modules/user";
 import { modifyForm } from "./../shared/helper";
-import "./test.css";
 
 interface IProps {
   User: IUserInfo;
@@ -119,45 +118,98 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
   ): void => {
     setStatus(e.currentTarget.id);
   };
+
+  //   let dependsOnBookStatus;
+
+  //   if (bookStatus === "to_tead") {
+  //     dependsOnBookStatus = userBooks[0].map((el: IBookToRead) => {
+  //       return (
+  //         <BookEntry
+  //           toRead={el}
+  //           getCurrentBookID={getCurrentBookID}
+  //           getImgBookId={getImgBookId}
+  //         />
+  //       );
+  //     });
+  //   } else if (bookStatus === "reading") {
+  //     dependsOnBookStatus = userBooks[1].map((el: IBookReading) => {
+  //       return (
+  //         <BookEntry
+  //           reading={el}
+  //           getCurrentBookID={getCurrentBookID}
+  //           getImgBookId={getImgBookId}
+  //         />
+  //       );
+  //     });
+  //   } else {
+  //     dependsOnBookStatus = userBooks[2].map((el: IBookFinished) => {
+  //       return (
+  //         <BookEntry
+  //           finished={el}
+  //           getCurrentBookID={getCurrentBookID}
+  //           getImgBookId={getImgBookId}
+  //         />
+  //       );
+  //     });
+  //   }
+
+  //   return (
+  //     <div className="wrapper">
+  //       {console.log(bookStatus)}
+  //       <h2 style={{ fontFamily: "Nanum Myeongjo, serif", fontWeight: "bold" }}>
+  //         나의 서재{" "}
+  //       </h2>
+  //       <hr style={{ marginTop: "5px" }} />
+  //       {temp}
+  //       <NavBar handleActive={handleActive} />
+  //       {dependsOnBookStatus}
+  //     </div>
+  //   );
+  // };
+
   // rendering :  need refactoring
   if (bookStatus === "to_read") {
     return (
-      <div className="random">
-        <div className="wrapper">
-          <Cards />
-          {temp}
-          <NavBar handleActive={handleActive} />
-          {userBooks[0].map((el: IBookToRead) => {
-            return (
-              <BookEntry
-                toRead={el}
-                getCurrentBookID={getCurrentBookID}
-                getImgBookId={getImgBookId}
-              />
-            );
-          })}
-          <button
-            id="toRead"
-            style={{
-              width: "120px",
-              height: "174px",
-              marginTop: "10px",
-              backgroundColor: "white",
-              border: "dashed",
-              borderColor: "grey"
-            }}
-            onClick={handleSearchBox}
-          >
-            책 추가
-          </button>
-        </div>
+      <div className="wrapper">
+        <h2 style={{ fontFamily: "Nanum Myeongjo, serif", fontWeight: "bold" }}>
+          나의 서재{" "}
+        </h2>
+        <hr style={{ marginTop: "5px" }} />
+        {temp}
+
+        <NavBar handleActive={handleActive} />
+        {userBooks[0].map((el: IBookToRead) => {
+          return (
+            <BookEntry
+              toRead={el}
+              getCurrentBookID={getCurrentBookID}
+              getImgBookId={getImgBookId}
+            />
+          );
+        })}
+        <button
+          id="toRead"
+          style={{
+            width: "120px",
+            height: "174px",
+            marginTop: "10px",
+            backgroundColor: "white",
+            border: "dashed",
+            borderColor: "grey"
+          }}
+          onClick={handleSearchBox}
+        >
+          책 추가
+        </button>
       </div>
     );
   } else if (bookStatus === "reading") {
     return (
       <div className="wrapper">
-        <Cards />
-
+        <h2 style={{ fontFamily: "Nanum Myeongjo, serif", fontWeight: "bold" }}>
+          나의 서재{" "}
+        </h2>
+        <hr style={{ marginTop: "5px" }} />
         <NavBar handleActive={handleActive} />
         {userBooks[1].map((el: IBookReading) => {
           return (
@@ -173,8 +225,10 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
   } else {
     return (
       <div className="wrapper">
-        <Cards />
-
+        <h2 style={{ fontFamily: "Nanum Myeongjo, serif", fontWeight: "bold" }}>
+          나의 서재{" "}
+        </h2>
+        <hr style={{ marginTop: "5px" }} />
         <NavBar handleActive={handleActive} />
         {userBooks[2].map((el: IBookFinished) => {
           return (

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { updateUserInfo, updateUserImg } from "./../../Redux/modules/user";
 import { IUserEditInfo } from "./../../Redux/Types";
 import { UserInfo } from "os";
+import { borderTop } from "@material-ui/system";
 
 interface IProps {
   handleClose: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -60,7 +61,6 @@ const EditUserInfo: React.FC<IProps> = ({
       updateUserInfo(updated);
     } else {
       console.log("image");
-
       updateUserImg(userImg);
       updateUserInfo(updated);
     }
@@ -69,57 +69,89 @@ const EditUserInfo: React.FC<IProps> = ({
 
   return (
     <div>
-      <div className="uk-modal-header">
-        <h2 className="uk-modal-title">user information</h2>
-      </div>
+      <div
+        className="uk-modal-body"
+        uk-overflow-auto
+        style={{ paddingLeft: "100px", paddingRight: "0" }}
+      >
+        <div
+          style={{
+            width: "40%",
+            height: "350px",
+            float: "left"
+          }}
+        >
+          <img
+            src={
+              user.image
+                ? user.image
+                : "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjRpvrUmIzmAhXQfd4KHUDHCOcQjRx6BAgBEAQ&url=http%3A%2F%2Fgetdrawings.com%2Fdefault-user-icon&psig=AOvVaw2wj9hItFTx3GEcLK-_4BHh&ust=1575005978900259"
+            }
+          />
+        </div>
+        <div>
+          <div>
+            <form>
+              <fieldset
+                className="uk-fieldset"
+                style={{
+                  backgroundColor: "white",
+                  borderTop: "none",
+                  float: "right",
+                  paddingTop: "50px",
+                  paddingLeft: "10px"
+                }}
+              >
+                <div style={{ float: "left", display: "block" }}>
+                  <span style={{ display: "inline-block" }}>name : </span>
+                  <input
+                    className="uk-input"
+                    style={{
+                      display: "inline-block",
+                      width: "150px",
+                      border: "none"
+                    }}
+                    type="text"
+                    defaultValue={user.name}
+                    onChange={changeInputValue}
+                    id="name"
+                  />
+                </div>
+                <br />
 
-      <div className="uk-modal-body" uk-overflow-auto>
-        <form>
-          <fieldset
-            className="uk-fieldset"
-            style={{
-              width: "500px",
-              backgroundColor: "white"
-            }}
-          >
-            <div>
-              <input
-                className="uk-input"
-                type="text"
-                defaultValue={user.name}
-                onChange={changeInputValue}
-                id="name"
-              />
-            </div>
-            <div>
-              <input
-                className="uk-input"
-                type="text"
-                defaultValue={user.email}
-                id="email"
-                onChange={changeInputValue}
-              />
-            </div>
-
-            <div>
-              <textarea
-                className="uk-textarea"
-                defaultValue={user.profile}
-                onChange={changeProfileValue}
-              ></textarea>
-              <input
-                className="fileInput"
-                type="file"
-                onChange={handleImageChange}
-              />
-            </div>
-          </fieldset>
-        </form>
+                <br />
+                <span style={{ display: "inline-block", float: "left" }}>
+                  profile :{" "}
+                </span>
+                <textarea
+                  className="uk-textarea"
+                  defaultValue={user.profile}
+                  style={{
+                    display: "inline-block",
+                    width: "250px",
+                    borderColor: "transparent",
+                    overflow: "auto",
+                    resize: "none",
+                    float: "left"
+                  }}
+                  onChange={changeProfileValue}
+                ></textarea>
+                <br />
+                <input
+                  className="fileInput"
+                  type="file"
+                  onChange={handleImageChange}
+                />
+              </fieldset>
+            </form>
+          </div>
+        </div>
       </div>
       <div className="uk-modal-footer uk-text-right">
         <button
           className="uk-button uk-button-default uk-modal-close"
           type="button"
+          onClick={handleClose}
         >
           Cancel
         </button>

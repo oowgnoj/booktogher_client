@@ -1,11 +1,14 @@
+
 import {
   IAuthor,
   IBookSelectedCuration,
   ICuration,
   IReview,
   IReviewBook,
-  IReviewSearchWithBooks
+  IReviewSearchWithBooks,
+    IUserInfo
 } from "./Types";
+
 
 export const author: IAuthor = {
   _id: "",
@@ -46,6 +49,7 @@ export const reviewsBooks: IReviewBook[][] = [
   ]
 ];
 
+
 export const selectedBooksForCuration: IBookSelectedCuration[] = [
   {
     _id: "",
@@ -72,3 +76,48 @@ export const selectedReviewsForCuration: IReviewSearchWithBooks[] = [
     title: ""
   }
 ];
+
+export const user: IUserInfo = {
+  _id: "",
+  email: "",
+  image: "",
+  name: "",
+  profile: "",
+  to_read: [
+    {
+      book: {
+        _id: "",
+        authors: [],
+        thumbnail: "",
+        title: ""
+      }
+    }
+  ],
+  reading: [
+    {
+      book: {
+        _id: "",
+        authors: [],
+        thumbnail: "",
+        title: ""
+      },
+      start: "",
+      goal: ""
+    }
+  ],
+  finished: [
+    {
+      book: {
+        _id: "",
+        authors: [""],
+        thumbnail: "",
+        title: ""
+      },
+      start: "",
+      end: ""
+    }
+  ],
+  numBooksGoal: 0,
+  numReviewsGoal: 0
+};
+

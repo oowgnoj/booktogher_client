@@ -18,17 +18,7 @@ class GuestGreeting extends React.Component {
           uk-toggle="target: #offcanvas-slide"
           style={{ marginTop: "25px", marginLeft: "10px" }}
         ></span>
-        <Link to="/">
-          <img
-            src={logo}
-            alt="로고"
-            style={{
-              width: "100px",
-              marginTop: "35px",
-              marginLeft: "-20px"
-            }}
-          />
-        </Link>
+
         <div
           id="offcanvas-slide"
           uk-offcanvas="overlay: true, esc-close: true, bg-close:true"

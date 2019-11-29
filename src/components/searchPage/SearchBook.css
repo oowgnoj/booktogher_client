@@ -2,8 +2,19 @@
   position: fixed;
   right: 36px;
   top: 0px;
+  height: 50px;
 }
-
+.search-icon{
+  height: 50px;
+}
+.search-form {
+  width: 500px;
+  top: -50px;
+  padding: 10px;
+}
+.search-form-input {
+  background-color: #fff;
+}
 .search-area {
   width: 100%;
   display: flex;
@@ -32,8 +43,8 @@
   margin-bottom: 0px;
 }
 .search-input{
-  width: 54%;
-  padding: 0px 0px 10px 0px;
+  width: 60%;
+  padding: 120px 0px 10px 0px;
   color:  #646464;
   font-family: 'Nanum Myeongjo', serif;
   border-bottom: 1px solid #646464;

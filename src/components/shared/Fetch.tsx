@@ -25,19 +25,16 @@ export const fetchReview = (callback?: any, id?: string): any => {
   })
     .then((res: Response) => res.json())
     .then((res: IReviews[]) => {
-      console.log(res);
       callback(res);
     });
 };
 
 export const fetchCuration = (callback?: any, id?: string): any => {
-  console.log("id", id);
   fetch(`${url}/curations?author=${id}`, {
     credentials: "include"
   })
     .then((res: Response) => res.json())
     .then((res: ICuration[]) => {
-      console.log("from fetch", res);
       callback(res);
     });
 };
@@ -47,7 +44,6 @@ export const fetchReviewLikes = (callback?: any, id?: string): any => {
   })
     .then((res: Response) => res.json())
     .then((res: IReviews) => {
-      console.log(res);
       callback(res);
     });
 };
@@ -100,6 +96,25 @@ export const fetchGetReviews = (callback: any, authorId: string): any => {
             })
           );
           callback(reviewsRes, booksInfo);
+        });
+      });
+    });
+};
+export const fetchGetReviewLikes = (
+  reviewCallback: any,
+  bookCallback: any
+): any => {
+  fetch(`${url}/reviews?list_type=my_likes`, { credentials: "include" })
+    .then((res: Response) => res.json())
+    .then((res: IReview[]) => {
+      console.log("from fetch", res);
+      reviewCallback(res);
+      const promises: any = res.map((review: IReview) => {
+        return fetch(`${url}/books?review=${review._id}`);
+      });
+      Promise.all(promises).then((res: any) => {
+        Promise.all(res.map((el: any) => el.json())).then(res => {
+          bookCallback(res);
         });
       });
     });

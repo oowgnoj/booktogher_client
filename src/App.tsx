@@ -21,6 +21,7 @@ import MyLikes from "./components/myLikes";
 import Search from "./components/searchPage/SearchPage";
 import EditPost from "./components/writeReview/EditPost";
 import SearchForm from "./components/searchPage/SearchForm"
+import Footer from "./components/footer/Footer"
 
 
 const App: React.FC = (props: any): ReactElement => {
@@ -52,6 +53,7 @@ const App: React.FC = (props: any): ReactElement => {
         <Route path="/searchForm" component={SearchForm} />
         <Route path="*" to="/" />
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 };
