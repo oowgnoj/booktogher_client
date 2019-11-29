@@ -105,25 +105,29 @@ class Review extends React.Component< IProps, IState> {
         }
       }
     }
-      if(this.props.bookList !== prevProps.bookList){
-        const setStateRating = (res: any): void => {
-          this.setState({ bookRating: res });
-        };
-        const bookId: any = this.props.bookList.map((info :IBook) =>{
-          return info._id
-        })
-        fetchBookRatings(setStateRating, bookId[0]);
-      } 
+    if(this.props.bookList !== prevProps.bookList){
+      const setStateRating = (res: any): void => {
+        this.setState({ bookRating: res });
+      };
+      var bookIdStr: string = ""
+      const bookId: any = this.props.bookList.map((info :IBook) =>{
+        bookIdStr += `books[]=${info._id}&`
+        return info._id
+      })
+      console.log(bookIdStr)
+      fetchBookRatings(setStateRating, bookIdStr);
+    } 
   }
   
   public render(): ReactElement {
+    console.log(this.state.bookRating)
     const { bookList, review } = this.props
-    const bookTitle: JSX.Element[] = bookList.map((info: IBook) => {
+    const bookTitle: JSX.Element[] = bookList.map((info: IBook, index: number) => {
       return (
         <div key ={info._id}>
           <b>
             책 : {info.title} : 평점 
-            {this.state.bookRating.length ? this.state.bookRating[0].avg_rating : 0}
+            {this.state.bookRating.length ? this.state.bookRating[index].avg_rating : 0}
           </b>
         </div>
       );
