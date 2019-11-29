@@ -4,6 +4,8 @@ import { IReview, IReviewBook } from "./Types";
 import { Link } from "react-router-dom";
 import "./curationEntry.css";
 import { Skeleton } from "@material-ui/lab";
+import Skeleton_review from "./ListSkeleton";
+
 interface IProps {
   Review: IReview;
   from: string;
@@ -24,7 +26,8 @@ const ReviewEntry: React.FC<IProps> = ({
           {Review.title ? (
             Review.title
           ) : (
-            <Skeleton variant="text" width={"50%"} height={40} />
+            <Skeleton_review />
+            // <Skeleton variant="text" width={"50%"} height={40} />
           )}{" "}
           <span style={{ color: "#696969	", fontSize: "15px" }}>
             {from === "likes" ? Review.author.name : ""}
