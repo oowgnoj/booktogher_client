@@ -35,7 +35,7 @@
 
 
 .book-reveiw {
-  width: 54%;
+  width: 60%;
   padding: 60px 20px 60px;
   letter-spacing: 0.8px;
   word-spacing: 0.6px;
@@ -73,4 +73,11 @@
   padding: 6px 6px 8px 10px;
   margin: 3px;
   border: 1px solid #eee;
+}
+
+.book_review_list_review {
+  flex: 1 1 auto;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin-right: 10px;
+  width: 450px;
 }
