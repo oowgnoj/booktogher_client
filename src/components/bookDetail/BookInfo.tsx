@@ -51,8 +51,7 @@ const BookInfo = ({ bookInfo, rating, user, updateUserInfo } :IProps): ReactElem
         alert("읽고 싶은 책에 추가 되었습니다.")
       } 
     }
-  });
-  const toRead: any = user.to_read;
+
 
     const bookAuther: ReactElement[] = bookInfo.authors.map((author:string) =>{
       return(
@@ -93,7 +92,7 @@ const BookInfo = ({ bookInfo, rating, user, updateUserInfo } :IProps): ReactElem
           </div>         
         </div>
       </div>
-    </div>
+
   );
 };
 

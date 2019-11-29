@@ -7,7 +7,6 @@ const RecoReviewCard = ({ review }: any): ReactElement => {
 
     <a href={`/review/${review._id}`} style={{ textDecoration: "none" }}>
       <div className="review_review_list_review">
-        <div className="" uk-grid>
           <div>
             <div 
               className="uk-card  uk-card-body" 
@@ -54,27 +53,8 @@ const RecoReviewCard = ({ review }: any): ReactElement => {
               </p>
             </div>
           </div>
-        </div>
       </div>
     </a>
-    // <div className="recoReview-card">
-    //     <div className="recoReview-header">
-    //         <div className="recoReview-img">
-    //             <img 
-    //               className="uk-border-circle" 
-    //               width="40" 
-    //               height="40" 
-    //               src={review.author.image}
-    //               alt={review.title}/>
-    //         </div>
-    //         <div className="recoReview-body">
-    //             <h5 className="recoReview-title">{review.title}</h5>  
-    //         </div>
-    //     </div>
-    //     <div className="recoReview-footer">
-    //     <Link to={`/review/${review._id}`}><div className="uk-button uk-button-text">Read more</div></Link>
-    //     </div>
-    // </div>
   ) 
 
 };

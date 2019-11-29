@@ -40,26 +40,23 @@ class SearchForm extends React.Component<{}, IState> {
         {this.state.redirect ?
         <Redirect to={`/search/${this.state.title}`}/>
         :
-        <div className="">
-          <div className="search-i">
-            <div>
-                <a className="uk-navbar-toggle search-icon" href="#" uk-icon="search"></a>
-                <div 
-                  className="uk-navbar-dropdown search-form" 
-                  uk-drop="mode: click; cls-drop: uk-navbar-dropdown; boundary: !nav"
-                >    
-                  <form className="uk-search uk-search-navbar uk-width-1-1">
-                      <input 
-                        className="uk-search-input search-form-input" 
-                        type="search" 
-                        placeholder="Search..."
-                        onChange={this.handleChangeTitle}
-                        onKeyPress ={this.handleKeyPress} />
-                  </form>
-                </div>
-            </div>
-          </div>
-        </div>}
+        <div className="search-i">
+              <a className="uk-navbar-toggle search-icon" href="#" uk-icon="search"></a>
+              <div 
+                className="uk-navbar-dropdown search-form" 
+                uk-drop="mode: click; cls-drop: uk-navbar-dropdown; boundary: !nav"
+              >    
+                <form className="uk-search uk-search-navbar uk-width-1-1">
+                    <input 
+                      className="uk-search-input search-form-input" 
+                      type="search" 
+                      placeholder="Search..."
+                      onChange={this.handleChangeTitle}
+                      onKeyPress ={this.handleKeyPress} />
+                </form>
+              </div>
+        </div>
+        }
       </div>  
     ) 
   }
