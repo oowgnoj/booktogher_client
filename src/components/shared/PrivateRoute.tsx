@@ -1,4 +1,11 @@
-import React, { Component, ReactElement } from "react";
+import React, {
+  Component,
+  ReactElement,
+  useState,
+  useEffect,
+  useRef
+} from "react";
+import Clean from "../shared/CleanLoading";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { IUserInfo } from "../shared/Types";
@@ -9,26 +16,19 @@ const PrivateRoute: React.FC<any> = ({
   user,
   ...rest
 }: any) => {
-  const isLogin = () => {
-    if (user._id) {
-      return true;
-    }
-    return false;
-  };
   return (
     <Route
       {...rest}
       render={props => {
-        console.log("private props ?", props);
-        console.log("user:", user);
-        setTimeout(() => console.log(user), 1000);
-        if (isLogin()) {
-          return <Component {...props} />;
-        } else {
+        if (user._id === "") {
+          return <Clean />;
+        } else if (user.error) {
           {
             alert("로그인이 필요한 페이지입니다");
           }
           return <Redirect to="/signin" />;
+        } else {
+          return <Component {...props} />;
         }
       }}
     />

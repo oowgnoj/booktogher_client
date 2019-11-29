@@ -266,7 +266,8 @@ export default handleActions(
 
     [GETINFO_PENDING]: (state: IState, action: any): IState => {
       return {
-        ...state
+        ...state,
+        pending: true
       };
     },
     [GETINFO_SUCCESS]: (state: IState, action: any): IState => {
