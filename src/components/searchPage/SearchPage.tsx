@@ -2,10 +2,10 @@ import React, { ReactElement } from "react";
 import { RouteComponentProps } from "react-router";
 import { Redirect } from "react-router-dom";
 import { IBook, IReviewWithBooks } from "../shared/Types";
-import { fetchBookSearch, fetchReviewSearch} from "./../shared/Fetch";
-import SearchBooks from "./SearchBooks"
-import SearchReviews from "./SearchReviews"
-import "./SearchBook.css"
+import { fetchBookSearch, fetchReviewSearch } from "./../shared/Fetch";
+import SearchBooks from "./SearchBooks";
+import SearchReviews from "./SearchReviews";
+import "./SearchBook.css";
 
 interface IState {
   books: IBook[];
@@ -17,20 +17,22 @@ interface IState {
 }
 
 interface IMatchParams {
-  keyWord: string
+  keyWord: string;
 }
 
-class SearchPage extends React.Component<RouteComponentProps<IMatchParams>, IState> {
-  constructor(props: any){
-    super(props)
-    this.state ={
+class SearchPage extends React.Component<
+  RouteComponentProps<IMatchParams>,
+  IState
+> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
       books: [
         {
           _id: "",
           authors: [""],
           contents: "",
-          thumbnail:
-            "",
+          thumbnail: "",
           title: ""
         }
       ],
@@ -44,13 +46,15 @@ class SearchPage extends React.Component<RouteComponentProps<IMatchParams>, ISta
             profile: ""
           },
           title: "",
-          books: [{
-            _id: "",
-            authors: [""],
-            contents: "",
-            thumbnail: "",
-            title: "",
-          }],
+          books: [
+            {
+              _id: "",
+              authors: [""],
+              contents: "",
+              thumbnail: "",
+              title: ""
+            }
+          ],
           contents: "",
           thumbnail: "",
           likes: [""]
@@ -58,9 +62,11 @@ class SearchPage extends React.Component<RouteComponentProps<IMatchParams>, ISta
       ],
       searchTitle: "",
       selectBook: "book",
+
       title : this.props.match.params.keyWord,
       redirect: false
     }
+
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.handleNavSelect = this.handleNavSelect.bind(this);
@@ -78,16 +84,19 @@ class SearchPage extends React.Component<RouteComponentProps<IMatchParams>, ISta
       else {
         alert("검색어를 입력해주세요")
         e.preventDefault();
-      } 
+      }
     }
   }
   public handleNavSelect(e: any): void {
     this.setState({ selectBook: e.currentTarget.id });
   }
 
-  public componentDidMount(): void{
+  public componentDidMount(): void {
     const setStateBook = (res: any): void => {
-      this.setState({ books: res , searchTitle: this.props.match.params.keyWord});
+      this.setState({
+        books: res,
+        searchTitle: this.props.match.params.keyWord
+      });
     };
     fetchBookSearch(setStateBook, this.props.match.params.keyWord);
     const setStateReview = (res: any): void => {
@@ -111,8 +120,9 @@ class SearchPage extends React.Component<RouteComponentProps<IMatchParams>, ISta
       this.setState({redirect: false})
     }
   }
- 
+
   public render(): ReactElement {
+
     console.log(this.state.redirect)
     return (
       <div>
@@ -121,13 +131,14 @@ class SearchPage extends React.Component<RouteComponentProps<IMatchParams>, ISta
         :
         <div className = "search-area">
           <div className = "search-input">
+
             <input
               type="search"
               className="search-box"
               placeholder="검색어를 입력해 주세요"
               value={this.state.title}
               onChange={this.handleChangeTitle}
-              onKeyPress ={this.handleKeyPress}
+              onKeyPress={this.handleKeyPress}
             ></input>
           </div>
 
@@ -157,6 +168,7 @@ class SearchPage extends React.Component<RouteComponentProps<IMatchParams>, ISta
               <li></li>
             </ul>
           </div>
+
           {this.state.selectBook ==="book" ? 
         <SearchBooks 
           books={this.state.books}
@@ -166,9 +178,10 @@ class SearchPage extends React.Component<RouteComponentProps<IMatchParams>, ISta
          reviews={this.state.reviews}
          searchTitle={this.state.searchTitle}/> } 
         </div> }       
+
       </div>
     );
   }
-};
+}
 
 export default SearchPage;

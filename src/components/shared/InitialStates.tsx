@@ -1,4 +1,14 @@
-import { IAuthor, IReviewBook, ICuration, IReview, IUserInfo } from "./Types";
+
+import {
+  IAuthor,
+  IBookSelectedCuration,
+  ICuration,
+  IReview,
+  IReviewBook,
+  IReviewSearchWithBooks,
+    IUserInfo
+} from "./Types";
+
 
 export const author: IAuthor = {
   _id: "",
@@ -37,6 +47,34 @@ export const reviewsBooks: IReviewBook[][] = [
       title: ""
     }
   ]
+];
+
+
+export const selectedBooksForCuration: IBookSelectedCuration[] = [
+  {
+    _id: "",
+    authors: "",
+    thumbnail: "",
+    title: ""
+  }
+];
+
+export const selectedReviewsForCuration: IReviewSearchWithBooks[] = [
+  {
+    _id: "",
+    author: {
+      _id: "",
+      image: "",
+      name: "",
+      profile: ""
+    },
+    books: [{ _id: "", title: "" }],
+    contents: "",
+    likes: [""],
+    published: true,
+    thumbnail: "",
+    title: ""
+  }
 ];
 
 export const user: IUserInfo = {
@@ -82,3 +120,4 @@ export const user: IUserInfo = {
   numBooksGoal: 0,
   numReviewsGoal: 0
 };
+

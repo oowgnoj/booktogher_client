@@ -1,54 +1,86 @@
-import React, { ReactElement, ChangeEvent } from "react";
-// import { IBooks, IReview } from "../shared/Types";
-// import "./Modal.scss";
-// import { fetchReviewsSearch } from "./fetchWriteCuration";
-// import { textAlign } from "@material-ui/system";
+import React, { ReactElement } from "react";
+import { IBooks, IReview, IReviewSearchWithBooks } from "../shared/Types";
+import "./ReviewModal.scss";
 
-// interface IProps {
-//   reviews: IReview[];
-//   clicked: any;
-// }
+interface IProps {
+  reviews: IReviewSearchWithBooks[];
+  clicked: any;
+}
 
-// interface IState {
-//   search: string;
-// }
+class SearchReviewSelect extends React.Component<IProps> {
+  constructor(props: IProps) {
+    super(props);
+    this.state = {};
+  }
+  public render(): ReactElement {
+    console.log("searchReview, this.props.reviews : ", this.props.reviews);
+    const MyReviewList: ReactElement[] = this.props.reviews.map(
+      (info: IReviewSearchWithBooks, index: number) => {
+        return (
+          <div
+            className="book-select"
+            key={index}
+            id={`${index}`}
+            onClick={e => this.props.clicked(e)}
+            style={{ marginLeft: "30px", marginBottom: "0px" }}
+          >
+            <li>
+              <article>
+                <header style={{ display: "flex" }}>
+                  <div>
+                    <img
+                      className="uk-comment-avatar"
+                      src={
+                        info.author.image
+                          ? info.author.image
+                          : "https://icons-for-free.com/iconfiles/png/128/anonymous+app+contacts+open+line+profile+user+icon-1320183042822068474.png"
+                      }
+                      width="80"
+                      height="80"
+                      alt=""
+                      style={{ marginRight: "30px" }}
+                    />
+                  </div>
 
-// class SearchReviewSelect extends React.Component<IProps, IState> {
-//   constructor(props: IProps) {
-//     super(props);
-//     this.state = {
-//       search: ""
-//     };
-//   }
+                  <div>
+                    <h4>
+                      {info.books.length > 1
+                        ? info.books[0].title + " 외"
+                        : info.books[0].title}
+                    </h4>
+                    <h4
+                      className="uk-comment-title uk-margin-remove"
+                      style={{ paddingTop: "15px" }}
+                    >
+                      {info.title}
+                    </h4>
+                    <p className="uk-comment-meta uk-margin-remove-top">
+                      {info.author.name}
+                    </p>
+                  </div>
+                </header>
+                <div style={{ marginTop: "20px" }}>
+                  <p>{info.contents.replace(/<[^>]*>?/gm, "")}</p>
+                </div>
+              </article>
+            </li>
+            <hr
+              style={{
+                color: "gray",
 
-//   public render(): ReactElement {
-//     console.log("props 확인 중", this.props.reviews);
-//     const MyReviewList: ReactElement[] = this.props.reviews.map(
-//       (info: IReview, index: number) => {
-//         return (
-//           <div>
-//             {" "}
-//             <div
-//               className="book-select"
-//               key={index}
-//               onClick={e => this.props.clicked(e)}
-//             >
-//               <div key={info._id} className="review-detail">
-//                 <h5>{info.title}뭐지</h5>
-//                 <div>{info.author.name}이름</div>
-//                 <div>{info.contents.replace(/<[^>]*>?/gm, "")}내용</div>
-//               </div>
-//             </div>
-//           </div>
-//         );
-//       }
-//     );
-//     return (
-//       <div>
-//         <div className="content">{MyReviewList}</div>
-//       </div>
-//     );
-//   }
-// }
+                height: 1
+              }}
+            />
+          </div>
+        );
+      }
+    );
+    return (
+      <div>
+        <ul className="content">{MyReviewList}</ul>
+      </div>
+    );
+  }
+}
 
-// export default SearchReviewSelect;
+export default SearchReviewSelect;

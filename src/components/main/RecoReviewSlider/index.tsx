@@ -9,14 +9,14 @@ import main_image_two from "../../../Asset/images/tem_2.png";
 import main_image_three from "../../../Asset/images/tem_3.png";
 
 interface IAuthor {
-  id: string;
+  _id: string;
   image: string;
   name: string;
   profile: string;
 }
 
 interface IReview {
-  id: string;
+  _id: string;
   author: IAuthor;
   contents: string;
   likes: string[];
@@ -64,6 +64,11 @@ const Slider: React.SFC<IProps> = ({ review }: IProps): ReactElement => {
                   ? review[0].contents.replace(/<[^>]*>?/gm, "")
                   : "서평 본문"}
               </p>
+              <Link to={review[0] ? `review/${review[0]._id}` : "/"}>
+                <button className="uk-button uk-button-default">
+                  보러가기
+                </button>
+              </Link>
             </div>
           </li>
           <li>
@@ -85,6 +90,11 @@ const Slider: React.SFC<IProps> = ({ review }: IProps): ReactElement => {
                   ? review[1].contents.replace(/<[^>]*>?/gm, "")
                   : "서평 본문"}
               </p>
+              <Link to={review[1] ? `review/${review[1]._id}` : "/"}>
+                <button className="uk-button uk-button-default">
+                  보러가기
+                </button>
+              </Link>
             </div>
           </li>
           <li>
@@ -106,6 +116,11 @@ const Slider: React.SFC<IProps> = ({ review }: IProps): ReactElement => {
                   ? review[2].contents.replace(/<[^>]*>?/gm, "")
                   : "서평 본문"}
               </p>
+              <Link to={review[2] ? `review/${review[2]._id}` : "/"}>
+                <button className="uk-button uk-button-default">
+                  보러가기
+                </button>
+              </Link>
             </div>
           </li>
         </ul>
