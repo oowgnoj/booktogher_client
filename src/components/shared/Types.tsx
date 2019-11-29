@@ -296,3 +296,31 @@ export interface IBookSelectedCuration {
   thumbnail: string;
   title: string;
 }
+
+/* ------- edit curation ------- */
+
+export interface IPatchBody {
+  title: string;
+  contents: string;
+  books: string[];
+  reviews: string[];
+}
+
+export interface ISelectedReview {
+  reviewId: string;
+  reviewTitle: string;
+  reviewContents: string;
+  reviewAuthor: string;
+  reviewAuthorImage: string;
+}
+
+export interface IEditCurationState {
+  title: string;
+  contents: string;
+  books: IBookSelectedCuration[];
+  reviews: IReviewSearchWithBooks[];
+  bookModal: boolean;
+  reviewModal: boolean;
+  isPatched: boolean;
+  curationId: string;
+}

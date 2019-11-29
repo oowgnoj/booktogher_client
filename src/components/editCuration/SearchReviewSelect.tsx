@@ -1,27 +1,21 @@
 import React, { ReactElement } from "react";
-import {
-  IBooks,
-  IReview,
-  IReviewBook,
-  IReviewSearchBook
-} from "../shared/Types";
+import { IBooks, IReview, IReviewSearchWithBooks } from "../shared/Types";
 import "./ReviewModal.scss";
 
 interface IProps {
-  reviews: IReview[];
-  books: IReviewSearchBook[][];
+  reviews: IReviewSearchWithBooks[];
   clicked: any;
 }
 
-class MyReviewSelect extends React.Component<IProps> {
+class SearchReviewSelect extends React.Component<IProps> {
   constructor(props: IProps) {
     super(props);
     this.state = {};
   }
   public render(): ReactElement {
-    console.log("myreviewselect this.props.books ? ", this.props.books);
+    console.log("searchReview, this.props.reviews : ", this.props.reviews);
     const MyReviewList: ReactElement[] = this.props.reviews.map(
-      (info: IReview, index: number) => {
+      (info: IReviewSearchWithBooks, index: number) => {
         return (
           <div
             className="book-select"
@@ -31,7 +25,6 @@ class MyReviewSelect extends React.Component<IProps> {
             style={{ marginLeft: "30px", marginBottom: "0px" }}
           >
             <li>
-              
               <article>
                 <header style={{ display: "flex" }}>
                   <div>
@@ -51,11 +44,9 @@ class MyReviewSelect extends React.Component<IProps> {
 
                   <div>
                     <h4>
-                      {this.props.books[index].length > 0
-                        ? this.props.books[index].length > 1
-                          ? this.props.books[index][0].title + " 외"
-                          : this.props.books[index][0].title
-                        : null}
+                      {info.books.length > 1
+                        ? info.books[0].title + " 외"
+                        : info.books[0].title}
                     </h4>
                     <h4
                       className="uk-comment-title uk-margin-remove"
@@ -92,4 +83,4 @@ class MyReviewSelect extends React.Component<IProps> {
   }
 }
 
-export default MyReviewSelect;
+export default SearchReviewSelect;

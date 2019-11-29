@@ -265,7 +265,7 @@ class ReadCuration extends React.Component<IParams, IState> {
           style={{
             marginTop: "50px",
             marginLeft: "1px",
-            height: "300px",
+            height: "310px",
             width: "50%",
             fontSize: "1.1em",
             lineHeight: "1.8em"

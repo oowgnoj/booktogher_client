@@ -38,6 +38,7 @@ export const fetchCuration = (callback?: any, id?: string): any => {
       callback(res);
     });
 };
+
 export const fetchReviewLikes = (callback?: any, id?: string): any => {
   fetch(`${url}/reviews?list_type=my_likes`, {
     credentials: "include"
@@ -47,6 +48,7 @@ export const fetchReviewLikes = (callback?: any, id?: string): any => {
       callback(res);
     });
 };
+
 export const fetchCurationLikes = (callback?: any, id?: string): any => {
   fetch(`${url}/curations?list_type=my_likes`, {
     credentials: "include"

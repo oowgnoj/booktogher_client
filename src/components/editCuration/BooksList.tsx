@@ -43,7 +43,7 @@ class BooksList extends React.Component<IProps> {
           ));
     return (
       <div
-        className="writecuration_books_booklist_wrapper"
+        className="editcuration_books_booklist_wrapper"
         style={{
           display: "flex",
           paddingLeft: "100px",
@@ -51,19 +51,19 @@ class BooksList extends React.Component<IProps> {
         }}
       >
         <span
-          className="writecuration_books_btn_wrapper"
+          className="editcuration_books_btn_wrapper"
           onClick={this.props.handleBookSelect}
         >
-          <span className="writecuration_books_btn">
+          <span className="editcuration_books_btn">
             <span uk-icon="plus"></span>
-            <p>책 추 가 하 기</p>
+            <p style={{ fontSize: "0.9em" }}>책 추 가 하 기</p>
           </span>
         </span>
         <span
-          className="writecuration_books_booklist"
+          className="editcuration_books_booklist"
           style={{
             display: "flex",
-            paddingLeft: "100px"
+            paddingLeft: "8%"
           }}
         >
           {bookList}

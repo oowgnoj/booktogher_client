@@ -1,7 +1,6 @@
 import React, { ReactElement } from "react";
 import { IBookState, IBook } from "../writeReview/writeInterface";
 import { fetchBookSearch } from "../writeReview/fetchWrite";
-import WritePost from "./index";
 import "../writeReview/Modal.scss";
 
 interface ISelected {
@@ -30,20 +29,11 @@ class BookSelect extends React.Component<IProps, IState> {
     this.state = {
       books: [
         {
-          _id: "book-id1",
-          authors: ["이모양"],
-          contents: "타입스크립트와의 싸움을 펼치는 이야기이다",
-          thumbnail:
-            "http://image.kyobobook.co.kr/images/book/large/598/l9788936433598.jpg",
-          title: "채식주의자"
-        },
-        {
-          _id: "book-id2",
-          authors: ["이기기"],
-          contents: "리액크 퀼에 대하여 공부해봅시다",
-          thumbnail:
-            "http://image.kyobobook.co.kr/images/book/large/304/l9791196814304.jpg",
-          title: "너에게만 좋은 사람이 되고 싶어"
+          _id: "",
+          authors: [""],
+          contents: "",
+          thumbnail:"",
+          title: ""
         }
       ],
       title: "",
@@ -56,6 +46,8 @@ class BookSelect extends React.Component<IProps, IState> {
     this.clickSearchButton = this.clickSearchButton.bind(this);
     this.clickSelectedBook = this.clickSelectedBook.bind(this);
     this.clickConfirm = this.clickConfirm.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.clickClose = this.clickClose.bind(this)
   }
 
   public handleChangeTitle(e: React.ChangeEvent<HTMLInputElement>): void {
@@ -69,9 +61,31 @@ class BookSelect extends React.Component<IProps, IState> {
     fetchBookSearch(setStateBook, this.state.title);
   }
 
+  public handleKeyPress(e: any): void{
+    if(e.key === 'Enter'){
+      if(this.state.title !== ""){
+        const setStateBook = (res: any): void => {
+          this.setState({ books: res });
+        };
+        fetchBookSearch(setStateBook, this.state.title);
+        e.preventDefault();
+      }
+      else {
+        alert("검색어를 입력해주세요")
+      } 
+    }
+  }
+
+  public clickClose(): void { 
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+
   public clickSelectedBook(e: any): void {
     const idTitle = e.target.alt.split(":");
     const img = e.target.src;
+    console.log("idtitle", idTitle);
 
     const newBook = {
       _id: idTitle[0],
@@ -126,39 +140,40 @@ class BookSelect extends React.Component<IProps, IState> {
           <div className="Modal-overlay">
             <div className="Modal">
               <p className="title">
+                <button 
+                  uk-icon="close"
+                  type="button" 
+                  onClick={this.clickClose}></button>
                 <input
                   type="text"
                   className="search-box"
                   placeholder="책 제목을 입력해 주세요"
                   value={this.state.title}
                   onChange={this.handleChangeTitle}
+                  onKeyPress ={this.handleKeyPress}
                 ></input>
-                <button onClick={this.clickSearchButton}>검색</button>
+                {/* <button onClick={this.clickSearchButton}>검색</button> */}
               </p>
-              {this.state.selectBooksTitle.length === 1 ? (
+              {/* {this.state.selectBooksTitle.length === 1 ? (
                 <h5>책을 선택해주세요.</h5>
               ) : (
                 <h5>{selectBookTitle}를 선택하셨습니다.</h5>
-              )}
-              <div className="content">{searchBookList}</div>
-              <div className="button-wrap">
-                <button onClick={this.clickConfirm}> Confirm </button>
+              )} */}
+              <div className="content">
+                {this.state.books[0]._id ==="" ?
+                "책을 검색해주세요." 
+                : searchBookList}
               </div>
+              <div className="button-wrap">
+                <button 
+                  className ="uk-button uk-button-default"
+                  onClick={this.clickConfirm}> Confirm </button>
+              </div>
+              
             </div>
+            
           </div>
         ) : null}
-        {/*  <WritePost
-          books={this.state.selectedBooks}
-          reviews={[
-            {
-              reviewId: "",
-              reviewTitle: "",
-              reviewContents: "",
-              reviewAuthor: "",
-              reviewAuthorImage: ""
-            }
-          ]}
-        /> */}
       </div>
     );
   }

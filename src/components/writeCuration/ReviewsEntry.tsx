@@ -50,7 +50,7 @@ class ReviewsEntry extends React.Component<IProps> {
             className="reviewentry_author"
             style={{
               textAlign: "center",
-              marginTop: "-30px",
+              marginTop: "5px",
               marginBottom: "10px",
               fontFamily: "Nanum Myeongjo, serif",
               fontSize: "0.8em",
@@ -72,20 +72,26 @@ class ReviewsEntry extends React.Component<IProps> {
             width: "60%"
           }}
         >
-          <div className="reviewentry_title">
+          <div
+            className="reviewentry_title"
+            style={{
+              fontSize: "30px",
+              width: "100%"
+            }}
+          >
             <p
               style={{
                 display: "inline",
                 marginRight: "3%",
                 color: "skyblue",
-                fontSize: "1.2em"
+                fontSize: "20px"
               }}
             >
               {review.books.length > 1
                 ? review.books[0].title + " 외"
                 : review.books[0].title}
             </p>
-            <p style={{ display: "inline", fontSize: "1.2em" }}>
+            <p style={{ display: "inline", fontSize: "20px" }}>
               {review.title.replace(/<[^>]*>?/gm, "")}
             </p>
           </div>

@@ -19,6 +19,7 @@ class UserGreeting extends React.Component {
   }
 
   public handleLogout(): void {
+    console.log("handleLogout 시작됨", new Date().getTime());
     Store.dispatch(requestLogout()).then((response: Response) =>
       console.log("로그아웃 성공! response : ", response)
     );

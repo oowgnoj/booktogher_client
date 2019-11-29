@@ -23,6 +23,7 @@ class ReviewsEntry extends React.Component<IProps> {
           <span
             style={{
               display: "inline-block",
+              marginLeft: "40px",
               marginRight: "30px",
               marginTop: "30px"
             }}
@@ -41,8 +42,7 @@ class ReviewsEntry extends React.Component<IProps> {
               className="reviewentry_author"
               style={{
                 textAlign: "center",
-                /* marginTop: "-30px", */
-
+                marginTop: "5px",
                 marginBottom: "10px",
                 fontFamily: "Nanum Myeongjo, serif",
                 fontSize: "0.8em",

@@ -2,21 +2,11 @@ import React, { ReactElement } from "react";
 import ReactHtmlParser from "react-html-parser";
 import ReviewsEntry from "./ReviewsEntry";
 import { placeholdersReview } from "./placeholders";
-import { IAuthor } from "../shared/Types";
+import { IAuthor, IReviewSearchWithBooks } from "../shared/Types";
 import "./index.css";
 
-interface IReview {
-  _id: string;
-  author: IAuthor;
-  contents: string;
-  likes: string[];
-  published: boolean;
-  thumbnail: string;
-  title: string;
-}
-
 interface IProps {
-  reviews: IReview[];
+  reviews: IReviewSearchWithBooks[];
   deleteEvent: any;
   handleReviewSelect: any;
 }
@@ -47,7 +37,7 @@ class ReviewsList extends React.Component<IProps> {
           ));
     return (
       <div
-        className="writecuration_reviews_reviewlist_wrapper"
+        className="editcuration_reviews_reviewlist_wrapper"
         style={{
           display: "flex",
           paddingLeft: "100px",
@@ -55,23 +45,27 @@ class ReviewsList extends React.Component<IProps> {
         }}
       >
         <span
-          className="writecuration_reviews_btn_wrapper"
+          className="editcuration_reviews_btn_wrapper"
           onClick={this.props.handleReviewSelect}
+          style={{
+            display: "flex",
+            paddingTop: "30px"
+          }}
         >
-          <span className="writecuration_reviews_btn">
+          <span className="editcuration_reviews_btn">
             <span uk-icon="plus"></span>
-            <p>서 평 추 가 하 기</p>
+            <p style={{ fontSize: "0.8em" }}>서 평 추 가 하 기</p>
           </span>
         </span>
-        <span
-          className="writecuration_reviews_reviewlist"
+        <div
+          className="editcuration_reviews_reviewlist"
           style={{
             display: "block",
-            paddingLeft: "70px"
+            paddingLeft: "20px"
           }}
         >
           {reviewList}
-        </span>
+        </div>
       </div>
     );
   }

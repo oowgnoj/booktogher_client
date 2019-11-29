@@ -4,7 +4,6 @@ import { Redirect, Route } from "react-router-dom";
 import BooksList from "./BooksList";
 import ReviewsList from "./ReviewsList";
 import ReadCuration from "../readCuration/index";
-import Books from "../mypage/books";
 import BookModal from "./BookSelect";
 import ReviewModal from "./ReviewSelect";
 
@@ -157,8 +156,8 @@ class WriteCuration extends React.Component<{}, IState> {
               placeholder="큐레이션의 제목을 입력해주세요"
               style={{
                 fontFamily: "Nanum Myeongjo, serif",
-                marginTop: "1%",
-                marginLeft: "-10%",
+                marginTop: "30px",
+                marginLeft: "1px",
                 width: "80%",
                 fontSize: "2.4em",
                 display: "inline",
@@ -185,7 +184,7 @@ class WriteCuration extends React.Component<{}, IState> {
             placeholder="큐레이션의 내용을 입력해주세요"
             style={{
               marginTop: "50px",
-              marginLeft: "-10%",
+              marginLeft: "1px",
               height: "300px",
               width: "50%",
               fontSize: "1.1em",

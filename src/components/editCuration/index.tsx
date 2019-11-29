@@ -1,84 +1,49 @@
 import React, { ReactElement } from "react";
 import { Redirect, Route, RouteComponentProps } from "react-router-dom";
+
 import BooksList from "./BooksList";
 import ReviewsList from "./ReviewsList";
 import ReadCuration from "../readCuration/index";
-import "./index.css";
-import Books from "../mypage/books";
-import { ICuration, ICurationsPost, IReview } from "../shared/Types";
+import BookModal from "./BookSelect";
+import ReviewModal from "./ReviewSelect";
+
+import {
+  IBookSelectedCuration,
+  ICuration,
+  IEditCurationState,
+  IPatchBody,
+  IReview,
+  IReviewSearchWithBooks
+} from "../shared/Types";
+
+import {
+  selectedBooksForCuration,
+  selectedReviewsForCuration
+} from "../shared/InitialStates";
+
 import {
   fetchCuration,
   fetchBooks,
   fetchReviews,
   fetchEditCuration
 } from "./fetchEditCuration";
-import Modal from "./BookSelect";
-import ReviewModal from "./ReviewSelect";
 
-interface IBook {
-  _id: string;
-  thumbnail: string;
-  authors: string;
-  title: string;
-}
-
-interface IBody {
-  title: string;
-  contents: string;
-  books: string[];
-  reviews: string[];
-}
-
-interface ISelectedBook {
-  _id: string;
-  title: string;
-  authors: string;
-  thumbnail: string;
-}
-
-interface ISelectedReview {
-  reviewId: string;
-  reviewTitle: string;
-  reviewContents: string;
-  reviewAuthor: string;
-  reviewAuthorImage: string;
-}
-
-interface IState {
-  title: string;
-  contents: string;
-  books: IBook[];
-  reviews: IReview[];
-  bookModal: boolean;
-  reviewModal: boolean;
-  isPatched: boolean;
-  curationId: string;
-}
+import "./index.css";
 
 interface IMatchParams {
   id: string;
 }
 
-class WriteCuration extends React.Component<
+class EditCuration extends React.Component<
   RouteComponentProps<IMatchParams>,
-  IState
+  IEditCurationState
 > {
   constructor(props: any) {
     super(props);
     this.state = {
-      books: [{ _id: "", authors: "", thumbnail: "", title: "" }],
+      books: selectedBooksForCuration,
       contents: "",
-      reviews: [
-        {
-          _id: "",
-          author: { _id: "", image: "", name: "", profile: "" },
-          contents: "",
-          likes: [],
-          published: true,
-          thumbnail: "",
-          title: ""
-        }
-      ],
+      reviews: selectedReviewsForCuration,
       title: "",
       bookModal: false,
       reviewModal: false,
@@ -97,22 +62,23 @@ class WriteCuration extends React.Component<
   }
 
   public componentDidMount(): void {
+    window.scroll(0, 0);
     const getCurationInfo = (result: ICuration): void => {
       this.setState({ contents: result.contents, title: result.title });
     };
-    const getBookInfo = (result: IBook[]): void => {
+    const getBookInfo = (result: IBookSelectedCuration[]): void => {
       this.setState({ books: result });
     };
-    const getReviewInfo = (result: IReview[]): void => {
+    const getReviewInfoWithBooks = (result: IReviewSearchWithBooks[]): void => {
       this.setState({ reviews: result });
     };
     fetchCuration(getCurationInfo, this.props.match.params.id);
     fetchBooks(getBookInfo, this.props.match.params.id);
-    fetchReviews(getReviewInfo, this.props.match.params.id);
+    fetchReviews(getReviewInfoWithBooks, this.props.match.params.id);
   }
 
   public bookDelete(bookId: string): void {
-    const currentBookList: IBook[] = this.state.books.slice();
+    const currentBookList: IBookSelectedCuration[] = this.state.books.slice();
     for (let i: number = 0; i < currentBookList.length; i++) {
       if (currentBookList[i]._id === bookId) {
         currentBookList.splice(i, 1);
@@ -122,7 +88,7 @@ class WriteCuration extends React.Component<
   }
 
   public reviewDelete(reviewId: string): void {
-    const currentReviewList: IReview[] = this.state.reviews.slice();
+    const currentReviewList: IReviewSearchWithBooks[] = this.state.reviews.slice();
     for (let i: number = 0; i < currentReviewList.length; i++) {
       if (currentReviewList[i]._id === reviewId) {
         currentReviewList.splice(i, 1);
@@ -150,28 +116,31 @@ class WriteCuration extends React.Component<
   }
 
   public handlePatch(): void {
-    const postBody: IBody = {
+    const postBody: IPatchBody = {
       title: this.state.title,
       contents: this.state.contents,
-      books: this.state.books.map((book: IBook) => book._id),
-      reviews: this.state.reviews.map((review: IReview) => review._id)
+      books: this.state.books.map((book: IBookSelectedCuration) => book._id),
+      reviews: this.state.reviews
+        ? this.state.reviews.map((review: IReview) => review._id)
+        : []
     };
+
     const getPatchedId = (id: string): void =>
       this.setState({ curationId: id, isPatched: true });
 
     fetchEditCuration(getPatchedId, this.props.match.params.id, postBody);
   }
 
-  public addBooks = (selectedBooks: ISelectedBook): any => {
-    const newBooks: ISelectedBook[] =
+  public addBooks = (selectedBooks: IBookSelectedCuration): any => {
+    const newBooks: IBookSelectedCuration[] =
       this.state.books.length !== 0 && this.state.books[0]._id
         ? this.state.books.concat(selectedBooks)
         : this.state.books.slice(1).concat(selectedBooks);
     this.setState({ books: newBooks, bookModal: false });
   };
 
-  public addReviews = (selectedReviews: IReview): any => {
-    const newReviews: IReview[] =
+  public addReviews = (selectedReviews: IReviewSearchWithBooks[]): any => {
+    const newReviews: IReviewSearchWithBooks[] =
       this.state.reviews.length !== 0 && this.state.reviews[0]._id
         ? this.state.reviews.concat(selectedReviews)
         : this.state.reviews.slice(1).concat(selectedReviews);
@@ -179,34 +148,35 @@ class WriteCuration extends React.Component<
   };
 
   public render(): ReactElement {
-    const { title, contents } = this.state;
     return (
-      <div className="writecuration">
-        {this.state.bookModal ? <Modal addBooks={this.addBooks} /> : null}
+      <div className="editcuration">
+        {this.state.bookModal ? <BookModal addBooks={this.addBooks} /> : null}
         {this.state.reviewModal ? (
           <ReviewModal addReviews={this.addReviews} />
         ) : null}
         {this.state.isPatched ? (
           <Redirect to={`/curation/${this.state.curationId}`} />
         ) : null}
-        <div className="writecuration_header">
-          <span className="writecuration_header_title">
+        <div className="editcuration_header">
+          <span className="editcuration_header_title">
             <input
               type="text"
               name="title"
               placeholder="큐레이션의 제목을 입력해주세요"
               style={{
-                height: "150px",
-                width: "100%",
-                border: "none",
-                fontSize: "50px"
+                fontFamily: "Nanum Myeongjo, serif",
+                marginTop: "30px",
+                marginLeft: "1px",
+                width: "80%",
+                fontSize: "2.4em",
+                display: "inline",
+                border: "none"
               }}
-              value={title}
               onChange={this.handleTitle}
             />
           </span>
           <span
-            className="writecuration_header_btn"
+            className="editcuration_header_btn"
             style={{ float: "right", clear: "right" }}
           >
             <button
@@ -217,24 +187,26 @@ class WriteCuration extends React.Component<
             </button>
           </span>
         </div>
-        <div className="writecuration_contents">
+        <div className="editcuration_contents">
           <textarea
             name="contents"
             placeholder="큐레이션의 내용을 입력해주세요"
             style={{
-              resize: "none",
+              marginTop: "50px",
+              marginLeft: "1px",
               height: "300px",
-              width: "100%",
+              width: "50%",
+              fontSize: "1.1em",
+              lineHeight: "1.8em",
+              resize: "none",
               border: "none",
-              fontSize: "20px",
               outline: "none"
             }}
-            value={contents}
             onChange={this.handleContent}
           />
         </div>
         <div
-          className="writecuration_books"
+          className="editcuration_books"
           style={{ backgroundColor: "#ebebeb" }}
         >
           <BooksList
@@ -243,15 +215,15 @@ class WriteCuration extends React.Component<
             handleBookSelect={this.handleBookSelect}
           />
         </div>
-        <div className="writecuration_review">
+        <div className="editcuration_review">
           <ReviewsList
             reviews={this.state.reviews}
             deleteEvent={this.reviewDelete}
             handleReviewSelect={this.handleReviewSelect}
           />
-          <span className="writecuration_review_btn"></span>
-          <span className="writecuration_review_reviewlist">
-            <div className="writecuration_review_reviewentry"></div>
+          <span className="editcuration_review_btn"></span>
+          <span className="editcuration_review_reviewlist">
+            <div className="editcuration_review_reviewentry"></div>
           </span>
         </div>
         <Route path="/curation/:id" component={ReadCuration} />
@@ -260,4 +232,4 @@ class WriteCuration extends React.Component<
   }
 }
 
-export default WriteCuration;
+export default EditCuration;

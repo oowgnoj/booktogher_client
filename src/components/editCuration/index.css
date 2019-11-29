@@ -1,27 +1,28 @@
-.writecuration {
+.editcuration {
   padding-top: 150px;
 }
 
-.writecuration_header {
-  padding-left: 300px;
-  padding-right: 300px;
+.editcuration_header {
+  padding-left: 20%;
+  padding-right: 10%;
 }
 
-.writecuration_contents {
-  padding-left: 300px;
-  padding-right: 300px;
+.editcuration_contents {
+  padding-left: 20%;
+  padding-right: 20%;
 }
 
-.writecuration_books {
+.editcuration_books {
+  margin-right: 15%;
   display: table;
   width: 100%;
 }
 
-.writecuration_books_btn {
+.editcuration_books_btn {
   vertical-align: middle;
 }
 
-.writecuration_books_bookentry {
+.editcuration_books_bookentry {
   margin-right: 80px;
   position: relative;
 }
@@ -49,7 +50,7 @@
 .middle_review {
   transition: 0.3s ease;
   opacity: 0;
-  position: inherit;
+  position: absolute;
   top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -76,4 +77,16 @@
 
 .opacity {
   opacity: 0.2;
+}
+
+input:focus {
+  outline: none;
+}
+
+.editcuration_reviewentry_cropped {
+  margin-top: 20px;
+  object-fit: cover;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
 }

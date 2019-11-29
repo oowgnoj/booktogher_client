@@ -55,7 +55,7 @@ class ReviewSelect extends React.Component<IProps, IState> {
       selectedReviews: selectedReviewsForCuration,
       search: "",
       isOpen: true,
-      navSelect: "myReview",
+      navSelect: "searchReview",
       userId: this.props.user._id
     };
     this.clickSelectedBook = this.clickSelectedBook.bind(this);
@@ -132,7 +132,7 @@ class ReviewSelect extends React.Component<IProps, IState> {
     fetchReviewsSearch(searchedReviews, search);
   }
 
-  public clickClose(): void { 
+  public clickClose(): void {
     this.setState({
       isOpen: !this.state.isOpen
     });
@@ -144,12 +144,13 @@ class ReviewSelect extends React.Component<IProps, IState> {
         {this.state.isOpen ? (
           <div className="Review-Modal-overlay">
             <div className="Review-Modal">
-            <button
-              className="close-button"
-              uk-icon="close"
-              type="button" 
-              onClick={this.clickClose}></button>
-              
+              <button
+                className="close-button"
+                uk-icon="close"
+                type="button"
+                onClick={this.clickClose}
+              ></button>
+
               <div>
                 <div
                   style={{
@@ -164,6 +165,11 @@ class ReviewSelect extends React.Component<IProps, IState> {
                   >
                     <li></li>
                     <li>
+                      <span id="searchReview" onClick={this.handleNavSelect}>
+                        모든 서평 검색
+                      </span>
+                    </li>
+                    <li>
                       <span id="myReview" onClick={this.handleNavSelect}>
                         내가 쓴 서평
                       </span>
@@ -173,11 +179,7 @@ class ReviewSelect extends React.Component<IProps, IState> {
                         좋아요 한 서평
                       </span>
                     </li>
-                    <li>
-                      <span id="searchReview" onClick={this.handleNavSelect}>
-                        모든 서평 검색
-                      </span>
-                    </li>
+
                     <li></li>
                   </ul>
                 </div>
@@ -225,11 +227,15 @@ class ReviewSelect extends React.Component<IProps, IState> {
                 </div>
               ) : null}
               <div className="Review-button-wrap">
-                <button 
-                  className ="uk-button uk-button-default"
-                  onClick={this.clickConfirm}> Confirm </button>
+                <button
+                  className="uk-button uk-button-default"
+                  onClick={this.clickConfirm}
+                >
+                  {" "}
+                  Confirm{" "}
+                </button>
               </div>
-            </div>           
+            </div>
           </div>
         ) : null}
       </div>
