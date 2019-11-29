@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { requestUserInfo } from "./Redux/modules/user";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import PrivateRoute from "./components/shared/PrivateRoute";
 import Sidebar from "./components/sidebar/index";
 import Main from "./components/main/index";
 import Signup from "./components/signup/Signup";
@@ -20,9 +21,8 @@ import MyCuration from "./components/myCuration";
 import MyLikes from "./components/myLikes";
 import Search from "./components/searchPage/SearchPage";
 import EditPost from "./components/writeReview/EditPost";
-import SearchForm from "./components/searchPage/SearchForm"
-import Footer from "./components/footer/Footer"
-
+import SearchForm from "./components/searchPage/SearchForm";
+import Footer from "./components/footer/Footer";
 
 const App: React.FC = (props: any): ReactElement => {
   useEffect(() => {
@@ -37,19 +37,19 @@ const App: React.FC = (props: any): ReactElement => {
         <Route exact path="/" component={Main} />
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
-        <Route path="/mypage" component={Mypage} />
+        <PrivateRoute path="/mypage" component={Mypage} exact />
         <Route path="/book/:id" component={BookDetail} />
         <Route path="/review/:id" component={ReadReview} />
-        <Route path="/postreview" component={PostReview} />
+        <PrivateRoute path="/postreview" component={PostReview} exact />
         <Route path="/curation/:id" component={ReadCuration} />
-        <Route path="/editcuration/:id" component={EditCuration} />
-        <Route path="/postcuration" component={PostCuration} />
-        <Route path="/myreview" component={Myreview} />
-        <Route path="/mybook" component={MyBook} />
-        <Route path="/mycuration" component={MyCuration} />
-        <Route path="/mylikes" component={MyLikes} />
+        <PrivateRoute path="/editcuration/:id" component={EditCuration} exact />
+        <PrivateRoute path="/postcuration" component={PostCuration} exact />
+        <PrivateRoute path="/myreview" component={Myreview} exact />
+        <PrivateRoute path="/mybook" component={MyBook} exact />
+        <PrivateRoute path="/mycuration" component={MyCuration} exact />
+        <PrivateRoute path="/mylikes" component={MyLikes} exact />
         <Route path="/search/:keyWord" component={Search} />
-        <Route path="/editReview/:id" component={EditPost} />
+        <PrivateRoute path="/editReview/:id" component={EditPost} exact />
         <Route path="/searchForm" component={SearchForm} />
         <Route path="*" to="/" />
       </Switch>

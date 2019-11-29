@@ -25,8 +25,9 @@ class ReviewsEntry extends React.Component<IProps> {
         className={
           "writecuration_reviews_reviewentry" + this.props.isPlaceHolder
         }
+        style={{ marginLeft: "80px" }}
       >
-        <div
+        <span
           style={{
             display: "inline-block",
             marginRight: "30px"
@@ -59,15 +60,16 @@ class ReviewsEntry extends React.Component<IProps> {
           >
             {review.author.name}
           </div>
-        </div>
-        <div
+        </span>
+        <span
           style={{
             display: "inline-block",
             textDecoration: "none",
             color: "gray",
             position: "absolute",
             marginLeft: "2%",
-            marginTop: "20px"
+            marginTop: "20px",
+            width: "60%"
           }}
         >
           <div className="reviewentry_title">
@@ -89,8 +91,9 @@ class ReviewsEntry extends React.Component<IProps> {
           </div>
           <div className="reviewentry_contents" style={{ fontSize: "0.9em" }}>
             <p>{review.contents.replace(/<[^>]*>?/gm, "")}</p>
+            <hr />
           </div>
-        </div>
+        </span>
       </div>
     );
   }

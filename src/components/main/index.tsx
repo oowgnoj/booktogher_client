@@ -43,6 +43,7 @@ class Main extends React.Component {
   public componentDidMount(): void {
     Store.dispatch(updateReviewsRecommend());
     Store.dispatch(updateCurationsRecommend());
+    window.scroll(0, 0);
   }
 
   public render(): ReactElement {
@@ -67,12 +68,15 @@ class Main extends React.Component {
                   서평을 작성해주세요. 서로모임에 오신 분들께 서평을
                   공유해주세요.
                 </p> */}
-              <button
+              {/* <button
                 className="uk-button uk-button-default uk-button-large "
                 style={{ width: "50%" }}
-              >
+              > */}
+              <p>
                 서평 쓰러가기
-              </button>
+                <span uk-icon="pencil" style={{ marginLeft: "2%" }}></span>
+              </p>
+              {/* </button> */}
             </div>
             {/* </div> */}
           </Link>
@@ -91,16 +95,19 @@ class Main extends React.Component {
                   큐레이션을 등록해주세요. 책과 서평으로 구성된 당신의 북
                   플레이리스트를 공유하여 주세요.
                 </p> */}
-              <button className="uk-button uk-button-default uk-button-large ">
+              {/* <button className="uk-button uk-button-default uk-button-large "> */}
+              <p>
                 큐레이션 등록하러 가기
-              </button>
+                <span uk-icon="pencil" style={{ marginLeft: "2%" }}></span>
+              </p>
+              {/* </button> */}
             </div>
             {/* </div> */}
           </Link>
         </div>
 
         <div className="main_review_list_start">
-          <RecoReviewList reviews={props.review.slice(1, 5)} />
+          <RecoReviewList reviews={props.review.slice(3)} />
         </div>
 
         <div className="main_recocollection_div">
@@ -112,7 +119,7 @@ class Main extends React.Component {
               fontSize: "1.3em"
             }}
           >
-            서로모임에 오신 분들께서 작성해주신 컬렉션입니다.
+            서로모임에 오신 분들께서 작성해주신 큐레이션입니다.
           </div>
         </div>
         <RecoCurationList curations={props.curation.slice(1, 5)} />
@@ -161,7 +168,7 @@ class Main extends React.Component {
 function mapStateToProps(state: any): any {
   return {
     curation: state.recommend.data.curation.slice(0, 5),
-    review: state.recommend.data.review.slice(0, 5)
+    review: state.recommend.data.review
   };
 }
 
