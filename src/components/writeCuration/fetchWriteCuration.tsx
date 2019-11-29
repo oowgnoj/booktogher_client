@@ -2,9 +2,15 @@ import {
   IBook,
   ICuration,
   ICurationsPost,
+  IReviewBook,
   IReviewWithBooks,
+  IReviewSearch,
+  IReviewSearchBook,
+  IReviewSearchWithBooksRes,
+  IReview,
   IReviews
 } from "../shared/Types";
+import { reviews } from "../shared/InitialStates";
 
 const url: string = "http://booktogether.ap-northeast-2.elasticbeanstalk.com";
 
@@ -32,8 +38,25 @@ export const fetchMyReview = (callback: any, userId: string): any => {
     method: "GET"
   })
     .then((res: Response) => res.json())
-    .then((res: IReviews) => {
-      callback(res);
+    .then((reviewsRes: IReview[]) => {
+      console.log("review author response : ", reviewsRes);
+      const promises: any = reviewsRes.map((review: IReview) => {
+        return fetch(`${url}/books?review=${review._id}`);
+      });
+      Promise.all(promises).then((res: any) => {
+        Promise.all(res.map((el: any) => el.json())).then((booksRes: any) => {
+          const booksInfo: IReviewSearchBook[][] = booksRes.map(
+            (books: IBook[]) =>
+              books.map((book: IBook) => {
+                return {
+                  _id: book._id,
+                  title: book.title
+                };
+              })
+          );
+          callback(reviewsRes, booksInfo);
+        });
+      });
     });
 };
 
@@ -46,8 +69,25 @@ export const fetchMyLikesReview = (callback: any): any => {
     method: "GET"
   })
     .then((res: Response) => res.json())
-    .then((res: IReviews) => {
-      callback(res);
+    .then((reviewsRes: IReview[]) => {
+      console.log("review mylikes response : ", reviewsRes);
+      const promises: any = reviewsRes.map((review: IReview) => {
+        return fetch(`${url}/books?review=${review._id}`);
+      });
+      Promise.all(promises).then((res: any) => {
+        Promise.all(res.map((el: any) => el.json())).then((booksRes: any) => {
+          const booksInfo: IReviewSearchBook[][] = booksRes.map(
+            (books: IBook[]) =>
+              books.map((book: IBook) => {
+                return {
+                  _id: book._id,
+                  title: book.title
+                };
+              })
+          );
+          callback(reviewsRes, booksInfo);
+        });
+      });
     });
 };
 
@@ -60,7 +100,8 @@ export const fetchReviewsSearch = (callback: any, search: string): void => {
     method: "GET"
   })
     .then((res: Response) => res.json())
-    .then((res: IReviews) => {
-      callback(res);
+    .then((reviewsRes: IReviewSearchWithBooksRes) => {
+      console.log("review search response : ", reviewsRes);
+      callback(reviewsRes.reviews);
     });
 };

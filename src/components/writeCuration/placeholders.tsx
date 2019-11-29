@@ -4,7 +4,7 @@ import book3 from "./assets/ph_3.jpeg";
 import book4 from "./assets/ph_4.jpeg";
 import book5 from "./assets/ph_5.jpeg";
 import book6 from "./assets/ph_6.jpeg";
-import { string } from "prop-types";
+import { IReviewSearchWithBooks } from "../shared/Types";
 
 interface IBook {
   _id: string;
@@ -13,24 +13,7 @@ interface IBook {
   title: string;
 }
 
-interface IReview {
-  _id: string;
-  author: IAuthor;
-  contents: string;
-  likes: string[];
-  published: boolean;
-  thumbnail: string;
-  title: string;
-}
-
-interface IAuthor {
-  _id: string;
-  image: string;
-  name: string;
-  profile: string;
-}
-
-export const placeholdersReview: IReview[] = [
+export const placeholdersReview: IReviewSearchWithBooks[] = [
   {
     _id: "ObjectId",
     author: {
@@ -40,8 +23,9 @@ export const placeholdersReview: IReview[] = [
       name: "정승권",
       profile: "저는 이런..."
     },
+    books: [{ _id: "ObjectId", title: "일탈" }],
     contents:
-      "인간은 변할 수 있고, 누구나 행복해 질 수 있다. 그렇다 서평 테스트 길게 들어가면 더 좋을 것 같다. 벌써 2차 배포까지 와버렸다",
+      "서평 추가하기 버튼을 클릭하여 큐레이션에 등록할 서평을 선택하여 주세요.",
     likes: ["userid1", "userid2"],
     published: true,
     thumbnail: "blue",

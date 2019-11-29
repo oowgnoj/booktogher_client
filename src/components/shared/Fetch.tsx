@@ -1,11 +1,12 @@
 import {
   IBook,
+  IBookReview,
   IBookSearch,
+  ICuration,
   IReview,
-  IReviewSearch,
   IReviews,
   IReviewBook,
-  ICuration
+  IReviewSearch
 } from "./Types";
 
 const url: string = "http://booktogether.ap-northeast-2.elasticbeanstalk.com";
@@ -57,7 +58,9 @@ export const fetchCurationLikes = (callback?: any, id?: string): any => {
 };
 
 export const fetchReviewSearch = (callback: any, title: string): any => {
-  fetch(`${url}/reviews/search?query=${title}`)
+  fetch(`${url}/reviews/search?query=${title}`, {
+    credentials: "include"
+  })
     .then((res: Response) => res.json())
     .then((res: IReviewSearch) => {
       callback(res.reviews);
@@ -65,26 +68,35 @@ export const fetchReviewSearch = (callback: any, title: string): any => {
 };
 
 export const fetchGetCurations = (callback: any, authorId: string): any => {
-  fetch(`${url}/curations?author=${authorId}`)
+  fetch(`${url}/curations?author=${authorId}`, {
+    credentials: "include"
+  })
     .then((res: Response) => res.json())
     .then((res: IReviews) => callback(res));
 };
 
-export const fetchGetReviews = (
-  reviewCallback: any,
-  bookCallback: any,
-  authorId: string
-): any => {
-  fetch(`${url}/reviews?author=${authorId}`)
+export const fetchGetReviews = (callback: any, authorId: string): any => {
+  fetch(`${url}/reviews?author=${authorId}`, {
+    credentials: "include"
+  })
     .then((res: Response) => res.json())
-    .then((res: IReview[]) => {
-      reviewCallback(res);
-      const promises: any = res.map((review: IReview) => {
+    .then((reviewsRes: IReview[]) => {
+      const promises: any = reviewsRes.map((review: IReview) => {
         return fetch(`${url}/books?review=${review._id}`);
       });
       Promise.all(promises).then((res: any) => {
-        Promise.all(res.map((el: any) => el.json())).then(res => {
-          bookCallback(res);
+        Promise.all(res.map((el: any) => el.json())).then((booksRes: any) => {
+          const booksInfo: IReviewBook[][] = booksRes.map((books: IBook[]) =>
+            books.map((book: IBook) => {
+              return {
+                _id: book._id,
+                thumbnail: book.thumbnail,
+                title: book.title
+              };
+            })
+          );
+
+          callback(reviewsRes, booksInfo);
         });
       });
     });

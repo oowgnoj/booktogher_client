@@ -11,17 +11,20 @@ interface IMatchParams {
 }
 
 interface IState {
-  bookInfo : IBookDetail;
+  bookInfo: IBookDetail;
   ratings: IRating[];
 }
 
-class BookDetail extends React.Component<RouteComponentProps<IMatchParams>,IState> {
+class BookDetail extends React.Component<
+  RouteComponentProps<IMatchParams>,
+  IState
+> {
   constructor(props: any) {
     super(props);
     this.state = {
-      bookInfo :{
+      bookInfo: {
         _id: "",
-        authors: [ "" ],
+        authors: [""],
         contents: "",
         datetime: "",
         isbn: "",
@@ -31,44 +34,42 @@ class BookDetail extends React.Component<RouteComponentProps<IMatchParams>,IStat
         status: "",
         thumbnail: "",
         title: "",
-        translators: [ "" ],
-        url: "",
+        translators: [""],
+        url: ""
       },
-      ratings: [ { 
-        book: "", // book id
-        avg_rating: 0,
-        user_rating: {
-          _id: "", // rating id
-          rating: 0
+      ratings: [
+        {
+          book: "", // book id
+          avg_rating: 0,
+          user_rating: {
+            _id: "", // rating id
+            rating: 0
+          }
         }
-      }]  
-    }
+      ]
+    };
   }
   public componentDidMount(): void {
     const setStateBook = (res: any): void => {
+      window.scroll(0, 0);
       this.setState({ bookInfo: res });
     };
     const setStateRating = (res: any): void => {
       this.setState({ ratings: res });
     };
     fetchBookDetail(setStateBook, this.props.match.params.id);
-    fetchBookRating(setStateRating, this.props.match.params.id)
+    fetchBookRating(setStateRating, this.props.match.params.id);
   }
 
   public render(): ReactElement {
     return (
-      <div className = "book-detail-area">
+      <div className="book-detail-area">
         <div className="book-cover"></div>
-        <BookInfo 
-          bookInfo = {this.state.bookInfo} 
-          rating={this.state.ratings}
-        />
-        <BookReview id = {this.props.match.params.id} />
+        <BookInfo bookInfo={this.state.bookInfo} rating={this.state.ratings} />
+        <BookReview id={this.props.match.params.id} />
       </div>
-    )
+    );
   }
 }
-
-
 
 export default BookDetail;

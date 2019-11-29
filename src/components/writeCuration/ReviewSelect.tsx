@@ -1,11 +1,17 @@
 import React, { ReactElement, MouseEvent } from "react";
 import {
   IBooks,
-  IReviewWithBooks,
+  IReviewSearchWithBooks,
   IReview,
   IUserInfo,
+  IReviewSearchBook,
   IReviewSearch
 } from "../shared/Types";
+import {
+  reviews,
+  reviewsBooks,
+  selectedReviewsForCuration
+} from "../shared/InitialStates";
 import { connect } from "react-redux";
 import {
   fetchMyReview,
@@ -13,14 +19,18 @@ import {
   fetchReviewsSearch
 } from "./fetchWriteCuration";
 import MyReviewSelect from "./MyReviewSelect";
+import SearchReviewSelect from "./SearchReviewSelect";
+import "./ReviewModal.scss";
 import { flexbox } from "@material-ui/system";
 
 interface IState {
-  reviews: IReview[];
+  reviews: IReviewSearchWithBooks[];
   title: string;
   myReviews: IReview[];
+  myReviewsBooks: IReviewSearchBook[][];
   myLikesReviews: IReview[];
-  selectedReviews: IReview[];
+  myLikesReviewsBooks: IReviewSearchBook[][];
+  selectedReviews: IReviewSearchWithBooks[];
   search: string;
   isOpen: boolean;
   navSelect: string;
@@ -36,71 +46,13 @@ class ReviewSelect extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = {
-      reviews: [
-        {
-          _id: "",
-          author: {
-            _id: "",
-            image: "",
-            name: "",
-            profile: ""
-          },
-          contents: "",
-          likes: [""],
-          published: true,
-          thumbnail: "",
-          title: ""
-        }
-      ],
+      reviews: selectedReviewsForCuration,
       title: "",
-      myReviews: [
-        {
-          _id: "",
-          author: {
-            _id: "",
-            image: "",
-            name: "",
-            profile: ""
-          },
-          contents: "",
-          likes: [""],
-          published: true,
-          thumbnail: "",
-          title: ""
-        }
-      ],
-      myLikesReviews: [
-        {
-          _id: "",
-          author: {
-            _id: "",
-            image: "",
-            name: "",
-            profile: ""
-          },
-          contents: "",
-          likes: [""],
-          published: true,
-          thumbnail: "",
-          title: ""
-        }
-      ],
-      selectedReviews: [
-        {
-          _id: "",
-          author: {
-            _id: "",
-            image: "",
-            name: "",
-            profile: ""
-          },
-          contents: "",
-          likes: [""],
-          published: true,
-          thumbnail: "",
-          title: ""
-        }
-      ],
+      myReviews: reviews,
+      myReviewsBooks: reviewsBooks,
+      myLikesReviews: reviews,
+      myLikesReviewsBooks: reviewsBooks,
+      selectedReviews: selectedReviewsForCuration,
       search: "",
       isOpen: true,
       navSelect: "myReview",
@@ -113,18 +65,23 @@ class ReviewSelect extends React.Component<IProps, IState> {
     this.handleSearch = this.handleSearch.bind(this);
   }
 
-  public componentDidMount() {
-    const setStateMyLikesReview = (res: any): void => {
-      const newReviews = res.slice();
-      console.log("내가 좋아하는 서평 mylikes fetch 결과", newReviews);
-      this.setState({ myLikesReviews: newReviews });
+  public componentDidMount(): void {
+    const setStateMyLikesReview = (
+      reviewsRes: IReview[],
+      booksInfo: IReviewSearchBook[][]
+    ): void => {
+      this.setState({
+        myLikesReviews: reviewsRes,
+        myLikesReviewsBooks: booksInfo
+      });
     };
     fetchMyLikesReview(setStateMyLikesReview);
 
-    const setStateMyReview = (res: any): void => {
-      const newReviews = res.slice();
-      console.log("내가 쓴 서평 myreview fetch 결과", newReviews);
-      this.setState({ myReviews: newReviews });
+    const setStateMyReview = (
+      reviewsRes: IReview[],
+      booksInfo: IReviewSearchBook[][]
+    ): void => {
+      this.setState({ myReviews: reviewsRes, myReviewsBooks: booksInfo });
     };
     fetchMyReview(setStateMyReview, this.props.user._id);
   }
@@ -135,12 +92,19 @@ class ReviewSelect extends React.Component<IProps, IState> {
     this.setState({ navSelect: tab });
   }
 
-  public clickSelectedBook(e: any, myReviews: any): void {
+  public clickSelectedBook(e: any): void {
     const index: number = e.currentTarget.id;
-    const clickedReveiw: IReview = this.state.myReviews[index];
-
+    const { navSelect } = this.state;
+    let clickedReview: any = this.state.myReviews[index];
+    clickedReview.books = this.state.myReviewsBooks[index];
+    if (navSelect === "myLikesReview") {
+      clickedReview = this.state.myLikesReviews[index];
+      clickedReview.books = this.state.myLikesReviewsBooks[index];
+    } else if (navSelect === "searchReview") {
+      clickedReview = this.state.reviews[index];
+    }
     this.setState({
-      selectedReviews: [...this.state.selectedReviews, clickedReveiw]
+      selectedReviews: [...this.state.selectedReviews, clickedReview]
     });
   }
 
@@ -160,12 +124,9 @@ class ReviewSelect extends React.Component<IProps, IState> {
   }
 
   public handleSearch(): void {
-    console.log("this.state", this.state);
-    const search = this.state.search;
-    const searchedReviews = (result: IReviewSearch): void => {
-      const newReviews = result.reviews.slice();
-      console.log("newReviews", newReviews);
-      this.setState({ reviews: newReviews });
+    const search: string = this.state.search;
+    const searchedReviews = (reviewsRes: IReviewSearchWithBooks[]): void => {
+      this.setState({ reviews: reviewsRes });
     };
     fetchReviewsSearch(searchedReviews, search);
   }
@@ -214,12 +175,14 @@ class ReviewSelect extends React.Component<IProps, IState> {
               {this.state.navSelect === "myReview" ? (
                 <MyReviewSelect
                   reviews={this.state.myReviews}
+                  books={this.state.myReviewsBooks}
                   clicked={this.clickSelectedBook}
                 />
               ) : null}
               {this.state.navSelect === "myLikesReview" ? (
                 <MyReviewSelect
                   reviews={this.state.myLikesReviews}
+                  books={this.state.myLikesReviewsBooks}
                   clicked={this.clickSelectedBook}
                 />
               ) : null}
@@ -244,7 +207,7 @@ class ReviewSelect extends React.Component<IProps, IState> {
                     검색
                   </button>
                   {this.state.reviews[0]._id ? (
-                    <MyReviewSelect
+                    <SearchReviewSelect
                       reviews={this.state.reviews}
                       clicked={this.clickSelectedBook}
                     />

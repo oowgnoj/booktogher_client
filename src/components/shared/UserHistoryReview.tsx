@@ -31,7 +31,6 @@ const UserHistoryReview = ({ reviews, books }: IReviewProps): ReactElement => {
                 <span
                   style={{
                     color: "skyblue",
-                    marginLeft: "15px",
                     marginRight: "5px"
                   }}
                 >
@@ -46,8 +45,7 @@ const UserHistoryReview = ({ reviews, books }: IReviewProps): ReactElement => {
               <span
                 style={{
                   fontSize: "13px",
-                  display: "block",
-                  marginLeft: "15px"
+                  display: "block"
                 }}
               >
                 {review.contents.replace(/<[^>]*>?/gm, "").slice(0, 300) +

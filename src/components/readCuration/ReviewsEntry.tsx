@@ -1,18 +1,10 @@
 import React, { ReactElement } from "react";
-import { IAuthor } from "../shared/Types";
-
-interface IReview {
-  _id: string;
-  author: IAuthor;
-  contents: string;
-  likes: string[];
-  published: boolean;
-  thumbnail: string;
-  title: string;
-}
+import { IAuthor, IReview, IBookReview } from "../shared/Types";
+import { Link } from "react-router-dom";
 
 interface IProps {
   review: IReview;
+  book: IBookReview[];
 }
 
 class ReviewsEntry extends React.Component<IProps> {
@@ -21,42 +13,55 @@ class ReviewsEntry extends React.Component<IProps> {
   }
 
   public render(): ReactElement {
-    const { review } = this.props;
+    const { review, book } = this.props;
     return (
       <div
         className="readcuration_reviews_reviewentry"
         style={{ marginLeft: "80px" }}
       >
-        <span style={{ display: "inline-block" }}>
-          <img
-            src={
-              review.author.image
-                ? review.author.image
-                : "https://icons-for-free.com/iconfiles/png/128/anonymous+app+contacts+open+line+profile+user+icon-1320183042822068474.png"
-            }
-            alt={review.title}
-            style={{ width: "120px", height: "auto" }}
-            className="image"
-          />
-          <div
-            className="reviewentry_author"
+        <Link to={`/curation/${review._id}`}>
+          <span style={{ display: "inline-block" }}>
+            <img
+              src={
+                review.author.image
+                  ? review.author.image
+                  : "https://icons-for-free.com/iconfiles/png/128/anonymous+app+contacts+open+line+profile+user+icon-1320183042822068474.png"
+              }
+              alt={review.title}
+              className="reviewentry_cropped"
+            />
+
+            <div
+              className="reviewentry_author"
+              style={{
+                textAlign: "center",
+                paddingTop: "20%",
+                marginBottom: "10px",
+                fontFamily: "Nanum Myeongjo, serif",
+                fontSize: "0.8em",
+                textDecoration: "none",
+                color: "gray"
+              }}
+            >
+              {review.author.name}
+            </div>
+          </span>
+          <span
             style={{
-              width: "120px",
-              textAlign: "center",
-              marginBottom: "10px"
+              display: "inline-block",
+              textDecoration: "none",
+              color: "gray"
             }}
           >
-            {review.author.name}
-          </div>
-        </span>
-        <span style={{ display: "inline-block" }}>
-          <div className="reviewentry_title" style={{ fontSize: "30px" }}>
-            <b>{review.title.replace(/<[^>]*>?/gm, "")}</b>
-          </div>
-          <div className="reviewentry_contents">
-            <b>{review.contents.replace(/<[^>]*>?/gm, "")}</b>
-          </div>
-        </span>
+            <div className="reviewentry_title" style={{ fontSize: "30px" }}>
+              <p>{book.length > 1 ? book[0].title + " 외" : book[0].title}</p>
+              <p>{review.title.replace(/<[^>]*>?/gm, "")}</p>
+            </div>
+            <div className="reviewentry_contents">
+              <p>{review.contents.replace(/<[^>]*>?/gm, "")}</p>
+            </div>
+          </span>
+        </Link>
       </div>
     );
   }

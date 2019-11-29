@@ -19,6 +19,10 @@ const Reviews: React.FC = (props: any): ReactElement => {
   const [myReview, setReview] = useState<IReview[]>(reviews);
   const [reviewBooks, setReviewBooks] = useState<IReviewBook[][]>(reviewsBooks);
 
+  const setBoth = (reviews: IReview[], books: IReviewBook[][]): void => {
+    return setReview(reviews), setReviewBooks(books);
+  };
+
   useEffect(() => {
     setUserID(props.user._id);
   });
@@ -27,7 +31,7 @@ const Reviews: React.FC = (props: any): ReactElement => {
 
   useEffect(() => {
     if (didMountRef.current) {
-      fetchGetReviews(setReview, setReviewBooks, userID);
+      fetchGetReviews(setBoth, userID);
     } else {
       didMountRef.current = true;
     }
