@@ -67,6 +67,7 @@
   },
   "devDependencies": {
     "customize-cra": "^0.9.1",
+    "cypress": "^3.7.0",
     "react-app-rewired": "^2.1.5",
     "tslint-config-prettier": "^1.18.0"
   }
