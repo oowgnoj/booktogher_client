@@ -95,6 +95,7 @@ export const fetchGetReviews = (callback: any, authorId: string): any => {
               };
             })
           );
+
           callback(reviewsRes, booksInfo);
         });
       });
