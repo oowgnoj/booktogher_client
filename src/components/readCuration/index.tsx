@@ -148,88 +148,87 @@ class ReadCuration extends React.Component<IParams, IState> {
   }
 
   public render(): ReactElement {
+    // const { curation, books, reviews, reviewsBooks } = this.state;
+    // return (
+    //   <div className="readCuration">
+    //     {this.state.historyModal ? (
+    //       <UserHistoryModal
+    //         author={this.state.curation.author}
+    //         handleClose={this.detectHistoryModal}
+    //       />
+    //     ) : null}
+    //     {this.state.isDeleted ? <Redirect to="/" /> : null}
+    //     <div
+    //       className="readCuration_header_likes"
+    //       style={{
+    //         marginLeft: "7%",
+    //         marginTop: "38px",
+    //         float: "left",
+    //         clear: "right"
+    //       }}
+    //     >
+    //       {curation.likes.includes(this.props.userId) ? (
+    //         <span
+    //           uk-icon="icon: heart; ratio: 1.5"
+    //           onClick={this.handleLikes}
+    //           className="heart"
+    //         ></span>
+    //       ) : (
+    //         <span
+    //           uk-icon="icon: heart; ratio: 1.5"
+    //           onClick={this.handleLikes}
+    //         ></span>
+    //       )}
+
+    //       <span style={{ marginLeft: "13px", fontSize: "20px" }}>
+    //         {curation.likes ? curation.likes.length : "좋아요 수"}
+    //       </span>
+    //     </div>
+    //     {curation.author._id === this.props.userId ? (
+    //       <div
+    //         style={{
+    //           marginLeft: "80%",
+    //           display: "flex",
+    //           marginTop: "-10px"
+    //         }}
+    //       >
+    //         <div className="readCuration_header_modify">
+    //           <Link to={`/editcuration/${this.props.match.params.id}`}>
+    //             <button className="uk-button uk-button-default uk-button-small">
+    //               수정
+    //             </button>
+    //           </Link>
+    //         </div>
+    //         <div
+    //           className="readCuration_header_delete"
+    //           style={{ paddingLeft: "10px" }}
+    //         >
+    //           <button
+    //             className="uk-button uk-button-default uk-button-small"
+    //             onClick={this.handleDelete}
+    //           >
+    //             삭제
+    //           </button>
+    //         </div>
+    //       </div>
+    //     ) : null}
+    //     <div className="readCuration_header">
+    //       <div
+    //         className="readCuration_header_title"
+    //         style={{
+    //           fontFamily: "Nanum Myeongjo, serif",
+    //           marginTop: "39px",
+    //           marginLeft: "1%",
+    //           height: "200px",
+    //           width: "80%",
+    //           fontSize: "2.4em",
+    //           display: "inline"
+    //         }}
+    //       >
+    //         {curation.title ? curation.title : "큐레이션 제목"}
+    //       </div>
 
     const { curation, books, reviews, reviewsBooks } = this.state;
-    return (
-      <div className="readCuration">
-        {this.state.historyModal ? (
-          <UserHistoryModal
-            author={this.state.curation.author}
-            handleClose={this.detectHistoryModal}
-          />
-        ) : null}
-        {this.state.isDeleted ? <Redirect to="/" /> : null}
-        <div
-          className="readCuration_header_likes"
-          style={{
-            marginLeft: "7%",
-            marginTop: "38px",
-            float: "left",
-            clear: "right"
-          }}
-        >
-          {curation.likes.includes(this.props.userId) ? (
-            <span
-              uk-icon="icon: heart; ratio: 1.5"
-              onClick={this.handleLikes}
-              className="heart"
-            ></span>
-          ) : (
-            <span
-              uk-icon="icon: heart; ratio: 1.5"
-              onClick={this.handleLikes}
-            ></span>
-          )}
-
-          <span style={{ marginLeft: "13px", fontSize: "20px" }}>
-            {curation.likes ? curation.likes.length : "좋아요 수"}
-          </span>
-        </div>
-        {curation.author._id === this.props.userId ? (
-          <div
-            style={{
-              marginLeft: "80%",
-              display: "flex",
-              marginTop: "-10px"
-            }}
-          >
-            <div className="readCuration_header_modify">
-              <Link to={`/editcuration/${this.props.match.params.id}`}>
-                <button className="uk-button uk-button-default uk-button-small">
-                  수정
-                </button>
-              </Link>
-            </div>
-            <div
-              className="readCuration_header_delete"
-              style={{ paddingLeft: "10px" }}
-            >
-              <button
-                className="uk-button uk-button-default uk-button-small"
-                onClick={this.handleDelete}
-              >
-                삭제
-              </button>
-            </div>
-          </div>
-        ) : null}
-        <div className="readCuration_header">
-          <div
-            className="readCuration_header_title"
-            style={{
-              fontFamily: "Nanum Myeongjo, serif",
-              marginTop: "39px",
-              marginLeft: "1%",
-              height: "200px",
-              width: "80%",
-              fontSize: "2.4em",
-              display: "inline"
-            }}
-          >
-            {curation.title ? curation.title : "큐레이션 제목"}
-          </div>
-
-    const { curation, books, reviews } = this.state;
     if (!curation.author._id) {
       return <Clean />;
     } else {
@@ -253,7 +252,6 @@ class ReadCuration extends React.Component<IParams, IState> {
               width: "20%"
             }}
           >
-
             <img
               src={
                 curation.author.image
@@ -356,29 +354,25 @@ class ReadCuration extends React.Component<IParams, IState> {
                 </div>
               ) : null}
             </div>
-
           </div>
-        <div
-          className="readCuration_contents"
-          style={{
-            marginTop: "50px",
-            marginLeft: "1px",
-            height: "300px",
-            width: "50%",
-            fontSize: "1.1em",
-            lineHeight: "1.8em"
-          }}
-        >
-          {curation.contents ? curation.contents : "큐레이션 본문"}
+          <div
+            className="readCuration_contents"
+            style={{
+              marginTop: "50px",
+              marginLeft: "1px",
+              height: "300px",
+              width: "50%",
+              fontSize: "1.1em",
+              lineHeight: "1.8em"
+            }}
+          >
+            {curation.contents ? curation.contents : "큐레이션 본문"}
+          </div>
+          <BooksList books={books} />
+          <ReviewsList reviews={reviews} books={reviewsBooks} />
         </div>
-        <BooksList books={books} />
-        <ReviewsList reviews={reviews} books={reviewsBooks} />
-      </div>
-    );
-
       );
     }
-
   }
 }
 function mapStateToProps(state: any): any {
