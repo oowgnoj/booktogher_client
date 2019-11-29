@@ -59,6 +59,8 @@ class EditCuration extends React.Component<
     this.handleReviewSelect = this.handleReviewSelect.bind(this);
     this.addBooks = this.addBooks.bind(this);
     this.addReviews = this.addReviews.bind(this);
+    this.bookModalClose = this.bookModalClose.bind(this);
+    this.reviewModalClose = this.reviewModalClose.bind(this);
   }
 
   public componentDidMount(): void {
@@ -95,6 +97,14 @@ class EditCuration extends React.Component<
       }
     }
     this.setState({ reviews: currentReviewList });
+  }
+
+  public bookModalClose(): void {
+    this.setState({ bookModal: false });
+  }
+
+  public reviewModalClose(): void {
+    this.setState({ bookModal: false });
   }
 
   public handleTitle(event: React.ChangeEvent<HTMLInputElement>): void {
@@ -150,9 +160,14 @@ class EditCuration extends React.Component<
   public render(): ReactElement {
     return (
       <div className="editcuration">
-        {this.state.bookModal ? <BookModal addBooks={this.addBooks} /> : null}
+        {this.state.bookModal ? (
+          <BookModal addBooks={this.addBooks} close={this.bookModalClose} />
+        ) : null}
         {this.state.reviewModal ? (
-          <ReviewModal addReviews={this.addReviews} />
+          <ReviewModal
+            addReviews={this.addReviews}
+            close={this.reviewModalClose}
+          />
         ) : null}
         {this.state.isPatched ? (
           <Redirect to={`/curation/${this.state.curationId}`} />

@@ -21,6 +21,7 @@ interface IState {
 
 interface IProps {
   addBooks: any;
+  close: any;
 }
 
 class BookSelect extends React.Component<IProps, IState> {
@@ -32,7 +33,7 @@ class BookSelect extends React.Component<IProps, IState> {
           _id: "",
           authors: [""],
           contents: "",
-          thumbnail:"",
+          thumbnail: "",
           title: ""
         }
       ],
@@ -47,7 +48,7 @@ class BookSelect extends React.Component<IProps, IState> {
     this.clickSelectedBook = this.clickSelectedBook.bind(this);
     this.clickConfirm = this.clickConfirm.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.clickClose = this.clickClose.bind(this)
+    this.clickClose = this.clickClose.bind(this);
   }
 
   public handleChangeTitle(e: React.ChangeEvent<HTMLInputElement>): void {
@@ -61,25 +62,25 @@ class BookSelect extends React.Component<IProps, IState> {
     fetchBookSearch(setStateBook, this.state.title);
   }
 
-  public handleKeyPress(e: any): void{
-    if(e.key === 'Enter'){
-      if(this.state.title !== ""){
+  public handleKeyPress(e: any): void {
+    if (e.key === "Enter") {
+      if (this.state.title !== "") {
         const setStateBook = (res: any): void => {
           this.setState({ books: res });
         };
         fetchBookSearch(setStateBook, this.state.title);
         e.preventDefault();
+      } else {
+        alert("검색어를 입력해주세요");
       }
-      else {
-        alert("검색어를 입력해주세요")
-      } 
     }
   }
 
-  public clickClose(): void { 
+  public clickClose(): void {
     this.setState({
       isOpen: !this.state.isOpen
     });
+    this.props.close();
   }
 
   public clickSelectedBook(e: any): void {
@@ -140,17 +141,18 @@ class BookSelect extends React.Component<IProps, IState> {
           <div className="Modal-overlay">
             <div className="Modal">
               <p className="title">
-                <button 
+                <button
                   uk-icon="close"
-                  type="button" 
-                  onClick={this.clickClose}></button>
+                  type="button"
+                  onClick={this.clickClose}
+                ></button>
                 <input
                   type="text"
                   className="search-box"
                   placeholder="책 제목을 입력해 주세요"
                   value={this.state.title}
                   onChange={this.handleChangeTitle}
-                  onKeyPress ={this.handleKeyPress}
+                  onKeyPress={this.handleKeyPress}
                 ></input>
                 {/* <button onClick={this.clickSearchButton}>검색</button> */}
               </p>
@@ -160,18 +162,20 @@ class BookSelect extends React.Component<IProps, IState> {
                 <h5>{selectBookTitle}를 선택하셨습니다.</h5>
               )} */}
               <div className="content">
-                {this.state.books[0]._id ==="" ?
-                "책을 검색해주세요." 
-                : searchBookList}
+                {this.state.books[0]._id === ""
+                  ? "책을 검색해주세요."
+                  : searchBookList}
               </div>
               <div className="button-wrap">
-                <button 
-                  className ="uk-button uk-button-default"
-                  onClick={this.clickConfirm}> Confirm </button>
+                <button
+                  className="uk-button uk-button-default"
+                  onClick={this.clickConfirm}
+                >
+                  {" "}
+                  Confirm{" "}
+                </button>
               </div>
-              
             </div>
-            
           </div>
         ) : null}
       </div>

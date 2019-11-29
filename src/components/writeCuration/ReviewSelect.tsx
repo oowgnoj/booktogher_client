@@ -124,12 +124,21 @@ class ReviewSelect extends React.Component<IProps, IState> {
     this.setState({ search: event.target.value });
   }
 
-  public handleSearch(): void {
-    const search: string = this.state.search;
-    const searchedReviews = (reviewsRes: IReviewSearchWithBooks[]): void => {
-      this.setState({ reviews: reviewsRes });
-    };
-    fetchReviewsSearch(searchedReviews, search);
+  public handleSearch(e: any): void {
+    if (e.key === "Enter") {
+      if (this.state.search !== "") {
+        const search: string = this.state.search;
+        const searchedReviews = (
+          reviewsRes: IReviewSearchWithBooks[]
+        ): void => {
+          this.setState({ reviews: reviewsRes });
+        };
+        fetchReviewsSearch(searchedReviews, search);
+        e.preventDefault();
+      } else {
+        alert("검색어를 입력해주세요");
+      }
+    }
   }
 
   public clickClose(): void {
@@ -184,6 +193,18 @@ class ReviewSelect extends React.Component<IProps, IState> {
                   </ul>
                 </div>
               </div>
+              <div
+                className="Review-button-wrap"
+                style={{ marginLeft: "550px" }}
+              >
+                <button
+                  className="uk-button uk-button-default"
+                  onClick={this.clickConfirm}
+                >
+                  {" "}
+                  Confirm{" "}
+                </button>
+              </div>
               {this.state.navSelect === "myReview" ? (
                 <MyReviewSelect
                   reviews={this.state.myReviews}
@@ -200,41 +221,49 @@ class ReviewSelect extends React.Component<IProps, IState> {
               ) : null}
               {this.state.navSelect === "searchReview" ? (
                 <div>
-                  <input
-                    type="text"
-                    placeholder="서평을 검색하세요"
+                  <div
+                    className="searchreview_title"
                     style={{
-                      width: "80%",
-                      textAlign: "center",
-                      marginTop: "50px",
-                      marginLeft: "60px",
-                      marginBottom: "30px"
+                      width: "620px",
+                      fontSize: "16pt",
+                      fontWeight: "bold",
+                      color: "#333",
+                      padding: "10px",
+                      borderBottom: "2px solid rgb(95, 95, 95)"
                     }}
-                    onChange={this.handleChange}
-                  />
-                  <button
+                  >
+                    <input
+                      type="text"
+                      placeholder="서평을 검색하세요"
+                      style={{
+                        border: "none",
+                        textAlign: "center",
+                        width: "620px",
+                        outline: "none",
+                        fontSize: "20px",
+                        color: "#333",
+                        padding: "10px 0px 0px 0px"
+                      }}
+                      onChange={this.handleChange}
+                      onKeyPress={this.handleSearch}
+                    />
+                    {/*  <button
                     className="uk-button uk-button-text"
                     onClick={this.handleSearch}
                   >
                     검색
-                  </button>
-                  {this.state.reviews[0]._id ? (
-                    <SearchReviewSelect
-                      reviews={this.state.reviews}
-                      clicked={this.clickSelectedBook}
-                    />
-                  ) : null}
+                  </button> */}
+                  </div>
+                  <div>
+                    {this.state.reviews[0]._id ? (
+                      <SearchReviewSelect
+                        reviews={this.state.reviews}
+                        clicked={this.clickSelectedBook}
+                      />
+                    ) : null}
+                  </div>
                 </div>
               ) : null}
-              <div className="Review-button-wrap">
-                <button
-                  className="uk-button uk-button-default"
-                  onClick={this.clickConfirm}
-                >
-                  {" "}
-                  Confirm{" "}
-                </button>
-              </div>
             </div>
           </div>
         ) : null}
