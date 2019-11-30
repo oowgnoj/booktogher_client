@@ -14,7 +14,6 @@ class SearchReviewSelect extends React.Component<IProps> {
     this.state = {};
   }
   public render(): ReactElement {
-    console.log("searchReview, this.props.reviews : ", this.props.reviews);
     const MyReviewList: ReactElement[] = this.props.reviews.map(
       (info: IReviewSearchWithBooks, index: number) => {
         return (

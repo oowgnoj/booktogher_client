@@ -23,8 +23,8 @@ import Search from "./components/searchPage/SearchPage";
 import EditPost from "./components/writeReview/EditPost";
 import SearchForm from "./components/searchPage/SearchForm";
 import Footer from "./components/footer/Footer";
-import FindPassword from "./components/findPassword/FindPassword"
-import ChangePassword from "./components/findPassword/ChangePassword"
+import FindPassword from "./components/findPassword/FindPassword";
+import ChangePassword from "./components/findPassword/ChangePassword";
 
 const App: React.FC = (props: any): ReactElement => {
   useEffect(() => {
@@ -54,7 +54,7 @@ const App: React.FC = (props: any): ReactElement => {
         <PrivateRoute path="/editReview/:id" component={EditPost} exact />
         <Route path="/searchForm" component={SearchForm} />
         <Route path="/findpassword" component={FindPassword} />
-        <Route path="/changepassword" component={ChangePassword} />
+        <Route path="/reset/:id" component={ChangePassword} />
         <Route path="*" to="/" />
       </Switch>
       <Footer />

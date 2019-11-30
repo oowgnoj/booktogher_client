@@ -18,7 +18,7 @@ subscribe 한 state 의 유저정보를 보여줌
 class Sidebar extends React.Component {
   public render(): ReactElement {
     const props: any = this.props;
-    console.log('a',props.User.User._id)
+
     const greeting: React.ReactElement = props.User.User._id ? (
       <UserGreeting />
     ) : (
