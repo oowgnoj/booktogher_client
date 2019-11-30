@@ -55,7 +55,7 @@ class SignUp extends React.Component<any, IState> {
     } else if (password1 === password2 && !validatePassword(password1)) {
       this.setState({
         alert: true,
-        status: `비밀번호는 최소 7자 ~ 최대 15자 이내로 설정해주세요. 영문, 숫자, 특수문자가 각 1자리 이상 포함되어야 합니다.`
+        status: `비밀번호는 최소 8자 이상, 반드시 숫자가 1자리 이상 포함되어야 합니다.`
       });
     } else if (
       mail &&

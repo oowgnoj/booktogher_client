@@ -104,7 +104,7 @@ class EditCuration extends React.Component<
   }
 
   public reviewModalClose(): void {
-    this.setState({ bookModal: false });
+    this.setState({ reviewModal: false });
   }
 
   public handleTitle(event: React.ChangeEvent<HTMLInputElement>): void {
@@ -187,6 +187,7 @@ class EditCuration extends React.Component<
                 display: "inline",
                 border: "none"
               }}
+              maxLength={22}
               onChange={this.handleTitle}
             />
           </span>
@@ -210,13 +211,14 @@ class EditCuration extends React.Component<
               marginTop: "50px",
               marginLeft: "1px",
               height: "300px",
-              width: "50%",
+              width: "90%",
               fontSize: "1.1em",
               lineHeight: "1.8em",
               resize: "none",
               border: "none",
               outline: "none"
             }}
+            maxLength={440}
             onChange={this.handleContent}
           />
         </div>

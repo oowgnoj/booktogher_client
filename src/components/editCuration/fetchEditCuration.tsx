@@ -61,19 +61,21 @@ export const fetchReviews = (callback: any, id: string): any => {
   })
     .then((res: Response) => res.json())
     .then((reviewsRes: any) => {
-      console.log("review author response : ", reviewsRes);
-      const promises: any = reviewsRes.map((review: IReview) => {
+      const published: any = reviewsRes.filter((review: IReview) => {
+        return review.published;
+      });
+      const promises: any = published.map((review: IReview) => {
         return fetch(`${url}/books?review=${review._id}`);
       });
       Promise.all(promises).then((res: any) => {
         Promise.all(res.map((el: any) => el.json())).then((booksRes: any) => {
-          const reviewsWithBook: IReviewSearchWithBooks[] = booksRes.map(
-            (books: IBook[]) =>
-              books.map((book: IBook, index: number) => {
-                reviewsRes[index].books = { id: book._id, title: book.title };
-              })
-          );
-          callback(reviewsWithBook);
+          booksRes.forEach((books: IBook[], index: number) => {
+            const basicInfo = books.map((book: IBook) => {
+              return { id: book._id, title: book.title };
+            });
+            published[index].books = basicInfo;
+          });
+          callback(published);
         });
       });
     });

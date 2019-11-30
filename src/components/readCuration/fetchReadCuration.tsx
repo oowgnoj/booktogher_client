@@ -53,6 +53,8 @@ export const fetchGetBooksOfReviews = (
   });
   Promise.all(promises).then((res: any) => {
     Promise.all(res.map((el: any) => el.json())).then((books: any) => {
+      console.log("reviews ? ", reviews);
+      console.log("books ? ", books);
       callback(reviews, books);
     });
   });
@@ -68,8 +70,13 @@ export const fetchReviews = (callback: any, id: string): any => {
   })
     .then((response: Response) => response.json())
     .then((reviews: IReview[]) => {
-      const reviewIds: string[] = reviews.map((review: IReview) => review._id);
-      fetchGetBooksOfReviews(callback, reviewIds, reviews);
+      const published: IReview[] = reviews.filter(
+        (review: IReview) => review.published
+      );
+      const reviewIds: string[] = published.map(
+        (review: IReview) => review._id
+      );
+      fetchGetBooksOfReviews(callback, reviewIds, published);
     });
 };
 

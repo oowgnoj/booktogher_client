@@ -48,10 +48,16 @@ class Main extends React.Component {
 
   public render(): ReactElement {
     const props: any = this.props;
+    const filteredReview: IReview[] = props.review.filter(
+      (review: IReview) => review.published && review.author
+    );
+    const filteredCuration: ICuration[] = props.curation.filter(
+      (curation: ICuration) => curation.author
+    );
 
     return (
       <div className="main">
-        <Slider review={props.review} />
+        <Slider review={filteredReview} />
 
         <div className="section_wrappe" style={{ marginTop: "20px" }}>
           <Link to="/postreview">
@@ -59,7 +65,10 @@ class Main extends React.Component {
               style={{
                 width: "50%",
                 display: "inline-block",
-                textAlign: "center"
+                textAlign: "center",
+                paddingTop: "30px",
+                paddingBottom: "5px",
+                backgroundColor: "#f2f2e1"
               }}
             >
               {/* <div className="uk-dark uk-background-muted uk-padding"> */}
@@ -76,6 +85,9 @@ class Main extends React.Component {
                 서평 쓰러가기
                 <span uk-icon="pencil" style={{ marginLeft: "2%" }}></span>
               </p>
+              <p style={{ fontSize: "13px" }}>
+                서평을 작성해주세요. 서로모임에 오신 분들께 서평을 공유해주세요.
+              </p>
               {/* </button> */}
             </div>
             {/* </div> */}
@@ -86,7 +98,10 @@ class Main extends React.Component {
                 width: "50%",
                 display: "inline-block",
                 textDecoration: "none",
-                textAlign: "center"
+                textAlign: "center",
+                paddingTop: "30px",
+                paddingBottom: "5px",
+                backgroundColor: "gray"
               }}
             >
               {/* <div className="uk-dark uk-background-muted uk-padding"> */}
@@ -96,9 +111,12 @@ class Main extends React.Component {
                   플레이리스트를 공유하여 주세요.
                 </p> */}
               {/* <button className="uk-button uk-button-default uk-button-large "> */}
-              <p>
+              <p style={{ color: "white" }}>
                 큐레이션 등록하러 가기
                 <span uk-icon="pencil" style={{ marginLeft: "2%" }}></span>
+                <p style={{ fontSize: "13px", color: "white" }}>
+                  책과 서평으로 구성된 당신의 북 플레이리스트를 공유하여 주세요.
+                </p>
               </p>
               {/* </button> */}
             </div>
@@ -107,7 +125,7 @@ class Main extends React.Component {
         </div>
 
         <div className="main_review_list_start">
-          <RecoReviewList reviews={props.review.slice(3)} />
+          <RecoReviewList reviews={filteredReview.slice(3)} />
         </div>
 
         <div className="main_recocollection_div">
@@ -122,7 +140,7 @@ class Main extends React.Component {
             서로모임에 오신 분들께서 작성해주신 큐레이션입니다.
           </div>
         </div>
-        <RecoCurationList curations={props.curation.slice(1, 5)} />
+        <RecoCurationList curations={filteredCuration.slice(1, 5)} />
       </div>
     );
   }

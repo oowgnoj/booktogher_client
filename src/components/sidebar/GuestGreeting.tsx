@@ -25,7 +25,7 @@ class GuestGreeting extends React.Component {
         >
           <div
             className="uk-offcanvas-bar"
-            style={{ backgroundColor: "#233253" }}
+            style={{ backgroundColor: "#eddbcd" }}
           >
             <span
               className="uk-offcanvas-close"

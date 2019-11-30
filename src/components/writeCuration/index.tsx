@@ -64,6 +64,8 @@ class WriteCuration extends React.Component<{}, IState> {
     this.handleReviewSelect = this.handleReviewSelect.bind(this);
     this.addBooks = this.addBooks.bind(this);
     this.addReviews = this.addReviews.bind(this);
+    this.bookModalClose = this.bookModalClose.bind(this);
+    this.reviewModalClose = this.reviewModalClose.bind(this);
   }
 
   public componentDidMount(): void {
@@ -88,6 +90,14 @@ class WriteCuration extends React.Component<{}, IState> {
       }
     }
     this.setState({ reviews: currentReviewList });
+  }
+
+  public bookModalClose(): void {
+    this.setState({ bookModal: false });
+  }
+
+  public reviewModalClose(): void {
+    this.setState({ reviewModal: false });
   }
 
   public handleTitle(event: React.ChangeEvent<HTMLInputElement>): void {
@@ -141,9 +151,14 @@ class WriteCuration extends React.Component<{}, IState> {
   public render(): ReactElement {
     return (
       <div className="writecuration">
-        {this.state.bookModal ? <BookModal addBooks={this.addBooks} /> : null}
+        {this.state.bookModal ? (
+          <BookModal addBooks={this.addBooks} close={this.bookModalClose} />
+        ) : null}
         {this.state.reviewModal ? (
-          <ReviewModal addReviews={this.addReviews} />
+          <ReviewModal
+            addReviews={this.addReviews}
+            close={this.reviewModalClose}
+          />
         ) : null}
         {this.state.isPosted ? (
           <Redirect to={`/curation/${this.state.curationId}`} />
@@ -163,6 +178,7 @@ class WriteCuration extends React.Component<{}, IState> {
                 display: "inline",
                 border: "none"
               }}
+              maxLength={22}
               onChange={this.handleTitle}
             />
           </span>
@@ -186,13 +202,14 @@ class WriteCuration extends React.Component<{}, IState> {
               marginTop: "50px",
               marginLeft: "1px",
               height: "300px",
-              width: "50%",
+              width: "90%",
               fontSize: "1.1em",
               lineHeight: "1.8em",
               resize: "none",
               border: "none",
               outline: "none"
             }}
+            maxLength={440}
             onChange={this.handleContent}
           />
         </div>

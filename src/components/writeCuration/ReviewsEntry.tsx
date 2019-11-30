@@ -92,11 +92,16 @@ class ReviewsEntry extends React.Component<IProps> {
                 : review.books[0].title}
             </p>
             <p style={{ display: "inline", fontSize: "20px" }}>
-              {review.title.replace(/<[^>]*>?/gm, "")}
+              {review.title}
             </p>
           </div>
           <div className="reviewentry_contents" style={{ fontSize: "0.9em" }}>
-            <p>{review.contents.replace(/<[^>]*>?/gm, "")}</p>
+            <p>
+              {review.contents.length > 120
+                ? review.contents.replace(/<[^>]*>?/gm, "").slice(0, 120) +
+                  "..."
+                : review.contents.replace(/<[^>]*>?/gm, "")}
+            </p>
             <hr />
           </div>
         </span>

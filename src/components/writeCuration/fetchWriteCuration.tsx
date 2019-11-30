@@ -40,7 +40,10 @@ export const fetchMyReview = (callback: any, userId: string): any => {
     .then((res: Response) => res.json())
     .then((reviewsRes: IReview[]) => {
       console.log("review author response : ", reviewsRes);
-      const promises: any = reviewsRes.map((review: IReview) => {
+      const published: any = reviewsRes.filter(
+        (review: IReview) => review.published
+      );
+      const promises: any = published.map((review: IReview) => {
         return fetch(`${url}/books?review=${review._id}`);
       });
       Promise.all(promises).then((res: any) => {
@@ -54,7 +57,7 @@ export const fetchMyReview = (callback: any, userId: string): any => {
                 };
               })
           );
-          callback(reviewsRes, booksInfo);
+          callback(published, booksInfo);
         });
       });
     });
@@ -70,8 +73,10 @@ export const fetchMyLikesReview = (callback: any): any => {
   })
     .then((res: Response) => res.json())
     .then((reviewsRes: IReview[]) => {
-      console.log("review mylikes response : ", reviewsRes);
-      const promises: any = reviewsRes.map((review: IReview) => {
+      const published: any = reviewsRes.filter(
+        (review: IReview) => review.published
+      );
+      const promises: any = published.map((review: IReview) => {
         return fetch(`${url}/books?review=${review._id}`);
       });
       Promise.all(promises).then((res: any) => {
@@ -85,7 +90,7 @@ export const fetchMyLikesReview = (callback: any): any => {
                 };
               })
           );
-          callback(reviewsRes, booksInfo);
+          callback(published, booksInfo);
         });
       });
     });
@@ -102,6 +107,9 @@ export const fetchReviewsSearch = (callback: any, search: string): void => {
     .then((res: Response) => res.json())
     .then((reviewsRes: IReviewSearchWithBooksRes) => {
       console.log("review search response : ", reviewsRes);
-      callback(reviewsRes.reviews);
+      const published = reviewsRes.reviews.filter(
+        (review: any) => review.published
+      );
+      callback(published);
     });
 };

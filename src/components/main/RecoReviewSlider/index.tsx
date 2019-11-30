@@ -35,7 +35,7 @@ const Slider: React.SFC<IProps> = ({ review }: IProps): ReactElement => {
       <div
         className="slider_text uk-position-relative uk-visible-toggle"
         tabIndex={-1}
-        uk-slideshow="autoplay: true; animation: slide"
+        uk-slideshow="autoplay: true; animation: fade"
       >
         <ul
           className="uk-slideshow-items"
@@ -44,7 +44,11 @@ const Slider: React.SFC<IProps> = ({ review }: IProps): ReactElement => {
           style={{ marginBottom: "-6.9%" }}
         >
           <li>
-            <img src={main_image_one} alt="" className="slider_img" />
+            <img
+              src="https://images.unsplash.com/photo-1535954741680-a2e24eb05418?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"
+              alt=""
+              className="slider_img"
+            />
 
             <div className="slider_review">
               <p className="slider_text_author">
@@ -79,7 +83,11 @@ const Slider: React.SFC<IProps> = ({ review }: IProps): ReactElement => {
             </div>
           </li>
           <li>
-            <img src={main_image_two} alt="" className="slider_img" />
+            <img
+              src="https://images.unsplash.com/photo-1568120294838-abf43a5f4bd6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+              alt=""
+              className="slider_img"
+            />
             <div className="slider_review">
               <p className="slider_text_author">
                 서로모임의{" "}
@@ -112,7 +120,11 @@ const Slider: React.SFC<IProps> = ({ review }: IProps): ReactElement => {
             </div>
           </li>
           <li>
-            <img src={main_image_three} alt="" className="slider_img" />
+            <img
+              src="https://images.unsplash.com/photo-1539970832214-4caf6d6b39a3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+              alt=""
+              className="slider_img"
+            />
             <div className="slider_review">
               <p className="slider_text_author">
                 서로모임의{" "}

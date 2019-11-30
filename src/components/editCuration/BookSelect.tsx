@@ -162,9 +162,11 @@ class BookSelect extends React.Component<IProps, IState> {
                 <h5>{selectBookTitle}를 선택하셨습니다.</h5>
               )} */}
               <div className="content">
-                {this.state.books[0]._id === ""
-                  ? "책을 검색해주세요."
-                  : searchBookList}
+                {this.state.books.length > 0
+                  ? this.state.books[0]._id === ""
+                    ? "책을 검색해주세요."
+                    : searchBookList
+                  : "책 검색 결과가 없습니다."}
               </div>
               <div className="button-wrap">
                 <button

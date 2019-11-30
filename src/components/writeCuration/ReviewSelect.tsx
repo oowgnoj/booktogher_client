@@ -39,6 +39,7 @@ interface IState {
 
 interface IProps {
   addReviews: any;
+  close: any;
   user: IUserInfo;
 }
 
@@ -96,9 +97,11 @@ class ReviewSelect extends React.Component<IProps, IState> {
   public clickSelectedBook(e: any): void {
     const index: number = e.currentTarget.id;
     const { navSelect } = this.state;
-    let clickedReview: any = this.state.myReviews[index];
-    clickedReview.books = this.state.myReviewsBooks[index];
-    if (navSelect === "myLikesReview") {
+    let clickedReview: any;
+    if (navSelect === "myReview") {
+      clickedReview = this.state.myReviews[index];
+      clickedReview.books = this.state.myReviewsBooks[index];
+    } else if (navSelect === "myLikesReview") {
       clickedReview = this.state.myLikesReviews[index];
       clickedReview.books = this.state.myLikesReviewsBooks[index];
     } else if (navSelect === "searchReview") {
@@ -145,6 +148,7 @@ class ReviewSelect extends React.Component<IProps, IState> {
     this.setState({
       isOpen: !this.state.isOpen
     });
+    this.props.close();
   }
 
   public render(): ReactElement {
@@ -206,18 +210,34 @@ class ReviewSelect extends React.Component<IProps, IState> {
                 </button>
               </div>
               {this.state.navSelect === "myReview" ? (
-                <MyReviewSelect
-                  reviews={this.state.myReviews}
-                  books={this.state.myReviewsBooks}
-                  clicked={this.clickSelectedBook}
-                />
+                this.state.myReviews.length > 0 ? (
+                  <MyReviewSelect
+                    reviews={this.state.myReviews}
+                    books={this.state.myReviewsBooks}
+                    clicked={this.clickSelectedBook}
+                  />
+                ) : (
+                  <div
+                    style={{
+                      marginTop: "110px"
+                    }}
+                  >
+                    작성한 서평이 없습니다.
+                  </div>
+                )
               ) : null}
               {this.state.navSelect === "myLikesReview" ? (
-                <MyReviewSelect
-                  reviews={this.state.myLikesReviews}
-                  books={this.state.myLikesReviewsBooks}
-                  clicked={this.clickSelectedBook}
-                />
+                this.state.myLikesReviews.length > 0 ? (
+                  <MyReviewSelect
+                    reviews={this.state.myLikesReviews}
+                    books={this.state.myLikesReviewsBooks}
+                    clicked={this.clickSelectedBook}
+                  />
+                ) : (
+                  <div style={{ marginTop: "110px" }}>
+                    좋아요를 클릭한 서평이 없습니다.
+                  </div>
+                )
               ) : null}
               {this.state.navSelect === "searchReview" ? (
                 <div>
@@ -242,7 +262,8 @@ class ReviewSelect extends React.Component<IProps, IState> {
                         outline: "none",
                         fontSize: "20px",
                         color: "#333",
-                        padding: "10px 0px 0px 0px"
+                        padding: "10px 0px 0 0px",
+                        marginBottom: "10px"
                       }}
                       onChange={this.handleChange}
                       onKeyPress={this.handleSearch}
@@ -255,12 +276,18 @@ class ReviewSelect extends React.Component<IProps, IState> {
                   </button> */}
                   </div>
                   <div>
-                    {this.state.reviews[0]._id ? (
-                      <SearchReviewSelect
-                        reviews={this.state.reviews}
-                        clicked={this.clickSelectedBook}
-                      />
-                    ) : null}
+                    {this.state.reviews[0] ? (
+                      this.state.reviews[0]._id ? (
+                        <SearchReviewSelect
+                          reviews={this.state.reviews}
+                          clicked={this.clickSelectedBook}
+                        />
+                      ) : null
+                    ) : (
+                      <div style={{ marginLeft: "240px", marginTop: "50px" }}>
+                        서평 검색 결과가 없습니다.
+                      </div>
+                    )}
                   </div>
                 </div>
               ) : null}
