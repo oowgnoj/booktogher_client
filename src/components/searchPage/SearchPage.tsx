@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { RouteComponentProps } from "react-router";
 import { Redirect } from "react-router-dom";
-import { IBook, IReviewWithBooks } from "../shared/Types";
+import { IBook, IReviewWithBooks,IAuthor } from "../shared/Types";
 import { fetchBookSearch, fetchReviewSearch } from "./../shared/Fetch";
 import SearchBooks from "./SearchBooks";
 import SearchReviews from "./SearchReviews";
@@ -10,11 +10,22 @@ import { minHeight } from "@material-ui/system";
 
 interface IState {
   books: IBook[];
-  reviews: IReviewWithBooks[];
+  reviews: IReviewWithBook[];
   searchTitle: string;
   selectBook: string;
   title: string;
   redirect: boolean;
+}
+
+export interface IReviewWithBook {
+  _id: string;
+  author: IAuthor;
+  title: string;
+  books: IBook[];
+  contents: string;
+  thumbnail: string;
+  published: boolean;
+  likes: string[];
 }
 
 interface IMatchParams {
@@ -57,6 +68,7 @@ class SearchPage extends React.Component<
             }
           ],
           contents: "",
+          published: true,
           thumbnail: "",
           likes: [""]
         }
