@@ -122,24 +122,6 @@ class BookSelect extends React.Component<IProps, IState> {
     const selectBookId :string[] = this.state.selectBooksId.slice(1)
     const selectBookTitle :string[] = this.state.selectBooksTitle.slice(1)
 
-    const readingBook:ReactElement[] = this.state.reading.map(
-      (info: IBookReading) => {
-        return (
-          <div className="book-select" key ={info.book._id}>           
-            <img
-              src={info.book.thumbnail}
-              width="100px"
-              alt ={`${info.book._id}:${info.book.title}`}
-              onClick = {(e): void=> this.clickSelectedBook(e)}
-            />
-            <div>{info.book.title}</div>
-          </div>
-        )
-      })
-    const selectBookRender: any = selectBookTitle.map(
-      (book: string)=>{
-        return <span>{book}. </span>
-      })
     return (
       <div>
         {this.state.isOpen ? (
@@ -168,11 +150,12 @@ class BookSelect extends React.Component<IProps, IState> {
                 <h5>[{selectBookRender}]를 선택하셨습니다.</h5>
               )} */}
               <div className="content">
-                {this.state.books[0]._id ==="" ?
-                "서평을 쓸 책을 검색해주세요." 
-                : searchBookList}
-              </div>
-              
+                {this.state.books.length > 0
+                  ? this.state.books[0]._id === ""
+                    ? "서평을 쓸 책을 검색해주세요."
+                    : searchBookList
+                  : "책 검색 결과가 없습니다."}
+              </div>             
             </div>
           </div>
         ) : null}
