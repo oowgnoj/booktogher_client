@@ -36,6 +36,7 @@ const Slider: React.SFC<IProps> = ({ review }: IProps): ReactElement => {
         className="slider_text uk-position-relative uk-visible-toggle"
         tabIndex={-1}
         uk-slideshow="autoplay: true; animation: slide"
+        uk-slider="center: true"
       >
         <ul
           className="uk-slideshow-items"
@@ -43,7 +44,7 @@ const Slider: React.SFC<IProps> = ({ review }: IProps): ReactElement => {
           uk-height-match
           style={{ marginBottom: "-6.9%" }}
         >
-          <li>
+          <li className="uk-width-3-4">
             <img src={main_image_one} alt="" className="slider_img" />
 
             <div className="slider_review">

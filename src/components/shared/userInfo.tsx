@@ -58,7 +58,7 @@ const Info: React.FC = (props: any): ReactElement => {
               backgroundColor: "white"
             }}
           >
-            {console.log(props.user.User)}{" "}
+            {" "}
             <img
               src={
                 props.user.User.image === null

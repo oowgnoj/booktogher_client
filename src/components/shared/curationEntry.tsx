@@ -12,7 +12,6 @@ const CurationEntry: React.FC<IProps> = ({
   curation,
   from
 }: IProps): ReactElement => {
-  console.log(curation);
 
   const path: string = `/curation/${curation._id}`;
   return (

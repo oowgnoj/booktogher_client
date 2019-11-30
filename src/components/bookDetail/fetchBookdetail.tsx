@@ -42,6 +42,6 @@ export const fetchAddToRead = (id: string): any => {
   })
     .then((res: Response) => res.json())
     .then((res: any) => {
-      console.log(res);
+      return res;
     });
 };

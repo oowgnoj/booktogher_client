@@ -1,11 +1,11 @@
 .signup {
-  height: 100%;
+  height: 500px;
   width: 100%;
 }
 
 .signup form {
   position: absolute;
-  top: 30%;
+  top: 26%;
   left: 40%;
   text-align: center;
 }

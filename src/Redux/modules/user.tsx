@@ -74,7 +74,6 @@ function updateInfoAPI(data: any): Promise<Response> {
 // mypage update user image
 function updateUserImgAPI(data: File): Promise<Response> {
   const img = new FormData();
-  console.log(data);
   img.append("image", data, data.name);
 
   return fetch("http://booktogether.ap-northeast-2.elasticbeanstalk.com/user", {
@@ -155,12 +154,12 @@ export const requestUserInfo = (): any => (dispatch: any): Promise<void> => {
 export const updateUserInfo = (userInfo: any): any => (
   dispatch: any
 ): Promise<void> => {
-  console.log("원하는거 ", userInfo);
+
   dispatch({ type: UPDATEINFO_PENDING });
   return updateInfoAPI(userInfo)
     .then((response: Response) => response.json())
     .then((result: IUserInfo) => {
-      console.log("원하는거 2", result);
+
       dispatch({
         payload: result,
         type: UPDATEINFO_SUCCESS
@@ -179,7 +178,6 @@ export const updateUserInfo = (userInfo: any): any => (
 export const updateUserImg = (data: File): any => (
   dispatch: any
 ): Promise<void> => {
-  console.log(data, "데이터");
   dispatch({ type: UPDATEINFO_PENDING });
 
   return updateUserImgAPI(data)

@@ -114,7 +114,6 @@ class Review extends React.Component< IProps, IState> {
         bookIdStr += `books[]=${info._id}&`
         return info._id
       })
-      console.log(bookIdStr)
       fetchBookRatings(setStateRating, bookIdStr);
     } 
   }
@@ -122,7 +121,6 @@ class Review extends React.Component< IProps, IState> {
   public render(): ReactElement {
 
     const { bookList, review } = this.props
-    console.log(review.author.name)
     const bookTitle: JSX.Element[] = bookList.map((info: IBook, index: number) => {
       return (
         <div key ={info._id}>

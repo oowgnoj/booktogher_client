@@ -5,8 +5,6 @@ import { IReview, IReviews, IReviewBook, IReviewProps } from "./Types";
 const UserHistoryReview = ({ reviews, books }: IReviewProps): ReactElement => {
   const list: any = reviews.map((review: IReview, index: number) => {
     if (review.published) {
-      console.log("books ?", books);
-      console.log("books[index] ?", books[index]);
       return (
         <div className="history_reviews_review">
           <Link
