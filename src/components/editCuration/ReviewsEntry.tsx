@@ -1,18 +1,8 @@
 import React, { ReactElement } from "react";
-import { IAuthor } from "../shared/Types";
-
-interface IReview {
-  _id: string;
-  author: IAuthor;
-  contents: string;
-  likes: string[];
-  published: boolean;
-  thumbnail: string;
-  title: string;
-}
+import { IAuthor, IReviewSearchWithBooks } from "../shared/Types";
 
 interface IProps {
-  review: IReview;
+  review: IReviewSearchWithBooks;
   deleteEvent: any;
   isPlaceHolder: string;
 }
@@ -24,6 +14,7 @@ class ReviewsEntry extends React.Component<IProps> {
   }
 
   public handleDelete(): void {
+    console.log("entry 에서 아이디 찍어보기 : ", this.props.review._id);
     this.props.deleteEvent(this.props.review._id);
   }
 
@@ -32,10 +23,16 @@ class ReviewsEntry extends React.Component<IProps> {
     return (
       <div
         className={
-          "writecuration_reviews_reviewentry" + this.props.isPlaceHolder
+          "editcuration_reviews_reviewentry" + this.props.isPlaceHolder
         }
+        style={{ marginLeft: "80px" }}
       >
-        <span style={{ display: "inline-block" }}>
+        <span
+          style={{
+            display: "inline-block",
+            marginRight: "30px"
+          }}
+        >
           <img
             src={
               review.author.image
@@ -44,30 +41,68 @@ class ReviewsEntry extends React.Component<IProps> {
             }
             alt={review.title}
             onClick={this.handleDelete}
-            style={{ width: "120px", height: "auto" }}
-            className="image"
+            className="editcuration_reviewentry_cropped"
           />
-          <div className="middle">
+          <div className="middle_review">
             <span uk-icon="icon: close; ratio: 1.7" className="text"></span>
           </div>
-
           <div
             className="reviewentry_author"
             style={{
-              width: "120px",
               textAlign: "center",
-              marginBottom: "10px"
+              marginTop: "5px",
+              marginBottom: "10px",
+              fontFamily: "Nanum Myeongjo, serif",
+              fontSize: "0.8em",
+              textDecoration: "none",
+              color: "gray"
             }}
           >
             {review.author.name}
           </div>
         </span>
-        <span style={{ display: "inline-block" }}>
-          <div className="reviewentry_title" style={{ fontSize: "30px" }}>
-            <b>{review.title.replace(/<[^>]*>?/gm, "")}</b>
+        <span
+          style={{
+            display: "inline-block",
+            textDecoration: "none",
+            color: "gray",
+            position: "absolute",
+            marginLeft: "2%",
+            marginTop: "20px",
+            width: "60%"
+          }}
+        >
+          <div
+            className="reviewentry_title"
+            style={{
+              fontSize: "30px",
+              width: "100%"
+            }}
+          >
+            <p
+              style={{
+                display: "inline",
+                marginRight: "3%",
+                color: "skyblue",
+                fontSize: "20px"
+              }}
+            >
+              {review.books.length > 1
+                ? review.books[0].title + " 외"
+                : review.books[0].title}
+            </p>
+            <p style={{ display: "inline", fontSize: "20px" }}>
+              {review.title.replace(/<[^>]*>?/gm, "")}
+            </p>
           </div>
-          <div className="reviewentry_contents">
-            <b>{review.contents.replace(/<[^>]*>?/gm, "")}</b>
+          <div className="reviewentry_contents" style={{ fontSize: "0.9em" }}>
+            <p>
+              {review.contents.length > 120
+                ? review.contents.replace(/<[^>]*>?/gm, "").slice(0, 120) +
+                  "..."
+                : review.contents.replace(/<[^>]*>?/gm, "")}
+            </p>
+            <hr />
           </div>
         </span>
       </div>

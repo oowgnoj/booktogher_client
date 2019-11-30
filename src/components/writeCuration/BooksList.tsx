@@ -56,14 +56,22 @@ class BooksList extends React.Component<IProps> {
         >
           <span className="writecuration_books_btn">
             <span uk-icon="plus"></span>
-            <p style={{ fontSize: "0.9em" }}>책 추 가 하 기</p>
+            <p
+              style={{
+                fontSize: "0.9em",
+                marginRight: "0px",
+                paddingRight: "0px"
+              }}
+            >
+              책 추 가 하 기
+            </p>
           </span>
         </span>
         <span
           className="writecuration_books_booklist"
           style={{
             display: "flex",
-            paddingLeft: "50px"
+            paddingLeft: "8%"
           }}
         >
           {bookList}

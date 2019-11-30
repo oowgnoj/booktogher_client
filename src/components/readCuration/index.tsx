@@ -69,6 +69,7 @@ class ReadCuration extends React.Component<IParams, IState> {
   }
 
   public componentDidMount(): void {
+    window.scroll(0, 0);
     const getCurationInfo = (result: ICuration): void => {
       this.setState({ curation: result });
     };
@@ -81,7 +82,7 @@ class ReadCuration extends React.Component<IParams, IState> {
     ): void => {
       this.setState({ reviews, reviewsBooks: books });
     };
-    window.scroll(0, 0);
+
     console.log("this.props.match.params.id : ", this.props.match.params.id);
     fetchCuration(getCurationInfo, this.props.match.params.id);
     fetchBooks(getBookInfo, this.props.match.params.id);
@@ -89,6 +90,7 @@ class ReadCuration extends React.Component<IParams, IState> {
   }
 
   public componentDidUpdate(prevProps: any): void {
+    window.scroll(0, 0);
     if (prevProps.match.params.id !== this.props.match.params.id) {
       // do something
       const getCurationInfo = (result: ICuration): void => {
@@ -100,7 +102,7 @@ class ReadCuration extends React.Component<IParams, IState> {
       const getReviewInfo = (result: IReview[]): void => {
         this.setState({ reviews: result });
       };
-      window.scroll(0, 0);
+
       console.log("this.props.match.params.id : ", this.props.match.params.id);
       fetchCuration(getCurationInfo, this.props.match.params.id);
       fetchBooks(getBookInfo, this.props.match.params.id);
@@ -117,23 +119,25 @@ class ReadCuration extends React.Component<IParams, IState> {
   }
 
   public handleLikes(): void {
-    const newCuration: ICuration = this.state.curation;
-    const newLikesList: string[] = this.state.curation.likes.slice();
-    if (this.state.curation.likes.includes(this.props.userId)) {
-      const deleteLikes = (): void => {
-        const userIndex: number = newLikesList.indexOf(this.props.userId);
-        newLikesList.splice(userIndex, 1);
-        newCuration.likes = newLikesList;
-        this.setState({ curation: newCuration });
-      };
-      fetchDeleteLikes(deleteLikes, this.props.match.params.id);
-    } else {
-      const postLikes = (): void => {
-        newLikesList.push(this.props.userId);
-        newCuration.likes = newLikesList;
-        this.setState({ curation: newCuration });
-      };
-      fetchPostLikes(postLikes, this.props.match.params.id);
+    if (this.props.userId) {
+      const newCuration: ICuration = this.state.curation;
+      const newLikesList: string[] = this.state.curation.likes.slice();
+      if (this.state.curation.likes.includes(this.props.userId)) {
+        const deleteLikes = (): void => {
+          const userIndex: number = newLikesList.indexOf(this.props.userId);
+          newLikesList.splice(userIndex, 1);
+          newCuration.likes = newLikesList;
+          this.setState({ curation: newCuration });
+        };
+        fetchDeleteLikes(deleteLikes, this.props.match.params.id);
+      } else {
+        const postLikes = (): void => {
+          newLikesList.push(this.props.userId);
+          newCuration.likes = newLikesList;
+          this.setState({ curation: newCuration });
+        };
+        fetchPostLikes(postLikes, this.props.match.params.id);
+      }
     }
   }
 
@@ -265,7 +269,7 @@ class ReadCuration extends React.Component<IParams, IState> {
           style={{
             marginTop: "50px",
             marginLeft: "1px",
-            height: "300px",
+            height: "310px",
             width: "50%",
             fontSize: "1.1em",
             lineHeight: "1.8em"

@@ -52,7 +52,7 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
     showSearchBook("open");
   };
   if (searchBook === "open") {
-    temp = <BookSelect addBooks={addBooks} />;
+    temp = <BookSelect addBooks={addBooks} close />;
   }
 
   //독서 history

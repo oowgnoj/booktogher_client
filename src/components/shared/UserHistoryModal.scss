@@ -46,15 +46,10 @@
 //     color: #333;
 //     padding: 10px 10px 0 10px;
 //   }
-//   .content {
-//     width: 900px;
-//     margin-top: 16px;
-//     padding: 10px;
-//     font-size: 12pt;
-//     color: #999;
-//     max-height: 80vh;
-//     overflow-y: auto;
-//   }
+.content {
+  overflow-y: auto;
+  height: 900px;
+}
 //   .content .book-select {
 //     float: left;
 //     padding: px;

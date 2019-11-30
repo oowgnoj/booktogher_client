@@ -66,11 +66,11 @@ export default class UserHistoryModal extends Component<
                 <div className="history_modal_close" onClick={this.handleClose}>
                   <span uk-icon="close" style={{ float: "right" }}></span>
                 </div>
-                <div
+                {/* <div
                   className="history_modal_info"
                   style={{ textAlign: "center" }}
-                >
-                  <div className="image-cropper">
+                > */}
+                {/* <div className="image-cropper">
                     <img
                       src={
                         this.state.author.image
@@ -85,21 +85,24 @@ export default class UserHistoryModal extends Component<
                       }}
                       className="history_cropped"
                     />
-                  </div>
-                  <div
+                  </div> */}
+                {/* <div
                     className="info_name"
                     style={{ margin: "auto", marginBottom: "30px" }}
                   >
                     {this.state.author.name}
-                  </div>
-                  <div
+                  </div> */}
+                {/* <div
                     className="info_profile"
                     style={{ margin: "auto", fontStyle: "italic" }}
                   >
                     {this.state.author.profile}
-                  </div>
-                </div>
-                <div className="history_modal_history">
+                  </div> */}
+                {/* </div> */}
+                <div
+                  className="history_modal_history content"
+                  style={{ marginTop: "80px", width: "500px", height: "auto" }}
+                >
                   <div className="history_tab">
                     <ul className="tab uk-breadcrumb">
                       <li>

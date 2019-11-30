@@ -74,7 +74,7 @@ class WritePost extends React.Component<IProps, IState> {
     this.setState({
       body: {
         ...this.state.body,
-        title: e.target.value,       
+        title: e.target.value
       }
     });
   }
@@ -91,47 +91,47 @@ class WritePost extends React.Component<IProps, IState> {
 
   public clickPaintBucket(): void {
     this.setState({
-      colorPicker : !this.state.colorPicker
-    })
+      colorPicker: !this.state.colorPicker
+    });
   }
- 
+
   public handlePublished(): void {
     this.setState({
       body: {
         ...this.state.body,
         published: !this.state.body.published
       }
-    })
+    });
   }
 
-  public handleChangeRating(e: any): void{  
+  public handleChangeRating(e: any): void {
     this.setState({
       rating: this.state.rating.concat(e.target.value)
-    })
+    });
   }
 
   public clickPostSubmit(): void {
-    if(this.state.body.books.length !== 0){
-      const redirectReview = (id : string) : any =>{
-        this.setState({reviewId : id})
-        this.setState({redirect: true })
-      }
-      for(let i = 0 ; i< this.state.body.books.length; i++){
-        const postRating: any ={
-          book : this.state.body.books[i],
+    if (this.state.body.books.length !== 0) {
+      const redirectReview = (id: string): any => {
+        this.setState({ reviewId: id });
+        this.setState({ redirect: true });
+      };
+      for (let i = 0; i < this.state.body.books.length; i++) {
+        const postRating: any = {
+          book: this.state.body.books[i],
           rating: this.state.rating[i]
-        }
-        fetchBookRating(postRating)
+        };
+        fetchBookRating(postRating);
       }
-      fetchPostReview(redirectReview, this.state.body)
+      fetchPostReview(redirectReview, this.state.body);
     } else {
-      alert("책을 선택해주세요")
+      alert("책을 선택해주세요");
     }
   }
 
-  public isNumberKey(e:any): any { 
+  public isNumberKey(e: any): any {
     const value: any = e.target.value;
-    const charCode: any = (e.which) ? e.which : e.keyCode;
+    const charCode: any = e.which ? e.which : e.keyCode;
     const pattern1: any = /^\d{1}$/; // 현재 value값이 1자리 숫자이면 0 만 입력가능
     if (pattern1.test(value)) {
       if (charCode !== 48) {
@@ -140,12 +140,12 @@ class WritePost extends React.Component<IProps, IState> {
       }
     }
   }
-  public numberMaxLength(e:any): void {
-    if(e.target.value !== "10"){
-      if(e.target.value.length > 1){
+  public numberMaxLength(e: any): void {
+    if (e.target.value !== "10") {
+      if (e.target.value.length > 1) {
         e.target.value = e.target.value.slice(0, 1);
       }
-    } 
+    }
   }
 
   public handleBookSelect(): void {
@@ -153,31 +153,30 @@ class WritePost extends React.Component<IProps, IState> {
   }
 
   public addBooks = (selectedBooks: ISelectedBook[]): any => {
-    const selectedBooksId: string[] = selectedBooks.map((book:any)=>{
-      return book._id
-    })
+    const selectedBooksId: string[] = selectedBooks.map((book: any) => {
+      return book._id;
+    });
     const newBooks: string[] =
       this.state.body.books.length !== 0 && this.state.body.books[0]
         ? this.state.body.books.concat(selectedBooksId)
         : this.state.body.books.slice(1).concat(selectedBooksId);
 
-    const selectedBooksTitle: string[] = selectedBooks.map((book:any)=>{
-      return book.title
-    })
+    const selectedBooksTitle: string[] = selectedBooks.map((book: any) => {
+      return book.title;
+    });
     const newBookTitle: string[] =
       this.state.bookTitle.length !== 0 && this.state.bookTitle[0]
         ? this.state.bookTitle.concat(selectedBooksTitle)
         : this.state.bookTitle.slice(1).concat(selectedBooksTitle);
 
-    this.setState({ 
+    this.setState({
       body: {
         ...this.state.body,
         books: newBooks
-      }, 
+      },
       bookModal: false,
       bookTitle: newBookTitle
     });
-    
   };
 
   public componentDidUpdate(prevProps: any): void {
@@ -188,92 +187,93 @@ class WritePost extends React.Component<IProps, IState> {
           books: this.props.bookId
         },
         bookTitle: this.props.bookTitle
-      })
+      });
     }
   }
 
   public render(): any {
     const style: any = {
-      backgroundColor : this.state.body.thumbnail
-    }
+      backgroundColor: this.state.body.thumbnail
+    };
 
-    const ratingBooks: any = this.state.bookTitle.map((book:any) =>{
+    const ratingBooks: any = this.state.bookTitle.map((book: any) => {
       return (
         <div>
-          <div className ="rating-box">
-            {book} 
-            의 평점을 입력해주세요
-            <input 
-              type="number" 
+          <div className="rating-box">
+            {book}의 평점을 입력해주세요
+            <input
+              type="number"
               min="0"
               max="10"
               onChange={this.handleChangeRating}
-              onKeyPress={(e: any): void=>this.isNumberKey(e)}
-              onInput={(e: any): void=>this.numberMaxLength(e)}></input> /10
+              onKeyPress={(e: any): void => this.isNumberKey(e)}
+              onInput={(e: any): void => this.numberMaxLength(e)}
+            ></input>{" "}
+            /10
           </div>
         </div>
+
       )
     })
+
 
     return (
       <div className="write-area">
         {this.state.redirect ? (
           <Redirect to={`/review/${this.state.reviewId}`} />
         ) : null}
-        {this.state.bookModal ? <Modal addBooks={this.addBooks} /> : null}
+        {this.state.bookModal ? <Modal addBooks={this.addBooks} close /> : null}
 
         <div className="write-title-area" style={style}>
-        <div className="submit">
-          <button 
-              className =""
-              onClick ={this.handleBookSelect}
-            >책선택</button>
-          <button     
-            className="paint-bucket" 
-            onClick = {this.clickPaintBucket}
-          >색선택</button>
-          
-            
-          {this.state.body.published ? 
-          <button  
-            className="unlock" 
-            onClick = {this.handlePublished}
-          >공개</button>
-          : 
-          <button 
-            className="lock" 
-            onClick = {this.handlePublished}
-          >비공개</button>}
+          <div className="submit">
+            <button className="" onClick={this.handleBookSelect}>
+              책선택
+            </button>
+            <button className="paint-bucket" onClick={this.clickPaintBucket}>
+              색선택
+            </button>
 
-          <button 
-            className =""
-            onClick={this.clickPostSubmit}
-          >등록</button>             
+            {this.state.body.published ? (
+              <button className="unlock" onClick={this.handlePublished}>
+                공개
+              </button>
+            ) : (
+              <button className="lock" onClick={this.handlePublished}>
+                비공개
+              </button>
+            )}
+
+            <button className="" onClick={this.clickPostSubmit}>
+              등록
+            </button>
+          </div>
+
+          {this.state.colorPicker ? (
+            <div className="twitter-picker-area">
+              <TwitterPicker
+                color={this.state.body.thumbnail}
+                onChangeComplete={this.handleChangeComplete}
+                width="300px"
+                triangle="top-right"
+              />{" "}
+            </div>
+          ) : (
+            <div className="color-picker-area"></div>
+          )}
+
+          <input
+            type="text"
+            className="write-title"
+            placeholder="제목을 입력하세요"
+            value={this.state.body.title}
+            onChange={this.handleChangeTitle}
+          ></input>
         </div>
 
-        {this.state.colorPicker ? 
-        <div className="twitter-picker-area">
-          <TwitterPicker
-            color={this.state.body.thumbnail}
-            onChangeComplete={this.handleChangeComplete}
-            width="300px"
-            triangle="top-right"
-          /> </div>: 
-          <div className="color-picker-area"></div> } 
-
-        <input
-          type="text"
-          className="write-title"
-          placeholder="제목을 입력하세요"
-          value={this.state.body.title}
-          onChange={this.handleChangeTitle}
-        ></input>
-      </div>
-
-      <div className="write-post">
-        <div className ="rating-box">
-          {ratingBooks}
-          {/* {this.props.bookTitle} 
+        <div className="write-post">
+          <div className="rating-box">
+            {ratingBooks}
+            {/* {this.props.bookTitle} 
           평점을 입력해주세요
           <input 
             type="number" 
@@ -282,15 +282,15 @@ class WritePost extends React.Component<IProps, IState> {
             onChange={this.handleChangeRating}
             onKeyPress={(e: any): void=>this.isNumberKey(e)}
             onInput={(e: any): void=>this.numberMaxLength(e)}></input> /10 */}
+          </div>
+          <ReactQuill
+            value={this.state.body.contents}
+            onChange={this.handleChangePost}
+            placeholder="서평을 입력하세요"
+          />
         </div>
-        <ReactQuill
-          value={this.state.body.contents}
-          onChange={this.handleChangePost}
-          placeholder="서평을 입력하세요"
-        />
+        <Route path="/review/:id" component={ReadReview} />
       </div>
-      <Route path="/review/:id" component={ReadReview} />
-    </div>
     );
   }
 }

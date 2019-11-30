@@ -4,7 +4,6 @@ import { Redirect, Route } from "react-router-dom";
 import BooksList from "./BooksList";
 import ReviewsList from "./ReviewsList";
 import ReadCuration from "../readCuration/index";
-import Books from "../mypage/books";
 import BookModal from "./BookSelect";
 import ReviewModal from "./ReviewSelect";
 
@@ -65,6 +64,8 @@ class WriteCuration extends React.Component<{}, IState> {
     this.handleReviewSelect = this.handleReviewSelect.bind(this);
     this.addBooks = this.addBooks.bind(this);
     this.addReviews = this.addReviews.bind(this);
+    this.bookModalClose = this.bookModalClose.bind(this);
+    this.reviewModalClose = this.reviewModalClose.bind(this);
   }
 
   public componentDidMount(): void {
@@ -89,6 +90,14 @@ class WriteCuration extends React.Component<{}, IState> {
       }
     }
     this.setState({ reviews: currentReviewList });
+  }
+
+  public bookModalClose(): void {
+    this.setState({ bookModal: false });
+  }
+
+  public reviewModalClose(): void {
+    this.setState({ reviewModal: false });
   }
 
   public handleTitle(event: React.ChangeEvent<HTMLInputElement>): void {
@@ -142,9 +151,14 @@ class WriteCuration extends React.Component<{}, IState> {
   public render(): ReactElement {
     return (
       <div className="writecuration">
-        {this.state.bookModal ? <BookModal addBooks={this.addBooks} /> : null}
+        {this.state.bookModal ? (
+          <BookModal addBooks={this.addBooks} close={this.bookModalClose} />
+        ) : null}
         {this.state.reviewModal ? (
-          <ReviewModal addReviews={this.addReviews} />
+          <ReviewModal
+            addReviews={this.addReviews}
+            close={this.reviewModalClose}
+          />
         ) : null}
         {this.state.isPosted ? (
           <Redirect to={`/curation/${this.state.curationId}`} />
@@ -157,13 +171,14 @@ class WriteCuration extends React.Component<{}, IState> {
               placeholder="큐레이션의 제목을 입력해주세요"
               style={{
                 fontFamily: "Nanum Myeongjo, serif",
-                marginTop: "1%",
-                marginLeft: "-10%",
+                marginTop: "30px",
+                marginLeft: "1px",
                 width: "80%",
                 fontSize: "2.4em",
                 display: "inline",
                 border: "none"
               }}
+              maxLength={22}
               onChange={this.handleTitle}
             />
           </span>
@@ -185,15 +200,16 @@ class WriteCuration extends React.Component<{}, IState> {
             placeholder="큐레이션의 내용을 입력해주세요"
             style={{
               marginTop: "50px",
-              marginLeft: "-10%",
+              marginLeft: "1px",
               height: "300px",
-              width: "50%",
+              width: "90%",
               fontSize: "1.1em",
               lineHeight: "1.8em",
               resize: "none",
               border: "none",
               outline: "none"
             }}
+            maxLength={440}
             onChange={this.handleContent}
           />
         </div>

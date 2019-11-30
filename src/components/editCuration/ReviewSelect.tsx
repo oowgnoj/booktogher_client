@@ -1,11 +1,17 @@
 import React, { ReactElement, MouseEvent } from "react";
 import {
   IBooks,
-  IReviewWithBooks,
+  IReviewSearchWithBooks,
   IReview,
   IUserInfo,
+  IReviewSearchBook,
   IReviewSearch
 } from "../shared/Types";
+import {
+  reviews,
+  reviewsBooks,
+  selectedReviewsForCuration
+} from "../shared/InitialStates";
 import { connect } from "react-redux";
 import {
   fetchMyReview,
@@ -13,14 +19,18 @@ import {
   fetchReviewsSearch
 } from "../writeCuration/fetchWriteCuration";
 import MyReviewSelect from "./MyReviewSelect";
+import SearchReviewSelect from "./SearchReviewSelect";
+import "./ReviewModal.scss";
 import { flexbox } from "@material-ui/system";
 
 interface IState {
-  reviews: IReview[];
+  reviews: IReviewSearchWithBooks[];
   title: string;
   myReviews: IReview[];
+  myReviewsBooks: IReviewSearchBook[][];
   myLikesReviews: IReview[];
-  selectedReviews: IReview[];
+  myLikesReviewsBooks: IReviewSearchBook[][];
+  selectedReviews: IReviewSearchWithBooks[];
   search: string;
   isOpen: boolean;
   navSelect: string;
@@ -29,6 +39,7 @@ interface IState {
 
 interface IProps {
   addReviews: any;
+  close: any;
   user: IUserInfo;
 }
 
@@ -36,74 +47,16 @@ class ReviewSelect extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = {
-      reviews: [
-        {
-          _id: "",
-          author: {
-            _id: "",
-            image: "",
-            name: "",
-            profile: ""
-          },
-          contents: "",
-          likes: [""],
-          published: true,
-          thumbnail: "",
-          title: ""
-        }
-      ],
+      reviews: selectedReviewsForCuration,
       title: "",
-      myReviews: [
-        {
-          _id: "",
-          author: {
-            _id: "",
-            image: "",
-            name: "",
-            profile: ""
-          },
-          contents: "",
-          likes: [""],
-          published: true,
-          thumbnail: "",
-          title: ""
-        }
-      ],
-      myLikesReviews: [
-        {
-          _id: "",
-          author: {
-            _id: "",
-            image: "",
-            name: "",
-            profile: ""
-          },
-          contents: "",
-          likes: [""],
-          published: true,
-          thumbnail: "",
-          title: ""
-        }
-      ],
-      selectedReviews: [
-        {
-          _id: "",
-          author: {
-            _id: "",
-            image: "",
-            name: "",
-            profile: ""
-          },
-          contents: "",
-          likes: [""],
-          published: true,
-          thumbnail: "",
-          title: ""
-        }
-      ],
+      myReviews: reviews,
+      myReviewsBooks: reviewsBooks,
+      myLikesReviews: reviews,
+      myLikesReviewsBooks: reviewsBooks,
+      selectedReviews: selectedReviewsForCuration,
       search: "",
       isOpen: true,
-      navSelect: "myReview",
+      navSelect: "searchReview",
       userId: this.props.user._id
     };
     this.clickSelectedBook = this.clickSelectedBook.bind(this);
@@ -111,6 +64,28 @@ class ReviewSelect extends React.Component<IProps, IState> {
     this.handleNavSelect = this.handleNavSelect.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.clickClose = this.clickClose.bind(this);
+  }
+
+  public componentDidMount(): void {
+    const setStateMyLikesReview = (
+      reviewsRes: IReview[],
+      booksInfo: IReviewSearchBook[][]
+    ): void => {
+      this.setState({
+        myLikesReviews: reviewsRes,
+        myLikesReviewsBooks: booksInfo
+      });
+    };
+    fetchMyLikesReview(setStateMyLikesReview);
+
+    const setStateMyReview = (
+      reviewsRes: IReview[],
+      booksInfo: IReviewSearchBook[][]
+    ): void => {
+      this.setState({ myReviews: reviewsRes, myReviewsBooks: booksInfo });
+    };
+    fetchMyReview(setStateMyReview, this.props.user._id);
   }
 
   public handleNavSelect(e: MouseEvent): void {
@@ -119,12 +94,21 @@ class ReviewSelect extends React.Component<IProps, IState> {
     this.setState({ navSelect: tab });
   }
 
-  public clickSelectedBook(e: any, myReviews: any): void {
+  public clickSelectedBook(e: any): void {
     const index: number = e.currentTarget.id;
-    const clickedReveiw: IReview = this.state.myReviews[index];
-
+    const { navSelect } = this.state;
+    let clickedReview: any;
+    if (navSelect === "myReview") {
+      clickedReview = this.state.myReviews[index];
+      clickedReview.books = this.state.myReviewsBooks[index];
+    } else if (navSelect === "myLikesReview") {
+      clickedReview = this.state.myLikesReviews[index];
+      clickedReview.books = this.state.myLikesReviewsBooks[index];
+    } else if (navSelect === "searchReview") {
+      clickedReview = this.state.reviews[index];
+    }
     this.setState({
-      selectedReviews: [...this.state.selectedReviews, clickedReveiw]
+      selectedReviews: [...this.state.selectedReviews, clickedReview]
     });
   }
 
@@ -133,46 +117,39 @@ class ReviewSelect extends React.Component<IProps, IState> {
       "컨펌 누르는 순간 쓰기 컴포넌트로 넘어가는 배열이 궁금해",
       this.state.selectedReviews.slice(1)
     );
-    this.props.addReviews(this.state.selectedReviews.slice(1));
+    const selected = this.state.selectedReviews.slice(1);
+    this.props.addReviews(selected);
     this.setState({
       isOpen: !this.state.isOpen
     });
   }
 
-  public componentDidMount() {
-    const setStateMyLikesReview = (res: any): void => {
-      const newReviews = res.slice();
-      console.log("내가 좋아하는 서평 mylikes fetch 결과", newReviews);
-      this.setState({ myLikesReviews: newReviews });
-    };
-    fetchMyLikesReview(setStateMyLikesReview);
-
-    const setStateMyReview = (res: any): void => {
-      const newReviews = res.slice();
-      console.log("내가 쓴 서평 myreview fetch 결과", newReviews);
-      this.setState({ myReviews: newReviews });
-    };
-    fetchMyReview(setStateMyReview, this.props.user._id);
-  }
-
-  // public componentDidUpdate(prevProps: any): void {
-  //   if (this.props.user._id !== prevProps.user._id) {
-  //   }
-  // }
-
   public handleChange(event: any): void {
     this.setState({ search: event.target.value });
   }
 
-  public handleSearch(): void {
-    console.log("this.state", this.state);
-    const search = this.state.search;
-    const searchedReviews = (result: IReviewSearch): void => {
-      const newReviews = result.reviews.slice();
-      console.log("newReviews", newReviews);
-      this.setState({ reviews: newReviews });
-    };
-    fetchReviewsSearch(searchedReviews, search);
+  public handleSearch(e: any): void {
+    if (e.key === "Enter") {
+      if (this.state.search !== "") {
+        const search: string = this.state.search;
+        const searchedReviews = (
+          reviewsRes: IReviewSearchWithBooks[]
+        ): void => {
+          this.setState({ reviews: reviewsRes });
+        };
+        fetchReviewsSearch(searchedReviews, search);
+        e.preventDefault();
+      } else {
+        alert("검색어를 입력해주세요");
+      }
+    }
+  }
+
+  public clickClose(): void {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+    this.props.close();
   }
 
   public render(): ReactElement {
@@ -181,9 +158,13 @@ class ReviewSelect extends React.Component<IProps, IState> {
         {this.state.isOpen ? (
           <div className="Review-Modal-overlay">
             <div className="Review-Modal">
-              <div className="Review-button-wrap">
-                <button onClick={this.clickConfirm}> Confirm </button>
-              </div>
+              <button
+                className="close-button"
+                uk-icon="close"
+                type="button"
+                onClick={this.clickClose}
+              ></button>
+
               <div>
                 <div
                   style={{
@@ -192,32 +173,16 @@ class ReviewSelect extends React.Component<IProps, IState> {
                     margin: "0px 50px"
                   }}
                 >
-                  {/* 
-                  <nav
-                    className="uk-navbar uk-margin"
-                    uk-navbar="mode: click"
-                    style={{ backgroundColor: "white" }}
-                  >
-                    <div className="uk-navbar-left">
-                      <ul className="uk-navbar-nav">
-                        <li id="myReview" onClick={this.handleNavSelect}>
-                          <a>내가 쓴 서평</a>
-                        </li>
-                        <li id="myLikesReview" onClick={this.handleNavSelect}>
-                          <a>좋아요 한 서평</a>
-                        </li>
-                        <li id="searchReview" onClick={this.handleNavSelect}>
-                          <a>모든 서평 검색</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </nav> */}
-
                   <ul
                     className="uk-breadcrumb"
                     style={{ marginTop: "20px", marginBottom: "25px" }}
                   >
                     <li></li>
+                    <li>
+                      <span id="searchReview" onClick={this.handleNavSelect}>
+                        모든 서평 검색
+                      </span>
+                    </li>
                     <li>
                       <span id="myReview" onClick={this.handleNavSelect}>
                         내가 쓴 서평
@@ -228,65 +193,102 @@ class ReviewSelect extends React.Component<IProps, IState> {
                         좋아요 한 서평
                       </span>
                     </li>
-                    <li>
-                      <span id="searchReview" onClick={this.handleNavSelect}>
-                        모든 서평 검색
-                      </span>
-                    </li>
+
                     <li></li>
                   </ul>
-
-                  {/*  <span id="myReview" onClick={this.handleNavSelect}>
-                    내가 쓴 서평
-                  </span>
-                  |
-                  <span id="myLikesReview" onClick={this.handleNavSelect}>
-                    좋아요 한 서평
-                  </span>
-                  |
-                  <span id="searchReview" onClick={this.handleNavSelect}>
-                    모든 서평 검색
-                  </span> */}
                 </div>
               </div>
+              <div
+                className="Review-button-wrap"
+                style={{ marginLeft: "550px" }}
+              >
+                <button
+                  className="uk-button uk-button-default"
+                  onClick={this.clickConfirm}
+                >
+                  {" "}
+                  Confirm{" "}
+                </button>
+              </div>
               {this.state.navSelect === "myReview" ? (
-                <MyReviewSelect
-                  reviews={this.state.myReviews}
-                  clicked={this.clickSelectedBook}
-                />
+                this.state.myReviews.length > 0 ? (
+                  <MyReviewSelect
+                    reviews={this.state.myReviews}
+                    books={this.state.myReviewsBooks}
+                    clicked={this.clickSelectedBook}
+                  />
+                ) : (
+                  <div
+                    style={{
+                      marginTop: "110px"
+                    }}
+                  >
+                    작성한 서평이 없습니다.
+                  </div>
+                )
               ) : null}
               {this.state.navSelect === "myLikesReview" ? (
-                <MyReviewSelect
-                  reviews={this.state.myLikesReviews}
-                  clicked={this.clickSelectedBook}
-                />
+                this.state.myLikesReviews.length > 0 ? (
+                  <MyReviewSelect
+                    reviews={this.state.myLikesReviews}
+                    books={this.state.myLikesReviewsBooks}
+                    clicked={this.clickSelectedBook}
+                  />
+                ) : (
+                  <div style={{ marginTop: "110px" }}>
+                    좋아요를 클릭한 서평이 없습니다.
+                  </div>
+                )
               ) : null}
               {this.state.navSelect === "searchReview" ? (
                 <div>
-                  <input
-                    type="text"
-                    placeholder="서평을 검색하세요"
+                  <div
+                    className="searchreview_title"
                     style={{
-                      width: "80%",
-                      textAlign: "center",
-                      marginTop: "50px",
-                      marginLeft: "60px",
-                      marginBottom: "30px"
+                      width: "620px",
+                      fontSize: "16pt",
+                      fontWeight: "bold",
+                      color: "#333",
+                      padding: "10px",
+                      borderBottom: "2px solid rgb(95, 95, 95)"
                     }}
-                    onChange={this.handleChange}
-                  />
-                  <button
+                  >
+                    <input
+                      type="text"
+                      placeholder="서평을 검색하세요"
+                      style={{
+                        border: "none",
+                        textAlign: "center",
+                        width: "620px",
+                        outline: "none",
+                        fontSize: "20px",
+                        color: "#333",
+                        padding: "10px 0px 0px 0px"
+                      }}
+                      onChange={this.handleChange}
+                      onKeyPress={this.handleSearch}
+                    />
+                    {/*  <button
                     className="uk-button uk-button-text"
                     onClick={this.handleSearch}
                   >
                     검색
-                  </button>
-                  {this.state.reviews[0]._id ? (
-                    <MyReviewSelect
-                      reviews={this.state.reviews}
-                      clicked={this.clickSelectedBook}
-                    />
-                  ) : null}
+                  </button> */}
+                  </div>
+                  <div>
+                    {this.state.reviews[0] ? (
+                      this.state.reviews[0]._id ? (
+                        <SearchReviewSelect
+                          reviews={this.state.reviews}
+                          clicked={this.clickSelectedBook}
+                        />
+                      ) : null
+                    ) : (
+                      <div style={{ marginLeft: "240px", marginTop: "50px" }}>
+                        서평 검색 결과가 없습니다.
+                      </div>
+                    )}
+                  </div>
                 </div>
               ) : null}
             </div>

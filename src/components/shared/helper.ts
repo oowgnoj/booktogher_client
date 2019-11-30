@@ -18,9 +18,8 @@ export const modifyForm = (entireBook: any) => {
 };
 
 export const validatePassword = (password: string): any => {
-  const passwordRegExp: RegExp = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/;
-  // 7 to 15 characters which contain at least one numeric digit and a special character
-  return password.match(passwordRegExp);
+  // Password must contain at least one number. & >=8
+  return password.match(/\d+/g) && password.length >= 8;
 };
 
 export const validateEmail = (address: string): boolean => {

@@ -25,10 +25,10 @@ class BooksList extends React.Component<IProps> {
         style={{ backgroundColor: "#ebebeb" }}
       >
         <div
-          className="writecuration_books_booklist_wrapper"
+          className="readcuration_books_booklist_wrapper"
           style={{
             display: "flex",
-            paddingLeft: "280px",
+            paddingLeft: "17%",
             paddingTop: "30px"
           }}
         >

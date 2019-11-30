@@ -1,21 +1,6 @@
 import React, { ReactElement } from "react";
 import { Link } from "react-router-dom";
-
-interface IAuthor {
-  _id: string;
-  image: string;
-  name: string;
-  profile: string;
-}
-
-interface ICuration {
-  _id: string;
-  author: IAuthor;
-  content: string;
-  likes: string[];
-  published: boolean;
-  title: string;
-}
+import { IAuthor, ICuration } from "../shared/Types";
 
 interface IProps {
   curation: ICuration;

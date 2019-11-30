@@ -27,7 +27,7 @@ class BooksEntry extends React.Component<IProps> {
     const { book } = this.props;
     return (
       <div
-        className={"writecuration_books_bookentry" + this.props.isPlaceHolder}
+        className={"editcuration_books_bookentry" + this.props.isPlaceHolder}
       >
         <img
           src={book.thumbnail}
