@@ -90,7 +90,7 @@ export const fetchBookRating = (post: IRating): any => {
   })
     .then((res: Response) => res.json())
     .then((res: IRatingPost) => {
-      console.log(res)
+      return res
     });
 };
 
