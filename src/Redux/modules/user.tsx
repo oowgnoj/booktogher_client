@@ -68,6 +68,21 @@ function updateInfoAPI(data: any): Promise<Response> {
   });
 }
 
+// check user auth
+function checkUserAuth(user: object): Promise<Response> {
+  return fetch(
+    "http://booktogether.ap-northeast-2.elasticbeanstalk.com/auth/checkpw",
+    {
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST",
+      body: JSON.stringify(user)
+    }
+  );
+}
+
 // mypage update user image
 function updateUserImgAPI(data: File): Promise<Response> {
   const img = new FormData();
@@ -203,6 +218,37 @@ export const updateUserBookStatus = (userInfo: IUserEditInfo): any => (
     .then((result: IUserInfo) => {
       dispatch({
         payload: result,
+        type: UPDATEINFO_SUCCESS
+      });
+    })
+
+    .catch((err: Response) => {
+      console.log(err);
+      dispatch({
+        payload: err,
+        type: UPDATEINFO_FAILURE
+      });
+    });
+};
+
+export const changeUserPassword = (user: object, newPassword: string): any => (
+  dispatch: any
+): Promise<void> => {
+  dispatch({ type: UPDATEINFO_PENDING });
+  console.log(user, newPassword);
+  return checkUserAuth(user)
+    .then((response: Response) => response.json())
+    .then((message: string) => {
+      dispatch({
+        payload: message,
+        type: UPDATEINFO_PENDING
+      });
+    })
+    .then(() => updateInfoAPI({ password: newPassword }))
+    .then((response: Response) => response.json())
+    .then((message: string) => {
+      dispatch({
+        payload: message,
         type: UPDATEINFO_SUCCESS
       });
     })

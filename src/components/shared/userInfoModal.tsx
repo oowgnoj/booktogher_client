@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { updateUserInfo, updateUserImg } from "./../../Redux/modules/user";
 import { IUserEditInfo } from "./../../Redux/Types";
 import { Input } from "antd";
+import PasswordChangeModal from "./../mypage/PasswordChange";
 const { TextArea } = Input;
 
 interface IProps {
@@ -34,10 +35,6 @@ const EditUserInfo: React.FC<IProps> = ({
       setName(event.target.value);
     } else if (event.target.id === "email") {
       setEmail(event.target.value);
-    } else if (event.target.id === "password-1") {
-      setPassword(event.target.value);
-    } else if (event.target.id === "password-2") {
-      setPasswordCheck(event.target.value);
     }
   };
 
@@ -117,12 +114,12 @@ const EditUserInfo: React.FC<IProps> = ({
                     id="name"
                     type="text"
                     defaultValue={user.name}
-                    style={{ display: "inline-block", margin: "5px 0 10px 0"}}
+                    style={{ display: "inline-block", margin: "5px 0 10px 0" }}
                     onChange={changeInputValue}
                   />
                 </div>
                 <div>
-                  <span>password</span>
+                  {/* <span>password</span>
                   <div className="uk-form-controls">
                     <input
                       className="uk-input"
@@ -143,9 +140,8 @@ const EditUserInfo: React.FC<IProps> = ({
                       style={{ display: "inline-block", margin: "5px 0 10px 0" }}
                       onChange={changeInputValue}
                     />
-                  </div>
+                  </div> */}
                 </div>
-
                 <span style={{ display: "inline-block", float: "left" }}>
                   profile :{" "}
                 </span>
@@ -174,6 +170,7 @@ const EditUserInfo: React.FC<IProps> = ({
         </div>
       </div>
       <div className="uk-modal-footer uk-text-right">
+        <PasswordChangeModal user={user} />
         <button
           className="uk-button uk-button-default uk-modal-close"
           type="button"
