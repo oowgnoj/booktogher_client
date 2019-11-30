@@ -7,7 +7,6 @@ interface IProps {
   User: IUserInfo;
 }
 const BookStats: React.FC<IProps> = ({ User }: IProps): ReactElement => {
-  console.log("bookstats", User);
   const userBookGoal: number = User.numBooksGoal;
 
   return (

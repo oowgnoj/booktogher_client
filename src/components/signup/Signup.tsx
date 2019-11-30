@@ -83,7 +83,7 @@ class SignUp extends React.Component<any, IState> {
           alert("회원가입이 완료되었습니다. 로그인해주세요.");
           this.props.history.push("/signin");
         })
-        .catch((err: Error) => console.log(err));
+        .catch((err: Error) => this.props.history.push("/"));
     } else {
       this.setState({
         alert: true,

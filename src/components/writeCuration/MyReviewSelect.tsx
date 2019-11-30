@@ -19,7 +19,6 @@ class MyReviewSelect extends React.Component<IProps> {
     this.state = {};
   }
   public render(): ReactElement {
-    console.log("myreviewselect this.props.books ? ", this.props.books);
     const MyReviewList: ReactElement[] = this.props.reviews.map(
       (info: IReview, index: number) => {
         return (

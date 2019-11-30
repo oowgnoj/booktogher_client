@@ -39,7 +39,6 @@ export const fetchMyReview = (callback: any, userId: string): any => {
   })
     .then((res: Response) => res.json())
     .then((reviewsRes: IReview[]) => {
-      console.log("review author response : ", reviewsRes);
       const published: any = reviewsRes.filter(
         (review: IReview) => review.published
       );
@@ -106,7 +105,6 @@ export const fetchReviewsSearch = (callback: any, search: string): void => {
   })
     .then((res: Response) => res.json())
     .then((reviewsRes: IReviewSearchWithBooksRes) => {
-      console.log("review search response : ", reviewsRes);
       const published = reviewsRes.reviews.filter(
         (review: any) => review.published
       );

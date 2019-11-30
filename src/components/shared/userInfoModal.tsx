@@ -117,7 +117,7 @@ const EditUserInfo: React.FC<IProps> = ({
                     id="name"
                     type="text"
                     defaultValue={user.name}
-                    style={{ display: "inline-block" }}
+                    style={{ display: "inline-block", margin: "5px 0 10px 0"}}
                     onChange={changeInputValue}
                   />
                 </div>
@@ -128,7 +128,7 @@ const EditUserInfo: React.FC<IProps> = ({
                       className="uk-input"
                       id="password-1"
                       type="password"
-                      style={{ display: "inline-block" }}
+                      style={{ display: "inline-block", margin: "5px 0 10px 0" }}
                       onChange={changeInputValue}
                     />
                   </div>
@@ -140,7 +140,7 @@ const EditUserInfo: React.FC<IProps> = ({
                       className="uk-input"
                       id="password-2"
                       type="password"
-                      style={{ display: "inline-block" }}
+                      style={{ display: "inline-block", margin: "5px 0 10px 0" }}
                       onChange={changeInputValue}
                     />
                   </div>
@@ -154,10 +154,11 @@ const EditUserInfo: React.FC<IProps> = ({
                   defaultValue={user.profile}
                   style={{
                     display: "inline-block",
-                    width: "250px",
+                    width: "460px",
                     overflow: "auto",
                     resize: "none",
-                    float: "left"
+                    float: "left",
+                    margin: "5px 0 10px 10px"
                   }}
                   onChange={changeProfileValue}
                 ></TextArea>

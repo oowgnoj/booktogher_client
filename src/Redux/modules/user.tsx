@@ -50,12 +50,9 @@ function logoutAPI(): Promise<Response> {
 }
 
 function getInfoAPI(): Promise<Response> {
-  return fetch(
-    "http://booktogether.ap-northeast-2.elasticbeanstalk.com/user?resetPasswordToken",
-    {
-      credentials: "include"
-    }
-  );
+  return fetch("http://booktogether.ap-northeast-2.elasticbeanstalk.com/user", {
+    credentials: "include"
+  });
 }
 
 // mypage update user information
@@ -114,12 +111,10 @@ export const requestLogin = (mail: string, pw: string): any => (
 // update user book status
 
 export const requestLogout = (): any => (dispatch: any): Promise<void> => {
-  console.log("requestLogout 시작됨", new Date().getTime());
   dispatch({ type: LOGOUT_PENDING });
   return logoutAPI()
     .then((response: Response) => response.json())
     .then((result: JSON) => {
-      console.log("request 옴!!!", new Date().getTime());
       dispatch({
         type: LOGOUT_SUCCESS
       });
@@ -156,12 +151,10 @@ export const requestUserInfo = (): any => (dispatch: any): Promise<void> => {
 export const updateUserInfo = (userInfo: any): any => (
   dispatch: any
 ): Promise<void> => {
-
   dispatch({ type: UPDATEINFO_PENDING });
   return updateInfoAPI(userInfo)
     .then((response: Response) => response.json())
     .then((result: IUserInfo) => {
-
       dispatch({
         payload: result,
         type: UPDATEINFO_SUCCESS
