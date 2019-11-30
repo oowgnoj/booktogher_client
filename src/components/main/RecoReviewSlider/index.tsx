@@ -39,15 +39,15 @@ const Slider: React.SFC<IProps> = ({ review }: IProps): ReactElement => {
         uk-slideshow="autoplay: true; animation: fade"
       >
         <ul
-          className="uk-slideshow-items"
+          className="uk-slideshow-items main-slider-ul"
           /* uk-height-viewport="offset-top: true; offset-bottom: false" */
           uk-height-match
-          style={{ marginBottom: "-6.9%" }}
+          style={{ marginBottom: "-4%" }}
         >
 
           <li>
             <img
-              src="https://images.unsplash.com/photo-1535954741680-a2e24eb05418?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"
+              src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
               alt=""
               className="slider_img"
             />
@@ -86,7 +86,8 @@ const Slider: React.SFC<IProps> = ({ review }: IProps): ReactElement => {
           </li>
           <li>
             <img
-              src="https://images.unsplash.com/photo-1568120294838-abf43a5f4bd6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+              src="https://images.unsplash.com/photo-1537495329792-41ae41ad3bf0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
+
               alt=""
               className="slider_img"
             />
@@ -123,7 +124,7 @@ const Slider: React.SFC<IProps> = ({ review }: IProps): ReactElement => {
           </li>
           <li>
             <img
-              src="https://images.unsplash.com/photo-1539970832214-4caf6d6b39a3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+              src="https://images.unsplash.com/photo-1568990416308-c998af4cf9ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"
               alt=""
               className="slider_img"
             />

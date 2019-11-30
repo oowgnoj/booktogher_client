@@ -16,6 +16,8 @@ import Store from "../../Redux/configureStore";
 import "./index.css";
 import { connect } from "react-redux";
 import { any } from "prop-types";
+import { border } from "@material-ui/system";
+import logo from "../../Asset/images/logo.png";
 
 // const dispatch = useDispatch()
 
@@ -58,18 +60,31 @@ class Main extends React.Component {
 
     return (
       <div className="main">
+        <img
+        src={logo}
+        alt="로고"
+        style={{
+          width: "100px",
+          marginTop: "-80px",
+          marginLeft: "48%",
+          marginBottom: "20px"
+        }}
+      />
         <Slider review={filteredReview} />
 
-        <div className="section_wrappe" style={{ marginTop: "20px" }}>
+        <div className="" style={{ marginTop: "0px" }}>
           <Link to="/postreview">
             <div
               style={{
-                width: "50%",
+                width: "40%",
                 display: "inline-block",
                 textAlign: "center",
                 paddingTop: "30px",
                 paddingBottom: "5px",
-                backgroundColor: "#f2f2e1"
+                backgroundColor: "#fff",
+                marginLeft: "8%",
+                border: "1px solid #ddd",
+                color: "#696969"
               }}
             >
               {/* <div className="uk-dark uk-background-muted uk-padding"> */}
@@ -96,13 +111,16 @@ class Main extends React.Component {
           <Link to="/postcuration">
             <div
               style={{
-                width: "50%",
+                width: "40%",
                 display: "inline-block",
                 textDecoration: "none",
                 textAlign: "center",
                 paddingTop: "30px",
                 paddingBottom: "5px",
-                backgroundColor: "gray"
+                backgroundColor: "#fff",
+                marginLeft: "3%",
+                border: "1px solid #ddd",
+                color: "#696969"
               }}
             >
               {/* <div className="uk-dark uk-background-muted uk-padding"> */}
@@ -112,10 +130,10 @@ class Main extends React.Component {
                   플레이리스트를 공유하여 주세요.
                 </p> */}
               {/* <button className="uk-button uk-button-default uk-button-large "> */}
-              <p style={{ color: "white" }}>
+              <p>
                 큐레이션 등록하러 가기
-                <span uk-icon="pencil" style={{ marginLeft: "2%" }}></span>
-                <p style={{ fontSize: "13px", color: "white" }}>
+                <span uk-icon="pencil" style={{ marginLeft: "2%"}}></span>
+                <p style={{ fontSize: "13px" }}>
                   책과 서평으로 구성된 당신의 북 플레이리스트를 공유하여 주세요.
                 </p>
               </p>
@@ -126,6 +144,17 @@ class Main extends React.Component {
         </div>
 
         <div className="main_review_list_start">
+        <div
+            className="main_recocollection_title"
+            style={{
+              marginTop: "80px",
+              marginBottom: "60px",
+              fontSize: "1.3em",
+              textAlign: "center"
+            }}
+          >
+            서로모임의 추천 서평
+          </div>
           <RecoReviewList reviews={filteredReview.slice(3)} />
         </div>
 
