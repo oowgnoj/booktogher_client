@@ -54,7 +54,7 @@ const App: React.FC = (props: any): ReactElement => {
         <PrivateRoute path="/editReview/:id" component={EditPost} exact />
         <Route path="/searchForm" component={SearchForm} />
         <Route path="/findpassword" component={FindPassword} />
-        <Route path="/reset" component={ChangePassword} />
+        <Route path="/reset/:id" component={ChangePassword} />
         <Route path="*" to="/" />
       </Switch>
       <Footer />

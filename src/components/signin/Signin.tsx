@@ -44,9 +44,7 @@ class Signin extends React.Component<any, IState> {
 
     if (isEmail && password) {
       Store.dispatch(requestLogin(email, password)).then(() => {
-        console.log("지금의 props 는 뭘까", this.props);
         if (this.props.User._id) {
-          console.log("로그인 성공 / this.props : ", this.props);
           this.props.history.push("/");
         } else if (this.props.User.error) {
           this.setState({

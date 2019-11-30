@@ -38,7 +38,7 @@ class FindPassword extends React.Component<any, IState> {
       const body: IEmailBody = {
         email
       };
-      console.log("body?", body);
+
       const setMessage = (status: number): void => {
         if (status === 400) {
           this.setState({

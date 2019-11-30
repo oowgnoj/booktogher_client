@@ -90,7 +90,7 @@ class ReviewSelect extends React.Component<IProps, IState> {
 
   public handleNavSelect(e: MouseEvent): void {
     const tab = e.currentTarget.id;
-    console.log(tab);
+
     this.setState({ navSelect: tab });
   }
 
@@ -113,10 +113,6 @@ class ReviewSelect extends React.Component<IProps, IState> {
   }
 
   public clickConfirm(): void {
-    console.log(
-      "컨펌 누르는 순간 쓰기 컴포넌트로 넘어가는 배열이 궁금해",
-      this.state.selectedReviews.slice(1)
-    );
     this.props.addReviews(this.state.selectedReviews.slice(1));
     this.setState({
       isOpen: !this.state.isOpen

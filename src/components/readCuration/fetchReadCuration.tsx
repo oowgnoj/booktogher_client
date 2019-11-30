@@ -53,8 +53,6 @@ export const fetchGetBooksOfReviews = (
   });
   Promise.all(promises).then((res: any) => {
     Promise.all(res.map((el: any) => el.json())).then((books: any) => {
-      console.log("reviews ? ", reviews);
-      console.log("books ? ", books);
       callback(reviews, books);
     });
   });
@@ -89,11 +87,9 @@ export const fetchDelete = (callback: any, id: string): any => {
     method: "DELETE"
   })
     .then((response: Response) => {
-      console.log("큐레이션 삭제 성공! , response", response);
       callback();
     })
     .catch((err: Error) => {
-      console.log("큐레이션 삭제 실패! , err", err);
       callback();
     });
 };

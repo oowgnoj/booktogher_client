@@ -86,7 +86,6 @@ class BookSelect extends React.Component<IProps, IState> {
   public clickSelectedBook(e: any): void {
     const idTitle = e.target.alt.split(":");
     const img = e.target.src;
-    console.log("idtitle", idTitle);
 
     const newBook = {
       _id: idTitle[0],

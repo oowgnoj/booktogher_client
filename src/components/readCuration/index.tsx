@@ -83,7 +83,6 @@ class ReadCuration extends React.Component<IParams, IState> {
       this.setState({ reviews, reviewsBooks: books });
     };
 
-    console.log("this.props.match.params.id : ", this.props.match.params.id);
     fetchCuration(getCurationInfo, this.props.match.params.id);
     fetchBooks(getBookInfo, this.props.match.params.id);
     fetchReviews(getReviewInfo, this.props.match.params.id);
@@ -103,7 +102,6 @@ class ReadCuration extends React.Component<IParams, IState> {
         this.setState({ reviews: result });
       };
 
-      console.log("this.props.match.params.id : ", this.props.match.params.id);
       fetchCuration(getCurationInfo, this.props.match.params.id);
       fetchBooks(getBookInfo, this.props.match.params.id);
       fetchReviews(getReviewInfo, this.props.match.params.id);
