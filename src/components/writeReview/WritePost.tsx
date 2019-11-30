@@ -212,9 +212,11 @@ class WritePost extends React.Component<IProps, IState> {
             /10
           </div>
         </div>
-      );
-    });
-    console.log(this.state.rating);
+
+      )
+    })
+
+
     return (
       <div className="write-area">
         {this.state.redirect ? (

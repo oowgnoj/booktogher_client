@@ -110,7 +110,6 @@ export const fetchGetReviewLikes = (
   fetch(`${url}/reviews?list_type=my_likes`, { credentials: "include" })
     .then((res: Response) => res.json())
     .then((res: IReview[]) => {
-      console.log("from fetch", res);
       reviewCallback(res);
       const promises: any = res.map((review: IReview) => {
         return fetch(`${url}/books?review=${review._id}`);

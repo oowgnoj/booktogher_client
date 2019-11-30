@@ -27,16 +27,17 @@ const Info: React.FC = (props: any): ReactElement => {
           uk-grid
           style={{ paddingRight: "100px", paddingLeft: "100px" }}
         >
+          {console.log(props.user.User.image === null)}
           <img
             src={
-              props.user.User.image
-                ? props.user.User.image
-                : "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjRpvrUmIzmAhXQfd4KHUDHCOcQjRx6BAgBEAQ&url=http%3A%2F%2Fgetdrawings.com%2Fdefault-user-icon&psig=AOvVaw2wj9hItFTx3GEcLK-_4BHh&ust=1575005978900259"
+              props.user.User.image === null
+                ? "https://cdn2.iconfinder.com/data/icons/bussiness-management-supersolid/24/add_add_contact_create_new_person_user_add_friend-512.png"
+                : props.user.User.image
             }
             style={{
               display: "inline-block",
               width: "40%",
-              height: "350px",
+              height: "270px",
               margin: "0",
               padding: "0",
               marginTop: "0",
@@ -51,18 +52,18 @@ const Info: React.FC = (props: any): ReactElement => {
               width: "60%",
               height: "350px",
               margin: "0",
-              padding: "50px",
+              padding: "0",
               marginTop: "0",
               verticalAlign: "top",
               backgroundColor: "white"
             }}
           >
-            {console.log(props.user.User)}{" "}
+            {" "}
             <img
               src={
-                props.user.User.image
-                  ? props.user.User.image
-                  : "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjRpvrUmIzmAhXQfd4KHUDHCOcQjRx6BAgBEAQ&url=http%3A%2F%2Fgetdrawings.com%2Fdefault-user-icon&psig=AOvVaw2wj9hItFTx3GEcLK-_4BHh&ust=1575005978900259"
+                props.user.User.image === null
+                  ? "https://cdn2.iconfinder.com/data/icons/bussiness-management-supersolid/24/add_add_contact_create_new_person_user_add_friend-512.png"
+                  : props.user.User.image
               }
               style={{
                 borderRadius: "50%",

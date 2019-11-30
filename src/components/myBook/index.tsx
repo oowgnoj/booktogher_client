@@ -1,6 +1,7 @@
 import React, { useState, useEffect, ReactElement, useRef } from "react";
 import { connect } from "react-redux";
-import "./myBook.css";
+
+import "./Mybook.css";
 
 import {
   IUserInfo,
@@ -11,10 +12,11 @@ import {
 
 import NavBar from "./NavBar";
 import BookEntry from "./BookEntry";
-import Modal from "./Modal";
+import BookHistory from "./BookHistory";
 import BookSelect from "./../writeCuration/BookSelect";
 import { updateUserInfo } from "../../Redux/modules/user";
 import { modifyForm } from "./../shared/helper";
+import moment from "moment";
 
 interface IProps {
   User: IUserInfo;
@@ -26,11 +28,11 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
   const toRead: any = props.user.to_read;
   const reading: any = props.user.reading;
   const finished: any = props.user.finished;
-  const userBookGoal: number = props.user.numBooksGoal;
 
   const [userBooks, setUserBooks] = React.useState([toRead, reading, finished]);
   const [bookStatus, setStatus] = useState<string>("to_read");
   const [searchBook, showSearchBook] = useState<string>("close");
+  const [showBookHistory, setBookHistory] = useState<string>("close");
 
   const addBooks = (newBooks: any): any => {
     const newBookAdded: any = [...userBooks];
@@ -43,7 +45,7 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
   };
 
   // handle search box
-  let temp: ReactElement = <p></p>;
+  let temp: ReactElement = <span style={{ display: "inline-block" }}></span>;
   const handleSearchBox = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void => {
@@ -53,9 +55,15 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
     temp = <BookSelect addBooks={addBooks} close />;
   }
 
-  const getImgBookId = (bookInfo: any): void => {
-    console.log(bookInfo);
+  //독서 history
+  const handleshowBookHistory = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ): void => {
+    setBookHistory("open");
+    setStatus("open");
+  };
 
+  const getImgBookId = (bookInfo: any): void => {
     const deletedBook = userBooks.map(array => {
       return array.filter((obj: any) => {
         return obj.book._id.toString() !== bookInfo._id;
@@ -74,24 +82,30 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
 
   const changeBookStatus = (bookId: string, target: string): void => {
     let tempObj: string = "";
+    let tempStart: string = "";
     const newUserBooks = userBooks.map(array => {
       return array.filter((obj: any) => {
         if (obj.book._id.toString() === bookId.toString()) {
           tempObj = obj.book;
+          tempStart = obj.start;
         }
         return obj.book._id.toString() !== bookId.toString();
       });
     });
     let index: number = 100;
+    let today = moment().format("MM/DD/YYYY");
 
     if (target === "to_read") {
       index = 0;
+      newUserBooks[index].push({ book: tempObj });
     } else if (target === "reading") {
       index = 1;
+      newUserBooks[index].push({ book: tempObj, start: today });
     } else if (target === "finished") {
       index = 2;
+      newUserBooks[index].push({ book: tempObj, start: tempStart, end: today });
     }
-    newUserBooks[index].push({ book: tempObj });
+
     setUserBooks([...newUserBooks]);
     props.updateUserInfo(modifyForm(newUserBooks));
   };
@@ -118,97 +132,82 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
     e: React.MouseEvent<HTMLLIElement, MouseEvent>
   ): void => {
     setStatus(e.currentTarget.id);
+    setBookHistory("close");
   };
 
   // rendering :  need refactoring
-  if (bookStatus === "to_read") {
-    return (
-      <div className="wrapper">
-        <h2 style={{ fontFamily: "Nanum Myeongjo, serif", fontWeight: "bold" }}>
-          나의 서재 <Modal />
-          <progress
-            id="js-progressbar"
-            className="uk-progress"
-            value={finished.length}
-            max={userBookGoal}
-            style={{
-              width: "50%",
-              display: "inline-block",
-              verticalAlign: "middle",
-              marginLeft: "auto",
-              marginRight: "0",
-              float: "right"
-            }}
-          ></progress>
-        </h2>
+  let whichBookRender: ReactElement;
 
-        <hr style={{ marginTop: "5px" }} />
-        {temp}
-        <NavBar handleActive={handleActive} />
-        {userBooks[0].map((el: IBookToRead) => {
-          return (
-            <BookEntry
-              toRead={el}
-              getCurrentBookID={getCurrentBookID}
-              getImgBookId={getImgBookId}
-            />
-          );
-        })}
-        <button
-          id="toRead"
-          style={{
-            width: "120px",
-            height: "174px",
-            marginTop: "10px",
-            backgroundColor: "white",
-            border: "dashed",
-            borderColor: "grey"
-          }}
-          onClick={handleSearchBox}
-        >
+  if (bookStatus === "to_read") {
+    whichBookRender = userBooks[0].map((el: IBookToRead) => {
+      return (
+        <BookEntry
+          toRead={el}
+          getCurrentBookID={getCurrentBookID}
+          getImgBookId={getImgBookId}
+        />
+      );
+    });
+  } else if (bookStatus === "reading") {
+    whichBookRender = userBooks[1].map((el: IBookReading) => {
+      return (
+        <BookEntry
+          reading={el}
+          getCurrentBookID={getCurrentBookID}
+          getImgBookId={getImgBookId}
+        />
+      );
+    });
+  } else if (bookStatus === "finished") {
+    whichBookRender = userBooks[2].map((el: IBookFinished) => {
+      return (
+        <BookEntry
+          finished={el}
+          getCurrentBookID={getCurrentBookID}
+          getImgBookId={getImgBookId}
+        />
+      );
+    });
+  } else {
+    whichBookRender = <div></div>;
+  }
+
+  let tempBookHistory: ReactElement = <div></div>;
+  if (showBookHistory === "open") {
+    tempBookHistory = <BookHistory User={props.user} />;
+  }
+  let tempBookAddButton: ReactElement = <div></div>;
+  if (bookStatus === "to_read") {
+    tempBookAddButton = (
+      <div style={{ paddingTop: "10px", display: "inline-block" }}>
+        <button id="toRead" onClick={handleSearchBox} className="addBookbutton">
           책 추가
         </button>
       </div>
     );
-  } else if (bookStatus === "reading") {
-    return (
-      <div className="wrapper">
-        <h2 style={{ fontFamily: "Nanum Myeongjo, serif", fontWeight: "bold" }}>
-          나의 서재{" "}
-        </h2>
-        <hr style={{ marginTop: "5px" }} />
-        <NavBar handleActive={handleActive} />
-        {userBooks[1].map((el: IBookReading) => {
-          return (
-            <BookEntry
-              reading={el}
-              getCurrentBookID={getCurrentBookID}
-              getImgBookId={getImgBookId}
-            />
-          );
-        })}
-      </div>
-    );
-  } else {
-    return (
-      <div className="wrapper">
-        <h2 style={{ fontFamily: "Nanum Myeongjo, serif", fontWeight: "bold" }}>
-          나의 서재{" "}
-        </h2>
-        <hr style={{ marginTop: "5px" }} />
-        <NavBar handleActive={handleActive} />
-        {userBooks[2].map((el: IBookFinished) => {
-          return (
-            <BookEntry
-              finished={el}
-              getCurrentBookID={getCurrentBookID}
-              getImgBookId={getImgBookId}
-            />
-          );
-        })}
-      </div>
-    );
   }
+  return (
+    <div className="wrapper">
+      {console.log(moment().format("MM/DD/YYYY"))}
+      <h2 style={{ fontFamily: "Nanum Myeongjo, serif", fontWeight: "bold" }}>
+        나의 서재
+        <button
+          className="uk-button uk-button-default"
+          style={{ float: "right" }}
+          onClick={handleshowBookHistory}
+        >
+          나의 독서 history
+        </button>
+      </h2>
+      <hr style={{ marginTop: "5px", marginBottom: "0" }} />
+      {temp}
+      <NavBar handleActive={handleActive} />
+
+      {whichBookRender}
+      {tempBookHistory}
+      {tempBookAddButton}
+    </div>
+  );
 };
 
 function mapStateToProps(state: any): any {

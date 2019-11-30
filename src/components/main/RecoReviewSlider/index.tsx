@@ -35,6 +35,7 @@ const Slider: React.SFC<IProps> = ({ review }: IProps): ReactElement => {
       <div
         className="slider_text uk-position-relative uk-visible-toggle"
         tabIndex={-1}
+
         uk-slideshow="autoplay: true; animation: fade"
       >
         <ul
@@ -43,6 +44,7 @@ const Slider: React.SFC<IProps> = ({ review }: IProps): ReactElement => {
           uk-height-match
           style={{ marginBottom: "-6.9%" }}
         >
+
           <li>
             <img
               src="https://images.unsplash.com/photo-1535954741680-a2e24eb05418?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"

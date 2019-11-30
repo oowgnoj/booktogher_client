@@ -1,7 +1,16 @@
-progress::-webkit-progress-bar {
-  background-color: red;
+.addBookbutton {
+  width: 120px;
+  height: 174px;
+  margintop: 10px;
+  backgroundcolor: white;
+  border: dashed;
+  bordercolor: grey;
+}
+
+progress::-webkit-progress {
   width: 100%;
 }
 progress::-webkit-progress-value {
   background-color: rgb(160, 177, 116) !important;
+  width: 100%;
 }

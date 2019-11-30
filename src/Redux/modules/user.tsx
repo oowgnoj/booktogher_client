@@ -1,5 +1,6 @@
 import { handleActions } from "redux-actions";
 import IState, { IUserInfo, initialState, IUserEditInfo } from "../Types";
+import { userInfo } from "os";
 
 const LOGIN_PENDING: string = "login/PENDING_LOGIN";
 const LOGIN_SUCCESS: string = "login/SUCCESS_LOGIN";
@@ -49,13 +50,17 @@ function logoutAPI(): Promise<Response> {
 }
 
 function getInfoAPI(): Promise<Response> {
-  return fetch("http://booktogether.ap-northeast-2.elasticbeanstalk.com/user", {
-    credentials: "include"
-  });
+  return fetch(
+    "http://booktogether.ap-northeast-2.elasticbeanstalk.com/user?resetPasswordToken",
+    {
+      credentials: "include"
+    }
+  );
 }
 
 // mypage update user information
 function updateInfoAPI(data: any): Promise<Response> {
+  console.log("redux data", data);
   return fetch("http://booktogether.ap-northeast-2.elasticbeanstalk.com/user", {
     credentials: "include",
     headers: {
@@ -69,7 +74,6 @@ function updateInfoAPI(data: any): Promise<Response> {
 // mypage update user image
 function updateUserImgAPI(data: File): Promise<Response> {
   const img = new FormData();
-  console.log(data);
   img.append("image", data, data.name);
 
   return fetch("http://booktogether.ap-northeast-2.elasticbeanstalk.com/user", {
@@ -152,19 +156,18 @@ export const requestUserInfo = (): any => (dispatch: any): Promise<void> => {
 export const updateUserInfo = (userInfo: any): any => (
   dispatch: any
 ): Promise<void> => {
-  console.log("리덕스 유저인포", userInfo);
+
   dispatch({ type: UPDATEINFO_PENDING });
   return updateInfoAPI(userInfo)
     .then((response: Response) => response.json())
     .then((result: IUserInfo) => {
-      console.log(result);
+
       dispatch({
         payload: result,
         type: UPDATEINFO_SUCCESS
       });
     })
     .catch((err: Response) => {
-      console.log(err);
       dispatch({
         payload: err,
         type: UPDATEINFO_FAILURE
@@ -177,7 +180,6 @@ export const updateUserInfo = (userInfo: any): any => (
 export const updateUserImg = (data: File): any => (
   dispatch: any
 ): Promise<void> => {
-  console.log(data, "데이터");
   dispatch({ type: UPDATEINFO_PENDING });
 
   return updateUserImgAPI(data)

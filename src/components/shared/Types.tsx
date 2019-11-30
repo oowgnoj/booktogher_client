@@ -56,6 +56,11 @@ interface ISimple_finished {
   end: string;
 }
 
+export interface NumbookRead {
+  name: string;
+  numOf: number;
+}
+
 // book
 // 서평쓰기 (책선택), 서평읽기 (책소개)
 interface ISearchBook {

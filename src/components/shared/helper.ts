@@ -3,10 +3,11 @@ export const modifyForm = (entireBook: any) => {
     return { book: el.book._id };
   });
   const readingSimple: any = entireBook[1].map((el: any) => {
-    return { book: el.book._id, start: el.book.start, goal: el.book.goal };
+    console.log(el.book.start);
+    return { book: el.book._id, start: el.start, goal: el.goal };
   });
   const finishedSimple: any = entireBook[2].map((el: any) => {
-    return { book: el.book._id, start: el.book.start, end: el.book.end };
+    return { book: el.book._id, start: el.start, end: el.end };
   });
   const data = {
     to_read: toReadSimple,

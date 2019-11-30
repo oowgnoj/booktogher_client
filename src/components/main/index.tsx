@@ -10,6 +10,7 @@ import {
   updateReviewsRecommend,
   updateCurationsRecommend
 } from "../../Redux/modules/recommend";
+import { updateUserInfo } from "../../Redux/modules/user";
 import Store from "../../Redux/configureStore";
 
 import "./index.css";
