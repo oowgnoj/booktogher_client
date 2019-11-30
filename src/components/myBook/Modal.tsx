@@ -56,7 +56,12 @@ const SimpleModal: React.FC = (props: any): ReactElement => {
     <div style={{ display: "inline-block" }}>
       <button
         className="uk-button uk-button-default"
-        style={{ border: "none", marginRight: "0px", color: "rgb(75,88,50)" }}
+        style={{
+          border: "none",
+          paddingLeft: "15px",
+          color: "rgb(75,88,50)",
+          display: "inline-block"
+        }}
         onClick={handleOpen}
       >
         목표 설정

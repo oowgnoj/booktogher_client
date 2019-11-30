@@ -3,8 +3,8 @@ import { IUserInfo } from "./../shared/Types";
 import { connect } from "react-redux";
 import { updateUserInfo, updateUserImg } from "./../../Redux/modules/user";
 import { IUserEditInfo } from "./../../Redux/Types";
-import { UserInfo } from "os";
-import { borderTop } from "@material-ui/system";
+import { Input } from "antd";
+const { TextArea } = Input;
 
 interface IProps {
   handleClose: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -22,6 +22,8 @@ const EditUserInfo: React.FC<IProps> = ({
   const [userImg, setUserImg] = useState<any>("");
   const [nameState, setName] = useState<string>(user.name);
   const [emailState, setEmail] = useState<string>(user.email);
+  const [passwordState, setPassword] = useState<string>("");
+  const [passwordCheckState, setPasswordCheck] = useState<string>("");
   const [profileState, setProfile] = useState<string>(user.profile);
 
   // handle change email and username (input box)
@@ -32,6 +34,10 @@ const EditUserInfo: React.FC<IProps> = ({
       setName(event.target.value);
     } else if (event.target.id === "email") {
       setEmail(event.target.value);
+    } else if (event.target.id === "password-1") {
+      setPassword(event.target.value);
+    } else if (event.target.id === "password-2") {
+      setPasswordCheck(event.target.value);
     }
   };
 
@@ -54,15 +60,20 @@ const EditUserInfo: React.FC<IProps> = ({
     let updated: any = {
       name: nameState,
       email: emailState,
-      profile: profileState
+      profile: profileState,
+      password: passwordState
     };
-    if (!userImg) {
-      updateUserInfo(updated);
+    if (passwordState === passwordCheckState) {
+      if (!userImg) {
+        updateUserInfo(updated);
+      } else {
+        updateUserImg(userImg);
+        updateUserInfo(updated);
+      }
+      handleClose(e);
     } else {
-      updateUserImg(userImg);
-      updateUserInfo(updated);
+      alert("password가 일치하지 않습니다.");
     }
-    handleClose(e);
   };
 
   return (
@@ -70,7 +81,7 @@ const EditUserInfo: React.FC<IProps> = ({
       <div
         className="uk-modal-body"
         uk-overflow-auto
-        style={{ paddingLeft: "100px", paddingRight: "0" }}
+        style={{ paddingLeft: "200px", paddingRight: "200px" }}
       >
         <div
           style={{
@@ -79,12 +90,15 @@ const EditUserInfo: React.FC<IProps> = ({
             float: "left"
           }}
         >
+          {console.log("password1", passwordState)}
+          {console.log("password-2", passwordCheckState)}
           <img
             src={
-              user.image
-                ? user.image
-                : "https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjRpvrUmIzmAhXQfd4KHUDHCOcQjRx6BAgBEAQ&url=http%3A%2F%2Fgetdrawings.com%2Fdefault-user-icon&psig=AOvVaw2wj9hItFTx3GEcLK-_4BHh&ust=1575005978900259"
+              user.image === null
+                ? "https://cdn2.iconfinder.com/data/icons/bussiness-management-supersolid/24/add_add_contact_create_new_person_user_add_friend-512.png"
+                : user.image
             }
+            style={{ width: "350px", height: "350px" }}
           />
         </div>
         <div>
@@ -95,45 +109,60 @@ const EditUserInfo: React.FC<IProps> = ({
                 style={{
                   backgroundColor: "white",
                   borderTop: "none",
-                  float: "right",
-                  paddingTop: "50px",
-                  paddingLeft: "10px"
+                  paddingLeft: "0"
                 }}
               >
-                <div style={{ float: "left", display: "block" }}>
-                  <span style={{ display: "inline-block" }}>name : </span>
+                <div>
+                  <span>name</span>
                   <input
                     className="uk-input"
-                    style={{
-                      display: "inline-block",
-                      width: "150px",
-                      border: "none"
-                    }}
+                    id="name"
                     type="text"
                     defaultValue={user.name}
+                    style={{ display: "inline-block" }}
                     onChange={changeInputValue}
-                    id="name"
                   />
                 </div>
-                <br />
+                <div>
+                  <span>password</span>
+                  <div className="uk-form-controls">
+                    <input
+                      className="uk-input"
+                      id="password-1"
+                      type="password"
+                      style={{ display: "inline-block" }}
+                      onChange={changeInputValue}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <span>check</span>
+                  <div className="uk-form-controls">
+                    <input
+                      className="uk-input"
+                      id="password-2"
+                      type="password"
+                      style={{ display: "inline-block" }}
+                      onChange={changeInputValue}
+                    />
+                  </div>
+                </div>
 
-                <br />
                 <span style={{ display: "inline-block", float: "left" }}>
                   profile :{" "}
                 </span>
-                <textarea
+                <TextArea
                   className="uk-textarea"
                   defaultValue={user.profile}
                   style={{
                     display: "inline-block",
                     width: "250px",
-                    borderColor: "transparent",
                     overflow: "auto",
                     resize: "none",
                     float: "left"
                   }}
                   onChange={changeProfileValue}
-                ></textarea>
+                ></TextArea>
                 <br />
                 <input
                   className="fileInput"

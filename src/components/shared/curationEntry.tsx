@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { ICuration } from "./../shared/Types";
 import "./curationEntry.css";
 import { Link } from "react-router-dom";
-import { Skeleton } from "@material-ui/lab";
+import Skeleton from "./../shared/ListSkeleton";
 interface IProps {
   curation: ICuration;
   from: string;
@@ -19,20 +19,14 @@ const CurationEntry: React.FC<IProps> = ({
       <dl className="uk-description-list">
         <dt style={{ fontSize: "25px" }}>
           {" "}
-          {curation.title ? (
-            curation.title
-          ) : (
-            <Skeleton variant="text" width={"35%"} height={40} />
-          )}{" "}
+          {curation.title ? curation.title : <Skeleton />}{" "}
           <span style={{ color: "#696969", fontSize: "15px" }}>
             {from === "likes" ? curation.author.name : ""}
           </span>
         </dt>{" "}
         {/* <dd style={{ color: "grey" }}>{curation.author.name}</dd> */}
         <dd style={{ color: "#808080	", fontSize: "20px" }}>
-          {curation.contents
-            ? curation.contents
-            : [<Skeleton variant="text" width={"60%"} height={25} />]}
+          {curation.contents ? curation.contents : <Skeleton />}
         </dd>
       </dl>
     </Link>
