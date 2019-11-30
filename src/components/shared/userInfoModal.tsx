@@ -90,8 +90,6 @@ const EditUserInfo: React.FC<IProps> = ({
             float: "left"
           }}
         >
-          {console.log("password1", passwordState)}
-          {console.log("password-2", passwordCheckState)}
           <img
             src={
               user.image === null

@@ -59,29 +59,29 @@ const Info: React.FC = (props: any): ReactElement => {
             }}
           >
             {" "}
-            <img
-              src={
-                props.user.User.image === null
-                  ? "https://cdn2.iconfinder.com/data/icons/bussiness-management-supersolid/24/add_add_contact_create_new_person_user_add_friend-512.png"
-                  : props.user.User.image
-              }
-              style={{
-                borderRadius: "50%",
-                width: "75px",
-                height: "75px",
-                marginRight: "10px",
-                display: "inline-block"
-              }}
-            />
-            <p
+            <div
               style={{
                 display: "inline-block",
-                margin: 0,
-                verticalAlign: "top",
-                marginTop: "10px"
+                width: "100%",
+                verticalAlign: "middle",
+                alignItems: "middle"
               }}
             >
-              <span>{props.user.User.name} </span> <br />
+              <img
+                src={
+                  props.user.User.image === null
+                    ? "https://cdn2.iconfinder.com/data/icons/bussiness-management-supersolid/24/add_add_contact_create_new_person_user_add_friend-512.png"
+                    : props.user.User.image
+                }
+                style={{
+                  borderRadius: "50%",
+                  width: "75px",
+                  height: "75px",
+                  marginRight: "10px",
+                  display: "inline-block"
+                }}
+              />
+              <span>{props.user.User.name} </span>
               <button
                 className="uk-button uk-button-default"
                 onClick={handleActive}
@@ -91,12 +91,14 @@ const Info: React.FC = (props: any): ReactElement => {
                   padding: 0,
                   fontSize: "13px",
                   color: "blue",
-                  borderColor: "blue"
+                  borderColor: "blue",
+                  display: "inline-block",
+                  verticalAlign: "center"
                 }}
               >
                 change info
               </button>
-            </p>
+            </div>
             {props.user.User.profile === "" ? (
               <p>유저 프로필을 입력해주세요. </p>
             ) : (

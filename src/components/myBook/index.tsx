@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ReactElement, useRef } from "react";
 import { connect } from "react-redux";
 
-import "./Mybook.css";
+import "./MyBook.css";
 
 import {
   IUserInfo,
@@ -202,10 +202,9 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
       <hr style={{ marginTop: "5px", marginBottom: "0" }} />
       {temp}
       <NavBar handleActive={handleActive} />
-
+      {tempBookAddButton}
       {whichBookRender}
       {tempBookHistory}
-      {tempBookAddButton}
     </div>
   );
 };
