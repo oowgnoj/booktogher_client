@@ -125,7 +125,7 @@ class Signin extends React.Component<any, IState> {
               SIGN IN
             </button>
           </p>
-          <Link to="/password">
+          <Link to="/findpassword">
             <p>계정을 잊어버리셨나요? </p>
           </Link>
           <span>{required}</span>

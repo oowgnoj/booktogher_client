@@ -1,6 +1,8 @@
 import React, { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import "./FindPassword.css";
+import { fetchFindPassword } from "./fetchPassword";
+import { IEmailBody } from "../shared/Types";
 
 interface IState {
   alert: boolean;
@@ -33,13 +35,33 @@ class FindPassword extends React.Component<any, IState> {
     isEmail = checkEmail(email);
 
     if (isEmail) {
-      //
+      const body: IEmailBody = {
+        email
+      };
+      console.log("body?", body);
+      const setMessage = (status: number): void => {
+        if (status === 400) {
+          this.setState({
+            alert: true,
+            status: "모든 필수 입력 필드에 정보를 채우세요."
+          });
+        } else if (status === 404) {
+          this.setState({
+            alert: true,
+            status: "입력하신 이메일로 가입되어 있는 계정이 없습니다."
+          });
+        } else if (status === 200) {
+          alert("비밀번호 재설정 메일이 전송되었습니다.");
+          this.props.history.push("/");
+        }
+      };
+      fetchFindPassword(setMessage, body);
     } else if (!isEmail) {
       this.setState({
         alert: true,
         status: "잘못된 형식의 이메일 주소입니다."
       });
-    } 
+    }
   }
 
   public emailChange(event: React.ChangeEvent<HTMLInputElement>): void {
@@ -72,7 +94,7 @@ class FindPassword extends React.Component<any, IState> {
                 onChange={this.emailChange}
               />
             </div>
-          </div>         
+          </div>
           <p uk-margin="true">
             <button
               className="uk-button uk-button-small"
@@ -88,6 +110,5 @@ class FindPassword extends React.Component<any, IState> {
     );
   }
 }
-
 
 export default FindPassword;

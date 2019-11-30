@@ -329,3 +329,18 @@ export interface IEditCurationState {
   isPatched: boolean;
   curationId: string;
 }
+
+/* ------- find & change password ------- */
+
+export interface IEmailBody {
+  email: string;
+}
+
+export interface IPasswordBody {
+  password: string;
+}
+
+export interface ITokenUser extends IUserInfo {
+  resetPasswordToken: string;
+  resetPasswordExpires: number;
+}
