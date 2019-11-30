@@ -17,6 +17,27 @@ interface INewBook {
   book: string;
 }
 
+<<<<<<< HEAD
+=======
+const BookInfo = ({
+  bookInfo,
+  rating,
+  user,
+  updateUserInfo
+}: IProps): ReactElement => {
+  console.log(bookInfo);
+  const bookAvgRating: ReactElement[] = rating.map((info: IRating) => {
+    return <span> {info.avg_rating} </span>;
+  });
+  const bookUserRating: ReactElement[] = rating.map((info: IRating) => {
+    if (info.user_rating !== null) {
+      return <span> {info.user_rating.rating} </span>;
+    } else {
+      return <span>0</span>;
+    }
+  });
+  const toRead: any = user.to_read;
+>>>>>>> 1f3a62d9862bb43f4e3b84c4cbd392ccff454427
 
 const BookInfo = ({ bookInfo, rating, user, updateUserInfo } :IProps): ReactElement => {
   console.log(bookInfo)
@@ -92,7 +113,7 @@ const BookInfo = ({ bookInfo, rating, user, updateUserInfo } :IProps): ReactElem
           </div>         
         </div>
       </div>
-
+    </div>
   );
 };
 
