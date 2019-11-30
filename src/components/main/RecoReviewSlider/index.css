@@ -2,23 +2,21 @@
 
 .main_slider {
   width: 100%;
-  background-color: #ffffff;
   display: inline-block;
+  background-color: #fff;
+  height: 580px;
   /* box-shadow: 14px 13px 7px -7px rgba(116, 113, 113, 0.47); */
-  margin-bottom: 30px;
 }
 
 .slider_img {
   width: 40%;
   float: left;
-  max-height: "550px";
 }
 
 .slider_text {
   width: 100%;
-  height: auto;
+  max-height: 400px;
   display: inline-block;
-  max-height: "550px";
 }
 
 .slider_review {
@@ -42,7 +40,7 @@
 .slider_text_title {
   font-family: "Nanum Myeongjo", serif;
   font-weight: bold;
-  margin-top: 10%;
+  margin-top: 5%;
   text-align: left;
   font-size: 1.5em;
   color: #212121;
@@ -52,10 +50,19 @@
 
 .slider_text_contents {
   font-family: "Nanum Myeongjo", serif;
-  margin-top: 10%;
+  margin-top: 4%;
   text-align: left;
   font-size: 1em;
   color: #666666;
   width: 80%;
   margin-left: 20%;
+}
+
+.main-slider-ul {
+  height: 580px;
+}
+
+.main-slider-ul li img {
+  height: 580px;
+
 }

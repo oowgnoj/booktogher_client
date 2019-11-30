@@ -1,8 +1,8 @@
 .main {
-  padding-top: 3%;
-  padding-left: 15%;
-  padding-right: 15%;
-  background: linear-gradient(180deg, #ffffff 73%, #ffffff 27%);
+  padding-top: 6%;
+  padding-left: 14%;
+  padding-right: 14%;
+  background: linear-gradient(180deg, rgb(248, 248, 248) 73%, #fff 27%);
 }
 /* 
 .parallax {
@@ -46,6 +46,7 @@
 
 .main_review_list_start {
   margin-top: 40px;
+  text-align: center;
 }
 /* 
 .main_review_list {
