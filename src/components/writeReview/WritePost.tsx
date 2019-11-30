@@ -64,6 +64,7 @@ class WritePost extends React.Component<IProps, IState> {
     this.handleChangeRating = this.handleChangeRating.bind(this);
     this.handleBookSelect = this.handleBookSelect.bind(this);
     this.addBooks = this.addBooks.bind(this);
+    this.bookModalClose = this.bookModalClose.bind(this);
   }
 
   public handleChangePost(value: string): void {
@@ -191,6 +192,10 @@ class WritePost extends React.Component<IProps, IState> {
     }
   }
 
+  public bookModalClose(): void {
+    this.setState({ bookModal: false });
+  }
+
   public render(): any {
     const style: any = {
       backgroundColor: this.state.body.thumbnail
@@ -222,7 +227,7 @@ class WritePost extends React.Component<IProps, IState> {
         {this.state.redirect ? (
           <Redirect to={`/review/${this.state.reviewId}`} />
         ) : null}
-        {this.state.bookModal ? <Modal addBooks={this.addBooks} close /> : null}
+        {this.state.bookModal ? <Modal addBooks={this.addBooks} close={this.bookModalClose} /> : null}
 
         <div className="write-title-area" style={style}>
           <div className="submit">
