@@ -1,4 +1,3 @@
-
 import {
   IAuthor,
   IBookSelectedCuration,
@@ -6,9 +5,9 @@ import {
   IReview,
   IReviewBook,
   IReviewSearchWithBooks,
-    IUserInfo
+  NumbookRead,
+  IUserInfo
 } from "./Types";
-
 
 export const author: IAuthor = {
   _id: "",
@@ -48,7 +47,6 @@ export const reviewsBooks: IReviewBook[][] = [
     }
   ]
 ];
-
 
 export const selectedBooksForCuration: IBookSelectedCuration[] = [
   {
@@ -121,3 +119,53 @@ export const user: IUserInfo = {
   numReviewsGoal: 0
 };
 
+export const montlyNumFinishedBook: NumbookRead[] = [
+  {
+    name: "Jan",
+    numOf: 0
+  },
+  {
+    name: "Feb",
+    numOf: 0
+  },
+  {
+    name: "Mar",
+    numOf: 0
+  },
+  {
+    name: "Apr",
+    numOf: 0
+  },
+  {
+    name: "May",
+    numOf: 0
+  },
+  {
+    name: "Jun",
+    numOf: 0
+  },
+  {
+    name: "Jul",
+    numOf: 0
+  },
+  {
+    name: "Aug",
+    numOf: 0
+  },
+  {
+    name: "Sep",
+    numOf: 0
+  },
+  {
+    name: "Oct",
+    numOf: 0
+  },
+  {
+    name: "Nov",
+    numOf: 0
+  },
+  {
+    name: "Dec",
+    numOf: 0
+  }
+];
