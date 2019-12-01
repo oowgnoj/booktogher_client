@@ -12,7 +12,7 @@ import {
 } from "../shared/Types";
 import { reviews } from "../shared/InitialStates";
 
-const url: string = "http://booktogether.ap-northeast-2.elasticbeanstalk.com";
+const url: string = "https://server.booktogether.org";
 
 export const fetchPostCuration = (callback: any, body: ICurationsPost): any => {
   return fetch(`${url}/curations`, {

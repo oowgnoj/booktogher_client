@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./FindPassword.css";
 import { fetchFindPassword } from "./fetchPassword";
 import { IEmailBody } from "../shared/Types";
+import { validateEmail } from "../shared/helper";
 
 interface IState {
   alert: boolean;
@@ -25,14 +26,7 @@ class FindPassword extends React.Component<any, IState> {
   public handleSubmit(event: React.MouseEvent<HTMLElement>): void {
     event.preventDefault();
     const { email } = this.state;
-    let isEmail: boolean;
-
-    function checkEmail(address: string): boolean {
-      const regExp: RegExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-      return regExp.test(address); // 형식에 맞는 경우 true 리턴
-    }
-
-    isEmail = checkEmail(email);
+    const isEmail: boolean = validateEmail(email);
 
     if (isEmail) {
       const body: IEmailBody = {
