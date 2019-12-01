@@ -4,22 +4,22 @@ import { requestLogout } from "../../Redux/modules/user";
 
 import Store from "../../Redux/configureStore";
 import { IUserInfo } from "../shared/Types";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 
 import logo from "../../Asset/images/logo.png";
 
-class UserGreeting extends React.Component {
+class UserGreeting extends React.Component<RouteComponentProps> {
   constructor(props: any) {
     super(props);
     this.handleLogout = this.handleLogout.bind(this);
   }
 
-  public showSettings(event: { preventDefault(): void }): void {
-    event.preventDefault();
-  }
+  // public showSettings(event: { preventDefault(): void }): void {
+  //   event.preventDefault();
+  // }
 
   public handleLogout(): void {
-    Store.dispatch(requestLogout());
+    Store.dispatch(requestLogout()).then(() => this.props.history.push("/"));
   }
 
   public render(): JSX.Element {
@@ -118,10 +118,8 @@ class UserGreeting extends React.Component {
               >
                 {"__"}
               </li>
-              <li>
-                <a onClick={this.handleLogout} href="/">
-                  로그아웃
-                </a>
+              <li className="logout">
+                <div onClick={this.handleLogout}>로그아웃</div>
               </li>
             </ul>
           </div>
@@ -143,4 +141,5 @@ function mapDispatchToProps(dispatch: any): any {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserGreeting);
+const routerUserGreeting: React.ComponentClass = withRouter(UserGreeting);
+export default connect(mapStateToProps, mapDispatchToProps)(routerUserGreeting);
