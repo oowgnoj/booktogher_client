@@ -131,7 +131,8 @@ const BookEntry: React.FC<IProps> = ({
               />
             </button>
             <div className="text">
-              {finished.start.slice(5, 10)}~{finished.end.slice(5, 10)}
+              {finished.start ? finished.start.slice(5, 10) : "시작일 미정"}~
+              {finished.end.slice(5, 10)}
             </div>
           </div>
         </div>
