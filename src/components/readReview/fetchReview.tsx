@@ -1,7 +1,7 @@
 import { IReview, IBook } from "./reviewInterface";
 import { IReviewLike, IRating } from "./../shared/Types"
 
-const url: string = "http://booktogether.ap-northeast-2.elasticbeanstalk.com";
+const url: string = "https://server.booktogether.org";
 
 export const fetchReview = (callback: any, id: string): any => {
   fetch(`${url}/reviews/${id}`, {
