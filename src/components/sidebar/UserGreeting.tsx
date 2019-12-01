@@ -37,7 +37,7 @@ class UserGreeting extends React.Component {
         <div id="offcanvas-slide" uk-offcanvas="overlay: true">
           <div
             className="uk-offcanvas-bar"
-            style={{ backgroundColor: "#eddbcd" }}
+            style={{ backgroundColor: "rgb(109,81,61)" }}
           >
             <span
               className="uk-offcanvas-close"

@@ -46,7 +46,7 @@ export default class Chart extends PureComponent<IProps, IState> {
           <Line
             type="monotone"
             dataKey="numOf"
-            stroke="#8884d8"
+            stroke="rgb(121, 144, 168)"
             strokeWidth={2}
           />
           <XAxis dataKey="name" />

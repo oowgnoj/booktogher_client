@@ -1,5 +1,5 @@
 import { IReview, IBook } from "./reviewInterface";
-import { IReviewLike, IRating } from "./../shared/Types"
+import { IReviewLike, IRating } from "./../shared/Types";
 
 const url: string = "https://server.booktogether.org";
 
@@ -54,18 +54,17 @@ export const fetchDeleteLikes = (callback: any, id: string): any => {
       "Content-Type": "application/json"
     },
     method: "DELETE"
-  })
-    .then((res: Response) =>  callback(res))
+  }).then((res: Response) => callback(res));
 };
 
 export const fetchBookRatings = (callback: any, id: string): any => {
   fetch(`${url}/ratings?${id}`, {
     credentials: "include"
   })
-  .then((res: Response) => res.json())
-  .then((res: IRating) => {
-    callback(res);
-  });
+    .then((res: Response) => res.json())
+    .then((res: IRating) => {
+      callback(res);
+    });
 };
 
 export const fetchDeleteReview = (callback: any, id: string): any => {
@@ -75,6 +74,5 @@ export const fetchDeleteReview = (callback: any, id: string): any => {
       "Content-Type": "application/json"
     },
     method: "DELETE"
-  })
-    .then((res: Response) => callback())
+  }).then((res: Response) => callback());
 };

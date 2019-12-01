@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { updateUserInfo, updateUserImg } from "./../../Redux/modules/user";
 import { IUserEditInfo } from "./../../Redux/Types";
 import { Input } from "antd";
+import PasswordChangeModal from "./../mypage/PasswordChange";
+import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 const { TextArea } = Input;
 
 interface IProps {
@@ -34,10 +36,6 @@ const EditUserInfo: React.FC<IProps> = ({
       setName(event.target.value);
     } else if (event.target.id === "email") {
       setEmail(event.target.value);
-    } else if (event.target.id === "password-1") {
-      setPassword(event.target.value);
-    } else if (event.target.id === "password-2") {
-      setPasswordCheck(event.target.value);
     }
   };
 
@@ -83,22 +81,14 @@ const EditUserInfo: React.FC<IProps> = ({
         uk-overflow-auto
         style={{ paddingLeft: "200px", paddingRight: "200px" }}
       >
-        <div
-          style={{
-            width: "40%",
-            height: "350px",
-            float: "left"
-          }}
-        >
-          {console.log("password1", passwordState)}
-          {console.log("password-2", passwordCheckState)}
+        <div>
           <img
             src={
               user.image === null
                 ? "https://cdn2.iconfinder.com/data/icons/bussiness-management-supersolid/24/add_add_contact_create_new_person_user_add_friend-512.png"
                 : user.image
             }
-            style={{ width: "350px", height: "350px" }}
+            style={{ width: "200px", height: "200px" }}
           />
         </div>
         <div>
@@ -113,41 +103,32 @@ const EditUserInfo: React.FC<IProps> = ({
                 }}
               >
                 <div>
-                  <span>name</span>
+                  <label htmlFor="file-input">
+                    <AddPhotoAlternateIcon />
+                  </label>
+                  <input
+                    className="fileInput"
+                    type="file"
+                    id="file-input"
+                    onChange={handleImageChange}
+                    style={{ visibility: "hidden" }}
+                  />
+                </div>
+                <div>
+                  <span>name : </span>
                   <input
                     className="uk-input"
                     id="name"
                     type="text"
                     defaultValue={user.name}
-                    style={{ display: "inline-block", margin: "5px 0 10px 0"}}
+                    style={{
+                      display: "inline-block",
+                      margin: "5px 0 10px 0",
+                      width: "150px"
+                    }}
                     onChange={changeInputValue}
                   />
                 </div>
-                <div>
-                  <span>password</span>
-                  <div className="uk-form-controls">
-                    <input
-                      className="uk-input"
-                      id="password-1"
-                      type="password"
-                      style={{ display: "inline-block", margin: "5px 0 10px 0" }}
-                      onChange={changeInputValue}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <span>check</span>
-                  <div className="uk-form-controls">
-                    <input
-                      className="uk-input"
-                      id="password-2"
-                      type="password"
-                      style={{ display: "inline-block", margin: "5px 0 10px 0" }}
-                      onChange={changeInputValue}
-                    />
-                  </div>
-                </div>
-
                 <span style={{ display: "inline-block", float: "left" }}>
                   profile :{" "}
                 </span>
@@ -165,17 +146,13 @@ const EditUserInfo: React.FC<IProps> = ({
                   onChange={changeProfileValue}
                 ></TextArea>
                 <br />
-                <input
-                  className="fileInput"
-                  type="file"
-                  onChange={handleImageChange}
-                />
               </fieldset>
             </form>
           </div>
         </div>
       </div>
       <div className="uk-modal-footer uk-text-right">
+        <PasswordChangeModal user={user} />
         <button
           className="uk-button uk-button-default uk-modal-close"
           type="button"

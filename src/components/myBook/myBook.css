@@ -4,13 +4,13 @@
   margintop: 10px;
   backgroundcolor: white;
   border: dashed;
-  bordercolor: grey;
+  bordercolor: rgb(121, 144, 168);
 }
 
 progress::-webkit-progress {
   width: 100%;
 }
 progress::-webkit-progress-value {
-  background-color: rgb(160, 177, 116) !important;
+  background-color: rgb(121, 144, 168) !important;
   width: 100%;
 }
