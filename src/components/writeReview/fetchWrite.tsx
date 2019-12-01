@@ -54,7 +54,7 @@ export interface IRatingPost {
   rating: number;
 }
 
-const url: string = "http://booktogether.ap-northeast-2.elasticbeanstalk.com";
+const url: string = "https://server.booktogether.org";
 
 export const fetchBookSearch = (callback: any, title: string): any => {
   fetch(`${url}/books/search?query=${title}`)
@@ -90,11 +90,15 @@ export const fetchBookRating = (post: IRating): any => {
   })
     .then((res: Response) => res.json())
     .then((res: IRatingPost) => {
-      return res
+      return res;
     });
 };
 
-export const fetchEditReview = (callback: any, post: IPostReview, id: string): any => {
+export const fetchEditReview = (
+  callback: any,
+  post: IPostReview,
+  id: string
+): any => {
   fetch(`${url}/reviews/${id}`, {
     method: "PATCH",
     headers: {

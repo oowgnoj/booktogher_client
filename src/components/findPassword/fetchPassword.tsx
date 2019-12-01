@@ -1,6 +1,6 @@
 import { IEmailBody, IPasswordBody, ITokenUser } from "../shared/Types";
 
-const url: string = "http://booktogether.ap-northeast-2.elasticbeanstalk.com";
+const url: string = "https://server.booktogether.org";
 
 export const fetchFindPassword = (callback: any, body: IEmailBody): any => {
   fetch(`${url}/auth/findpw`, {

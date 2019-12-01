@@ -189,6 +189,7 @@ class EditCuration extends React.Component<
               }}
               maxLength={22}
               onChange={this.handleTitle}
+              value={this.state.title}
             />
           </span>
           <span
@@ -220,6 +221,7 @@ class EditCuration extends React.Component<
             }}
             maxLength={440}
             onChange={this.handleContent}
+            value={this.state.contents}
           />
         </div>
         <div

@@ -65,7 +65,7 @@ class SignUp extends React.Component<any, IState> {
       validatePassword(password1)
     ) {
       fetch(
-        "http://booktogether.ap-northeast-2.elasticbeanstalk.com/auth/signup",
+        "https://server.booktogether.org/auth/signup",
         {
           body: JSON.stringify({
             email: mail,

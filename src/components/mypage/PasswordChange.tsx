@@ -63,6 +63,7 @@ const ChangePasswordModal: React.FC<IProps> = ({
     if (passwordState === checkState) {
       const userInfo = { user: user._id, password: oldPasswordState };
       changeUserPassword(userInfo, passwordState);
+      handleClose();
     } else {
       alert("비밀번호 재입력값이 다릅니다.");
     }
@@ -90,7 +91,7 @@ const ChangePasswordModal: React.FC<IProps> = ({
         }}
         onClick={handleOpen}
       >
-        목표 설정
+        비밀번호 재설정
       </button>
       <Modal
         aria-labelledby="simple-modal-title"

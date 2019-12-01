@@ -20,37 +20,31 @@ const UPDATEINFO_FAILURE: string = "getinfo/FAILURE_UPDATEINFO";
 
 // Fetch functions
 function loginAPI(mail: string, pw: string): Promise<Response> {
-  return fetch(
-    "http://booktogether.ap-northeast-2.elasticbeanstalk.com/auth/login",
-    {
-      body: JSON.stringify({
-        email: mail,
-        password: pw
-      }),
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      method: "POST"
-    }
-  );
+  return fetch("https://server.booktogether.org/auth/login", {
+    body: JSON.stringify({
+      email: mail,
+      password: pw
+    }),
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "POST"
+  });
 }
 
 function logoutAPI(): Promise<Response> {
-  return fetch(
-    "http://booktogether.ap-northeast-2.elasticbeanstalk.com/auth/logout",
-    {
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/text"
-      },
-      method: "POST"
-    }
-  );
+  return fetch("https://server.booktogether.org/auth/logout", {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/text"
+    },
+    method: "POST"
+  });
 }
 
 function getInfoAPI(): Promise<Response> {
-  return fetch("http://booktogether.ap-northeast-2.elasticbeanstalk.com/user", {
+  return fetch("https://server.booktogether.org/user", {
     credentials: "include"
   });
 }
@@ -58,7 +52,7 @@ function getInfoAPI(): Promise<Response> {
 // mypage update user information
 function updateInfoAPI(data: any): Promise<Response> {
   console.log("redux data", data);
-  return fetch("http://booktogether.ap-northeast-2.elasticbeanstalk.com/user", {
+  return fetch("https://server.booktogether.org/user", {
     credentials: "include",
     headers: {
       "Content-Type": "application/json"
@@ -70,17 +64,14 @@ function updateInfoAPI(data: any): Promise<Response> {
 
 // check user auth
 function checkUserAuth(user: object): Promise<Response> {
-  return fetch(
-    "http://booktogether.ap-northeast-2.elasticbeanstalk.com/auth/checkpw",
-    {
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      method: "POST",
-      body: JSON.stringify(user)
-    }
-  );
+  return fetch("https://server.booktogether.org/auth/checkpw", {
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "POST",
+    body: JSON.stringify(user)
+  });
 }
 
 // mypage update user image
@@ -88,7 +79,7 @@ function updateUserImgAPI(data: File): Promise<Response> {
   const img = new FormData();
   img.append("image", data, data.name);
 
-  return fetch("http://booktogether.ap-northeast-2.elasticbeanstalk.com/user", {
+  return fetch("https://server.booktogether.org/user", {
     body: img,
     credentials: "include",
     method: "PATCH"

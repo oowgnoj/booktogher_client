@@ -7,7 +7,7 @@ import {
   IReviewSearchWithBooks
 } from "../shared/Types";
 
-const url: string = "http://booktogether.ap-northeast-2.elasticbeanstalk.com";
+const url: string = "https://server.booktogether.org";
 
 export const fetchCuration = (callback: any, id: string): any => {
   return fetch(`${url}/curations/${id}`, {
@@ -86,17 +86,14 @@ export const fetchEditCuration = (
   id: string,
   body: ICurationsPost
 ): any => {
-  return fetch(
-    `http://booktogether.ap-northeast-2.elasticbeanstalk.com/curations/${id}`,
-    {
-      body: JSON.stringify(body),
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      method: "PATCH"
-    }
-  )
+  return fetch(`https://server.booktogether.org/curations/${id}`, {
+    body: JSON.stringify(body),
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "PATCH"
+  })
     .then((response: Response) => response.json())
     .then((result: ICuration) => {
       callback(result._id);

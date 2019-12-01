@@ -1,6 +1,6 @@
 import { IBookDetail, IReviews, IRatings } from "../shared/Types";
 
-const url: string = "http://booktogether.ap-northeast-2.elasticbeanstalk.com";
+const url: string = "https://server.booktogether.org";
 
 export const fetchBookDetail = (callback: any, id: string): any => {
   fetch(`${url}/books/${id}`, {
