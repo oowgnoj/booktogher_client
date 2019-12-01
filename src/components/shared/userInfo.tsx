@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from "react";
 import Modal from "./userInfoModal";
-
+import UserCard from "./userCard";
 import { connect } from "react-redux";
 
 interface IProps {
@@ -27,84 +27,7 @@ const Info: React.FC = (props: any): ReactElement => {
           uk-grid
           style={{ paddingRight: "100px", paddingLeft: "100px" }}
         >
-          {console.log(props.user.User.image === null)}
-          <img
-            src={
-              props.user.User.image === null
-                ? "https://cdn2.iconfinder.com/data/icons/bussiness-management-supersolid/24/add_add_contact_create_new_person_user_add_friend-512.png"
-                : props.user.User.image
-            }
-            style={{
-              display: "inline-block",
-              width: "40%",
-              height: "270px",
-              margin: "0",
-              padding: "0",
-              marginTop: "0",
-              boxSizing: "border-box",
-              opacity: "80%"
-            }}
-          />
-          <div
-            className="uk-dark uk-background-muted uk-padding"
-            style={{
-              display: "inline-block",
-              width: "60%",
-              height: "350px",
-              margin: "0",
-              padding: "0",
-              marginTop: "0",
-              verticalAlign: "top",
-              backgroundColor: "white"
-            }}
-          >
-            {" "}
-            <div
-              style={{
-                display: "inline-block",
-                width: "100%",
-                verticalAlign: "middle",
-                alignItems: "middle"
-              }}
-            >
-              <img
-                src={
-                  props.user.User.image === null
-                    ? "https://cdn2.iconfinder.com/data/icons/bussiness-management-supersolid/24/add_add_contact_create_new_person_user_add_friend-512.png"
-                    : props.user.User.image
-                }
-                style={{
-                  borderRadius: "50%",
-                  width: "75px",
-                  height: "75px",
-                  marginRight: "10px",
-                  display: "inline-block"
-                }}
-              />
-              <span>{props.user.User.name} </span>
-              <button
-                className="uk-button uk-button-default"
-                onClick={handleActive}
-                style={{
-                  float: "right",
-                  height: "auto",
-                  padding: 0,
-                  fontSize: "13px",
-                  color: "blue",
-                  borderColor: "blue",
-                  display: "inline-block",
-                  verticalAlign: "center"
-                }}
-              >
-                change info
-              </button>
-            </div>
-            {props.user.User.profile === "" ? (
-              <p>유저 프로필을 입력해주세요. </p>
-            ) : (
-              <p style={{ fontStyle: "italic" }}>{props.user.User.profile} </p>
-            )}
-          </div>
+          <UserCard user={props.user.User} handleActive={handleActive} />
         </div>
       )}
     </div>
