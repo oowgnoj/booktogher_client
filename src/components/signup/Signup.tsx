@@ -64,21 +64,18 @@ class SignUp extends React.Component<any, IState> {
       username &&
       validatePassword(password1)
     ) {
-      fetch(
-        "http://booktogether.ap-northeast-2.elasticbeanstalk.com/auth/signup",
-        {
-          body: JSON.stringify({
-            email: mail,
-            name: username,
-            password: password1
-          }),
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          method: "POST"
-        }
-      )
+      fetch("https://server.booktogether.org/auth/signup", {
+        body: JSON.stringify({
+          email: mail,
+          name: username,
+          password: password1
+        }),
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        method: "POST"
+      })
         .then((response: Response) => {
           alert("회원가입이 완료되었습니다. 로그인해주세요.");
           this.props.history.push("/signin");
