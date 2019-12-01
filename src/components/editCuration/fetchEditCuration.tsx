@@ -86,7 +86,7 @@ export const fetchEditCuration = (
   id: string,
   body: ICurationsPost
 ): any => {
-  return fetch(`https://server.booktogether.org/curations/${id}`, {
+  return fetch(`${url}/curations/${id}`, {
     body: JSON.stringify(body),
     credentials: "include",
     headers: {
