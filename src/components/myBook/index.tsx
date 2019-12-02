@@ -188,7 +188,6 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
   }
   return (
     <div className="wrapper">
-      {console.log(moment().format("MM/DD/YYYY"))}
       <h2 style={{ fontFamily: "Nanum Myeongjo, serif", fontWeight: "bold" }}>
         나의 서재
         <button

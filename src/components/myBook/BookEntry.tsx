@@ -94,7 +94,7 @@ const BookEntry: React.FC<IProps> = ({
           </div>
         </div>
         <p className="title-text">{reading.book.title}</p>
-        <p className="author-text">{reading.book.authors}</p>
+        <p className="author-text">{reading.book.authors.slice(0, 6)}</p>
         <Button
           status={"reading"}
           bookID={reading.book}
@@ -131,7 +131,8 @@ const BookEntry: React.FC<IProps> = ({
               />
             </button>
             <div className="text">
-              {finished.start.slice(5, 10)}~{finished.end.slice(5, 10)}
+              {finished.start ? finished.start.slice(5, 10) : "시작일 미정"}~
+              {finished.end.slice(5, 10)}
             </div>
           </div>
         </div>
