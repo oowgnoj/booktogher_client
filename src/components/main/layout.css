@@ -9,11 +9,11 @@
 
 .main-title {
   position: relative;
-  top: 20%;
+  top: 22%;
   left: 18%;
   font-size: 50px;
   color: #fff;
-  font-weight: 300;
+  font-weight: 400;
   width: 60%;
 }
 
@@ -22,7 +22,7 @@
   width: 420px;
   height: 360px;
   padding: 50px 50px 0 50px;
-  top: -18%;
+  top: -20%;
   left: 54%;
   border-radius: 5px;
   background-color: rgb(256, 256, 256, 0.9);

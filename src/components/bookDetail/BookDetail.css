@@ -3,6 +3,9 @@
   width: 100%;
   flex-direction: column;
   align-items: center;
+  letter-spacing: 0.8px;
+  word-spacing: 1px;
+  line-height: 2;
 }
 
 .book-cover {
@@ -29,7 +32,6 @@
   word-spacing: 0.6px;
   line-height: 1.6;
   font-weight: 300;
-  font-family: 'Gothic A1', sans-serif;
   color: black;
 }
 
@@ -40,7 +42,6 @@
   letter-spacing: 0.8px;
   word-spacing: 0.6px;
   line-height: 1.6;
-  font-family: 'Gothic A1', sans-serif;
 }
 
 .book-reveiw h5 {

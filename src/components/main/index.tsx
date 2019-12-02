@@ -131,8 +131,9 @@ class Layout extends React.Component{
         </div>
 
         <div className="main-link">
-          <h2>서로모임은 서평 쓰기 플랫폼입니다.</h2>
-          <div>책과 서평을 모아 큐레이션을 작성하기도 가능합니다. </div>
+          <h2>책으로 모인 사람들의 공간 서로모임입니다.</h2>
+          <div>서로모임에 오신 분들께 당신만의 서평과 북
+                큐레이션을 공유하여 주세요. </div>
           <Link to="/postreview">
             <div 
               className="uk-button uk-button-default uk-button-large main-link-button"
