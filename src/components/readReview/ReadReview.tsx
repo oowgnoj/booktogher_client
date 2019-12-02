@@ -5,20 +5,27 @@ import BookInfo from "./BookInfo";
 import RecoReview from "./RecoReview";
 import UserInfo from "./UserInfo";
 
-import { IReview, IBook, IRating } from "./../shared/Types"
-import { fetchReview, fetchReviewBook, fetchBookReviewList } from "./fetchReview";
+import { IReview, IBook, IRating } from "./../shared/Types";
+import {
+  fetchReview,
+  fetchReviewBook,
+  fetchBookReviewList
+} from "./fetchReview";
 
 interface IMatchParams {
   id: string;
 }
 
 interface IProps {
-  review : IReview;
-  bookList : IBook[];
-  bookId : string[];
+  review: IReview;
+  bookList: IBook[];
+  bookId: string[];
 }
 
-class ReadReview extends React.Component<RouteComponentProps<IMatchParams>,IProps> {
+class ReadReview extends React.Component<
+  RouteComponentProps<IMatchParams>,
+  IProps
+> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -45,8 +52,8 @@ class ReadReview extends React.Component<RouteComponentProps<IMatchParams>,IProp
         thumbnail: "",
         title: ""
       },
-      bookId :[""]
-    }  
+      bookId: [""]
+    };
   }
   public componentDidMount(): void {
     const setStateReview = (res: any): void => {
@@ -56,9 +63,9 @@ class ReadReview extends React.Component<RouteComponentProps<IMatchParams>,IProp
 
     const setStateBook = (res: any): void => {
       this.setState({ bookList: res });
-      res.map((book: IBook)=>{
-        this.setState({ bookId : [book._id]})
-      })
+      res.map((book: IBook) => {
+        this.setState({ bookId: [book._id] });
+      });
     };
     fetchReviewBook(setStateBook, this.props.match.params.id);
   }
@@ -69,12 +76,12 @@ class ReadReview extends React.Component<RouteComponentProps<IMatchParams>,IProp
         this.setState({ review: res });
       };
       fetchReview(setStateReview, this.props.match.params.id);
-  
+
       const setStateBook = (res: any): void => {
         this.setState({ bookList: res });
-        res.map((book: IBook)=>{
-          this.setState({ bookId : [book._id]})
-        })
+        res.map((book: IBook) => {
+          this.setState({ bookId: [book._id] });
+        });
       };
       fetchReviewBook(setStateBook, this.props.match.params.id);
     }
@@ -86,8 +93,11 @@ class ReadReview extends React.Component<RouteComponentProps<IMatchParams>,IProp
       <div>
         <Review review={this.state.review} bookList={this.state.bookList} />
         <BookInfo bookList={this.state.bookList} />
-        <RecoReview bookId={this.state.bookId} reviewId={this.state.review._id}/>
-       {/* <UserInfo review={this.state.review} /> */}
+        <RecoReview
+          bookId={this.state.bookId}
+          reviewId={this.state.review._id}
+        />
+        {/* <UserInfo review={this.state.review} /> */}
       </div>
     );
   }
