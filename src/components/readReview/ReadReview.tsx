@@ -4,6 +4,7 @@ import Review from "./Review";
 import BookInfo from "./BookInfo";
 import RecoReview from "./RecoReview";
 import UserInfo from "./UserInfo";
+import CleanLoading from "../shared/CleanLoading";
 
 import { IReview, IBook, IRating } from "./../shared/Types";
 import {
@@ -87,17 +88,23 @@ class ReadReview extends React.Component<
     }
   }
 
-  public render(): ReactElement {
+  public render(): any {
     window.scroll(0, 0);
     return (
       <div>
-        <Review review={this.state.review} bookList={this.state.bookList} />
-        <BookInfo bookList={this.state.bookList} />
-        <RecoReview
-          bookId={this.state.bookId}
-          reviewId={this.state.review._id}
-        />
-        {/* <UserInfo review={this.state.review} /> */}
+        {this.state.review._id === "" ? (
+          <CleanLoading />
+        ) : (
+          <div>
+            <Review review={this.state.review} bookList={this.state.bookList} />
+            <BookInfo bookList={this.state.bookList} />
+            <RecoReview
+              bookId={this.state.bookId}
+              reviewId={this.state.review._id}
+            />
+            {/* <UserInfo review={this.state.review} /> */}
+          </div>
+        )}
       </div>
     );
   }

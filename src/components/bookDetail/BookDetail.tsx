@@ -4,6 +4,7 @@ import { IBookDetail, IRating } from "../shared/Types";
 import { fetchBookDetail, fetchBookRating } from "./fetchBookdetail";
 import BookInfo from "./BookInfo";
 import BookReview from "./BookReview";
+import CleanLoading from "../shared/CleanLoading"
 import "./BookDetail.css";
 
 interface IMatchParams {
@@ -64,11 +65,16 @@ class BookDetail extends React.Component<
   public render(): ReactElement {
     window.scroll(0, 0);
     return (
-      <div className="book-detail-area">
+      <div>
+        {this.state.bookInfo._id === "" ? 
+        <CleanLoading /> :
+        <div className="book-detail-area">
         <div className="book-cover"></div>
         <BookInfo bookInfo={this.state.bookInfo} rating={this.state.ratings} />
         <BookReview id={this.props.match.params.id} />
+      </div>}
       </div>
+      
     );
   }
 }
