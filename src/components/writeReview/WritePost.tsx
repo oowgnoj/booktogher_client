@@ -181,6 +181,7 @@ class WritePost extends React.Component<IProps, IState> {
   };
 
   public componentDidUpdate(prevProps: any): void {
+    window.scroll(0, 0);
     if (prevProps.bookId !== this.props.bookId) {
       this.setState({
         body: {
@@ -197,7 +198,7 @@ class WritePost extends React.Component<IProps, IState> {
   }
 
   public render(): any {
-    window.scroll(0, 0);
+    
     const style: any = {
       backgroundColor: this.state.body.thumbnail
     };
