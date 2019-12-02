@@ -1,8 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo:400,700,800|Noto+Sans+KR:200,300,400,700,800&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo:400,700,800|Gothic+A1:200,300,400,700,800&display=swap');
 
 
 .review-area {
-  font-family: 'Gothic A1', sans-serif;
   width: 100%;
   text-align: center;
   display: flex;
@@ -44,7 +43,6 @@
   padding: 80px 60px;
   color: #0c0c0c;
   font-size: 16px;
-  font-family: 'Gothic A1', sans-serif;
   font-weight: 200;
   border-bottom: 1px solid rgb(201, 201, 201);
 }
@@ -71,7 +69,6 @@
 .review-likes span {
   float: left;
   margin-top: 5px;
-  font-family: 'Gothic A1', sans-serif;
 }
 
 .likes-num {
@@ -103,12 +100,25 @@
 }
 
 @media ( max-width: 768px ){
+  .review-area{
+    width: 100%;
+    padding: 0;
+  }
+  .review-cover{
+    width: 100%;
+    padding: 0;
+    height: 250px;
+
+  }
   .title-area {
+    width: 240px;
     padding: 100px 0px 40px 0px;
+    margin: 0;
   }
   .post-area {
-    width: 70%;
+    width: 80%;
     padding: 50px 0;
+    line-height: 1.6;
   }
 }
 

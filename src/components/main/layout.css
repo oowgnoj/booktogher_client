@@ -1,7 +1,7 @@
 .main-cover {
   width: 100%;
   background-image: url("https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1141&q=80");
-  height: 580px;
+  height: 640px;
   background-size: cover;
   background-position: center;
   background-color: rgb(0,0,0);
@@ -9,11 +9,11 @@
 
 .main-title {
   position: relative;
-  top: 20%;
+  top: 22%;
   left: 18%;
   font-size: 50px;
   color: #fff;
-  font-weight: 300;
+  font-weight: 400;
   width: 60%;
 }
 
@@ -127,23 +127,22 @@ h2 {
   .main-title {
     position: relative;
     top: 10%;
-    left: 10%;
-    font-size: 50px;
+    left: 8%;
+    font-size: 36px;
     width: 70%;
   }
   .main-review {
     position: relative;
-    width: 300px;
-    height: 370px;
-    padding: 34px 20px 0 20px;
+    width: 80%;
+    height: 400px;
+    padding: 34px 15px 0 15px;
     top: 14%;
-    left: 4%;
+    left: 5%;
     border-radius: 5px;
     background-color: rgb(256, 256, 256, 0.9);   
   }
   .main-link{
-    width: 300px;
-    padding: 20px;
+    display: none;
   }
   .main-link div{
     margin: 5px;
@@ -154,7 +153,5 @@ h2 {
   .main-reco-curation {
     display: none;
   }
-  .main-link-button{
-    display: none;
-  }
+  
 }

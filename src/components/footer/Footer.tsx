@@ -1,15 +1,10 @@
 import React, { ReactElement } from "react";
 import logo from "../../Asset/images/logo.png";
+import "./Footer.css"
 
 const Footer = (): ReactElement => {
-  const style: any = {
-    width: "100%",
-    height: "150px",
-    backgroundColor: "#eee",
-    marginTop: "160px"
-  };
   return (
-    <div style={style}>
+    <div className ="footer-area">
       <img
         src={logo}
         alt="로고"
@@ -19,7 +14,7 @@ const Footer = (): ReactElement => {
           marginLeft: "20%"
         }}
       />
-      <span style={{ marginLeft: "46%"}}>
+      <span>
         © 2019, BookTogether
       </span>
     </div>

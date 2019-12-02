@@ -4,6 +4,7 @@ import Review from "./Review";
 import BookInfo from "./BookInfo";
 import RecoReview from "./RecoReview";
 import UserInfo from "./UserInfo";
+import CleanLoading from "../shared/CleanLoading"
 
 import { IReview, IBook, IRating } from "./../shared/Types"
 import { fetchReview, fetchReviewBook, fetchBookReviewList } from "./fetchReview";
@@ -80,17 +81,26 @@ class ReadReview extends React.Component<RouteComponentProps<IMatchParams>,IProp
     }
   }
 
-  public render(): ReactElement {
+  public render(): any {
     window.scroll(0, 0);
-    return (
-      <div>
-        <Review review={this.state.review} bookList={this.state.bookList} />
-        <BookInfo bookList={this.state.bookList} />
-        <RecoReview bookId={this.state.bookId} reviewId={this.state.review._id}/>
-       {/* <UserInfo review={this.state.review} /> */}
-      </div>
-    );
-  }
+      return (
+        <div>
+          {this.state.review._id === "" ? 
+        <CleanLoading /> :
+      
+        <div>
+          <Review review={this.state.review} bookList={this.state.bookList} />
+          <BookInfo bookList={this.state.bookList} />
+          <RecoReview bookId={this.state.bookId} reviewId={this.state.review._id}/>
+        {/* <UserInfo review={this.state.review} /> */}
+        </div>
+        }
+
+        </div>
+        
+      );
+    }
+  
 }
 
 export default ReadReview;

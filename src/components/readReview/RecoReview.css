@@ -14,5 +14,7 @@
 }
 
 @media ( max-width: 768px ){
-  
+  .recoReview-area{
+    display: none;
+  }
 }
