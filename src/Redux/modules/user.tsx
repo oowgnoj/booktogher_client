@@ -122,6 +122,7 @@ export const requestLogout = (): any => (dispatch: any): Promise<void> => {
     .then((response: Response) => response.json())
     .then((result: JSON) => {
       dispatch({
+        payload: initialState,
         type: LOGOUT_SUCCESS
       });
     })
@@ -285,7 +286,7 @@ export default handleActions(
       return {
         ...state,
         error: "",
-
+        User: action.payload,
         pending: false
       };
     },
