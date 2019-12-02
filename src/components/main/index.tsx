@@ -49,7 +49,8 @@ class Layout extends React.Component{
           width: "100px",
           marginTop: "26px",
           marginLeft: "80px",
-          marginBottom: "20px"
+          marginBottom: "20px",
+          display: "inline-block"
         }}/>
           <div className="main-title">가장 훌륭한 벗은<br/> 가장 좋은 책이다</div>
           <div className="main-review">   

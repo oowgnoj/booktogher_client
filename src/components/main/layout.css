@@ -1,7 +1,7 @@
 .main-cover {
   width: 100%;
   background-image: url("https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1141&q=80");
-  height: 560px;
+  height: 580px;
   background-size: cover;
   background-position: center;
   background-color: rgb(0,0,0);
@@ -9,7 +9,7 @@
 
 .main-title {
   position: relative;
-  top: 36%;
+  top: 20%;
   left: 18%;
   font-size: 50px;
   color: #fff;
@@ -22,7 +22,7 @@
   width: 420px;
   height: 360px;
   padding: 50px 50px 0 50px;
-  top: -12%;
+  top: -20%;
   left: 54%;
   border-radius: 5px;
   background-color: rgb(256, 256, 256, 0.9);
