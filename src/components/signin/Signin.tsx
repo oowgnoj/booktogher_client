@@ -8,6 +8,9 @@ import Store from "../../Redux/configureStore";
 import { validateEmail } from "../shared/helper";
 import "./Signin.css";
 
+import io from "socket.io-client";
+import OAuthButton from "./OAuthButton";
+
 // import "../../../node_modules/uikit/dist/js/uikit-icons.min.js";
 // import "../../../node_modules/uikit/dist/js/uikit.js";
 // import "../../../node_modules/uikit/dist/css/uikit.css";
@@ -82,6 +85,18 @@ class Signin extends React.Component<any, IState> {
       <div style={{ height: "44px" }}></div>
     );
 
+    const server: string = "https://server.booktogether.org";
+
+    const providers = ["facebook", "kakao"];
+
+    const socialLogin: ReactElement = (
+      <div>
+        {providers.map((provider, i) => (
+          <OAuthButton key={i} provider={provider} socket={io(server)} />
+        ))}
+      </div>
+    );
+
     return (
       <div className="signin">
         <form>
@@ -119,8 +134,9 @@ class Signin extends React.Component<any, IState> {
               SIGN IN
             </button>
           </p>
+          <div className="sociallogin">{socialLogin}</div>
           <Link to="/findpassword">
-            <p>계정을 잊어버리셨나요? </p>
+            <p style={{ marginTop: "30px" }}>계정을 잊어버리셨나요? </p>
           </Link>
           <span>{required}</span>
         </form>
