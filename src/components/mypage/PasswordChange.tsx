@@ -52,7 +52,11 @@ const ChangePasswordModal: React.FC<IProps> = ({
   const [checkState, setcheckState] = React.useState<any>("");
 
   const handleOpen = (): void => {
+    // if (user.accountType !== "standard") {
     setOpen(true);
+    // } else {
+    // alert("소셜로그인 회원은 비밀번호를 변경할 수 없습니다.");
+    // }
   };
 
   const handleClose = (): void => {
@@ -91,7 +95,7 @@ const ChangePasswordModal: React.FC<IProps> = ({
         }}
         onClick={handleOpen}
       >
-        비밀번호 재설정
+        비밀번호 변경
       </button>
       <Modal
         aria-labelledby="simple-modal-title"
