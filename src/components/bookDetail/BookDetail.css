@@ -81,3 +81,21 @@
   margin-right: 10px;
   width: 450px;
 }
+
+@media ( max-width: 768px ){
+  .book-detail-book-title b{
+    margin: 0 150px 0 ;
+    padding: 0;
+  }
+  .bookInfo-wrap{
+    width: 70%;
+  }
+  .bookInfo-detail {
+    margin: 0;
+    padding: 0;
+  }
+  .book-detail-book-title img {
+    padding: 0;
+
+  }
+}

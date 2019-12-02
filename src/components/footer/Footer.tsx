@@ -19,7 +19,7 @@ const Footer = (): ReactElement => {
           marginLeft: "20%"
         }}
       />
-      <span style={{ marginLeft: "40%", paddingTop: "80px" }}>
+      <span style={{ marginLeft: "46%"}}>
         © 2019, BookTogether
       </span>
     </div>

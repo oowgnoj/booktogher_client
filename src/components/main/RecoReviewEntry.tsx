@@ -30,10 +30,10 @@ const RecoReviewEntry = ({ review }: IProps): ReactElement => {
       <div className="main_review_list_review">
         <div className="uk-child-width-expand@s uk-text-center" uk-grid>
           <div>
-            <div className="uk-card  uk-card-body" style={{ height: "300px" }}>
+            <div className="uk-card" style={{ height: "300px" }}>
               <h3
                 className="uk-card-title"
-                style={{ fontSize: "1.1em", textAlign: "left" }}
+                style={{ fontSize: "1.2em", textAlign: "left" }}
               >
                 <span
                   style={{
@@ -51,7 +51,9 @@ const RecoReviewEntry = ({ review }: IProps): ReactElement => {
                 style={{
                   color: "gray",
                   fontSize: "0.9em",
-                  textAlign: "justify"
+                  textAlign: "justify",
+                  lineHeight: "1.6",
+                  marginTop: "30px"
                 }}
               >
                 {review.contents.length > 120

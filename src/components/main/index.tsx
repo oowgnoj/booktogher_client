@@ -1,44 +1,24 @@
 import React, { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import { IAuthor, IReview, ICuration } from "../shared/Types";
-import Sidebar from "../sidebar/index";
-import Slider from "./RecoReviewSlider/index";
-import RecoReviewList from "./RecoReviewList";
-import RecoCurationList from "./RecoCurationList";
-import { useDispatch } from "react-redux";
 import {
   updateReviewsRecommend,
   updateCurationsRecommend
 } from "../../Redux/modules/recommend";
-import { updateUserInfo } from "../../Redux/modules/user";
-import Store from "../../Redux/configureStore";
-
-import "./index.css";
 import { connect } from "react-redux";
-import { any } from "prop-types";
-import { border } from "@material-ui/system";
-import logo from "../../Asset/images/logo.png";
-
-// const dispatch = useDispatch()
-
-/*
-(서버) 
-[1단계] 2개 endpoint 로의 fetch 가 예정되어있음 
-reviews?list_type=recommended
-collections?list_type=recommended
-[2단계]
-collection 받은 다음 books?collection_id=각 recommended collection 으로
-
-(스토어)
-fetch 받은 데이터를 store.dispatch 로 state 에 반영할 예정
-*/
+import RecoReviewList from "./RecoReviewList";
+import RecoCurationList from "./RecoCurationList";
+import Store from "../../Redux/configureStore";
+import "./layout.css";
+import "./index.css";
+import logo from "../../Asset/images/log.png";
 
 interface IState {
   curation: ICuration[];
   review: IReview[];
 }
 
-class Main extends React.Component {
+class Layout extends React.Component{
   constructor(props: any) {
     super(props);
   }
@@ -49,6 +29,7 @@ class Main extends React.Component {
     window.scroll(0, 0);
   }
 
+
   public render(): ReactElement {
     const props: any = this.props;
     const filteredReview: IReview[] = props.review.filter(
@@ -57,161 +38,139 @@ class Main extends React.Component {
     const filteredCuration: ICuration[] = props.curation.filter(
       (curation: ICuration) => curation.author
     );
-
     return (
-      <div className="main">
+      <div className="main-body">
+        
+        <div className="main-cover">
         <img
         src={logo}
         alt="로고"
         style={{
           width: "100px",
-          marginTop: "-80px",
-          marginLeft: "48%",
+          marginTop: "26px",
+          marginLeft: "80px",
           marginBottom: "20px"
-        }}
-      />
-        <Slider review={filteredReview} />
-
-        <div className="" style={{ marginTop: "0px" }}>
-          <Link to="/postreview">
-            <div
-              style={{
-                width: "40%",
-                display: "inline-block",
-                textAlign: "center",
-                paddingTop: "30px",
-                paddingBottom: "5px",
-                backgroundColor: "#fff",
-                marginLeft: "8%",
-                border: "1px solid #ddd",
-                color: "#696969"
-              }}
+        }}/>
+          <div className="main-title">가장 훌륭한 벗은<br/> 가장 좋은 책이다</div>
+          <div className="main-review">   
+          <span style={{color: "#D15947"}}>서로모임 추천 서평</span>       
+            <div 
+              className= "slider_text uk-position-relative uk-visible-toggle"
+              tabIndex={-1}
+              uk-slideshow="autoplay: true; animation: fade"
             >
-              {/* <div className="uk-dark uk-background-muted uk-padding"> */}
-              {/* <h3>서평</h3> */}
-              {/* <p>
-                  서평을 작성해주세요. 서로모임에 오신 분들께 서평을
-                  공유해주세요.
-                </p> */}
-              {/* <button
-                className="uk-button uk-button-default uk-button-large "
-                style={{ width: "50%" }}
-              > */}
-              <p>
-                서평 쓰러가기
-                <span uk-icon="pencil" style={{ marginLeft: "2%" }}></span>
-              </p>
-              <p style={{ fontSize: "13px" }}>
-                서평을 작성해주세요. 서로모임에 오신 분들께 서평을 공유해주세요.
-              </p>
-              {/* </button> */}
+              <ul className="uk-slideshow-items main-review-ul">
+                <li>
+                  <h3>{filteredReview[0] ? filteredReview[0].title : "한 번 배워서 어디서나 사용하기"}</h3>
+                  <span>by {filteredReview[0] ? filteredReview[0].author.name : "정혜경"}</span>
+                  <div>
+                    {filteredReview[0]
+                    ? filteredReview[0].contents.replace(/<[^>]*>?/gm, "").length > 150
+                      ? filteredReview[0].contents
+                          .replace(/<[^>]*>?/gm, "")
+                          .slice(0, 150) + "..."
+                      : filteredReview[0].contents.replace(/<[^>]*>?/gm, "")
+                    : "서평 본문"}
+                  </div>
+                  <Link to={filteredReview[0] ? `review/${filteredReview[0]._id}` : "/"}>
+                    <button className="see-more">보러가기</button>
+                  </Link>                 
+                </li>
+                <li>
+                  <h3>{filteredReview[1] ? filteredReview[1].title : "한 번 배워서 어디서나 사용하기"}</h3>
+                  <span>by {filteredReview[1] ? filteredReview[1].author.name : "정혜경"}</span>
+                  <div>
+                    {filteredReview[1]
+                      ? filteredReview[1].contents.replace(/<[^>]*>?/gm, "").length > 150
+                        ? filteredReview[1].contents
+                            .replace(/<[^>]*>?/gm, "")
+                            .slice(0, 150) + "..."
+                        : filteredReview[1].contents.replace(/<[^>]*>?/gm, "")
+                      : "서평 본문"}
+                  </div>
+                  <Link to={filteredReview[1] ? `review/${filteredReview[1]._id}` : "/"}>
+                    <button className="see-more">보러가기</button>
+                  </Link>
+                </li>
+                <li>
+                  <h3>{filteredReview[2] ? filteredReview[2].title : "한 번 배워서 어디서나 사용하기"}</h3>
+                  <span>by {filteredReview[2] ? filteredReview[2].author.name : "정혜경"}</span>
+                  <div>
+                    {filteredReview[2]
+                        ? filteredReview[2].contents.replace(/<[^>]*>?/gm, "").length > 150
+                          ? filteredReview[2].contents
+                              .replace(/<[^>]*>?/gm, "")
+                              .slice(0, 150) + "..."
+                          : filteredReview[2].contents.replace(/<[^>]*>?/gm, "")
+                        : "서평 본문"}
+                  </div>
+                  <Link to={filteredReview[2] ? `review/${filteredReview[2]._id}` : "/"}>
+                    <button className="see-more">보러가기</button>
+                  </Link>
+                </li>
+              </ul>
+              <a
+                className="uk-position-center-left uk-position-small uk-hidden-hover"
+                href="#"
+                uk-slidenav-previous
+                uk-slideshow-item="previous"
+              >
+                <span uk-icon="chevron-left" style={{ color: "gray" }}></span>
+              </a>
+              <a
+                className="uk-position-center-right uk-position-small uk-hidden-hover"
+                href="#"
+                uk-slidenav-next
+                uk-slideshow-item="next"
+              >
+                <span uk-icon="chevron-right" style={{ color: "gray" }}></span>
+              </a>
             </div>
-            {/* </div> */}
+          </div>
+        </div>
+
+        <div className="main-link">
+          <h2>서로모임은 서평 쓰기 플랫폼입니다.</h2>
+          <div>책과 서평을 모아 큐레이션을 작성하기도 가능합니다. </div>
+          <Link to="/postreview">
+            <div 
+              className="uk-button uk-button-default uk-button-large main-link-button"
+              style={{fontSize: "16px", color: "#D15947"}}>
+              서평 쓰러 가기
+              <span uk-icon="pencil" style={{ marginLeft: "5px"}}></span>
+            </div>
           </Link>
           <Link to="/postcuration">
-            <div
-              style={{
-                width: "40%",
-                display: "inline-block",
-                textDecoration: "none",
-                textAlign: "center",
-                paddingTop: "30px",
-                paddingBottom: "5px",
-                backgroundColor: "#fff",
-                marginLeft: "3%",
-                border: "1px solid #ddd",
-                color: "#696969"
-              }}
-            >
-              {/* <div className="uk-dark uk-background-muted uk-padding"> */}
-              {/* <h3>큐레이션</h3> */}
-              {/*  <p>
-                  큐레이션을 등록해주세요. 책과 서평으로 구성된 당신의 북
-                  플레이리스트를 공유하여 주세요.
-                </p> */}
-              {/* <button className="uk-button uk-button-default uk-button-large "> */}
-              <p>
-                큐레이션 등록하러 가기
-                <span uk-icon="pencil" style={{ marginLeft: "2%"}}></span>
-                <p style={{ fontSize: "13px" }}>
-                  책과 서평으로 구성된 당신의 북 플레이리스트를 공유하여 주세요.
-                </p>
-              </p>
-              {/* </button> */}
+            <div 
+              className="uk-button uk-button-default uk-button-large main-link-button"
+              style={{fontSize: "16px", color: "#D15947"}}>
+              큐레이션 쓰러 가기
+              <span uk-icon="pencil" style={{ marginLeft: "5px"}}></span>
             </div>
-            {/* </div> */}
-          </Link>
+          </Link>         
         </div>
 
-        <div className="main_review_list_start">
-        <div
-            className="main_recocollection_title"
-            style={{
-              marginTop: "80px",
-              marginBottom: "60px",
-              fontSize: "1.3em",
-              textAlign: "center"
-            }}
-          >
-            서로모임의 추천 서평
+        <div className="main-reco-review">
+          <h2>서로모임의 추천 서평</h2>
+          <div className="main-reco-review-list">
+            <RecoReviewList reviews={filteredReview.slice(3)} />
           </div>
-          <RecoReviewList reviews={filteredReview.slice(3)} />
+
         </div>
 
-        <div className="main_recocollection_div">
-          <div
-            className="main_recocollection_title"
-            style={{
-              marginTop: "80px",
-              marginBottom: "60px",
-              fontSize: "1.3em"
-            }}
-          >
-            서로모임에 오신 분들께서 작성해주신 큐레이션입니다.
+        <div className="main-reco-curation">
+          <h3>서로모임에 오신 분들께서 작성해주신 큐레이션입니다.</h3>
+          <div className="main-reco-curation-list">
+            <RecoCurationList curations={filteredCuration.slice(1, 5)} />
           </div>
         </div>
-        <RecoCurationList curations={filteredCuration.slice(1, 5)} />
+
+
+
       </div>
-    );
+    )
   }
 }
-
-// interface IAAuthor {
-//   _id: string;
-//   image: string;
-//   name: string;
-//   profile: string;
-// }
-
-// interface ICAuration {
-//   _id: string;
-//   author: IAAuthor;
-//   contents: string;
-//   likes: string[];
-//   published: boolean;
-//   title: string;
-// }
-
-// interface IRAeview {
-//   id: string;
-//   author: IAAuthor;
-//   contents: string;
-//   likes: string[];
-//   published: boolean;
-//   thumbnail: string;
-//   title: string;
-// }
-
-// interface IDAata {
-//   curation: ICAuration[];
-//   review: IRAeview[];
-// }
-
-// interface ISAtate {
-//   data: IDAata;
-//   error: boolean;
-//   pending: boolean;
-// }
 
 function mapStateToProps(state: any): any {
   return {
@@ -227,4 +186,4 @@ function mapDispatchToProps(dispatch: any): any {
   };
 } //
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);

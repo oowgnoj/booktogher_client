@@ -1,0 +1,160 @@
+.main-cover {
+  width: 100%;
+  background-image: url("https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1141&q=80");
+  height: 560px;
+  background-size: cover;
+  background-position: center;
+  background-color: rgb(0,0,0);
+}
+
+.main-title {
+  position: relative;
+  top: 36%;
+  left: 18%;
+  font-size: 50px;
+  color: #fff;
+  font-weight: 300;
+  width: 60%;
+}
+
+.main-review {
+  position: relative;
+  width: 420px;
+  height: 360px;
+  padding: 50px 50px 0 50px;
+  top: -12%;
+  left: 54%;
+  border-radius: 5px;
+  background-color: rgb(256, 256, 256, 0.9);
+  letter-spacing: 0.4px;
+  word-spacing: 0.8px;
+  line-height: 1.6;
+}
+
+.uk-slideshow-items {
+  height: 400px;
+}
+
+.main-review-ul li{
+  height: 500px;
+}
+
+.main-review-ul li span{
+  font-style: italic;
+}
+.main-review-ul h3 {
+  font-weight: 700;
+}
+
+.main-review-ul li div {
+  margin-top: 30px;
+}
+
+.main-link {
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 60px 0 80px;
+}
+
+h2 {
+  margin-top: 30px;
+  color: #4e4e4e;
+}
+
+.main-reco-curation h3 {
+  margin-top: 30px;
+  color: #4e4e4e;
+  font-size: 30px;
+}
+.main-link div {
+  margin: 15px 5px;
+}
+
+.main-reco-review {
+  text-align: center;
+  height: 380px;
+  padding: 60px 0 80px;
+  background-color: rgb(252, 241, 241);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  letter-spacing: 0.4px;
+  word-spacing: 0.8px;
+}
+
+.main-reco-curation {
+  text-align: center;
+  padding: 60px 0 30px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-reco-review-list {
+  width: 68%;
+  float: left;
+  margin-top: 30px;
+  padding-left: 30px;
+}
+
+.main-reco-curation-list{
+  width: 68%;
+  float: left;
+  margin-top: 20px;
+  padding-left: 30px;
+}
+
+.see-more {
+  width: 60px;
+  height: 20px;
+  border: none;
+  margin-top: 20px;
+  color: #D15947;
+}
+
+@media ( max-width: 768px ){
+  .main-body{
+    width: 100%;
+  }
+  .main-cover {
+    width: 100%;
+    background-size: cover;
+    height: 840px;
+  }
+  .main-title {
+    position: relative;
+    top: 10%;
+    left: 10%;
+    font-size: 50px;
+    width: 70%;
+  }
+  .main-review {
+    position: relative;
+    width: 300px;
+    height: 370px;
+    padding: 34px 20px 0 20px;
+    top: 14%;
+    left: 4%;
+    border-radius: 5px;
+    background-color: rgb(256, 256, 256, 0.9);   
+  }
+  .main-link{
+    width: 300px;
+    padding: 20px;
+  }
+  .main-link div{
+    margin: 5px;
+  }
+  .main-reco-review {
+    display: none;
+  }
+  .main-reco-curation {
+    display: none;
+  }
+  .main-link-button{
+    display: none;
+  }
+}
