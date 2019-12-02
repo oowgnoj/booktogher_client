@@ -1,0 +1,31 @@
+.footer-area {
+  width: 100%;
+  height: 150px;
+  background-color: #eee;
+  margin-top: 160px;
+}
+
+.footer-area span {
+  margin-left: 46%;
+}
+
+.footer-area img {
+  width: 100px;
+  margin-top: 35px;
+  margin-left: 20%
+}
+
+@media ( max-width: 768px ){
+  .footer-area {
+    margin-top: 0px;
+    height: 80px;
+  }
+  .footer-area span {
+    display: none;
+  }
+  .footer-area img {
+    margin-left: 30%;
+    margin-top: 5px;
+    padding-left: 10%
+  }
+}

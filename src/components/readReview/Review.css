@@ -103,12 +103,25 @@
 }
 
 @media ( max-width: 768px ){
+  .review-area{
+    width: 100%;
+    padding: 0;
+  }
+  .review-cover{
+    width: 100%;
+    padding: 0;
+    height: 250px;
+
+  }
   .title-area {
+    width: 240px;
     padding: 100px 0px 40px 0px;
+    margin: 0;
   }
   .post-area {
-    width: 70%;
+    width: 80%;
     padding: 50px 0;
+    line-height: 1.6;
   }
 }
 

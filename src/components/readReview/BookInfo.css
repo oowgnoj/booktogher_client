@@ -42,7 +42,20 @@
 }
 
 @media ( max-width: 768px ){
+  .book-detail div {
+    padding-top: 0;
+
+  }
+  .book-detail {
+    width: 80%;
+    padding: 0;
+  }
+  .book-title{
+    padding: 0;
+    margin: 0;
+  }
   .book-info-area{
-    padding: 220px 0 0 0;
+    display: inline-block;
+    padding: 0px 0 0 0;
   }
 }

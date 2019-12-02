@@ -25,7 +25,7 @@ class GuestGreeting extends React.Component {
         >
           <div
             className="uk-offcanvas-bar"
-            style={{ backgroundColor: "#eddbcd" }}
+            style={{ backgroundColor: "rgb(109,81,61)" }}
           >
             <span
               className="uk-offcanvas-close"
@@ -36,7 +36,7 @@ class GuestGreeting extends React.Component {
             <h3>서로모임에 오신 것을 환영합니다</h3>
             <p>
               안녕하세요. 서로모임 소개가 필요합니다. 책으로 모인 사람들의 공간
-              서로모임입니다. 벌써 2주가 지나갔네요!
+              서로모임입니다.
             </p>
             <div
               style={{
