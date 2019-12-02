@@ -12,3 +12,7 @@
 .recoReview-list {
   width: 60%;
 }
+
+@media ( max-width: 768px ){
+  
+}

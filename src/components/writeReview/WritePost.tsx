@@ -197,6 +197,7 @@ class WritePost extends React.Component<IProps, IState> {
   }
 
   public render(): any {
+    window.scroll(0, 0);
     const style: any = {
       backgroundColor: this.state.body.thumbnail
     };
