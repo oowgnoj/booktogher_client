@@ -117,13 +117,25 @@ class WritePost extends React.Component<IProps, IState> {
         this.setState({ reviewId: id });
         this.setState({ redirect: true });
       };
-      for (let i = 0; i < this.state.body.books.length; i++) {
-        const postRating: any = {
-          book: this.state.body.books[i],
-          rating: this.state.rating[i]
-        };
-        fetchBookRating(postRating);
+      if(this.state.body.books.length !== this.state.rating.length){
+        for (let i = 0; i < this.state.body.books.length; i++) {
+          const postRating: any = {
+            book: this.state.body.books[i],
+            rating: this.state.rating[i+1]
+          };
+          fetchBookRating(postRating);
+        }
+      } else {
+        for (let i = 0; i < this.state.body.books.length; i++) {
+          const postRating: any = {
+            book: this.state.body.books[i],
+            rating: this.state.rating[i]
+          };
+          fetchBookRating(postRating);
+        }
+
       }
+      
       fetchPostReview(redirectReview, this.state.body);
     } else {
       alert("책을 선택해주세요");
