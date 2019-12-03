@@ -2,6 +2,9 @@ import React, { ReactElement } from "react";
 import { validatePassword, validateEmail } from "../shared/helper";
 import "./Signup.css";
 
+import io from "socket.io-client";
+import OAuthButton from "../signin/OAuthButton";
+
 // import "../../../node_modules/uikit/dist/js/uikit-icons.min.js";
 // import "../../../node_modules/uikit/dist/js/uikit.js";
 // import "../../../node_modules/uikit/dist/css/uikit.css";
@@ -14,6 +17,11 @@ interface IState {
   status: string;
   username: string; // req.body 의 key 값의 name 과 중복되는 문제 해결을 위해 mail 로 변경
 }
+
+const server: string = "https://server.booktogether.org";
+
+const providers = ["kakao"];
+const socket = io(server, { transports: ["polling"] });
 
 class SignUp extends React.Component<any, IState> {
   constructor(props: any) {
@@ -110,6 +118,9 @@ class SignUp extends React.Component<any, IState> {
   }
 
   public render(): ReactElement {
+    const socialLogin: ReactElement[] = providers.map((provider, i) => {
+      return <OAuthButton key={i} provider={provider} socket={socket} />;
+    });
     const required: ReactElement = this.state.alert ? (
       <span className="uk-alert-primary" uk-alert style={{ height: "50px" }}>
         <a className="uk-alert-close" uk-close></a>
@@ -178,6 +189,7 @@ class SignUp extends React.Component<any, IState> {
               SIGN UP
             </button>
           </p>
+          <div>{socialLogin}</div>
           <span className="signup_alert">{required}</span>
         </form>
       </div>

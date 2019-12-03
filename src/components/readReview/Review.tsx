@@ -74,13 +74,23 @@ class Review extends React.Component< IProps, IState> {
   }
 
   public componentDidMount(): void {
+    if(this.props.user._id === this.props.review.author._id){
+      this.setState({edit:true})
+    }
+    if(this.props.review.likes.includes(this.props.user._id)){
+      this.setState({likes: true})
+    }
     const setStateRating = (res: any): void => {
       this.setState({ bookRating: res });
     };
+    var bookIdStr: string = ""
     const bookId: any = this.props.bookList.map((info :IBook) =>{
+      bookIdStr += `books[]=${info._id}&`
       return info._id
     })
-    fetchBookRatings(setStateRating, bookId[0]); 
+    bookIdStr += `user=${this.props.review.author._id}`
+    console.log(bookIdStr)
+    fetchBookRatings(setStateRating, bookIdStr);  
   }
   
   public componentDidUpdate(prevProps: any): void {
@@ -114,19 +124,20 @@ class Review extends React.Component< IProps, IState> {
         bookIdStr += `books[]=${info._id}&`
         return info._id
       })
+      bookIdStr += `user=${this.props.review.author._id}`
+      console.log(bookIdStr)
       fetchBookRatings(setStateRating, bookIdStr);
     } 
   }
   
   public render(): ReactElement {
-
     const { bookList, review } = this.props
     const bookTitle: JSX.Element[] = bookList.map((info: IBook, index: number) => {
       return (
         <div key ={info._id}>
           <b>
             책 : {info.title} : 평점 
-            {this.state.bookRating.length ? this.state.bookRating[index].avg_rating : 0}
+            {this.state.bookRating.length ? this.state.bookRating[index].user_rating.rating : 0}
           </b>
         </div>
       );
