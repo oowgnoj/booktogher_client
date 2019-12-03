@@ -126,19 +126,23 @@ class EditCuration extends React.Component<
   }
 
   public handlePatch(): void {
-    const postBody: IPatchBody = {
-      title: this.state.title,
-      contents: this.state.contents,
-      books: this.state.books.map((book: IBookSelectedCuration) => book._id),
-      reviews: this.state.reviews
-        ? this.state.reviews.map((review: IReview) => review._id)
-        : []
-    };
+    if (this.state.books.length === 0 || !this.state.books[0]._id) {
+      alert("1권 이상의 책을 선택하여 주세요");
+    } else {
+      const postBody: IPatchBody = {
+        title: this.state.title,
+        contents: this.state.contents,
+        books: this.state.books.map((book: IBookSelectedCuration) => book._id),
+        reviews: this.state.reviews
+          ? this.state.reviews.map((review: IReview) => review._id)
+          : []
+      };
 
-    const getPatchedId = (id: string): void =>
-      this.setState({ curationId: id, isPatched: true });
+      const getPatchedId = (id: string): void =>
+        this.setState({ curationId: id, isPatched: true });
 
-    fetchEditCuration(getPatchedId, this.props.match.params.id, postBody);
+      fetchEditCuration(getPatchedId, this.props.match.params.id, postBody);
+    }
   }
 
   public addBooks = (selectedBooks: IBookSelectedCuration): any => {
@@ -235,11 +239,13 @@ class EditCuration extends React.Component<
           />
         </div>
         <div className="editcuration_review">
-          <ReviewsList
-            reviews={this.state.reviews}
-            deleteEvent={this.reviewDelete}
-            handleReviewSelect={this.handleReviewSelect}
-          />
+          {this.state.reviews ? (
+            <ReviewsList
+              reviews={this.state.reviews}
+              deleteEvent={this.reviewDelete}
+              handleReviewSelect={this.handleReviewSelect}
+            />
+          ) : null}
           <span className="editcuration_review_btn"></span>
           <span className="editcuration_review_reviewlist">
             <div className="editcuration_review_reviewentry"></div>
