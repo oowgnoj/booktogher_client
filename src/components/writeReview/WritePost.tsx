@@ -122,7 +122,6 @@ class WritePost extends React.Component<IProps, IState> {
           book: this.state.body.books[i],
           rating: this.state.rating[i]
         };
-        console.log(postRating)
         fetchBookRating(postRating);
       }
       fetchPostReview(redirectReview, this.state.body);
