@@ -49,7 +49,7 @@ class UserGreeting extends React.Component<RouteComponentProps> {
               src={
                 props.User.image
                   ? props.User.image
-                  : "https://app.helperbit.com/media/avatar/png/single_user_female_256x256.png"
+                  : "http://uploads.webflow.com/56a09b532f2ef2655bb8cec2/56a0bb98e9a99a4669bf7f07_user_icon.png"
               }
               alt=""
               width="100px"

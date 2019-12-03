@@ -85,8 +85,14 @@ class SignUp extends React.Component<any, IState> {
         method: "POST"
       })
         .then((response: Response) => {
-          alert("회원가입이 완료되었습니다. 로그인해주세요.");
-          this.props.history.push("/signin");
+          if (response.status === 201) {
+            alert("회원가입이 완료되었습니다. 로그인해주세요.");
+            this.props.history.push("/signin");
+          } else if (response.status === 409) {
+            alert("이미 사용중인 메일 주소입니다.");
+          } else if (response.status === 400) {
+            alert("모든 필수 입력 필드에 정보를 채우세요.");
+          }
         })
         .catch((err: Error) => this.props.history.push("/"));
     } else {
@@ -122,12 +128,12 @@ class SignUp extends React.Component<any, IState> {
       return <OAuthButton key={i} provider={provider} socket={socket} />;
     });
     const required: ReactElement = this.state.alert ? (
-      <span className="uk-alert-primary" uk-alert style={{ height: "50px" }}>
-        <a className="uk-alert-close" uk-close></a>
+      <span className="uk-alert-primary" uk-alert>
+        {/* <a className="uk-alert-close" uk-close></a> */}
         <p style={{ color: "#blue" }}>{this.state.status}</p>
       </span>
     ) : (
-      <div style={{ height: "44px" }}> </div>
+      <div></div>
     );
 
     return (
@@ -183,15 +189,15 @@ class SignUp extends React.Component<any, IState> {
           <p uk-margin="true">
             <button
               className="uk-button uk-button-small"
-              style={{ color: "gray" }}
+              style={{ color: "gray", marginTop: "-10px" }}
               onClick={this.handleSubmit}
             >
               SIGN UP
             </button>
           </p>
           <div>{socialLogin}</div>
-          <span className="signup_alert">{required}</span>
         </form>
+        <div className="signup_alert">{required}</div>
       </div>
     );
   }

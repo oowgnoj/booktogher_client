@@ -1,11 +1,13 @@
 .signup {
   height: 500px;
   width: 100%;
+  padding-bottom: 10%;
+  position: relative;
 }
 
 .signup form {
   position: absolute;
-  top: 26%;
+  top: 20%;
   left: 40%;
   text-align: center;
 }
@@ -13,4 +15,13 @@
 .signup form input {
   padding: 10%;
   margin: 5% 0;
+}
+
+.signup_alert {
+  position: relative;
+  top: 130%;
+  right: -31%;
+  width: 500px;
+  height: auto;
+  text-align: center;
 }
