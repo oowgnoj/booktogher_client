@@ -162,6 +162,7 @@ class ReadCuration extends React.Component<IParams, IState> {
                 handleClose={this.detectHistoryModal}
               />
             ) : null}
+            {console.log("params id", this.props.match.params.id)}
             {this.state.isDeleted ? <Redirect to="/" /> : null}
             <div
               className="readCuration_header_likes"

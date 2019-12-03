@@ -51,7 +51,6 @@ function getInfoAPI(): Promise<Response> {
 
 // mypage update user information
 function updateInfoAPI(data: any): Promise<Response> {
-  console.log("redux data", data);
   return fetch("https://server.booktogether.org/user", {
     credentials: "include",
     headers: {
@@ -191,7 +190,6 @@ export const updateUserImg = (data: File): any => (
       });
     })
     .catch((err: Response) => {
-      console.log(err);
       dispatch({
         payload: err,
         type: UPDATEINFO_FAILURE
@@ -215,7 +213,6 @@ export const updateUserBookStatus = (userInfo: IUserEditInfo): any => (
     })
 
     .catch((err: Response) => {
-      console.log(err);
       dispatch({
         payload: err,
         type: UPDATEINFO_FAILURE
@@ -227,7 +224,6 @@ export const changeUserPassword = (user: object, newPassword: string): any => (
   dispatch: any
 ): Promise<void> => {
   dispatch({ type: UPDATEINFO_PENDING });
-  console.log(user, newPassword);
   return checkUserAuth(user)
     .then((response: Response) => response.json())
     .then((message: string) => {
@@ -245,7 +241,6 @@ export const changeUserPassword = (user: object, newPassword: string): any => (
       });
     })
     .catch((err: Response) => {
-      console.log(err);
       dispatch({
         payload: err,
         type: UPDATEINFO_FAILURE
