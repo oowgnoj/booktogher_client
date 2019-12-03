@@ -24,7 +24,7 @@ interface IState {
 
 const server: string = "https://server.booktogether.org";
 
-const providers = ["kakao"];
+const providers = ["facebook", "kakao"];
 const socket = io(server, { transports: ["polling"] });
 
 class Signin extends React.Component<any, IState> {
@@ -82,6 +82,7 @@ class Signin extends React.Component<any, IState> {
 
   public render(): ReactElement {
     const socialLogin: ReactElement[] = providers.map((provider, i) => {
+      console.log(`[${i}] signin 에서 socket ?`, socket);
       return <OAuthButton key={i} provider={provider} socket={socket} />;
     });
     const required: ReactElement = this.state.alert ? (

@@ -20,7 +20,7 @@ interface IState {
 
 const server: string = "https://server.booktogether.org";
 
-const providers = ["kakao"];
+const providers = ["facebook", "kakao"];
 const socket = io(server, { transports: ["polling"] });
 
 class SignUp extends React.Component<any, IState> {
