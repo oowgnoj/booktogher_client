@@ -3,6 +3,7 @@ import { IEmailBody, IPasswordBody, ITokenUser } from "../shared/Types";
 const url: string = "https://server.booktogether.org";
 
 export const fetchFindPassword = (callback: any, body: IEmailBody): any => {
+  console.log("body 궁금해", body);
   fetch(`${url}/auth/findpw`, {
     method: "POST",
     headers: {
@@ -10,7 +11,9 @@ export const fetchFindPassword = (callback: any, body: IEmailBody): any => {
     },
     body: JSON.stringify(body),
     credentials: "include"
-  }).then((res: Response) => callback(res));
+  })
+    .then((res: Response) => res.json())
+    .then(result => callback(result));
 };
 
 export const fetchUserResetToken = (callback: any, token: string): any => {
