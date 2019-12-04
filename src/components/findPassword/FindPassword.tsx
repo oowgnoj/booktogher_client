@@ -34,28 +34,20 @@ class FindPassword extends React.Component<any, IState> {
       };
 
       const setMessage = (res: any): void => {
-        if (res.status === 400) {
-          this.setState({
-            alert: true,
-            status: "모든 필수 입력 필드에 정보를 채우세요."
-          });
-        } else if (res.status === 404) {
-          this.setState({
-            alert: true,
-            status: "입력하신 이메일로 가입되어 있는 계정이 없습니다."
-          });
-        } else if (res.status === 403) {
-          if (res.error.type === "OAuthEmail") {
-            this.setState({
-              alert: true,
-              status: "소셜 로그인으로 가입된 계정입니다."
-            });
-          } else if (res.error.type === "EmailError") {
-            this.setState({
-              alert: true,
-              status:
+        if (res.error) {
+          if (res.error.status === 400) {
+            alert("모든 필수 입력 필드에 정보를 채우세요.");
+          } else if (res.error.status === 404) {
+            alert("입력하신 이메일로 가입되어 있는 계정이 없습니다.");
+          } else if (res.error.status === 403) {
+            if (res.error.type === "OAuthEmail") {
+              alert("소셜 로그인으로 가입된 계정입니다.");
+              this.props.history.push("./signin");
+            } else if (res.error.type === "EmailError") {
+              alert(
                 "해당 이메일의 차단 또는 스팸 설정으로 인해 재설정 링크를 보낼 수 없습니다."
-            });
+              );
+            }
           }
         } else if (res.status === 200) {
           alert("비밀번호 재설정 메일이 전송되었습니다.");

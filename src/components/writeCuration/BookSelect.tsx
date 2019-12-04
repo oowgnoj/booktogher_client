@@ -84,6 +84,8 @@ class BookSelect extends React.Component<IProps, IState> {
   }
 
   public clickSelectedBook(e: any): void {
+    e.currentTarget.style.border = "3px solid rgb(108, 198, 250)";
+
     const idTitle = e.target.alt.split(":");
     const img = e.target.src;
 
