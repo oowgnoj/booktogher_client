@@ -12,6 +12,11 @@ class SearchReviewSelect extends React.Component<IProps> {
     super(props);
     this.state = {};
   }
+
+  public plusClick = (e: any) => {
+    e.currentTarget.style.opacity = 1;
+  };
+
   public render(): ReactElement {
     const MyReviewList: ReactElement[] = this.props.reviews.map(
       (info: IReviewSearchWithBooks, index: number) => {
@@ -111,6 +116,16 @@ class SearchReviewSelect extends React.Component<IProps> {
                         </div>
                       </div>
                     </span>
+                    <span
+                      className="select-plus"
+                      uk-icon="icon: check; ratio: 1.5"
+                      onClick={this.plusClick}
+                      style={{
+                        paddingLeft: "50px",
+                        paddingTop: "25px",
+                        opacity: "0.4"
+                      }}
+                    ></span>
                   </header>
                 </article>
                 <hr

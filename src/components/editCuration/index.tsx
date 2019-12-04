@@ -126,8 +126,15 @@ class EditCuration extends React.Component<
   }
 
   public handlePatch(): void {
-    if (this.state.books.length === 0 || !this.state.books[0]._id) {
+
+    if (!this.state.title) {
+      alert("큐레이션 제목을 등록해주세요");
+    } else if (!this.state.contents) {
+      alert("큐레이션 본문 내용을 등록해주세요");
+
+    } else if (this.state.books.length === 0 || !this.state.books[0]._id) {
       alert("1권 이상의 책을 선택하여 주세요");
+
     } else {
       const postBody: IPatchBody = {
         title: this.state.title,

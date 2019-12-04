@@ -51,10 +51,11 @@ class Signin extends React.Component<any, IState> {
         if (this.props.User._id) {
           this.props.history.push("/");
         } else if (this.props.User.error) {
-          this.setState({
+          alert("아이디 혹은 패스워드가 일치하지 않습니다");
+          /* this.setState({
             alert: true,
             status: "아이디 혹은 패스워드가 일치하지 않습니다."
-          });
+          }); */
         }
       });
     } else if (!isEmail) {
@@ -105,6 +106,7 @@ class Signin extends React.Component<any, IState> {
                 title="정확한 이메일 주소를 입력하여주세요!"
                 placeholder="이메일을 입력해주세요"
                 onChange={this.emailChange}
+                style={{ height: "40px" }}
               />
             </div>
           </div>
@@ -121,7 +123,7 @@ class Signin extends React.Component<any, IState> {
             </div>
           </div>
 
-          <p uk-margin="true">
+          <p uk-margin="true" style={{ marginTop: "10px" }}>
             <button
               className="uk-button uk-button-small"
               style={{ color: "gray" }}
@@ -131,12 +133,13 @@ class Signin extends React.Component<any, IState> {
             </button>
           </p>
 
-          <Link to="/findpassword">
-            <p style={{ marginTop: "30px" }}>계정을 잊어버리셨나요? </p>
-          </Link>
           <span>
             <div>{socialLogin}</div>
           </span>
+
+          <Link to="/findpassword">
+            <p style={{ marginTop: "30px" }}>계정을 잊어버리셨나요? </p>
+          </Link>
           {required}
         </form>
       </div>

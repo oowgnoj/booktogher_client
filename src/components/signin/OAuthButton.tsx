@@ -27,10 +27,10 @@ class OAuth extends Component<any, any> {
         // 벌써 계정을 따로 만들었다면, 에러 객체가 올 것이다.
         if (res.error.type === "DuplicateEmail") {
           alert(res.error.message);
+          this.props.history.push("/");
         } else {
           alert(`일시적인 오류가 발생하였습니다. 다시 시도해주세요.`);
         }
-        this.props.history.push("/");
         // 에러 핸들링 작업 필요
       }
     });
@@ -67,12 +67,14 @@ class OAuth extends Component<any, any> {
   render() {
     const { provider } = this.props;
     return (
-      <button
-        onClick={this.openPopup}
-        className="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom"
-      >
-        {provider}
-      </button>
+      <div style={{ marginBottom: "15px" }}>
+        <button
+          onClick={this.openPopup}
+          className="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom"
+        >
+          {provider}
+        </button>
+      </div>
     );
   }
 }
