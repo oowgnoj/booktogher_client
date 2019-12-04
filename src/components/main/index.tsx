@@ -101,18 +101,18 @@ class Layout extends React.Component {
                     <span>by {filteredReview[2] ? filteredReview[2].author.name : "정혜경"}</span>
                     <div>
                       {filteredReview[2]
-                          ? filteredReview[2].contents.replace(/<[^>]*>?/gm, "").length > 150
-                            ? filteredReview[2].contents
-                                .replace(/<[^>]*>?/gm, "")
-                                .slice(0, 150) + "..."
-                            : filteredReview[2].contents.replace(/<[^>]*>?/gm, "")
-                          : "서평 본문"}
+                        ? filteredReview[2].contents.replace(/<[^>]*>?/gm, "").length > 150
+                          ? filteredReview[2].contents
+                              .replace(/<[^>]*>?/gm, "")
+                              .slice(0, 150) + "..."
+                          : filteredReview[2].contents.replace(/<[^>]*>?/gm, "")
+                        : "서평 본문"}
                     </div>
                   </Link>
                 </li>
               </ul>
               <a
-                className="uk-position-center-left-out uk-position-small uk-hidden-hover "
+                className="uk-position-center-left-out uk-position-small "
                 href="#"
                 uk-slidenav-previous
                 uk-slideshow-item="previous"
@@ -120,7 +120,7 @@ class Layout extends React.Component {
                 <span uk-icon="chevron-left" style={{ color: "gray", paddingBottom: "100px"}}></span>
               </a>
               <a
-                className="uk-position-center-right-out uk-position-small uk-hidden-hover"
+                className="uk-position-center-right-out uk-position-small "
                 href="#"
                 uk-slidenav-next
                 uk-slideshow-item="next"
