@@ -59,74 +59,75 @@ class Layout extends React.Component{
               className= "slider_text uk-position-relative uk-visible-toggle"
               tabIndex={-1}
               uk-slideshow="autoplay: true; animation: fade"
+              style ={{padding:"0"}}
             >
               <ul className="uk-slideshow-items main-review-ul">
                 <li>
-                  <h3>{filteredReview[0] ? filteredReview[0].title : "한 번 배워서 어디서나 사용하기"}</h3>
-                  <span>by {filteredReview[0] ? filteredReview[0].author.name : "정혜경"}</span>
-                  <div>
-                    {filteredReview[0]
-                    ? filteredReview[0].contents.replace(/<[^>]*>?/gm, "").length > 150
-                      ? filteredReview[0].contents
-                          .replace(/<[^>]*>?/gm, "")
-                          .slice(0, 150) + "..."
-                      : filteredReview[0].contents.replace(/<[^>]*>?/gm, "")
-                    : "서평 본문"}
-                  </div>
                   <Link to={filteredReview[0] ? `review/${filteredReview[0]._id}` : "/"}>
-                    <button className="see-more">보러가기</button>
+                    <h3>{filteredReview[0] ? filteredReview[0].title : "한 번 배워서 어디서나 사용하기"}</h3>
+                    <span>by {filteredReview[0] ? filteredReview[0].author.name : "정혜경"}</span>
+                    <div>
+                      {filteredReview[0]
+                      ? filteredReview[0].contents.replace(/<[^>]*>?/gm, "").length > 150
+                        ? filteredReview[0].contents
+                            .replace(/<[^>]*>?/gm, "")
+                            .slice(0, 150) + "..."
+                        : filteredReview[0].contents.replace(/<[^>]*>?/gm, "")
+                      : "서평 본문"}
+                    </div>
                   </Link>                 
                 </li>
                 <li>
-                  <h3>{filteredReview[1] ? filteredReview[1].title : "한 번 배워서 어디서나 사용하기"}</h3>
-                  <span>by {filteredReview[1] ? filteredReview[1].author.name : "정혜경"}</span>
-                  <div>
-                    {filteredReview[1]
-                      ? filteredReview[1].contents.replace(/<[^>]*>?/gm, "").length > 150
-                        ? filteredReview[1].contents
-                            .replace(/<[^>]*>?/gm, "")
-                            .slice(0, 150) + "..."
-                        : filteredReview[1].contents.replace(/<[^>]*>?/gm, "")
-                      : "서평 본문"}
-                  </div>
                   <Link to={filteredReview[1] ? `review/${filteredReview[1]._id}` : "/"}>
-                    <button className="see-more">보러가기</button>
+                    <h3>{filteredReview[1] ? filteredReview[1].title : "한 번 배워서 어디서나 사용하기"}</h3>
+                    <span>by {filteredReview[1] ? filteredReview[1].author.name : "정혜경"}</span>
+                    <div>
+                      {filteredReview[1]
+                        ? filteredReview[1].contents.replace(/<[^>]*>?/gm, "").length > 150
+                          ? filteredReview[1].contents
+                              .replace(/<[^>]*>?/gm, "")
+                              .slice(0, 150) + "..."
+                          : filteredReview[1].contents.replace(/<[^>]*>?/gm, "")
+                        : "서평 본문"}
+                    </div>
                   </Link>
                 </li>
                 <li>
-                  <h3>{filteredReview[2] ? filteredReview[2].title : "한 번 배워서 어디서나 사용하기"}</h3>
-                  <span>by {filteredReview[2] ? filteredReview[2].author.name : "정혜경"}</span>
-                  <div>
-                    {filteredReview[2]
-                        ? filteredReview[2].contents.replace(/<[^>]*>?/gm, "").length > 150
-                          ? filteredReview[2].contents
-                              .replace(/<[^>]*>?/gm, "")
-                              .slice(0, 150) + "..."
-                          : filteredReview[2].contents.replace(/<[^>]*>?/gm, "")
-                        : "서평 본문"}
-                  </div>
                   <Link to={filteredReview[2] ? `review/${filteredReview[2]._id}` : "/"}>
-                    <button className="see-more">보러가기</button>
+                    <h3>{filteredReview[2] ? filteredReview[2].title : "한 번 배워서 어디서나 사용하기"}</h3>
+                    <span>by {filteredReview[2] ? filteredReview[2].author.name : "정혜경"}</span>
+                    <div>
+                      {filteredReview[2]
+                          ? filteredReview[2].contents.replace(/<[^>]*>?/gm, "").length > 150
+                            ? filteredReview[2].contents
+                                .replace(/<[^>]*>?/gm, "")
+                                .slice(0, 150) + "..."
+                            : filteredReview[2].contents.replace(/<[^>]*>?/gm, "")
+                          : "서평 본문"}
+                    </div>
+                  
                   </Link>
                 </li>
               </ul>
               <a
-                className="uk-position-center-left uk-position-small uk-hidden-hover"
+                className="uk-position-center-left-out uk-position-small uk-hidden-hover "
                 href="#"
                 uk-slidenav-previous
                 uk-slideshow-item="previous"
               >
-                <span uk-icon="chevron-left" style={{ color: "gray" }}></span>
+                <span uk-icon="chevron-left" style={{ color: "gray", paddingBottom: "100px"}}></span>
               </a>
               <a
-                className="uk-position-center-right uk-position-small uk-hidden-hover"
+                className="uk-position-center-right-out uk-position-small uk-hidden-hover"
                 href="#"
                 uk-slidenav-next
                 uk-slideshow-item="next"
               >
-                <span uk-icon="chevron-right" style={{ color: "gray" }}></span>
+                <span uk-icon="chevron-right" style={{ color: "gray", paddingBottom: "100px" }}></span>
               </a>
+              
             </div>
+            
           </div>
         </div>
 

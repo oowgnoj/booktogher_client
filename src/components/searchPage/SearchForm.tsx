@@ -53,7 +53,7 @@ class SearchForm extends React.Component<{}, IState> {
                     <input 
                       className="uk-search-input search-form-input" 
                       type="search" 
-                      placeholder="Search..."
+                      placeholder="책 / 서평을 검색해 주세요"
                       onChange={this.handleChangeTitle}
                       onKeyPress ={this.handleKeyPress} />
                 </form>

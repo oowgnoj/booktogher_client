@@ -9,6 +9,7 @@ import {
   fetchDeleteReview 
 } from "./fetchReview"
 import { connect } from "react-redux";
+import UserHistoryModal from "../shared/UserHistoryModal";
 import "./Review.css";
 
 export interface IProps {
@@ -23,6 +24,7 @@ interface IState{
   likesNum : number;
   bookRating: IRating[];
   redirect: boolean;
+  historyModal: boolean;
 }
 
 class Review extends React.Component< IProps, IState> {
@@ -33,11 +35,14 @@ class Review extends React.Component< IProps, IState> {
       edit : false,
       likes: false ,
       likesNum: this.props.review.likes.length,
-      redirect: false     
+      redirect: false,
+      historyModal: false   
     }
     this.handleClickLikes = this.handleClickLikes.bind(this);
     this.handleDeleteLikes = this.handleDeleteLikes.bind(this);
-    this.handleDeleteReview = this.handleDeleteReview.bind(this)
+    this.handleDeleteReview = this.handleDeleteReview.bind(this);
+    this.handleHistoryClick = this.handleHistoryClick.bind(this);
+    this.detectHistoryModal = this.detectHistoryModal.bind(this);
   }
 
   public handleClickLikes(): void{
@@ -71,6 +76,14 @@ class Review extends React.Component< IProps, IState> {
     }
     fetchDeleteReview(redirectHome, this.props.review._id)
     alert("서평이 삭제됩니다")
+  }
+
+  public handleHistoryClick(): void {
+    this.setState({ historyModal: true });
+  }
+
+  public detectHistoryModal(): void {
+    this.setState({ historyModal: false });
   }
 
   public componentDidMount(): void {
@@ -151,6 +164,12 @@ class Review extends React.Component< IProps, IState> {
         {this.state.redirect ? (
           <Redirect to="/" />
         ) : null}
+        {this.state.historyModal ? (
+            <UserHistoryModal
+              author={this.props.review.author}
+              handleClose={this.detectHistoryModal}
+            />
+          ) : null}
         <div className="review-cover" style ={style}>
           <div className="title-area" >
             <h1 className="title">{review.title}</h1>
@@ -185,7 +204,7 @@ class Review extends React.Component< IProps, IState> {
           </div>
         </div>
         <div className="post-area">
-          <div style ={{fontStyle:"italic"}}>by {review.author.name}</div>
+          <div style ={{fontStyle:"italic"}} onClick={this.handleHistoryClick}>by {review.author.name}</div>
 
           <div className="book-rating">{bookTitle}</div>
           <div
