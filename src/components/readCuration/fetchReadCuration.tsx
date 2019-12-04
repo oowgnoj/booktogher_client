@@ -68,13 +68,17 @@ export const fetchReviews = (callback: any, id: string): any => {
   })
     .then((response: Response) => response.json())
     .then((reviews: IReview[]) => {
-      const published: IReview[] = reviews.filter(
-        (review: IReview) => review.published
-      );
-      const reviewIds: string[] = published.map(
-        (review: IReview) => review._id
-      );
-      fetchGetBooksOfReviews(callback, reviewIds, published);
+      if (reviews.length > 0) {
+        const published: IReview[] = reviews.filter(
+          (review: IReview) => review.published
+        );
+        const reviewIds: string[] = published.map(
+          (review: IReview) => review._id
+        );
+        fetchGetBooksOfReviews(callback, reviewIds, published);
+      } else {
+        callback([], []);
+      }
     });
 };
 

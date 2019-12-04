@@ -4,6 +4,7 @@ import { requestUserInfo } from "./Redux/modules/user";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./components/shared/PrivateRoute";
+import NotFound from "./components/shared/NotFoundPage";
 import Sidebar from "./components/sidebar/index";
 import Main from "./components/main/index";
 import Signup from "./components/signup/Signup";
@@ -55,7 +56,8 @@ const App: React.FC = (props: any): ReactElement => {
         <Route path="/searchForm" component={SearchForm} />
         <Route path="/findpassword" component={FindPassword} />
         <Route path="/reset/:id" component={ChangePassword} />
-        <Route path="*" to="/" />
+        <Route path="/404" component={NotFound} />
+        <Route path="*" exact={true} component={NotFound} />
       </Switch>
       <Footer />
     </BrowserRouter>

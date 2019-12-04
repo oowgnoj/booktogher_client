@@ -16,6 +16,15 @@ const PrivateRoute: React.FC<any> = ({
   user,
   ...rest
 }: any) => {
+  const didMountRef = useRef(false);
+
+  useEffect(() => {
+    if (didMountRef.current) {
+    } else {
+      didMountRef.current = true;
+    }
+  }, [user._id]);
+
   return (
     <Route
       {...rest}
