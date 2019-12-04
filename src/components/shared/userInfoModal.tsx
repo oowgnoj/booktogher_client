@@ -89,8 +89,6 @@ const EditUserInfo: React.FC<IProps> = ({
         uk-overflow-auto
         style={{ paddingLeft: "200px", paddingRight: "200px" }}
       >
-        {console.log(user)}
-        {console.log(typeof userImg)}
         <div>
           <img
             src={
