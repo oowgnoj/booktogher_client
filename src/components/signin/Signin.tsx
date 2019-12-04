@@ -51,10 +51,11 @@ class Signin extends React.Component<any, IState> {
         if (this.props.User._id) {
           this.props.history.push("/");
         } else if (this.props.User.error) {
-          this.setState({
+          alert("아이디 혹은 패스워드가 일치하지 않습니다");
+          /* this.setState({
             alert: true,
             status: "아이디 혹은 패스워드가 일치하지 않습니다."
-          });
+          }); */
         }
       });
     } else if (!isEmail) {

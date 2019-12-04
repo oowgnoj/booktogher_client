@@ -126,19 +126,25 @@ class EditCuration extends React.Component<
   }
 
   public handlePatch(): void {
-    const postBody: IPatchBody = {
-      title: this.state.title,
-      contents: this.state.contents,
-      books: this.state.books.map((book: IBookSelectedCuration) => book._id),
-      reviews: this.state.reviews
-        ? this.state.reviews.map((review: IReview) => review._id)
-        : []
-    };
+    if (!this.state.title) {
+      alert("큐레이션 제목을 등록해주세요");
+    } else if (!this.state.contents) {
+      alert("큐레이션 본문 내용을 등록해주세요");
+    } else {
+      const postBody: IPatchBody = {
+        title: this.state.title,
+        contents: this.state.contents,
+        books: this.state.books.map((book: IBookSelectedCuration) => book._id),
+        reviews: this.state.reviews
+          ? this.state.reviews.map((review: IReview) => review._id)
+          : []
+      };
 
-    const getPatchedId = (id: string): void =>
-      this.setState({ curationId: id, isPatched: true });
+      const getPatchedId = (id: string): void =>
+        this.setState({ curationId: id, isPatched: true });
 
-    fetchEditCuration(getPatchedId, this.props.match.params.id, postBody);
+      fetchEditCuration(getPatchedId, this.props.match.params.id, postBody);
+    }
   }
 
   public addBooks = (selectedBooks: IBookSelectedCuration): any => {

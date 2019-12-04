@@ -10,7 +10,7 @@ export const fetchFindPassword = (callback: any, body: IEmailBody): any => {
     },
     body: JSON.stringify(body),
     credentials: "include"
-  }).then((res: Response) => callback(res.status));
+  }).then((res: Response) => callback(res));
 };
 
 export const fetchUserResetToken = (callback: any, token: string): any => {
