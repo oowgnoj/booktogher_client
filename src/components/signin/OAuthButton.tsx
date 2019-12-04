@@ -17,7 +17,7 @@ class OAuth extends Component<any, any> {
       // 서버에서 인증 처리 후, "facebook" 혹은 "kakao" 이벤트가 실행되며
       // 응답을 보내준다. 이후 socket.on() 이벤트 리스너의 콜백함수가 실행된다.
       this.state.popup.close(); // 응답을 받으면, 팝업창을 닫는다
-      console.log(`res 가 온다 [${provider}] : `, res);
+
       if (!res.error) {
         Store.dispatch(requestUserInfo())
           .then(() => {
@@ -25,7 +25,6 @@ class OAuth extends Component<any, any> {
             this.props.history.push("/");
           })
           .catch((err: Response) => {
-            console.error(err);
             alert("회원정보를 확인할 수 없습니다. 다시 시도해주세요.");
           });
       } else {
@@ -55,7 +54,7 @@ class OAuth extends Component<any, any> {
 
       // *주의: socketId query를 추가해야지 socket.on("facebook"), socket.on("kakao") 응답을 받을 수 있다.
       const url = `${server}/auth/${provider}?socketId=${socket.id}`;
-      console.log("popup 에서의 url : ", url);
+
       // 팝업창 열기
       popup = window.open(
         url,
