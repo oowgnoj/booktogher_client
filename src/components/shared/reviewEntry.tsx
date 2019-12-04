@@ -22,7 +22,9 @@ const ReviewEntry: React.FC<IProps> = ({
       <dl className="uk-description-list">
         <dt style={{ fontSize: "25px" }}>
           {" "}
-          <span style={{ color: "blue" }}>{books ? books[0].title : ""}</span>
+          <span style={{ color: "blue" }}>
+            {books ? books[0].title + " " : ""}
+          </span>
           {Review.title ? (
             Review.title
           ) : (

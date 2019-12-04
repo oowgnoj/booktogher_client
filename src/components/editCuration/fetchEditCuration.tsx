@@ -61,23 +61,27 @@ export const fetchReviews = (callback: any, id: string): any => {
   })
     .then((res: Response) => res.json())
     .then((reviewsRes: any) => {
-      const published: any = reviewsRes.filter((review: IReview) => {
-        return review.published;
-      });
-      const promises: any = published.map((review: IReview) => {
-        return fetch(`${url}/books?review=${review._id}`);
-      });
-      Promise.all(promises).then((res: any) => {
-        Promise.all(res.map((el: any) => el.json())).then((booksRes: any) => {
-          booksRes.forEach((books: IBook[], index: number) => {
-            const basicInfo = books.map((book: IBook) => {
-              return { id: book._id, title: book.title };
-            });
-            published[index].books = basicInfo;
-          });
-          callback(published);
+      if (reviewsRes.length > 0) {
+        const published: any = reviewsRes.filter((review: IReview) => {
+          return review.published;
         });
-      });
+        const promises: any = published.map((review: IReview) => {
+          return fetch(`${url}/books?review=${review._id}`);
+        });
+        Promise.all(promises).then((res: any) => {
+          Promise.all(res.map((el: any) => el.json())).then((booksRes: any) => {
+            booksRes.forEach((books: IBook[], index: number) => {
+              const basicInfo = books.map((book: IBook) => {
+                return { id: book._id, title: book.title };
+              });
+              published[index].books = basicInfo;
+            });
+            callback(published);
+          });
+        });
+      } else {
+        callback([]);
+      }
     });
 };
 

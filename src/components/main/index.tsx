@@ -18,7 +18,7 @@ interface IState {
   review: IReview[];
 }
 
-class Layout extends React.Component{
+class Layout extends React.Component {
   constructor(props: any) {
     super(props);
   }
@@ -28,7 +28,6 @@ class Layout extends React.Component{
     Store.dispatch(updateCurationsRecommend());
     window.scroll(0, 0);
   }
-
 
   public render(): ReactElement {
     const props: any = this.props;
@@ -40,23 +39,26 @@ class Layout extends React.Component{
     );
     return (
       <div className="main-body">
-        
         <div className="main-cover">
-        <img
-        src={logo}
-        alt="로고"
-        style={{
-          width: "100px",
-          marginTop: "26px",
-          marginLeft: "80px",
-          marginBottom: "20px",
-          display: "inline-block"
-        }}/>
-          <div className="main-title">가장 훌륭한 벗은<br/> 가장 좋은 책이다</div>
-          <div className="main-review">   
-          <span style={{color: "#D15947"}}>서로모임 추천 서평</span>       
-            <div 
-              className= "slider_text uk-position-relative uk-visible-toggle"
+          <img
+            src={logo}
+            alt="로고"
+            style={{
+              width: "100px",
+              marginTop: "26px",
+              marginLeft: "80px",
+              marginBottom: "20px",
+              display: "inline-block"
+            }}
+          />
+          <div className="main-title">
+            가장 훌륭한 벗은
+            <br /> 가장 좋은 책이다
+          </div>
+          <div className="main-review">
+            <span style={{ color: "#D15947" }}>서로모임 추천 서평</span>
+            <div
+              className="slider_text uk-position-relative uk-visible-toggle"
               tabIndex={-1}
               uk-slideshow="autoplay: true; animation: fade"
               style ={{padding:"0"}}
@@ -74,6 +76,7 @@ class Layout extends React.Component{
                             .slice(0, 150) + "..."
                         : filteredReview[0].contents.replace(/<[^>]*>?/gm, "")
                       : "서평 본문"}
+
                     </div>
                   </Link>                 
                 </li>
@@ -105,7 +108,6 @@ class Layout extends React.Component{
                             : filteredReview[2].contents.replace(/<[^>]*>?/gm, "")
                           : "서평 본문"}
                     </div>
-                  
                   </Link>
                 </li>
               </ul>
@@ -125,32 +127,35 @@ class Layout extends React.Component{
               >
                 <span uk-icon="chevron-right" style={{ color: "gray", paddingBottom: "100px" }}></span>
               </a>
-              
+
             </div>
-            
           </div>
         </div>
 
         <div className="main-link">
           <h2>책으로 모인 사람들의 공간 서로모임입니다.</h2>
-          <div>서로모임에 오신 분들께 당신만의 서평과 북
-                큐레이션을 공유하여 주세요. </div>
+          <div>
+            서로모임에 오신 분들께 당신만의 서평과 북 큐레이션을 공유하여
+            주세요.{" "}
+          </div>
           <Link to="/postreview">
-            <div 
+            <div
               className="uk-button uk-button-default uk-button-large main-link-button"
-              style={{fontSize: "16px", color: "#D15947"}}>
+              style={{ fontSize: "16px", color: "#D15947" }}
+            >
               서평 쓰러 가기
-              <span uk-icon="pencil" style={{ marginLeft: "5px"}}></span>
+              <span uk-icon="pencil" style={{ marginLeft: "5px" }}></span>
             </div>
           </Link>
           <Link to="/postcuration">
-            <div 
+            <div
               className="uk-button uk-button-default uk-button-large main-link-button"
-              style={{fontSize: "16px", color: "#D15947"}}>
+              style={{ fontSize: "16px", color: "#D15947" }}
+            >
               큐레이션 쓰러 가기
-              <span uk-icon="pencil" style={{ marginLeft: "5px"}}></span>
+              <span uk-icon="pencil" style={{ marginLeft: "5px" }}></span>
             </div>
-          </Link>         
+          </Link>
         </div>
 
         <div className="main-reco-review">
@@ -158,7 +163,6 @@ class Layout extends React.Component{
           <div className="main-reco-review-list">
             <RecoReviewList reviews={filteredReview.slice(3)} />
           </div>
-
         </div>
 
         <div className="main-reco-curation">
@@ -167,11 +171,8 @@ class Layout extends React.Component{
             <RecoCurationList curations={filteredCuration.slice(1, 5)} />
           </div>
         </div>
-
-
-
       </div>
-    )
+    );
   }
 }
 

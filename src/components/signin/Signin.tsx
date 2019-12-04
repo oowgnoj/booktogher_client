@@ -22,6 +22,11 @@ interface IState {
   status: string;
 }
 
+const server: string = "https://server.booktogether.org";
+
+const providers = ["facebook", "kakao"];
+const socket = io(server, { transports: ["polling"] });
+
 class Signin extends React.Component<any, IState> {
   constructor(props: any) {
     super(props);
@@ -76,6 +81,9 @@ class Signin extends React.Component<any, IState> {
   }
 
   public render(): ReactElement {
+    const socialLogin: ReactElement[] = providers.map((provider, i) => {
+      return <OAuthButton key={i} provider={provider} socket={socket} />;
+    });
     const required: ReactElement = this.state.alert ? (
       <span className="uk-alert-primary" uk-alert style={{ height: "50px" }}>
         <a className="uk-alert-close" uk-close></a>
@@ -83,18 +91,6 @@ class Signin extends React.Component<any, IState> {
       </span>
     ) : (
       <div style={{ height: "44px" }}></div>
-    );
-
-    const server: string = "https://server.booktogether.org";
-
-    const providers = ["facebook", "kakao"];
-
-    const socialLogin: ReactElement = (
-      <div>
-        {providers.map((provider, i) => (
-          <OAuthButton key={i} provider={provider} socket={io(server)} />
-        ))}
-      </div>
     );
 
     return (
@@ -134,11 +130,14 @@ class Signin extends React.Component<any, IState> {
               SIGN IN
             </button>
           </p>
-          <div className="sociallogin">{socialLogin}</div>
+
           <Link to="/findpassword">
             <p style={{ marginTop: "30px" }}>계정을 잊어버리셨나요? </p>
           </Link>
-          <span>{required}</span>
+          <span>
+            <div>{socialLogin}</div>
+          </span>
+          {required}
         </form>
       </div>
     );
