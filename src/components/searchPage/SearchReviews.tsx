@@ -65,7 +65,7 @@ class SearchReviews extends React.Component<IProps, IState> {
                   className="reviewentry_author"
                   style={{
                     textAlign: "center",
-                    marginTop: "-30px",
+                    marginTop: "0px",
                     marginBottom: "10px",
                     fontFamily: "Nanum Myeongjo, serif",
                     fontSize: "0.8em",

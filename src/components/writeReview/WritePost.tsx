@@ -112,22 +112,41 @@ class WritePost extends React.Component<IProps, IState> {
   }
 
   public clickPostSubmit(): void {
-    if (this.state.body.books.length !== 0) {
+    if(this.state.body.books.length === 0){
+      alert("책을 선택해주세요.");
+    }
+    else if(this.state.body.contents === ""){
+      alert("내용을 입력해주세요.")
+    }
+    else if(this.state.body.title === ""){
+      alert("제목을 입력해주세요.")
+    }
+    else if (this.state.body.books.length !== 0) {
       const redirectReview = (id: string): any => {
         this.setState({ reviewId: id });
         this.setState({ redirect: true });
       };
-      for (let i = 0; i < this.state.body.books.length; i++) {
-        const postRating: any = {
-          book: this.state.body.books[i],
-          rating: this.state.rating[i]
-        };
-        fetchBookRating(postRating);
+      if(this.state.body.books.length !== this.state.rating.length){
+        for (let i = 0; i < this.state.body.books.length; i++) {
+          const postRating: any = {
+            book: this.state.body.books[i],
+            rating: this.state.rating[i+1]
+          };
+          fetchBookRating(postRating);
+        }
+      } else {
+        for (let i = 0; i < this.state.body.books.length; i++) {
+          const postRating: any = {
+            book: this.state.body.books[i],
+            rating: this.state.rating[i]
+          };
+          fetchBookRating(postRating);
+        }
+
       }
+      
       fetchPostReview(redirectReview, this.state.body);
-    } else {
-      alert("책을 선택해주세요");
-    }
+    } 
   }
 
   public isNumberKey(e: any): any {
@@ -240,19 +259,32 @@ class WritePost extends React.Component<IProps, IState> {
               색선택
             </button>
 
-            {this.state.body.published ? (
-              <button className="unlock" onClick={this.handlePublished}>
-                공개
-              </button>
-            ) : (
-              <button className="lock" onClick={this.handlePublished}>
-                비공개
-              </button>
-            )}
+            
 
             <button className="" onClick={this.clickPostSubmit}>
               등록
             </button>
+
+            {this.state.body.published ? (
+              <label className="unlock">
+                <input
+                  className="uk-checkbox" 
+                  type="checkbox" 
+                  onChange={this.handlePublished}
+                /> 
+                비공개</label>            
+            ) : (
+              <label className="unlock">
+                <input 
+                  className="uk-checkbox" 
+                  type="checkbox" 
+                  onChange={this.handlePublished}
+                  checked
+                /> 
+                비공개</label> 
+            )}
+            
+
           </div>
 
           {this.state.colorPicker ? (
