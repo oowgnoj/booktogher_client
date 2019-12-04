@@ -10,8 +10,8 @@ function rand() {
 }
 
 function getModalStyle() {
-  const top = 30;
-  const left = 30;
+  const top = 50;
+  const left = 50;
 
   return {
     top: `${top}%`,
@@ -86,7 +86,7 @@ const ChangePasswordModal: React.FC<IProps> = ({
   return (
     <div style={{ display: "inline-block" }}>
       <button
-        className="uk-button uk-button-default"
+        className="uk-button uk-button-default uk-modal-close"
         style={{
           border: "none",
           paddingLeft: "15px",
@@ -131,7 +131,30 @@ const ChangePasswordModal: React.FC<IProps> = ({
                 onChange={changeInputValue}
               />
             </div>
-            <button onClick={handleSubmit}>비밀번호 변경</button>
+            <button
+              className="uk-button uk-button-default uk-modal-close"
+              style={{
+                border: "none",
+                color: "rgb(75,88,50)",
+                display: "inline-block"
+              }}
+              onClick={handleClose}
+            >
+              취소
+            </button>
+            <button
+              className="uk-button uk-button-primary"
+              style={{
+                border: "none",
+                color: "white",
+                display: "inline-block",
+                float: "right",
+                textAlign: "center"
+              }}
+              onClick={handleSubmit}
+            >
+              비밀번호 변경
+            </button>
           </div>
         </div>
       </Modal>

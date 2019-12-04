@@ -45,11 +45,9 @@ const MyLikes: React.FC = (props: any): ReactElement => {
         나의 좋아요
       </h2>
       <hr />
-      {console.log(props.user._id)}
       <NavBar handleActive={handleActive} />
       {navBar === "review"
         ? myReview.map((el: IReview, index: number) => {
-            console.log("review");
             return (
               <ReviewEntry
                 Review={el}

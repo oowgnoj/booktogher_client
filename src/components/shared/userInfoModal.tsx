@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useState, useEffect } from "react";
 import { IUserInfo } from "./../shared/Types";
 import { connect } from "react-redux";
 import { updateUserInfo, updateUserImg } from "./../../Redux/modules/user";
@@ -27,6 +27,14 @@ const EditUserInfo: React.FC<IProps> = ({
   const [passwordState, setPassword] = useState<string>("");
   const [passwordCheckState, setPasswordCheck] = useState<string>("");
   const [profileState, setProfile] = useState<string>(user.profile);
+
+  // useEffect(() => {
+  //   if (current) {
+  //     fetchGetReviewLikes(setReview, setReviewBooks);
+  //   } else {
+  //     didMountRef.current = true;
+  //   }
+  // }, [userImg]);
 
   // handle change email and username (input box)
   const changeInputValue = (
@@ -81,12 +89,16 @@ const EditUserInfo: React.FC<IProps> = ({
         uk-overflow-auto
         style={{ paddingLeft: "200px", paddingRight: "200px" }}
       >
+        {console.log(user)}
+        {console.log(typeof userImg)}
         <div>
           <img
             src={
-              user.image === null
+              userImg === ""
                 ? "https://cdn2.iconfinder.com/data/icons/bussiness-management-supersolid/24/add_add_contact_create_new_person_user_add_friend-512.png"
-                : user.image
+                : userImg === "string "
+                ? userImg
+                : URL.createObjectURL(userImg)
             }
             style={{ width: "200px", height: "200px" }}
           />

@@ -126,10 +126,15 @@ class EditCuration extends React.Component<
   }
 
   public handlePatch(): void {
+
     if (!this.state.title) {
       alert("큐레이션 제목을 등록해주세요");
     } else if (!this.state.contents) {
       alert("큐레이션 본문 내용을 등록해주세요");
+
+    } else if (this.state.books.length === 0 || !this.state.books[0]._id) {
+      alert("1권 이상의 책을 선택하여 주세요");
+
     } else {
       const postBody: IPatchBody = {
         title: this.state.title,
@@ -241,11 +246,13 @@ class EditCuration extends React.Component<
           />
         </div>
         <div className="editcuration_review">
-          <ReviewsList
-            reviews={this.state.reviews}
-            deleteEvent={this.reviewDelete}
-            handleReviewSelect={this.handleReviewSelect}
-          />
+          {this.state.reviews ? (
+            <ReviewsList
+              reviews={this.state.reviews}
+              deleteEvent={this.reviewDelete}
+              handleReviewSelect={this.handleReviewSelect}
+            />
+          ) : null}
           <span className="editcuration_review_btn"></span>
           <span className="editcuration_review_reviewlist">
             <div className="editcuration_review_reviewentry"></div>

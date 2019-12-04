@@ -119,16 +119,27 @@ class WriteCuration extends React.Component<{}, IState> {
   }
 
   public handlePost(): void {
+
     if (!this.state.title) {
       alert("큐레이션 제목을 등록해주세요");
     } else if (!this.state.contents) {
       alert("큐레이션 본문 내용을 등록해주세요");
+
+    } else if (this.state.books.length === 0 || !this.state.books[0]._id) {
+      alert("1권 이상의 책을 선택하여 주세요");
+
     } else {
       const postBody: IBody = {
         title: this.state.title,
         contents: this.state.contents,
         books: this.state.books.map((book: IBookSelectedCuration) => book._id),
-        reviews: this.state.reviews.map((review: IReview) => review._id)
+
+        reviews: this.state.reviews
+          ? this.state.reviews[0]._id
+            ? this.state.reviews.map((review: IReview) => review._id)
+            : []
+          : []
+
       };
 
       const getPostedId = (id: string): void =>
