@@ -61,15 +61,15 @@ class Main extends React.Component {
     return (
       <div className="main">
         <img
-        src={logo}
-        alt="로고"
-        style={{
-          width: "100px",
-          marginTop: "-80px",
-          marginLeft: "48%",
-          marginBottom: "20px"
-        }}
-      />
+          src={logo}
+          alt="로고"
+          style={{
+            width: "100px",
+            marginTop: "-80px",
+            marginLeft: "48%",
+            marginBottom: "20px"
+          }}
+        />
         <Slider review={filteredReview} />
 
         <div className="" style={{ marginTop: "0px" }}>
@@ -132,7 +132,7 @@ class Main extends React.Component {
               {/* <button className="uk-button uk-button-default uk-button-large "> */}
               <p>
                 큐레이션 등록하러 가기
-                <span uk-icon="pencil" style={{ marginLeft: "2%"}}></span>
+                <span uk-icon="pencil" style={{ marginLeft: "2%" }}></span>
                 <p style={{ fontSize: "13px" }}>
                   책과 서평으로 구성된 당신의 북 플레이리스트를 공유하여 주세요.
                 </p>
@@ -144,7 +144,7 @@ class Main extends React.Component {
         </div>
 
         <div className="main_review_list_start">
-        <div
+          <div
             className="main_recocollection_title"
             style={{
               marginTop: "80px",
