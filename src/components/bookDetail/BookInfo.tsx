@@ -21,7 +21,7 @@ interface INewBook {
 const BookInfo = ({ bookInfo, rating, user, updateUserInfo } :IProps): ReactElement => {
     const bookAvgRating: ReactElement[]  = rating.map((info:IRating)=>{
       return( 
-        <span> {info.avg_rating.toFixed(2)} </span>
+        <span> {Math.round(info.avg_rating)} </span>
       )
     })
     const bookUserRating: any = rating.map((info:IRating)=>{
