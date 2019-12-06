@@ -40,7 +40,7 @@ export interface IUserInfo {
   finished: IBookFinished[];
   numBooksGoal: number;
   numReviewsGoal: number;
-  // accountType: string;
+  accountType: string;
 }
 
 interface ISimple_toRead {

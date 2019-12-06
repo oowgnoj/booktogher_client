@@ -13,7 +13,7 @@
 
 ## Stacks
 
-| Purpose          | Stacks                    |
+| Type             | Stacks                    |
 | ---------------- | ------------------------- |
 | Library          | React                     |
 | State Management | Redux, Redux-thunk        |
