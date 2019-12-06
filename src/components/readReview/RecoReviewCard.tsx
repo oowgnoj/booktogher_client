@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react";
 import "./RecoReviewCard.css";
 import { Link } from "react-router-dom";
+import { reviews } from "../shared/InitialStates";
 
 const RecoReviewCard = ({ review }: any): ReactElement => {
   return (
