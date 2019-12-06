@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Store from "../../Redux/configureStore";
 import { requestUserInfo } from "../../Redux/modules/user";
+import { Socket } from "net";
+import store from "../../Redux/configureStore";
 
 class OAuth extends Component<any, any> {
   constructor(props: any) {
@@ -38,6 +40,11 @@ class OAuth extends Component<any, any> {
         // 에러 핸들링 작업 필요
       }
     });
+  }
+
+  public componentWillUnmount() {
+    const { socket, provider } = this.props;
+    socket.off(provider);
   }
 
   public openPopup(e: any) {
