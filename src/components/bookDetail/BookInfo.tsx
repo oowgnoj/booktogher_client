@@ -81,7 +81,11 @@ const BookInfo = ({ bookInfo, rating, user, updateUserInfo } :IProps): ReactElem
           : <div className="rating-render-box01"></div>}
           
           <div className="bookInfo-detail">
-            <div>저자 : {bookAuther}</div>
+            <div>저자 : {` ${
+                bookInfo.authors.length > 1
+                  ? bookInfo.authors[0] + " 외"
+                  : bookInfo.authors[0]
+              }`}</div>
             {bookInfo.translators.length !== 0 ? 
               <div>통역 : {bookTranslator}</div>
               : null}

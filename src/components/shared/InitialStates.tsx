@@ -116,7 +116,8 @@ export const user: IUserInfo = {
     }
   ],
   numBooksGoal: 0,
-  numReviewsGoal: 0
+  numReviewsGoal: 0,
+  accountType: ""
 };
 
 export const montlyNumFinishedBook: NumbookRead[] = [
