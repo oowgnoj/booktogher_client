@@ -121,8 +121,11 @@ class SearchReviews extends React.Component<IProps, IState> {
                       {review.contents.length > 120
                         ? review.contents
                             .replace(/<[^>]*>?/gm, "")
+                            .replace("&nbsp;", "")
                             .slice(0, 120) + "..."
-                        : review.contents.replace(/<[^>]*>?/gm, "")}
+                        : review.contents
+                            .replace(/<[^>]*>?/gm, "")
+                            .replace("&nbsp;", "")}
                     </p>
                   </div>
                 </div>
