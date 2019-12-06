@@ -20,7 +20,11 @@ class MyReviewSelect extends React.Component<IProps> {
   }
 
   public plusClick = (e: any) => {
-    e.currentTarget.style.opacity = 1;
+    if (e.currentTarget.style.opacity === 1) {
+      e.currentTarget.style.opacity = 0.4;
+    } else {
+      e.currentTarget.style.opacity = 1;
+    }
   };
 
   public render(): ReactElement {
@@ -31,7 +35,9 @@ class MyReviewSelect extends React.Component<IProps> {
             className="book-select"
             key={index}
             id={`${index}`}
-            onClick={e => this.props.clicked(e)}
+            onClick={e => {
+              this.props.clicked(e);
+            }}
             style={{
               width: "80%",
               height: "auto",

@@ -99,6 +99,7 @@ class ReviewSelect extends React.Component<IProps, IState> {
     const index: number = e.currentTarget.id;
     const { navSelect } = this.state;
     let clickedReview: any;
+
     if (navSelect === "myReview") {
       clickedReview = this.state.myReviews[index];
       clickedReview.books = this.state.myReviewsBooks[index];
@@ -108,9 +109,18 @@ class ReviewSelect extends React.Component<IProps, IState> {
     } else if (navSelect === "searchReview") {
       clickedReview = this.state.reviews[index];
     }
-    this.setState({
-      selectedReviews: [...this.state.selectedReviews, clickedReview]
-    });
+
+    if (this.state.selectedReviews.includes(clickedReview)) {
+      const newSelectedReviews = this.state.selectedReviews.slice();
+      newSelectedReviews.splice(newSelectedReviews.indexOf(clickedReview), 1);
+      this.setState({
+        selectedReviews: newSelectedReviews
+      });
+    } else {
+      this.setState({
+        selectedReviews: [...this.state.selectedReviews, clickedReview]
+      });
+    }
   }
 
   public clickConfirm(): void {
