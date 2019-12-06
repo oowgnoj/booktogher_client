@@ -66,6 +66,10 @@
   fill : red;
 }
 
+.unheartLike {
+  cursor: pointer;
+}
+
 .review-likes span {
   float: left;
   margin-top: 5px;

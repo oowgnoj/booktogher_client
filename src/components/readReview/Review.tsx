@@ -190,7 +190,7 @@ class Review extends React.Component<IProps, IState> {
                   onClick={this.handleDeleteLikes}
                 ></span>
               ) : (
-                <span uk-icon="heart" onClick={this.handleClickLikes}></span>
+                <span uk-icon="heart" className="unheartLike" onClick={this.handleClickLikes}></span>
               )}
               <div className="likes-num">{this.state.likesNum}</div>
 
