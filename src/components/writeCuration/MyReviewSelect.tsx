@@ -20,10 +20,12 @@ class MyReviewSelect extends React.Component<IProps> {
   }
 
   public plusClick = (e: any) => {
-    if (e.currentTarget.style.opacity === 1) {
-      e.currentTarget.style.opacity = 0.4;
+    const check = e.currentTarget.querySelector(".select-plus");
+
+    if (check.style.opacity === 1) {
+      check.style.opacity = 0.4;
     } else {
-      e.currentTarget.style.opacity = 1;
+      check.style.opacity = 1;
     }
   };
 
@@ -37,6 +39,7 @@ class MyReviewSelect extends React.Component<IProps> {
             id={`${index}`}
             onClick={e => {
               this.props.clicked(e);
+              this.plusClick(e);
             }}
             style={{
               width: "80%",
@@ -124,8 +127,11 @@ class MyReviewSelect extends React.Component<IProps> {
                             {info.contents.length > 120
                               ? info.contents
                                   .replace(/<[^>]*>?/gm, "")
+                                  .replace(/&nbsp;/g, " ")
                                   .slice(0, 120) + "..."
-                              : info.contents.replace(/<[^>]*>?/gm, "")}
+                              : info.contents
+                                  .replace(/<[^>]*>?/gm, "")
+                                  .replace(/&nbsp;/g, " ")}
                           </p>
                         </div>
                       </div>
@@ -133,7 +139,7 @@ class MyReviewSelect extends React.Component<IProps> {
                     <span
                       className="select-plus"
                       uk-icon="icon: check; ratio: 1.5"
-                      onClick={this.plusClick}
+                      /* onClick={this.plusClick} */
                       style={{
                         paddingLeft: "50px",
                         paddingTop: "25px",

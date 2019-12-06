@@ -92,11 +92,11 @@ class Layout extends React.Component {
                               ).length > 150
                               ? filteredReview[0].contents
                                   .replace(/<[^>]*>?/gm, "")
+                                  .replace(/&nbsp;/g, " ")
                                   .slice(0, 150) + "..."
-                              : filteredReview[0].contents.replace(
-                                  /<[^>]*>?/gm,
-                                  ""
-                                )
+                              : filteredReview[0].contents
+                                  .replace(/<[^>]*>?/gm, "")
+                                  .replace(/&nbsp;/g, " ")
                             : "서평 본문"}
                         </div>
                       </Link>
@@ -120,17 +120,16 @@ class Layout extends React.Component {
                         </span>
                         <div>
                           {filteredReview[1]
-                            ? filteredReview[1].contents.replace(
-                                /<[^>]*>?/gm,
-                                ""
-                              ).length > 150
+                            ? filteredReview[1].contents
+                                .replace(/<[^>]*>?/gm, "")
+                                .replace(/&nbsp;/g, " ").length > 150
                               ? filteredReview[1].contents
                                   .replace(/<[^>]*>?/gm, "")
+                                  .replace(/&nbsp;/g, " ")
                                   .slice(0, 150) + "..."
-                              : filteredReview[1].contents.replace(
-                                  /<[^>]*>?/gm,
-                                  ""
-                                )
+                              : filteredReview[1].contents
+                                  .replace(/<[^>]*>?/gm, "")
+                                  .replace(/&nbsp;/g, " ")
                             : "서평 본문"}
                         </div>
                       </Link>
@@ -154,17 +153,15 @@ class Layout extends React.Component {
                         </span>
                         <div>
                           {filteredReview[2]
-                            ? filteredReview[2].contents.replace(
-                                /<[^>]*>?/gm,
-                                ""
-                              ).length > 150
+                            ? filteredReview[2].contents
+                                .replace(/<[^>]*>?/gm, "")
+                                .replace(/&nbsp;/g, " ").length > 150
                               ? filteredReview[2].contents
                                   .replace(/<[^>]*>?/gm, "")
                                   .slice(0, 150) + "..."
-                              : filteredReview[2].contents.replace(
-                                  /<[^>]*>?/gm,
-                                  ""
-                                )
+                              : filteredReview[2].contents
+                                  .replace(/<[^>]*>?/gm, "")
+                                  .replace(/&nbsp;/g, " ")
                             : "서평 본문"}
                         </div>
                       </Link>
