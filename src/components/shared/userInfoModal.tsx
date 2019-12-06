@@ -21,7 +21,7 @@ const EditUserInfo: React.FC<IProps> = ({
   updateUserInfo,
   updateUserImg
 }: IProps): ReactElement => {
-  const [userImg, setUserImg] = useState<any>(user.image);
+  const [userImg, setUserImg] = useState<any>("");
   const [nameState, setName] = useState<string>(user.name);
   const [emailState, setEmail] = useState<string>(user.email);
   const [profileState, setProfile] = useState<string>(user.profile);
@@ -78,7 +78,7 @@ const EditUserInfo: React.FC<IProps> = ({
           <img
             src={
               userImg === ""
-                ? "http://uploads.webflow.com/56a09b532f2ef2655bb8cec2/56a0bb98e9a99a4669bf7f07_user_icon.png"
+                ? "https://cdn2.iconfinder.com/data/icons/bussiness-management-supersolid/24/add_add_contact_create_new_person_user_add_friend-512.png"
                 : userImg === "string "
                 ? userImg
                 : URL.createObjectURL(userImg)
