@@ -68,7 +68,6 @@ class ReviewSelect extends React.Component<IProps, IState> {
   }
 
   public componentDidMount(): void {
-    console.log("props connect : ", this.props.user);
     const setStateMyLikesReview = (
       reviewsRes: IReview[],
       booksInfo: IReviewSearchBook[][]

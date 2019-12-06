@@ -15,7 +15,6 @@ class SearchReviewSelect extends React.Component<IProps> {
 
   public plusClick = (e: any) => {
     const check = e.currentTarget.querySelector(".select-plus");
-    console.log("check ? ", check);
 
     if (check.style.opacity === 1) {
       check.style.opacity = 0.4;
