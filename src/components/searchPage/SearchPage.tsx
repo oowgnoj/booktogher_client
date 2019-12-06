@@ -91,9 +91,12 @@ class SearchPage extends React.Component<
 
   public handleKeyPress(e: any): any{
     if(e.key === 'Enter'){
-      if(this.state.title !== ""){
-        this.setState({redirect: true})
+      if(this.state.title === this.props.match.params.keyWord){
+        e.preventDefault();
       }
+      else if(this.state.title !== ""){
+        this.setState({redirect: true})
+      } 
       else {
         alert("검색어를 입력해주세요")
         e.preventDefault();
@@ -131,7 +134,7 @@ class SearchPage extends React.Component<
       };
       fetchReviewSearch(setStateReview, this.state.title);
       this.setState({redirect: false})
-    }
+    } 
   }
 
   public render(): ReactElement {

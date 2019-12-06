@@ -179,7 +179,7 @@ class Review extends React.Component<IProps, IState> {
             <h1 className="title">{review.title}</h1>
             <div className="review-likes">
               {this.props.review.published === false ? (
-                <span>비공개</span>
+                <span className="published">비공개</span>
               ) : null}
 
               {this.state.likes ? (

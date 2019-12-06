@@ -1,6 +1,8 @@
 import React, { ReactElement } from "react";
 import { IBookState, IBook } from "../writeReview/writeInterface";
 import { fetchBookSearch } from "../writeReview/fetchWrite";
+import { IBookReading } from "../shared/Types";
+import { connect } from 'react-redux';
 import "../writeReview/Modal.scss";
 
 interface ISelected {
@@ -17,11 +19,15 @@ interface IState {
   selectBooksTitle: string[];
   selectedBooks: ISelected[];
   isOpen: boolean;
+  to_read: IBookReading[];
+  finished: any;
 }
 
 interface IProps {
   addBooks: any;
   close: any;
+  to_read: IBookReading[];
+  finished: any;
 }
 
 class BookSelect extends React.Component<IProps, IState> {
@@ -41,7 +47,9 @@ class BookSelect extends React.Component<IProps, IState> {
       selectBooksId: [""],
       selectBooksTitle: [""],
       selectedBooks: [{ _id: "", title: "", authors: "", thumbnail: "" }],
-      isOpen: true
+      isOpen: true,
+      to_read: this.props.to_read,
+      finished: this.props.finished
     };
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.clickSearchButton = this.clickSearchButton.bind(this);
@@ -133,6 +141,25 @@ class BookSelect extends React.Component<IProps, IState> {
       }
     );
 
+    const readingBook:ReactElement[] = this.state.finished.map(
+      (info: IBookReading) => {
+        return (
+          <div className="book-select" key ={info.book._id}>           
+            <img
+              src={info.book.thumbnail}
+              width="100px"
+              alt={`${info.book._id}:${info.book.title}:${
+                info.book.authors.length > 1
+                  ? info.book.authors[0] + " 외"
+                  : info.book.authors[0]
+              }`}
+              onClick = {(e): void=> this.clickSelectedBook(e)}
+            />
+            <div>{info.book.title}</div>
+          </div>
+        )
+      })
+
     const selectBookId: string[] = this.state.selectBooksId.slice(1);
     const selectBookTitle: string[] = this.state.selectBooksTitle.slice(1);
 
@@ -165,7 +192,9 @@ class BookSelect extends React.Component<IProps, IState> {
               <div className="content">
                 {this.state.books.length > 0
                   ? this.state.books[0]._id === ""
-                    ? "책을 검색해주세요."
+                    ? readingBook.length !== 0 ?
+                    <div>다 읽은 책 목록
+                    <div>{readingBook}</div> </div>:"책을 검색해주세요."
                     : searchBookList
                   : "책 검색 결과가 없습니다."}
               </div>
@@ -186,4 +215,12 @@ class BookSelect extends React.Component<IProps, IState> {
   }
 }
 
-export default BookSelect;
+const mapStateToProps = (state :any) :any => {
+  return {
+      reading: state.user.User.reading,
+      to_read: state.user.User.to_read,
+      finished: state.user.User.finished
+  };
+}
+
+export default connect(mapStateToProps)(BookSelect);

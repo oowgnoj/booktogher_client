@@ -179,22 +179,29 @@ class EditPost extends React.Component<RouteComponentProps<IMatchParams>, IState
               onClick = {this.clickPaintBucket}
             >색선택</button>
             
-              
-            {this.state.body.published ? 
-            <button  
-              className="unlock" 
-              onClick = {this.handlePublished}
-            >공개</button>
-            : 
-            <button 
-              className="lock" 
-              onClick = {this.handlePublished}
-            >비공개</button>}
-
             <button 
               className =""
               onClick={this.clickPostEdit}
-            >등록</button>             
+            >등록</button>  
+
+            {this.state.body.published ? (
+              <label className="unlock">
+                <input
+                  className="uk-checkbox" 
+                  type="checkbox" 
+                  onChange={this.handlePublished}
+                /> 
+                비공개</label>            
+            ) : (
+              <label className="unlock">
+                <input 
+                  className="uk-checkbox" 
+                  type="checkbox" 
+                  onChange={this.handlePublished}
+                  checked
+                /> 
+                비공개</label> 
+            )}           
           </div>
 
           {this.state.colorPicker ? 
