@@ -2,7 +2,7 @@
 
 > 서(書)로모임은 서평 / 큐레이션을 작성하고 다른 유저들과 공유할 수 있는 플랫폼 입니다.
 
-![Screen_Shot_2019-12-04_at_2.32.17_PM](/Users/jongwoopark/BCHA-client/src/Asset/images/log.png)
+![Alt text](src/Asset/images/main.png "Main")
 
 ## Service Detail
 
