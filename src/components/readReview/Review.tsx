@@ -151,7 +151,8 @@ class Review extends React.Component<IProps, IState> {
             <b>
               책 : {info.title} : 평점
               {this.state.bookRating.length
-                ? this.state.bookRating[index].user_rating.rating
+                ? this.state.bookRating[index].user_rating !== null ?
+                this.state.bookRating[index].user_rating.rating :0
                 : 0}
             </b>
           </div>
