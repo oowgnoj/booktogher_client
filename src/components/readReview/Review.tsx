@@ -149,11 +149,11 @@ class Review extends React.Component<IProps, IState> {
         return (
           <div key={info._id}>
             <b>
-              책 : {info.title} : 평점
+              책 : {info.title} 
               {this.state.bookRating.length
                 ? this.state.bookRating[index].user_rating !== null ?
-                this.state.bookRating[index].user_rating.rating :0
-                : 0}
+                `  -  평점 ${this.state.bookRating[index].user_rating.rating}` : null
+                : null}
             </b>
           </div>
         );
@@ -211,10 +211,10 @@ class Review extends React.Component<IProps, IState> {
           </div>
         </div>
         <div className="post-area">
-
-          <div style ={{fontStyle:"italic"}} onClick={this.handleHistoryClick}>by {review.author.name}</div>
-
-
+          <div 
+            style ={{fontStyle:"italic", cursor:"pointer", width: "100px"}} 
+            onClick={this.handleHistoryClick}>by {review.author.name}
+          </div>
           <div className="book-rating">{bookTitle}</div>
           <div
             dangerouslySetInnerHTML={{ __html: review.contents }}
