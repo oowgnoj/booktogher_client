@@ -22,7 +22,7 @@ const BookInfo = ({ bookList }: IBookState): ReactElement => {
           <div className="book-authors">저자 :  
           {info.authors.map((author:string) =>{
               return(
-                <span>{`${author}, `}</span>
+                <span>{` ${author},`}</span>
               )
             })}</div>
           <div className="book-contents">책 소개 : {info.contents}</div>
