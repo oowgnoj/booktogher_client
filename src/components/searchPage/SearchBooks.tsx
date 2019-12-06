@@ -31,14 +31,12 @@ class SearchBooks extends React.Component<IProps, IState> {
     }
   }
   public componentDidUpdate(prevProps: any): void {
-    console.log(this.props.books)
     if (this.props.books !== prevProps.books) {
       this.setState({ books: this.props.books }); 
     }
   }
 
   public render(): ReactElement {
-    console.log(this.props.books)
     const searchBookList: ReactElement[] = this.props.books.map(
       (info: IBook) => {
         return (

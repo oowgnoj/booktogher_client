@@ -34,7 +34,7 @@
 .review-likes {
   margin-left: 94%;
   text-align: right;
-  width: 160px;
+  width: 220px;
   height: 40px;
 }
 .post-area {
@@ -97,6 +97,11 @@
 
 .text-area {
   margin-top: 60px;
+}
+
+.published {
+  font-size: 10px;
+  margin-right: 8px;
 }
 
 @media ( max-width: 768px ){

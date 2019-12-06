@@ -151,7 +151,8 @@ class Review extends React.Component<IProps, IState> {
             <b>
               책 : {info.title} : 평점
               {this.state.bookRating.length
-                ? this.state.bookRating[index].user_rating.rating
+                ? this.state.bookRating[index].user_rating !== null ?
+                this.state.bookRating[index].user_rating.rating :0
                 : 0}
             </b>
           </div>
@@ -179,7 +180,7 @@ class Review extends React.Component<IProps, IState> {
             <h1 className="title">{review.title}</h1>
             <div className="review-likes">
               {this.props.review.published === false ? (
-                <span>비공개</span>
+                <span className="published">비공개</span>
               ) : null}
 
               {this.state.likes ? (
