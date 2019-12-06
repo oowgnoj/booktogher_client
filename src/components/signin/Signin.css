@@ -1,17 +1,17 @@
 .signin {
-  height: 500px;
+  min-height: 500px;
   width: 100%;
   padding-bottom: 10%;
 }
 
 .signin form {
   position: absolute;
-  top: 22%;
+  top: 200px;
   left: 40%;
   text-align: center;
 }
 
 .signin form input {
-  padding: 10%;
-  margin: 5% 0;
+  padding: 20px;
+  margin: 10px 0;
 }
