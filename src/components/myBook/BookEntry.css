@@ -7,7 +7,7 @@
   vertical-align: top;
 }
 
-.title-text {
+.title-text p {
   font-size: 15px;
   margin-bottom: 0;
   height: 50px;
@@ -15,6 +15,7 @@
   color: "black";
 }
 .author-text {
+  margin-top: 0;
   font-size: 15px;
   text-align: center;
 }

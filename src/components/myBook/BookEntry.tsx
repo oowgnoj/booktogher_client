@@ -101,7 +101,7 @@ const BookEntry: React.FC<IProps> = ({
           </div>
         </div>
         <Link to={`/book/${reading.book._id}`} className="title-text">
-          <p style={{ color: "black" }}>{reading.book.title}</p>
+          <p>{reading.book.title}</p>
         </Link>
         <p className="author-text">
           {reading.book.authors.length > 1
