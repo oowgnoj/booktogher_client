@@ -1,0 +1,7 @@
+.curation_likes empty svg {
+  fill: none;
+}
+
+.curation_likes full svg path {
+  fill: red;
+}

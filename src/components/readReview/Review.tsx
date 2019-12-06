@@ -37,14 +37,13 @@ class Review extends React.Component<IProps, IState> {
       likesNum: this.props.review.likes.length,
 
       redirect: false,
-      historyModal: false   
-    }
+      historyModal: false
+    };
     this.handleClickLikes = this.handleClickLikes.bind(this);
     this.handleDeleteLikes = this.handleDeleteLikes.bind(this);
     this.handleDeleteReview = this.handleDeleteReview.bind(this);
     this.handleHistoryClick = this.handleHistoryClick.bind(this);
     this.detectHistoryModal = this.detectHistoryModal.bind(this);
-
   }
 
   public handleClickLikes(): void {
@@ -164,18 +163,15 @@ class Review extends React.Component<IProps, IState> {
 
     return (
       <div className="review-area">
-
-        {this.state.redirect ? (
-          <Redirect to="/" />
-        ) : null}
+        {this.state.redirect ? <Redirect to="/" /> : null}
         {this.state.historyModal ? (
-            <UserHistoryModal
-              author={this.props.review.author}
-              handleClose={this.detectHistoryModal}
-            />
-          ) : null}
-        <div className="review-cover" style ={style}>
-          <div className="title-area" >
+          <UserHistoryModal
+            author={this.props.review.author}
+            handleClose={this.detectHistoryModal}
+          />
+        ) : null}
+        <div className="review-cover" style={style}>
+          <div className="title-area">
             <h1 className="title">{review.title}</h1>
             <div className="review-likes">
               {this.props.review.published === false ? (
@@ -210,9 +206,12 @@ class Review extends React.Component<IProps, IState> {
           </div>
         </div>
         <div className="post-area">
-
-          <div style ={{fontStyle:"italic"}} onClick={this.handleHistoryClick}>by {review.author.name}</div>
-
+          <div
+            style={{ fontStyle: "italic" }}
+            onClick={this.handleHistoryClick}
+          >
+            by {review.author.name}
+          </div>
 
           <div className="book-rating">{bookTitle}</div>
           <div
