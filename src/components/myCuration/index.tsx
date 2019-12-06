@@ -13,12 +13,14 @@ interface IProps {
 const Curation: React.FC<IProps> = (props: any): ReactElement => {
   const [myCuration, setMyCuration] = useState<ICuration[]>(curations);
 
+  // componentDidUpdate 사용했었다가 componentDidMount로 바꿈
   useEffect(() => {
     fetchCuration(setMyCuration, props.user._id);
-  }, [props.user._id]);
+  }, []);
 
   return (
     <div className="wrapper">
+      {console.log(props.user)}
       <h2 style={{ fontFamily: "Nanum Myeongjo, serif", fontWeight: "bold" }}>
         나의 큐레이션{" "}
         <button
@@ -37,9 +39,7 @@ const Curation: React.FC<IProps> = (props: any): ReactElement => {
           return <Entry curation={el} from={"my"} />;
         })
       ) : (
-        <div>
-          <div></div>
-        </div>
+        <div></div>
       )}
     </div>
   );

@@ -41,6 +41,7 @@ const MyLikes: React.FC = (props: any): ReactElement => {
 
   return (
     <div className="wrapper">
+      {console.log(props.user)}
       <h2 style={{ fontFamily: "Nanum Myeongjo, serif", fontWeight: "bold" }}>
         나의 좋아요
       </h2>

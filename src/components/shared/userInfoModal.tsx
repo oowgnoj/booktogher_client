@@ -24,17 +24,7 @@ const EditUserInfo: React.FC<IProps> = ({
   const [userImg, setUserImg] = useState<any>("");
   const [nameState, setName] = useState<string>(user.name);
   const [emailState, setEmail] = useState<string>(user.email);
-  const [passwordState, setPassword] = useState<string>("");
-  const [passwordCheckState, setPasswordCheck] = useState<string>("");
   const [profileState, setProfile] = useState<string>(user.profile);
-
-  // useEffect(() => {
-  //   if (current) {
-  //     fetchGetReviewLikes(setReview, setReviewBooks);
-  //   } else {
-  //     didMountRef.current = true;
-  //   }
-  // }, [userImg]);
 
   // handle change email and username (input box)
   const changeInputValue = (
@@ -66,20 +56,15 @@ const EditUserInfo: React.FC<IProps> = ({
     let updated: any = {
       name: nameState,
       email: emailState,
-      profile: profileState,
-      password: passwordState
+      profile: profileState
     };
-    if (passwordState === passwordCheckState) {
-      if (!userImg) {
-        updateUserInfo(updated);
-      } else {
-        updateUserImg(userImg);
-        updateUserInfo(updated);
-      }
-      handleClose(e);
+    if (!userImg) {
+      updateUserInfo(updated);
     } else {
-      alert("password가 일치하지 않습니다.");
+      updateUserImg(userImg);
+      updateUserInfo(updated);
     }
+    handleClose(e);
   };
 
   return (
@@ -95,7 +80,7 @@ const EditUserInfo: React.FC<IProps> = ({
           <img
             src={
               userImg === ""
-                ? "https://cdn2.iconfinder.com/data/icons/bussiness-management-supersolid/24/add_add_contact_create_new_person_user_add_friend-512.png"
+                ? "http://uploads.webflow.com/56a09b532f2ef2655bb8cec2/56a0bb98e9a99a4669bf7f07_user_icon.png"
                 : userImg === "string "
                 ? userImg
                 : URL.createObjectURL(userImg)
@@ -183,7 +168,6 @@ const EditUserInfo: React.FC<IProps> = ({
     </div>
   );
 };
-
 function mapDispatchToProps(dispatch: any): any {
   return {
     updateUserImg: (img: File): void => dispatch(updateUserImg(img)),

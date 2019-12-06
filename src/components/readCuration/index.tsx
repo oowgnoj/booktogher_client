@@ -162,7 +162,6 @@ class ReadCuration extends React.Component<IParams, IState> {
                 handleClose={this.detectHistoryModal}
               />
             ) : null}
-
             {this.state.isDeleted ? <Redirect to="/" /> : null}
             <div
               className="readCuration_header_likes"

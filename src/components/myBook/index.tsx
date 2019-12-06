@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ReactElement, useRef } from "react";
 import { connect } from "react-redux";
 
-import "./MyBook.css";
+import "./myBook.css";
 
 import {
   IUserInfo,
@@ -55,7 +55,7 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
     temp = <BookSelect addBooks={addBooks} close />;
   }
 
-  //독서 history
+  // 독서 history
   const handleshowBookHistory = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void => {

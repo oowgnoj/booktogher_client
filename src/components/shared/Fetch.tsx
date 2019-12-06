@@ -124,7 +124,7 @@ export const fetchGetReviewLikes = (
 
 // export const fetchCheckUserStatus = (callback: any): any => {
 //   fetch(`${url}/user`, { credentials: "include" }).then((res: Response) => {
-//     console.log(res);
+//     (res);
 //     if (res.status === 200) {
 //       callback(true);
 //     } else {
