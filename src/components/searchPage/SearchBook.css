@@ -106,3 +106,7 @@
   padding: 30px 0px;
   border-bottom: 1px solid rgb(184, 184, 184);
 }
+
+.uk-position-z-index {
+  z-index: 999;
+}

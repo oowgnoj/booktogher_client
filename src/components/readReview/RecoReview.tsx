@@ -32,6 +32,16 @@ class RecoReview extends React.Component<IProps, IReviewState> {
     };
   }
 
+  public componentDidMount(): void {
+   
+      const setStateReviewList = (res: any): void => {
+        this.setState({ reviewList: res });
+      };
+      if(this.props.bookId[0] !== ""){
+        fetchBookReviewList(setStateReviewList, this.props.bookId[0]);
+      }
+  }
+
   public componentDidUpdate(prevProps: any): void {
     if (this.props.bookId !== prevProps.bookId) {
       const setStateReviewList = (res: any): void => {
@@ -44,6 +54,7 @@ class RecoReview extends React.Component<IProps, IReviewState> {
   }
   
   public render(): ReactElement {
+    console.log(this.props.bookId[0])
     const reviewCard: any = this.state.reviewList.map((info: IReview) => {
       if(this.props.reviewId !== info._id && info.published !== false){
         return (
