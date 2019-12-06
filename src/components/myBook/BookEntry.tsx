@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import Button from "./Button";
-
+import { Link } from "react-router-dom";
 import { IBookToRead, IBookReading, IBookFinished } from "./../shared/Types";
 import "./BookEntry.css";
 
@@ -26,6 +26,7 @@ const BookEntry: React.FC<IProps> = ({
   if (toRead) {
     return (
       <div className="content-holder">
+        {console.log(toRead)}
         <div className="image-container">
           <img className="book-image" src={toRead.book.thumbnail} />
           <div className="overlay">
@@ -52,8 +53,14 @@ const BookEntry: React.FC<IProps> = ({
             <div className="text"></div>
           </div>
         </div>
-        <p className="title-text">{toRead.book.title}</p>
-        <p className="author-text">{toRead.book.authors}</p>
+        <Link to={`/book/${toRead.book._id}`} className="title-text">
+          <p style={{ color: "black" }}>{toRead.book.title}</p>
+        </Link>
+        <p className="author-text">
+          {toRead.book.authors.length > 1
+            ? toRead.book.authors[0] + " 외"
+            : toRead.book.authors[0]}
+        </p>
         <Button
           status={"toRead"}
           bookID={toRead.book}
@@ -93,8 +100,14 @@ const BookEntry: React.FC<IProps> = ({
             </div>
           </div>
         </div>
-        <p className="title-text">{reading.book.title}</p>
-        <p className="author-text">{reading.book.authors.slice(0, 6)}</p>
+        <Link to={`/book/${reading.book._id}`} className="title-text">
+          <p style={{ color: "black" }}>{reading.book.title}</p>
+        </Link>
+        <p className="author-text">
+          {reading.book.authors.length > 1
+            ? reading.book.authors[0] + " 외"
+            : reading.book.authors[0]}
+        </p>
         <Button
           status={"reading"}
           bookID={reading.book}
@@ -136,8 +149,14 @@ const BookEntry: React.FC<IProps> = ({
             </div>
           </div>
         </div>
-        <p className="title-text">{finished.book.title}</p>
-        <p className="author-text">{finished.book.authors}</p>
+        <Link to={`/book/${finished.book._id}`} className="title-text">
+          <p style={{ color: "black" }}>{finished.book.title}</p>
+        </Link>{" "}
+        <p className="author-text">
+          {finished.book.authors.length > 1
+            ? finished.book.authors[0] + " 외"
+            : finished.book.authors[0]}
+        </p>
         <Button
           status={"finished"}
           bookID={finished.book}

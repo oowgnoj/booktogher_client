@@ -21,7 +21,7 @@ const EditUserInfo: React.FC<IProps> = ({
   updateUserInfo,
   updateUserImg
 }: IProps): ReactElement => {
-  const [userImg, setUserImg] = useState<any>("");
+  const [userImg, setUserImg] = useState<any>(user.image);
   const [nameState, setName] = useState<string>(user.name);
   const [emailState, setEmail] = useState<string>(user.email);
   const [profileState, setProfile] = useState<string>(user.profile);
@@ -74,8 +74,6 @@ const EditUserInfo: React.FC<IProps> = ({
         uk-overflow-auto
         style={{ paddingLeft: "200px", paddingRight: "200px" }}
       >
-        {console.log(user)}
-        {console.log(typeof userImg)}
         <div>
           <img
             src={
