@@ -49,7 +49,7 @@ class FindPassword extends React.Component<any, IState> {
               );
             }
           }
-        } else if (res.status === 200) {
+        } else if (res.message) {
           alert("비밀번호 재설정 메일이 전송되었습니다.");
           this.props.history.push("/");
         }
