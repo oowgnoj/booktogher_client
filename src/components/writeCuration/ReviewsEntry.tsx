@@ -97,9 +97,13 @@ class ReviewsEntry extends React.Component<IProps> {
             <div className="reviewentry_contents" style={{ fontSize: "0.9em" }}>
               <p style={{ display: "inline-block", width: "80%" }}>
                 {review.contents.length > 120
-                  ? review.contents.replace(/<[^>]*>?/gm, "").slice(0, 120) +
-                    "..."
-                  : review.contents.replace(/<[^>]*>?/gm, "")}
+                  ? review.contents
+                      .replace(/<[^>]*>?/gm, "")
+                      .replace(/&nbsp;/g, " ")
+                      .slice(0, 120) + "..."
+                  : review.contents
+                      .replace(/<[^>]*>?/gm, "")
+                      .replace(/&nbsp;/g, " ")}
               </p>
               <span
                 className="reviewentry_close"

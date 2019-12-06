@@ -68,7 +68,7 @@ class ReviewSelect extends React.Component<IProps, IState> {
   }
 
   public componentDidMount(): void {
-    console.log('props connect : ', this.props.user);
+    console.log("props connect : ", this.props.user);
     const setStateMyLikesReview = (
       reviewsRes: IReview[],
       booksInfo: IReviewSearchBook[][]
@@ -110,13 +110,7 @@ class ReviewSelect extends React.Component<IProps, IState> {
       clickedReview = this.state.reviews[index];
     }
 
-    if (this.state.selectedReviews.includes(clickedReview)) {
-      const newSelectedReviews = this.state.selectedReviews.slice();
-      newSelectedReviews.splice(newSelectedReviews.indexOf(clickedReview), 1);
-      this.setState({
-        selectedReviews: newSelectedReviews
-      });
-    } else {
+    if (!this.state.selectedReviews.includes(clickedReview)) {
       this.setState({
         selectedReviews: [...this.state.selectedReviews, clickedReview]
       });
