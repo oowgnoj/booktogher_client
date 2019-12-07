@@ -39,21 +39,37 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/js/uikit-icons.min.js"></script>
-
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <title>서로모임</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <script>
+      Kakao.init("67ed3e187787a5eac0d50485aa0ba956");
+      function sendLink(title, author, url) {
+        Kakao.Link.sendDefault({
+          objectType: "feed",
+          content: {
+            title: title,
+            description: `by ${author}`,
+            imageUrl:
+              "https://s3.ap-northeast-2.amazonaws.com/booktogether.org/bookTogether_logo_525.png",
+            link: {
+              webUrl: url,
+              mobileWebUrl: url
+            }
+          },
+          buttons: [
+            {
+              title: "웹으로 보기",
+              link: {
+                webUrl: url,
+                mobileWebUrl: url
+              }
+            }
+          ]
+        });
+      }
+    </script>
   </body>
 </html>

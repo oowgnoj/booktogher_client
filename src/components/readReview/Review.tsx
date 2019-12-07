@@ -37,14 +37,13 @@ class Review extends React.Component<IProps, IState> {
       likesNum: this.props.review.likes.length,
 
       redirect: false,
-      historyModal: false   
-    }
+      historyModal: false
+    };
     this.handleClickLikes = this.handleClickLikes.bind(this);
     this.handleDeleteLikes = this.handleDeleteLikes.bind(this);
     this.handleDeleteReview = this.handleDeleteReview.bind(this);
     this.handleHistoryClick = this.handleHistoryClick.bind(this);
     this.detectHistoryModal = this.detectHistoryModal.bind(this);
-
   }
 
   public handleClickLikes(): void {
@@ -149,10 +148,11 @@ class Review extends React.Component<IProps, IState> {
         return (
           <div key={info._id}>
             <b>
-              책 : {info.title} 
+              책 : {info.title}
               {this.state.bookRating.length
-                ? this.state.bookRating[index].user_rating !== null ?
-                `  -  평점 ${this.state.bookRating[index].user_rating.rating}` : null
+                ? this.state.bookRating[index].user_rating !== null
+                  ? `  -  평점 ${this.state.bookRating[index].user_rating.rating}`
+                  : null
                 : null}
             </b>
           </div>
@@ -165,24 +165,36 @@ class Review extends React.Component<IProps, IState> {
 
     return (
       <div className="review-area">
-
-        {this.state.redirect ? (
-          <Redirect to="/" />
-        ) : null}
+        {this.state.redirect ? <Redirect to="/" /> : null}
         {this.state.historyModal ? (
-            <UserHistoryModal
-              author={this.props.review.author}
-              handleClose={this.detectHistoryModal}
-            />
-          ) : null}
-        <div className="review-cover" style ={style}>
-          <div className="title-area" >
+          <UserHistoryModal
+            author={this.props.review.author}
+            handleClose={this.detectHistoryModal}
+          />
+        ) : null}
+        <div className="review-cover" style={style}>
+          <div className="title-area">
             <h1 className="title">{review.title}</h1>
             <div className="review-likes">
               {this.props.review.published === false ? (
                 <span className="published">비공개</span>
-              ) : null}
-
+              ) : (
+                <span
+                  style={{ margin: "-2px 10px 0 0", cursor: "pointer" }}
+                  onClick={() =>
+                    (window as any).sendLink(
+                      review.title,
+                      review.author.name,
+                      window.location.href
+                    )
+                  }
+                >
+                  <img
+                    style={{ width: "25px" }}
+                    src="https://i0.wp.com/forhappywomen.com/wp-content/uploads/2018/11/%EC%82%B0%EB%B6%80%EC%9D%B8%EA%B3%BC-%ED%8F%AC%ED%95%B4%ED%94%BC%EC%9A%B0%EB%A8%BC-%EB%AC%B8%EC%9D%98-%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%94%8C%EB%9F%AC%EC%8A%A4%EC%B9%9C%EA%B5%AC-%EB%B2%84%ED%8A%BC.png?resize=586%2C586&ssl=1"
+                  ></img>
+                </span>
+              )}
               {this.state.likes ? (
                 <span
                   uk-icon="heart"
@@ -190,7 +202,11 @@ class Review extends React.Component<IProps, IState> {
                   onClick={this.handleDeleteLikes}
                 ></span>
               ) : (
-                <span uk-icon="heart" className="unheartLike" onClick={this.handleClickLikes}></span>
+                <span
+                  uk-icon="heart"
+                  className="unheartLike"
+                  onClick={this.handleClickLikes}
+                ></span>
               )}
               <div className="likes-num">{this.state.likesNum}</div>
 
@@ -211,9 +227,11 @@ class Review extends React.Component<IProps, IState> {
           </div>
         </div>
         <div className="post-area">
-          <div 
-            style ={{fontStyle:"italic", cursor:"pointer", width: "150px"}} 
-            onClick={this.handleHistoryClick}>by {review.author.name}
+          <div
+            style={{ fontStyle: "italic", cursor: "pointer", width: "150px" }}
+            onClick={this.handleHistoryClick}
+          >
+            by {review.author.name}
           </div>
           <div className="book-rating">{bookTitle}</div>
           <div
