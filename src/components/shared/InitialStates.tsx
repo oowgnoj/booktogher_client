@@ -1,5 +1,6 @@
 import {
   IAuthor,
+  IBook,
   IBookSelectedCuration,
   ICuration,
   IReview,
@@ -15,6 +16,18 @@ export const author: IAuthor = {
   name: "",
   profile: ""
 };
+
+export const curation: ICuration = {
+  _id: "",
+  author,
+  contents: "",
+  likes: [""],
+  title: ""
+};
+
+export const books: IBook[] = [
+  { _id: "", authors: [""], contents: "", thumbnail: "", title: "" }
+];
 
 export const curations: ICuration[] = [
   {

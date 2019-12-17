@@ -228,11 +228,12 @@ class Review extends React.Component<IProps, IState> {
         </div>
         <div className="post-area">
           <div
-            style={{ fontStyle: "italic", cursor: "pointer", width: "150px" }}
+
             onClick={this.handleHistoryClick}
           >
             by {review.author.name}
           </div>
+
           <div className="book-rating">{bookTitle}</div>
           <div
             dangerouslySetInnerHTML={{ __html: review.contents }}

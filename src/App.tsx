@@ -13,7 +13,7 @@ import Mypage from "./components/mypage";
 import BookDetail from "./components/bookDetail/BookDetail";
 import ReadReview from "./components/readReview/ReadReview";
 import PostReview from "./components/writeReview/ModalTest";
-import ReadCuration from "./components/readCuration/index";
+import ReadCuration from "./components/re_readCuration/index";
 import PostCuration from "./components/writeCuration/index";
 import EditCuration from "./components/editCuration/index";
 import Myreview from "./components/myReview";
