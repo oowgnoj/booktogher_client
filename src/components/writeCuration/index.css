@@ -84,9 +84,13 @@ input:focus {
 }
 
 .writecuration_reviewentry_cropped {
-  margin-top: 20px;
+  margin-top: 30px;
   object-fit: cover;
   border-radius: 50%;
   height: 50px;
   width: 50px;
+}
+
+.reviewentry_close:hover {
+  cursor: pointer;
 }

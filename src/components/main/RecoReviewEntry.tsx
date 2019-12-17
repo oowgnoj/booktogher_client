@@ -57,9 +57,13 @@ const RecoReviewEntry = ({ review }: IProps): ReactElement => {
                 }}
               >
                 {review.contents.length > 120
-                  ? review.contents.replace(/<[^>]*>?/gm, "").slice(0, 100) +
-                    "..."
-                  : review.contents.replace(/<[^>]*>?/gm, "")}
+                  ? review.contents
+                      .replace(/<[^>]*>?/gm, "")
+                      .replace(/&nbsp;/g, " ")
+                      .slice(0, 100) + "..."
+                  : review.contents
+                      .replace(/<[^>]*>?/gm, "")
+                      .replace(/&nbsp;/g, " ")}
               </p>
               <p
                 style={{

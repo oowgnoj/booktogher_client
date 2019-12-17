@@ -1,16 +1,21 @@
 .search-i {
   position: fixed;
   right: 36px;
-  top: 0px;
-  height: 50px;
+  top: 30px;
+  height: 20px;
+  z-index: 999;
+  margin: 0;
 }
 .search-icon{
-  height: 50px;
+  height: 24px;
+  margin: 0;
 }
 .search-form {
+  position: fixed;
   width: 500px;
-  margin-top: -150px;
-  padding: 10px;
+  margin-top: -50px;
+  padding: 10px 10px 10px 20px;
+  right: 36px;
 }
 .search-form-input {
   background-color: #fff;
@@ -105,4 +110,8 @@
   text-align: left;
   padding: 30px 0px;
   border-bottom: 1px solid rgb(184, 184, 184);
+}
+
+.uk-position-z-index {
+  z-index: 999;
 }

@@ -53,8 +53,9 @@
 }
 
 .main_review_list_review {
-  width: 220px;
+  width: 90%;
   margin-top: 30px;
+  margin-left: 11px;
 }
 
 /* .crop {

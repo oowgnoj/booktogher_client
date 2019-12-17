@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 interface IProps {
   review: IReview;
+
   book: IBookReview[];
 }
 
@@ -88,11 +89,14 @@ class ReviewsEntry extends React.Component<IProps> {
             <div className="reviewentry_contents" style={{ fontSize: "0.9em" }}>
               <p>
                 {review.contents.length > 120
-                  ? review.contents.replace(/<[^>]*>?/gm, "").slice(0, 120) +
-                    "..."
-                  : review.contents.replace(/<[^>]*>?/gm, "")}
+                  ? review.contents
+                      .replace(/<[^>]*>?/gm, "")
+                      .replace(/&nbsp;/g, " ")
+                      .slice(0, 120) + "..."
+                  : review.contents
+                      .replace(/<[^>]*>?/gm, "")
+                      .replace(/&nbsp;/g, " ")}
               </p>
-              <hr />
             </div>
           </span>
         </Link>

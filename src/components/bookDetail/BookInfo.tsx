@@ -21,18 +21,16 @@ interface INewBook {
 const BookInfo = ({ bookInfo, rating, user, updateUserInfo } :IProps): ReactElement => {
     const bookAvgRating: ReactElement[]  = rating.map((info:IRating)=>{
       return( 
-        <span> {info.avg_rating} </span>
+        <span> {Math.round(info.avg_rating)} </span>
       )
     })
-    const bookUserRating: ReactElement[] = rating.map((info:IRating)=>{
+    const bookUserRating: any = rating.map((info:IRating)=>{
       if(info.user_rating !== null){
         return(
           <span> {info.user_rating.rating} </span>
         )
       } else {
-        return(
-          <span>0</span>
-        )
+        return undefined
       }
     })
     const toRead: any = user.to_read;
@@ -54,7 +52,7 @@ const BookInfo = ({ bookInfo, rating, user, updateUserInfo } :IProps): ReactElem
 
     const bookAuther: ReactElement[] = bookInfo.authors.map((author:string) =>{
       return(
-        <span>{`${author} `}</span>
+        <span>{`${author}, `}</span>
       )
     })
 
@@ -63,7 +61,7 @@ const BookInfo = ({ bookInfo, rating, user, updateUserInfo } :IProps): ReactElem
         <span>{`${translator} `}</span>
       )
     })
-
+ console.log(bookUserRating)
   return (
     <div className ="bookInfo-wrap">
         <div className="book-detail-book-title">
@@ -78,10 +76,16 @@ const BookInfo = ({ bookInfo, rating, user, updateUserInfo } :IProps): ReactElem
         </div>
         <div className="">
           <div className="rating-render-box">서로모임 평점{bookAvgRating}</div>
-          <div className="rating-render-box">나의 평점{bookUserRating}</div>
+          {bookUserRating[0] !== undefined ? 
+          <div className="rating-render-box">나의 평점{bookUserRating}</div> 
+          : <div className="rating-render-box01"></div>}
           
           <div className="bookInfo-detail">
-            <div>저자 : {bookAuther}</div>
+            <div>저자 : {` ${
+                bookInfo.authors.length > 1
+                  ? bookInfo.authors[0] + " 외"
+                  : bookInfo.authors[0]
+              }`}</div>
             {bookInfo.translators.length !== 0 ? 
               <div>통역 : {bookTranslator}</div>
               : null}

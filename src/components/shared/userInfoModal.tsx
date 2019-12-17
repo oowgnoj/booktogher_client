@@ -24,17 +24,7 @@ const EditUserInfo: React.FC<IProps> = ({
   const [userImg, setUserImg] = useState<any>("");
   const [nameState, setName] = useState<string>(user.name);
   const [emailState, setEmail] = useState<string>(user.email);
-  const [passwordState, setPassword] = useState<string>("");
-  const [passwordCheckState, setPasswordCheck] = useState<string>("");
   const [profileState, setProfile] = useState<string>(user.profile);
-
-  // useEffect(() => {
-  //   if (current) {
-  //     fetchGetReviewLikes(setReview, setReviewBooks);
-  //   } else {
-  //     didMountRef.current = true;
-  //   }
-  // }, [userImg]);
 
   // handle change email and username (input box)
   const changeInputValue = (
@@ -66,20 +56,15 @@ const EditUserInfo: React.FC<IProps> = ({
     let updated: any = {
       name: nameState,
       email: emailState,
-      profile: profileState,
-      password: passwordState
+      profile: profileState
     };
-    if (passwordState === passwordCheckState) {
-      if (!userImg) {
-        updateUserInfo(updated);
-      } else {
-        updateUserImg(userImg);
-        updateUserInfo(updated);
-      }
-      handleClose(e);
+    if (!userImg) {
+      updateUserInfo(updated);
     } else {
-      alert("password가 일치하지 않습니다.");
+      updateUserImg(userImg);
+      updateUserInfo(updated);
     }
+    handleClose(e);
   };
 
   return (
@@ -89,8 +74,6 @@ const EditUserInfo: React.FC<IProps> = ({
         uk-overflow-auto
         style={{ paddingLeft: "200px", paddingRight: "200px" }}
       >
-        {console.log(user)}
-        {console.log(typeof userImg)}
         <div>
           <img
             src={
@@ -183,7 +166,6 @@ const EditUserInfo: React.FC<IProps> = ({
     </div>
   );
 };
-
 function mapDispatchToProps(dispatch: any): any {
   return {
     updateUserImg: (img: File): void => dispatch(updateUserImg(img)),

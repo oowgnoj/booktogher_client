@@ -14,12 +14,14 @@ interface IState {
   isOpen: boolean;
   reading: IBookReading[];
   to_read: IBookReading[];
+  finished: any;
 }
 
 
 interface IProps {
   reading: IBookReading[];
   to_read: IBookReading[];
+  finished: any;
 }
 
 class BookSelect extends React.Component<IProps, IState> {
@@ -40,6 +42,7 @@ class BookSelect extends React.Component<IProps, IState> {
       selectBooksTitle: [""],
       title: "",
       to_read: this.props.to_read,
+      finished: this.props.finished
     };
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.clickSearchButton = this.clickSearchButton.bind(this);
@@ -122,6 +125,21 @@ class BookSelect extends React.Component<IProps, IState> {
     const selectBookId :string[] = this.state.selectBooksId.slice(1)
     const selectBookTitle :string[] = this.state.selectBooksTitle.slice(1)
 
+    const readingBook:ReactElement[] = this.state.finished.map(
+      (info: IBookReading) => {
+        return (
+          <div className="book-select" key ={info.book._id}>           
+            <img
+              src={info.book.thumbnail}
+              width="100px"
+              alt ={`${info.book._id}:${info.book.title}`}
+              onClick = {(e): void=> this.clickSelectedBook(e)}
+            />
+            <div>{info.book.title}</div>
+          </div>
+        )
+      })
+
     return (
       <div>
         {this.state.isOpen ? (
@@ -152,7 +170,9 @@ class BookSelect extends React.Component<IProps, IState> {
               <div className="content">
                 {this.state.books.length > 0
                   ? this.state.books[0]._id === ""
-                    ? "서평을 쓸 책을 검색해주세요."
+                    ? readingBook.length !== 0 ? 
+                    <div>다 읽은 책 목록
+                    <div>{readingBook}</div> </div> : "서평을 쓸 책을 검색해주세요."
                     : searchBookList
                   : "책 검색 결과가 없습니다."}
               </div>             
@@ -168,7 +188,8 @@ class BookSelect extends React.Component<IProps, IState> {
 const mapStateToProps = (state :any) :any => {
   return {
       reading: state.user.User.reading,
-      to_read: state.user.User.to_read
+      to_read: state.user.User.to_read,
+      finished: state.user.User.finished
   };
 }
 

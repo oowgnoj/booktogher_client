@@ -60,48 +60,31 @@ export default class UserHistoryModal extends Component<
     return (
       <div>
         {this.state.isOpen ? (
-          <div className="Review-Modal-overlay history_modal">
-            <div className="Review-Modal">
+          <div className="History-Modal-overlay history_modal">
+            <div className="History-Modal">
               <div className="history_grid">
                 <div className="history_modal_close" onClick={this.handleClose}>
                   <span uk-icon="close" style={{ float: "right" }}></span>
                 </div>
-                {/* <div
+                <div
                   className="history_modal_info"
                   style={{ textAlign: "center" }}
-                > */}
-                {/* <div className="image-cropper">
-                    <img
-                      src={
-                        this.state.author.image
-                          ? this.state.author.image
-                          : "https://icons-for-free.com/iconfiles/png/128/anonymous+app+contacts+open+line+profile+user+icon-1320183042822068474.png"
-                      }
-                      alt={this.state.author.name}
-                      style={{
-                        width: "100px",
-                        marginTop: "30px",
-                        marginBottom: "30px"
-                      }}
-                      className="history_cropped"
-                    />
-                  </div> */}
-                {/* <div
+                >
+                  <div
                     className="info_name"
-                    style={{ margin: "auto", marginBottom: "30px" }}
+                    style={{
+                      margin: "auto",
+                      color: "skyblue",
+                      fontWeight: "bold",
+                      fontStyle: "italic"
+                    }}
                   >
-                    {this.state.author.name}
-                  </div> */}
-                {/* <div
-                    className="info_profile"
-                    style={{ margin: "auto", fontStyle: "italic" }}
-                  >
-                    {this.state.author.profile}
-                  </div> */}
-                {/* </div> */}
+                    {this.state.author.name} 님이 작성하신 글들입니다.
+                  </div>
+                </div>
                 <div
                   className="history_modal_history content"
-                  style={{ marginTop: "80px", width: "500px", height: "auto" }}
+                  style={{ marginTop: "30px", width: "460px", height: "460px" }}
                 >
                   <div className="history_tab">
                     <ul className="tab uk-breadcrumb">

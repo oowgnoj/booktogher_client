@@ -24,7 +24,7 @@ class ReviewsEntry extends React.Component<IProps> {
         className={
           "writecuration_reviews_reviewentry" + this.props.isPlaceHolder
         }
-        style={{ marginLeft: "80px" }}
+        style={{ marginLeft: "80px", marginTop: "5px" }}
       >
         <span
           style={{
@@ -39,7 +39,6 @@ class ReviewsEntry extends React.Component<IProps> {
                 : "https://icons-for-free.com/iconfiles/png/128/anonymous+app+contacts+open+line+profile+user+icon-1320183042822068474.png"
             }
             alt={review.title}
-            onClick={this.handleDelete}
             className="writecuration_reviewentry_cropped"
           />
           <div className="middle_review">
@@ -71,37 +70,48 @@ class ReviewsEntry extends React.Component<IProps> {
             width: "60%"
           }}
         >
-          <div
-            className="reviewentry_title"
-            style={{
-              fontSize: "30px",
-              width: "100%"
-            }}
-          >
-            <p
+          <div className="reviewentry_body" style={{ width: "100%" }}>
+            <div
+              className="reviewentry_title"
               style={{
-                display: "inline",
-                marginRight: "3%",
-                color: "skyblue",
-                fontSize: "20px"
+                fontSize: "30px",
+                width: "100%"
               }}
             >
-              {review.books.length > 1
-                ? review.books[0].title + " 외"
-                : review.books[0].title}
-            </p>
-            <p style={{ display: "inline", fontSize: "20px" }}>
-              {review.title}
-            </p>
-          </div>
-          <div className="reviewentry_contents" style={{ fontSize: "0.9em" }}>
-            <p>
-              {review.contents.length > 120
-                ? review.contents.replace(/<[^>]*>?/gm, "").slice(0, 120) +
-                  "..."
-                : review.contents.replace(/<[^>]*>?/gm, "")}
-            </p>
-            <hr />
+              <p
+                style={{
+                  display: "inline",
+                  marginRight: "3%",
+                  color: "skyblue",
+                  fontSize: "20px"
+                }}
+              >
+                {review.books.length > 1
+                  ? review.books[0].title + " 외"
+                  : review.books[0].title}
+              </p>
+              <p style={{ display: "inline", fontSize: "20px" }}>
+                {review.title}
+              </p>
+            </div>
+            <div className="reviewentry_contents" style={{ fontSize: "0.9em" }}>
+              <p style={{ display: "inline-block", width: "80%" }}>
+                {review.contents.length > 120
+                  ? review.contents
+                      .replace(/<[^>]*>?/gm, "")
+                      .replace(/&nbsp;/g, " ")
+                      .slice(0, 120) + "..."
+                  : review.contents
+                      .replace(/<[^>]*>?/gm, "")
+                      .replace(/&nbsp;/g, " ")}
+              </p>
+              <span
+                className="reviewentry_close"
+                uk-icon="icon: close; ratio: 1.3"
+                onClick={this.handleDelete}
+                style={{ paddingLeft: "50px" }}
+              ></span>
+            </div>
           </div>
         </span>
       </div>

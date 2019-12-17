@@ -44,7 +44,7 @@ class SearchForm extends React.Component<{}, IState> {
         </div>     
         :
         <div className="search-i">
-              <a className="uk-navbar-toggle search-icon" href="#" uk-icon="search"></a>
+              <a className="search-icon" href="#" uk-icon="search"></a>
               <div 
                 className="uk-navbar-dropdown search-form" 
                 uk-drop="mode: click; "
