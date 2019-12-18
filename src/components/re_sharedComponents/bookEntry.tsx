@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { Link } from "react-router-dom";
+import {IUserBook} from './../re_shared/interfaces'
 
 interface IBook {
   _id: string;
@@ -10,7 +11,9 @@ interface IBook {
 }
 
 interface IProps {
-  book: IBook;
+  book: IBook | IUserBook
+  from: string;
+  imgClick: (book: IBook | IUserBook) => void 
 }
 
 /*
@@ -21,7 +24,7 @@ myBooks,
 searchResult
  */
 
-const BookEntry: React.FC<IProps> = ({ book }: IProps): ReactElement => {
+const BookEntry: React.FC<IProps> = ({ book, from, imgClick }: IProps): ReactElement => {
   const path: string = `/book/${book._id}`;
   const title: string =
     book.title.length < 10 ? book.title : book.title.slice(0, 9);
@@ -29,16 +32,21 @@ const BookEntry: React.FC<IProps> = ({ book }: IProps): ReactElement => {
     book.authors.length < 10 ? book.authors : book.authors.slice(0, 9) + "..";
   const image: string = book.thumbnail;
 
+  // 1) 선택 (state 올려줘야해서) 2) 삭제  3) 링크
+  
+  // onclick
+  // 상위 : delete, select, 
+
   return (
-    <Link to={path}>
+
       <div className="readcuration_bookentry">
-        <img src={image} alt={title} className="image" />
+        <img src={image} alt={title} className="image" onClick ={():void => imgClick(book)}/>
         <div className="readcuration_bookentry_title">
-          <b>{title}</b>
+        {from === "myBook" ?  <Link to={path}> <b>{title}</b> </Link> : <b>{title}</b>}
         </div>
         <div className="readcuration_bookentry_author">{authors}</div>
       </div>
-    </Link>
+
   );
 };
 

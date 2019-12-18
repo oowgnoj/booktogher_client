@@ -11,7 +11,7 @@ const BooksList: React.FC<IProps> = ({ books }: IProps): ReactElement => {
     <div className="readCuration_bookslist">
       <div className="readcuration_books_booklist_wrapper">
         {books.map((book: IBook, index: number) => {
-          return <BooksEntry book={book} key={index} />;
+          return <BooksEntry book={book} key={index} imgClick={(): void => {console.log('안녕')}} from="readCuration"  />;
         })}
       </div>
     </div>
