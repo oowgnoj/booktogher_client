@@ -111,13 +111,24 @@ class ReadCuration extends React.Component<IParams, IState> {
     const { historyModal } = this.state;
     return (
       <div>
-        <CleanLoading display={Boolean(curation._id)} />
+       {/*  <CleanLoading display={Boolean(curation._id)} />
         <div className="readCuration">
           <UserHistoryModal
             author={this.state.curation.author}
             handleClose={this.detectHistoryModal}
             display={historyModal}
-          />
+          /> */}
+           {this.state.curation._id === "" ? (
+          <CleanLoading  display={Boolean(curation._id)}/>
+        ) : (
+          <div className="readCuration">
+            {this.state.historyModal ? (
+              <UserHistoryModal
+                author={this.state.curation.author}
+                handleClose={this.detectHistoryModal}
+                display={historyModal}
+              />
+            ) : null}
 
           <div className="readCuration_header_likes">
             <LikesButton

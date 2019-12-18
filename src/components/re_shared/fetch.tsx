@@ -2,8 +2,9 @@ import {
   ICuration,
   ICurationsPost,
   IReview,
-  IBookReview
-} from "../shared/Types";
+  IBookReview,
+  ISearchBook
+} from "../re_shared/interfaces";
 
 const url: string = "https://server.booktogether.org";
 
@@ -34,5 +35,15 @@ export const postLikes = (callback: any, id: string): any => {
     .then((response: Response) => response.json())
     .then((result: ICuration) => {
       callback(result._id);
+    });
+};
+
+// shared : book modal
+
+export const fetchBookSearch = (callback: any, title: string): any => {
+  fetch(`${url}/books/search?query=${title}`)
+    .then((res: Response) => res.json())
+    .then((res: ISearchBook) => {
+      callback(res.books);
     });
 };

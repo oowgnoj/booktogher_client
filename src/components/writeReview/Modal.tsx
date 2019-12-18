@@ -1,6 +1,6 @@
 import React from 'react';
 import './Modal.scss';
-import BookSelect from './BookSelect'
+import BookSelect from '../re_writeReview/BookSelect'
 
 const Modal = () => {  
   return (

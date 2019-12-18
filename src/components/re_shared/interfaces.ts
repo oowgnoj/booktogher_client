@@ -9,7 +9,7 @@ export interface IRouterButton {
 }
 
 /* ------------------------ */
-interface IUserBook {
+export interface IUserBook {
   _id: string;
   authors: string[];
   thumbnail: string;
@@ -72,7 +72,7 @@ export interface NumbookRead {
 
 // book
 // 서평쓰기 (책선택), 서평읽기 (책소개)
-interface ISearchBook {
+export interface ISearchBook {
   results_count: number;
   pageable_count: number;
   current_page: number;
