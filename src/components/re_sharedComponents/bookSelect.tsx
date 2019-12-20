@@ -1,47 +1,53 @@
 import React, { ReactElement } from "react";
-import { fetchBookSearch } from "./../re_shared/fetch";
+import { fetchBookSearch } from "../writeReview/fetchWrite";
 import { connect } from 'react-redux';
-import WritePost from "../writeReview/WritePost";
+import "../writeReview/Modal.scss";
 import BookEntry from './../re_sharedComponents/bookEntry'
 import {IBook, IBookFinished, IUserBook, IUserInfo, IBookReading} from './../re_shared/interfaces'
 
-import "../writeReview/Modal.scss";
+// interface ISelected {
+//   _id: string;
+//   title: string;
+//   authors: string;
+//   thumbnail: string;
+// }
 
 interface IState {
   books: IBook[];
   title: string;
   selectBooksId: string[];
   selectBooksTitle: string[];
+  selectedBooks: IBook[] | IUserBook[];
   isOpen: boolean;
-  reading: IBookReading[];
   to_read: IBookReading[];
   finished: any;
 }
 
-
 interface IProps {
-  reading: IBookReading[];
+  addBooks: any;
+  close: any;
   to_read: IBookReading[];
   finished: any;
 }
 
 class BookSelect extends React.Component<IProps, IState> {
-  constructor(props: any) {
+  constructor(props: IProps) {
     super(props);
     this.state = {
-      books :[{
-        _id: "",
-        authors: [ "" ],
-        contents: "",
-        thumbnail: "",
-        title: ""
+      books: [
+        {
+          _id: "",
+          authors: [""],
+          contents: "",
+          thumbnail: "",
+          title: ""
         }
       ],
-      isOpen: true,
-      reading: this.props.reading,
+      title: "",
       selectBooksId: [""],
       selectBooksTitle: [""],
-      title: "",
+      selectedBooks: [{ _id: "", title: "", authors: [], contents: "", thumbnail: "" }],
+      isOpen: true,
       to_read: this.props.to_read,
       finished: this.props.finished
     };
@@ -50,7 +56,7 @@ class BookSelect extends React.Component<IProps, IState> {
     this.clickSelectedBook = this.clickSelectedBook.bind(this);
     this.clickConfirm = this.clickConfirm.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.clickClose = this.clickClose.bind(this)
+    this.clickClose = this.clickClose.bind(this);
   }
 
   public handleChangeTitle(e: React.ChangeEvent<HTMLInputElement>): void {
@@ -64,52 +70,49 @@ class BookSelect extends React.Component<IProps, IState> {
     fetchBookSearch(setStateBook, this.state.title);
   }
 
-  public clickSelectedBook(book:IBook | IUserBook): void{
-
-    this.setState({
-      selectBooksId: this.state.selectBooksId.concat([book._id]),
-      selectBooksTitle: this.state.selectBooksTitle.concat([book.title])
-    });
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-    alert(`${book.title}을 선택하셨습니다.`)
-  }
-
-  public clickClose(): void { 
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
-
-  public clickConfirm(): void {
-    if(this.state.selectBooksId[0] !== ""){
-      this.setState({
-        isOpen: !this.state.isOpen
-      });
-    } else {
-      alert("책을 선택해주세요")
-    }
-  }
-
-
-  public handleKeyPress(e: any): void{
-    if(e.key === 'Enter'){
-      if(this.state.title !== ""){
+  public handleKeyPress(e: any): void {
+    if (e.key === "Enter") {
+      if (this.state.title !== "") {
         const setStateBook = (res: any): void => {
           this.setState({ books: res });
         };
         fetchBookSearch(setStateBook, this.state.title);
         e.preventDefault();
+      } else {
+        alert("검색어를 입력해주세요");
       }
-      else {
-        alert("검색어를 입력해주세요")
-      } 
     }
   }
 
+  public clickClose(): void {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+    this.props.close();
+  }
 
-  public render() : ReactElement{
+  public clickSelectedBook(book:IBook | IUserBook, e: any): void {
+    console.log(book, e)
+    e.currentTarget.style.border = "3px solid rgb(108, 198, 250)";
+
+
+    const bookList: IBook[] | IUserBook[] = this.state.selectedBooks.slice();
+    bookList.push(book);
+
+    this.setState({
+      selectedBooks: bookList
+    });
+  }
+
+  public clickConfirm(): void {
+    const selectedBooks = this.state.selectedBooks.slice(1);
+    this.props.addBooks(selectedBooks);
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+
+  public render(): ReactElement {
     // 초기값 남아있는거 삭제하고 하위 컴포넌트로 내려주기 위함
     const selectBookId :string[] = this.state.selectBooksId.slice(1)
     const selectBookTitle :string[] = this.state.selectBooksTitle.slice(1)
@@ -125,36 +128,44 @@ class BookSelect extends React.Component<IProps, IState> {
     return (
       <div>
         {this.state.isOpen ? (
-          <div className="Modal-overlay uk-animation-slide-top-small">
+          <div className="Modal-overlay">
             <div className="Modal">
-
               <p className="title">
-                <button 
-                    uk-icon="close"
-                    type="button" 
-                    onClick={this.clickClose}></button>
+                <button
+                  uk-icon="close"
+                  type="button"
+                  onClick={this.clickClose}
+                ></button>
                 <input
                   type="text"
                   className="search-box"
                   placeholder="책 제목을 입력해 주세요"
                   value={this.state.title}
                   onChange={this.handleChangeTitle}
-                  onKeyPress ={this.handleKeyPress}
+                  onKeyPress={this.handleKeyPress}
                 ></input>
               </p>
               <div className="content">
-                {searchResult.length > 0
-                  ? searchResult[0]._id === ""
-                    ? readingBook.length !== 0 ? 
+                {this.state.books.length > 0
+                  ? this.state.books[0]._id === ""
+                    ? readingBook.length !== 0 ?
                     <div>다 읽은 책 목록
-                    <div>{readingBook}</div> </div> : "서평을 쓸 책을 검색해주세요."
+                    <div>{readingBook}</div> </div>:"책을 검색해주세요."
                     : searchBookList
                   : "책 검색 결과가 없습니다."}
-              </div>             
+              </div>
+              <div className="button-wrap">
+                <button
+                  className="uk-button uk-button-default"
+                  onClick={this.clickConfirm}
+                >
+                  {" "}
+                  Confirm{" "}
+                </button>
+              </div>
             </div>
           </div>
         ) : null}
-        {/* <WritePost bookId={selectBookId} bookTitle={selectBookTitle} /> */}
       </div>
     );
   }

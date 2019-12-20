@@ -12,7 +12,7 @@ import Signin from "./components/signin/Signin";
 import Mypage from "./components/mypage";
 import BookDetail from "./components/bookDetail/BookDetail";
 import ReadReview from "./components/readReview/ReadReview";
-import PostReview from "./components/writeReview/ModalTest";
+import PostReview from "./components/re_writeReview/index";
 import ReadCuration from "./components/re_readCuration/index";
 import PostCuration from "./components/writeCuration/index";
 import EditCuration from "./components/editCuration/index";
