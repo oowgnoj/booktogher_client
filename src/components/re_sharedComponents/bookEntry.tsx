@@ -13,7 +13,7 @@ interface IBook {
 interface IProps {
   book: IBook | IUserBook
   from: string;
-  imgClick: (book: IBook | IUserBook) => void 
+  imgClick: (book: IBook | IUserBook, e: any) => void 
 }
 
 /*
@@ -32,6 +32,7 @@ const BookEntry: React.FC<IProps> = ({ book, from, imgClick }: IProps): ReactEle
     book.authors.length < 10 ? book.authors : book.authors.slice(0, 9) + "..";
   const image: string = book.thumbnail;
 
+
   // 1) 선택 (state 올려줘야해서) 2) 삭제  3) 링크
   
   // onclick
@@ -40,7 +41,7 @@ const BookEntry: React.FC<IProps> = ({ book, from, imgClick }: IProps): ReactEle
   return (
 
       <div className="readcuration_bookentry">
-        <img src={image} alt={title} className="image" onClick ={():void => imgClick(book)}/>
+        <img src={image} alt={title} className="image" onClick ={(e : any):void => imgClick(book, e)}/>
         <div className="readcuration_bookentry_title">
         {from === "myBook" ?  <Link to={path}> <b>{title}</b> </Link> : <b>{title}</b>}
         </div>

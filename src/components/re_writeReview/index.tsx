@@ -3,10 +3,10 @@ import { Redirect, Route, Link } from "react-router-dom";
 import ReactQuill, { Quill } from "react-quill";
 import { TwitterPicker } from "react-color";
 import "../../../node_modules/react-quill/dist/quill.snow.css";
-import "./writePost.css";
+import "../writeReview/writePost.css";
 import { fetchPostReview, fetchBookRating } from "../writeReview/fetchWrite";
 import ReadReview from "../readReview/ReadReview";
-import Modal from "../writeCuration/BookSelect";
+import Modal from "../re_sharedComponents/bookSelect";
 
 interface IState {
   body: IWrite;
@@ -42,13 +42,13 @@ class WritePost extends React.Component<IProps, IState> {
     super(props);
     this.state = {
       body: {
-        books: this.props.bookId, // book id 목록
+        books: [], // book id 목록
         contents: "",
         published: true,
         thumbnail: "#eeeeee",
         title: ""
       },
-      bookModal: false,
+      bookModal: true,
       bookTitle: [],
       colorPicker: false,
       rating: [],
@@ -172,9 +172,11 @@ class WritePost extends React.Component<IProps, IState> {
   }
 
   public addBooks = (selectedBooks: ISelectedBook[]): any => {
+    console.log(selectedBooks)
     const selectedBooksId: string[] = selectedBooks.map((book: any) => {
       return book._id;
     });
+    console.log(this.state.body.books)
     const newBooks: string[] =
       this.state.body.books.length !== 0 && this.state.body.books[0]
         ? this.state.body.books.concat(selectedBooksId)
@@ -197,6 +199,10 @@ class WritePost extends React.Component<IProps, IState> {
       bookTitle: newBookTitle
     });
   };
+
+  public componentDidMount(){
+
+  }
 
   public componentDidUpdate(prevProps: any): void {
     window.scroll(0, 0);
