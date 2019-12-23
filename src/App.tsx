@@ -17,7 +17,7 @@ import ReadCuration from "./components/re_readCuration/index";
 import PostCuration from "./components/writeCuration/index";
 import EditCuration from "./components/editCuration/index";
 import Myreview from "./components/myReview";
-import MyBook from "./components/myBook";
+import MyBook from "./components/re_myBook";
 import MyCuration from "./components/myCuration";
 import MyLikes from "./components/myLikes";
 import Search from "./components/searchPage/SearchPage";

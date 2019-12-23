@@ -8,6 +8,7 @@ interface IProps {
   toRead?: IBookToRead | null;
   reading?: IBookReading | null;
   finished?: IBookFinished | null;
+
   getCurrentBookID: (
     bookInfo: object,
     e: React.MouseEvent<HTMLLIElement, MouseEvent>

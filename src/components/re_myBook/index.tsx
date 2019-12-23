@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ReactElement, useRef } from "react";
 import { connect } from "react-redux";
 
-import "./myBook.css";
+import "./../myBook/myBook.css";
 
 import {
   IUserInfo,
@@ -10,10 +10,10 @@ import {
   IBookFinished
 } from "./../shared/Types";
 
-import NavBar from "./NavBar";
+import NavBar from "./../myBook/NavBar";
 import BookEntry from "./BookEntry";
-import BookHistory from "./BookHistory";
-import BookSelect from "./../writeCuration/BookSelect";
+import BookHistory from "./../myBook/BookHistory";
+import BookSelect from "./../re_sharedComponents/bookSelect";
 import { updateUserInfo } from "../../Redux/modules/user";
 import { modifyForm } from "./../shared/helper";
 import moment from "moment";
@@ -46,6 +46,7 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
 
   // handle search box
   let temp: ReactElement = <span style={{ display: "inline-block" }}></span>;
+
   const handleSearchBox = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void => {
@@ -143,41 +144,31 @@ const Books: React.FC<IProps> = (props: any): ReactElement => {
   };
 
   // rendering :  need refactoring
-  let whichBookRender: ReactElement;
+  let index = 0;
 
-  if (bookStatus === "to_read") {
-    whichBookRender = userBooks[0].map((el: IBookToRead) => {
-      return (
-        <BookEntry
-          toRead={el}
-          getCurrentBookID={getCurrentBookID}
-          getImgBookId={getImgBookId}
-        />
-      );
-    });
-  } else if (bookStatus === "reading") {
-    whichBookRender = userBooks[1].map((el: IBookReading) => {
-      return (
-        <BookEntry
-          reading={el}
-          getCurrentBookID={getCurrentBookID}
-          getImgBookId={getImgBookId}
-        />
-      );
-    });
-  } else if (bookStatus === "finished") {
-    whichBookRender = userBooks[2].map((el: IBookFinished) => {
-      return (
-        <BookEntry
-          finished={el}
-          getCurrentBookID={getCurrentBookID}
-          getImgBookId={getImgBookId}
-        />
-      );
-    });
-  } else {
-    whichBookRender = <div></div>;
+  switch (bookStatus) {
+    case "to_read":
+      index = 0;
+      break;
+    case "reading":
+      index = 1;
+      break;
+    case "finished":
+      index = 2;
+      break;
   }
+
+  let whichBookRender: ReactElement;
+  whichBookRender = userBooks[index].map((el: any) => {
+    return (
+      <BookEntry
+        book={el}
+        status={bookStatus}
+        getCurrentBookID={getCurrentBookID}
+        getImgBookId={getImgBookId}
+      />
+    );
+  });
 
   let tempBookHistory: ReactElement = <div></div>;
   if (showBookHistory === "open") {
